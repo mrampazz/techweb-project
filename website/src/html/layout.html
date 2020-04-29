@@ -1,13 +1,43 @@
- 
 <!DOCTYPE html>
 <html lang="it">
   <head>
-    <title></title>
-    <author>Daniel James Tronca, Gabriel Ciulei, Andrea Polo, Marco Rampazzo</author>
+    <title>{currentPage}</title>
+    <meta
+      name="author"
+      content="Daniel James Tronca, Gabriel Ciulei, Andrea Polo, Marco Rampazzo"
+    />
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../assets/styles/style.css" />
+    <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
     <!-- <base href="http://localhost/flixy/website/public/html" /> -->
   </head>
   <body>
+    <header class="header-container">
+      <div class="title-container">
+        <h1>My very cool title</h1>
+        <div class="header-button-container">
+          <a class="header-button" href="{loginLink}">{LOGIN}</a>
+          <a class="header-button" href="{registrationLink}">{REGISTRAZIONE}</a>
+        </div>
+      </div>
+      <div class="breadcrumb-container">
+        <ul>
+          <li>Ti trovi in </li>
+          <li> &#62;&#62; <a href="#">Home</a></li>
+        </ul>
+      </div>
+    </header>
+
+    <main class="main-container">
+      <nav class="menu-container">
+        {menuLinks}
+      </nav>
+      <div class="content-container"></div>
+    </main>
+
+    <footer class="footer-container">
+      Copyright stuff I guess
+    </footer>
   </body>
 </html>
