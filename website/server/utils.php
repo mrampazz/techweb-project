@@ -21,49 +21,6 @@ class Utils
         return implode($list);
     }
 
-    public static function replaceContentsMovieCard($card, $title, $coverUrl, $stars, $id, $votesTotal, $votesPositive, $isFav)
-    {
-        $starNumber = [];
-        if ($votesPositive == null) {
-            $card = str_replace("{likes}", 0, $card);
-        } else {
-            $card = str_replace("{likes}", $votesPositive, $card);
-        }
-        $movie = Media::fetch($id);
-        if ($movie->hasEpisodes == 1) {
-            $card = str_replace("{isMovie}", "Serie", $card);
-        } else {
-            $card = str_replace("{isMovie}", "Film", $card);
-        }
-        $card = str_replace("{movieTitle}", $title, $card);
-        $card = str_replace("{mediaNotFav}", !($isFav == true) ? "" : "hidden", $card);
-        $card = str_replace("{mediaIsFav}", ($isFav == true) ? "" : "hidden", $card);
-        $card = str_replace("{dislikes}", $votesTotal - $votesPositive, $card);
-        $card = str_replace("coverURL", "../public/" . $coverUrl, $card);
-        $card = str_replace("{movieID}", $id, $card);
-        $card = str_replace("linkDettaglioMovie", "./php/layout.php?page=dettaglio&amp;movieId=" . $id, $card);
-        $check = Utils::checkLikedMovies($id);
-        switch ($check) {
-            case 1:
-                $card = str_replace("{like-selected}", "thumb-selected", $card);
-                break;
-            case 0:
-                $card = str_replace("{dislike-selected}", "thumb-selected", $card);
-                break;
-            case -1: {
-                    $card = str_replace("{like-selected}", " ", $card);
-                    $card = str_replace("{dislike-selected}", " ", $card);
-                }
-                break;
-        }
-        for ($i = 0; $i < $stars; $i++) {
-            array_push($starNumber, "<i class='fa fa-star'></i>");
-        }
-        $card = str_replace("{starNumber}", $stars, $card);
-        $card = str_replace("{movieStars}", implode($starNumber), $card);
-        return $card;
-    }
-
     public static function isArticleLiked($id)
     {
         $userId = SessionManager::getUserId();

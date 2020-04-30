@@ -8,7 +8,6 @@ $output = file_get_contents("../html/layout.html");
 
 class Link
 {
-
     public $name;
     public $link;
     public function __construct($n, $l)
@@ -28,6 +27,7 @@ $links = [
 ];
 
 $output = str_replace("{menuLinks}", Utils::getMenuLinks($links), $output);
+
 
 if (SessionManager::isUserLogged()) {
     $username = SessionManager::getUsername();
@@ -50,6 +50,7 @@ if (isset($_GET["logout"])) {
 
 switch ($_GET['page']) {
     case 'home':
+        $breadcrumb = "<li>&#62;&#62; <a>Home</a></li>";
         $page = file_get_contents("../html/home.html");
         $output = str_replace("{content}", $page, $output);
         $output = str_replace("{currentPage}", "Homepage", $output);
@@ -57,13 +58,27 @@ switch ($_GET['page']) {
         break;
 
     case 'profile':
+        $breadcrumb = "<li>&#62;&#62; href='" . SessionManager::BASE_URL . 'home' . "'<a>Home</a></li><li>&#62;&#62;<a>Profilo</a></li>";
         $page = file_get_contents("../html/profilo.html");
         $output = str_replace("{content}", $page, $output);
         $output = str_replace("{currentPage}", "Il tuo profilo", $output);
         include_once("./profile.php");
         break;
 
+    case 'article':
+        if (isset($_GET['id'])) {
+            $id = $_GET['id'];
+            $article = Articles::getArticleFrom($id);
+        }
+        $breadcrumb = "<li>&#62;&#62; href='" . SessionManager::BASE_URL . 'home' . "'<a>Home</a></li><li>&#62;&#62;<a>Articolo {$article->name} </a></li>";
+        $page = file_get_contents("../html/article-page.html");
+        $output = str_replace("{content}", $page, $output);
+        $output = str_replace("{currentPage}", "Articolo {$article->name}", $output);
+        include_once("./article-page.php");
+        break;
+
     case 'rules':
+        $breadcrumb = "<li>&#62;&#62; href='" . SessionManager::BASE_URL . 'home' . "'<a>Home</a></li><li>&#62;&#62;<a>Regolamento</a></li>";
         $page = file_get_contents("../html/rules.html");
         $output = str_replace("{content}", $page, $output);
         $output = str_replace("{currentPage}", "Regolamento", $output);
@@ -71,6 +86,7 @@ switch ($_GET['page']) {
         break;
 
     case 'about':
+        $breadcrumb = "<li>&#62;&#62; href='" . SessionManager::BASE_URL . 'home' . "'<a>Home</a></li><li>&#62;&#62;<a>Chi siamo?</a></li>";
         $page = file_get_contents("../html/about.html");
         $output = str_replace("{content}", $page, $output);
         $output = str_replace("{currentPage}", "Chi siamo?", $output);
@@ -78,6 +94,7 @@ switch ($_GET['page']) {
         break;
 
     case 'faq':
+        $breadcrumb = "<li>&#62;&#62; href='" . SessionManager::BASE_URL . 'home' . "'<a>Home</a></li><li>&#62;&#62;<a>FAQ</a></li>";
         $page = file_get_contents("../html/faq.html");
         $output = str_replace("{content}", $page, $output);
         $output = str_replace("{currentPage}", "FAQ", $output);
