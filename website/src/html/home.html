@@ -1,1 +1,27 @@
+<div class="homepage-container">
+  <div class="search-container">
+    <fieldset class="custom-fieldset">
+      <legend class="custom-legend">Ricerca</legend>
+      <form class="inline-form">
+        <div>
+          <label class="custom-label" type="text" name="search" for="search-input">Cerca un telefono</label>
+          <input class="custom-input" id="search-input" />
+        </div>
+        <div>
+          <label class="custom-label" type="text" name="search" for="search-select">Modello</label>
+          <select class="custom-select" id="search-select">
+            <option value="all">Tutti i modelli</option>
+            <option>{modelOptions}</option>
+          </select>
+        </div>
+        <div>
+          <button class="custom-button" type="submit">Cerca</button>
+        </div>
+      </form>
+    </fieldset>
+  </div>
 
+  <div class="articles-container">
+    {articles}
+  </div>
+</div>
