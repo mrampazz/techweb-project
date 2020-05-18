@@ -11,7 +11,7 @@ body {
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  font-family: "Roboto", sans-serif;
+  font-family: 'Montserrat', sans-serif;;
 }
 
 .header-container {
@@ -274,6 +274,207 @@ body {
   color: lightcoral;
 }
 
+/* MARGIN TOP SECTION */
+.margin-top-0-2 {
+  margin-top: 0.2em;
+}
+.margin-top-0-5 {
+  margin-top: 0.5em;
+}
+.margin-top-0-7 {
+  margin-top: .7em;
+}
+.margin-top-1 {
+  margin-top: 1em;
+}
+.margin-top-2 {
+  margin-top: 2em;
+}
+.margin-top-2-5 {
+  margin-top: 2.5em;
+}
+.margin-top-3 {
+  margin-top: 3em;
+}
+
+/* TEXT ALIGN */
+.text-align-center {
+  text-align: center;
+}
+.text-align-left {
+  text-align: left;
+}
+.text-align-right {
+  text-align: right;
+}
+.text-align-justify {
+  text-align: justify;
+}
+
+/* FLEX CONTAINER */
+.flex-container {
+  display: flex;
+}
+.flex-content-center {
+  justify-content: center;
+}
+.flex-content-start {
+  justify-content: flex-start;
+}
+.flex-content-space-between {
+  justify-content: space-between;
+}
+.flex-direction-row {
+  flex-direction: row;
+}
+.flex-direction-row-reverse {
+  flex-direction: row-reverse;
+}
+.flex-direction-col {
+  flex-direction: column;
+}
+/*------------login------------*/
+
+/* BG SECTION */
+.primary-bg {
+  background-color: #eef4ff;
+}
+.secondary-bg {
+  background-color: #506180;
+}
+
+.log-reg-container {
+  color: white;
+}
+
+.light-colored-button {
+  width: 8em;
+  height: 2.2em;
+  border-radius: .5em;
+  text-decoration: none;
+  background-color: white;
+  color: #506180;
+  font-weight: 700;
+}
+
+/* FORM starting stylings */
+.group {
+  position: relative;
+  margin-bottom: 2.8em;
+}
+.groupProfilo{
+  position: relative;
+  margin-bottom: 2.8em;
+}
+input {
+  font-size: 1.125em;
+  padding-bottom: .1em;
+  display: block;
+  width: 100%;
+  border: none;
+  border-bottom: .065em solid white;
+  background-color: #506180;
+  color: white
+}
+input:focus {
+  outline: none;
+}
+/* LABEL */
+
+.label-log-reg {
+  font-size: 0.8em;
+  font-weight: normal;
+  position: absolute;
+  left: .3em;
+  bottom: 1.8em;
+}
+/* active state */
+
+input:focus ~ label,
+input:valid ~ label {
+  top: -1.25em;
+  font-size: .8em;
+  color: white;
+}
+/* BOTTOM BARS */
+
+.bar {
+  position: relative;
+  display: block;
+}
+.bar:before,
+.bar:after {
+  content: '';
+  height: .1em;
+  width: 0;
+  bottom: .06em;
+  position: absolute;
+  background: #eef4ff;
+  transition: 0.2s ease all;
+  -moz-transition: 0.2s ease all;
+  -webkit-transition: 0.2s ease all;
+}
+.bar:before {
+  left: 50%;
+}
+.bar:after {
+  right: 50%;
+}
+/* active state */
+input:focus ~ .bar:before,
+input:focus ~ .bar:after {
+  width: 50%;
+}
+/* HIGHLIGHTER */
+
+.highlight {
+  position:absolute;
+  height:60%; 
+  width:6.25em; 
+  top:25%; 
+  opacity:0.5;
+  pointer-events: none;
+}
+/* active state */
+
+input:focus ~ .highlight {
+  -webkit-animation: inputHighlighter 0.3s ease;
+  -moz-animation: inputHighlighter 0.3s ease;
+  animation: inputHighlighter 0.3s ease;
+}
+/* ANIMATIONS */
+
+@-webkit-keyframes inputHighlighter {
+  from {
+    background: #eef4ff;
+  }
+  to {
+    width: 0;
+    background: transparent;
+  }
+}
+@-moz-keyframes inputHighlighter {
+  from {
+    background: #eef4ff;
+  }
+  to {
+    width: 0;
+    background: transparent;
+  }
+}
+@keyframes inputHighlighter {
+  from {
+    background: #eef4ff;
+  }
+  to {
+    width: 0;
+    background: transparent;
+  }
+}
+/* FORM ending stylings */
+
+
+
 @media only screen and (max-width: 700px) {
   .menu-container {
     display: none;
@@ -283,3 +484,4 @@ body {
     margin: 0;
   }
 }
+
