@@ -326,25 +326,28 @@ body {
 }
 
 /* FLEX CONTAINER */
-.flex-container {
-  display: flex;
-}
 .flex-content-center {
+  display: flex;
   justify-content: center;
 }
 .flex-content-start {
+  display: flex;
   justify-content: flex-start;
 }
 .flex-content-space-between {
+  display: flex;
   justify-content: space-between;
 }
 .flex-direction-row {
+  display: flex;
   flex-direction: row;
 }
 .flex-direction-row-reverse {
+  display: flex;
   flex-direction: row-reverse;
 }
 .flex-direction-col {
+  display: flex;
   flex-direction: column;
 }
 /*------------login------------*/
@@ -376,10 +379,7 @@ body {
   position: relative;
   margin-bottom: 2.8em;
 }
-.groupProfilo{
-  position: relative;
-  margin-bottom: 2.8em;
-}
+
 input {
   font-size: 1.125em;
   padding-bottom: .1em;
