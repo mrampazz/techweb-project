@@ -9,11 +9,10 @@ var errorMessage = ""; //gestita da createErrorMessage
 
 /* 
     controlla se l'item rispetta l'espressione regolare ==> ritorna booleano
-    type è una stringa, specifica se si deve validare la form di "login" o di "registration"
 */
-function validInput(item, reg_expr = null, type){
+function validInput(item, reg_expr = null, isLogin){
     if (item.value == "" || !reg_expr.test(item.value)){
-        createErrorMessage(item,type);
+        createErrorMessage(item,isLogin);
         return false;
     } 
     else
@@ -24,18 +23,17 @@ function validInput(item, reg_expr = null, type){
     validazione form login
 */
 function validateFormLogin() {
-    var type = "login"
     var username = document.getElementById("username");
     var password = document.getElementById("password");
      
-    if (!validInput(username, RE_USERNAME, type))                                  
+    if (!validInput(username, RE_USERNAME, true))                                  
     { 
         alert(errorMessage); 
         username.focus(); 
         return false; 
     } 
    
-    if (!validInput(password, type))                               
+    if (!validInput(password, true))                               
     { 
         alert(errorMessage); 
         password.focus(); 
@@ -49,49 +47,49 @@ function validateFormLogin() {
     validazione form registrazione
 */
 function validateFormRegistration() {
-    var type = "registration"
     var name = document.getElementById("name");
     var surname = document.getElementById("surname");
     var username = document.getElementById("username");
+    var email = document.getElementById("email");
     var password = document.getElementById("password");
     var rpassword = document.getElementById("confirmationPassword");
     
-    if (!validInput(name, RE_NAME, type))                                  
+    if (!validInput(name, RE_NAME, false))                                  
     { 
         alert(errorMessage); 
         name.focus(); 
         return false; 
     } 
    
-    if (!validInput(surname, RE_NAME, type))                               
+    if (!validInput(surname, RE_NAME, false))                               
     { 
         alert(errorMessage); 
         surname.focus(); 
         return false; 
     } 
     
-    if (!validInput(username, RE_USERNAME, type))                                  
+    if (!validInput(username, RE_USERNAME, false))                                  
     { 
         alert(errorMessage); 
         username.focus(); 
         return false; 
     } 
 
-    if (!validInput(email, RE_EMAIL, type))                                  
+    if (!validInput(email, RE_EMAIL, false))                                  
     { 
         alert(errorMessage); 
         email.focus(); 
         return false; 
     } 
    
-    if (!validInput(password, RE_PASSWORD, type))                               
+    if (!validInput(password, RE_PASSWORD, false))                               
     { 
         alert(errorMessage); 
         password.focus(); 
         return false; 
     } 
    
-    if (!validInput(rpassword, RE_PASSWORD, type))                               
+    if (!validInput(rpassword, RE_PASSWORD, false))                               
     { 
         alert(errorMessage); 
         rpassword.focus(); 
@@ -99,6 +97,80 @@ function validateFormRegistration() {
     } 
    
     return true; 
+}
+
+/*
+    validazione form profilo
+*/
+function validateFormProfile(){
+    var name = document.getElementById("name");
+    var surname = document.getElementById("surname");
+    var username = document.getElementById("username");
+    var email = document.getElementById("email");
+
+    if (!validInput(name, RE_NAME, false))                                  
+    { 
+        alert(errorMessage); 
+        name.focus(); 
+        return false; 
+    } 
+   
+    if (!validInput(surname, RE_NAME, false))                               
+    { 
+        alert(errorMessage); 
+        surname.focus(); 
+        return false; 
+    } 
+    
+    if (!validInput(username, RE_USERNAME, false))                                  
+    { 
+        alert(errorMessage); 
+        username.focus(); 
+        return false; 
+    } 
+
+    if (!validInput(email, RE_EMAIL, false))                                  
+    { 
+        alert(errorMessage); 
+        email.focus(); 
+        return false; 
+    } 
+}
+
+/*
+    validazione immagine in input e visualizzazione preview
+*/
+function imageValidation() { 
+    var fileInput =  
+        document.getElementById('file-upload'); 
+            
+    var filePath = fileInput.value; 
+
+    if (!filePath==""){
+
+        //estensioni accettate
+        var allowedExtensions =  
+                /(\.jpg|\.jpeg|\.png|\.gif)$/i; 
+                
+        if (!allowedExtensions.exec(filePath)) { 
+            alert("Il tipo di file selezionato non \u00E8 valido."); 
+            fileInput.value = ''; 
+            return false; 
+        }  
+        else  
+        { 
+            //anteprima immagine 
+            if (fileInput.files && fileInput.files[0]) { 
+                var reader = new FileReader(); 
+                reader.onload = function(e) { 
+                    document.getElementById( 
+                        'avatar').setAttribute("src",e.target.result);
+                }; 
+                        
+                reader.readAsDataURL(fileInput.files[0]); 
+            } 
+        }
+    }
 }
 
 /*
@@ -114,9 +186,8 @@ function checkRepeatPassword(password, rpassword) {
 
 /*
   crea messaggio di errore personalizzato in base all'item passato
-  type è una stringa, specifica se si deve creare un errore per la form di "login" o di "registration"
 */
-function createErrorMessage(item, type){
+function createErrorMessage(item, isLogin){
     if (item.value == ""){
         switch (item.name) {
             case 'name': errorMessage = "Inserisci il nome.";
@@ -133,25 +204,25 @@ function createErrorMessage(item, type){
                 break;
         }
     }
-    else if (type == "login"){
+    else if (isLogin){
         switch (item.name) {
-            case 'username': errorMessage = "L'username inserito non è corretto.";
+            case 'username': errorMessage = "L'username inserito non \u00E8 corretto.";
                 break;
         }
     }
-    else if(type == "registration"){
+    else{
         switch (item.name) {
             case 'name': errorMessage = "Controlla il Nome! Il campo dev'essere composto solamente da lettere.";
                 break;
             case 'surname': errorMessage = "Controlla il Cognome! Il campo dev'essere composto solamente da lettere.";
                 break;
-            case 'username': errorMessage = "Controlla l'username! Il campo non può essere composto da caratteri speciali.";
+            case 'username': errorMessage = "Controlla l'username! Il campo non pu\u00F2 essere composto da caratteri speciali.";
                 break;
             case 'email': errorMessage = "Controlla l'email! Il campo non rispetta la sintassi corretta.";
                 break;
             case 'password': errorMessage = "Controlla la password! Dev'essere alfanumerica ed essere composta da almeno 6 caratteri.";
                 break;
-            case 'confirmationPassword': errorMessage = "La password di conferma è diversa dalla password!";
+            case 'confirmationPassword': errorMessage = "La password di conferma \u00E8 diversa dalla password!";
                 break;
         }
     }

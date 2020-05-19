@@ -326,55 +326,72 @@ body {
 }
 
 /* FLEX CONTAINER */
-.flex-content-center {
+
+.flex-container{
   display: flex;
+}
+.flex-content-center {
   justify-content: center;
 }
 .flex-content-start {
-  display: flex;
   justify-content: flex-start;
 }
 .flex-content-space-between {
-  display: flex;
   justify-content: space-between;
 }
 .flex-direction-row {
-  display: flex;
   flex-direction: row;
 }
 .flex-direction-row-reverse {
-  display: flex;
   flex-direction: row-reverse;
 }
 .flex-direction-col {
-  display: flex;
   flex-direction: column;
 }
-/*------------login------------*/
+
 
 /* BG SECTION */
 .primary-bg {
   background-color: #eef4ff;
 }
 .secondary-bg {
-  background-color: #506180;
+  background-color: white; /* this is temporary, will became #506180 (if needed) after layout integration */
 }
 
-.log-reg-container {
-  color: white;
+/* COLOR SECTION */
+.primary-color{
+  color: #eef4ff;
 }
 
-.light-colored-button {
-  width: 8em;
+.secondary-color{
+  color: #506180;
+}
+
+
+/* login/registration/form */
+
+/* FORM starting stylings */
+
+.form-button {
+  width: 9em;
   height: 2.2em;
   border-radius: .5em;
   text-decoration: none;
-  background-color: white;
-  color: #506180;
+  background-color: #506180;
+  color: white;
   font-weight: 700;
+  box-shadow: .1em .1em .1em #506180;
+  opacity: .95;
 }
 
-/* FORM starting stylings */
+.form-button:hover{
+  opacity: 1;
+}
+
+.form-button:active{
+  border: .1em solid white
+}
+
 .group {
   position: relative;
   margin-bottom: 2.8em;
@@ -386,9 +403,9 @@ input {
   display: block;
   width: 100%;
   border: none;
-  border-bottom: .065em solid white;
-  background-color: #506180;
-  color: white
+  border-bottom: .065em solid #506180;
+  background-color: white;
+  color: #506180;
 }
 input:focus {
   outline: none;
@@ -408,7 +425,7 @@ input:focus ~ label,
 input:valid ~ label {
   top: -1.25em;
   font-size: .8em;
-  color: white;
+  color: #506180;
 }
 /* BOTTOM BARS */
 
@@ -423,7 +440,7 @@ input:valid ~ label {
   width: 0;
   bottom: .06em;
   position: absolute;
-  background: #eef4ff;
+  background: #506180;
   transition: 0.2s ease all;
   -moz-transition: 0.2s ease all;
   -webkit-transition: 0.2s ease all;
@@ -460,7 +477,7 @@ input:focus ~ .highlight {
 
 @-webkit-keyframes inputHighlighter {
   from {
-    background: #eef4ff;
+    background: #506180;
   }
   to {
     width: 0;
@@ -469,7 +486,7 @@ input:focus ~ .highlight {
 }
 @-moz-keyframes inputHighlighter {
   from {
-    background: #eef4ff;
+    background: #506180;
   }
   to {
     width: 0;
@@ -478,7 +495,7 @@ input:focus ~ .highlight {
 }
 @keyframes inputHighlighter {
   from {
-    background: #eef4ff;
+    background: #506180;
   }
   to {
     width: 0;
@@ -487,6 +504,29 @@ input:focus ~ .highlight {
 }
 /* FORM ending stylings */
 
+/* Profile */
+
+#file-upload {
+  display: none;
+}
+
+.upload-foto {
+  border: 0.07em solid #ccc;
+  display: inline-block;
+  padding: .4em .8em;
+  cursor: pointer;
+  text-align: center;
+}
+
+#avatar {
+  width: 16em;
+  height: 16em;
+  background-size: cover;
+  position: relative;
+  border-radius: 50%;
+  border: 0.125em solid white;
+  object-fit: cover;
+}
 
 
 @media only screen and (max-width: 700px) {
@@ -497,5 +537,6 @@ input:focus ~ .highlight {
   .content-container {
     margin: 0;
   }
+
 }
 
