@@ -376,6 +376,8 @@ body {
   width: 9em;
   height: 2.2em;
   border-radius: .5em;
+  -webkit-border-radius: .5em;
+  -moz-border-radius: .5em;
   text-decoration: none;
   background-color: #506180;
   color: white;
@@ -524,6 +526,8 @@ input:focus ~ .highlight {
   background-size: cover;
   position: relative;
   border-radius: 50%;
+  -webkit-border-radius: 50%;
+  -moz-border-radius: 50%;
   border: 0.125em solid white;
   object-fit: cover;
 }

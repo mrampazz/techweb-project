@@ -1,8 +1,8 @@
 
-const RE_PASSWORD = /^(?=.*[0-9])(?=.*[a-zA-Z])[a-zA-Z0-9!.@#$%^&*]{6,16}$/;
-const RE_EMAIL = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
-const RE_NAME = /^[a-zA-Z ]{1,16}$/;
-const RE_USERNAME = /^[A-Za-z0-9]+(?:[_-][A-Za-z0-9]+)*$/;
+var RE_PASSWORD = /^(?=.*[0-9])(?=.*[a-zA-Z])[a-zA-Z0-9!.@#$%^&*]{6,16}$/;
+var RE_EMAIL = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+var RE_NAME = /^[a-zA-Z ]{1,16}$/;
+var RE_USERNAME = /^[A-Za-z0-9]+(?:[_-][A-Za-z0-9]+)*$/;
 
 var errorMessage = ""; //gestita da createErrorMessage
 
@@ -10,7 +10,7 @@ var errorMessage = ""; //gestita da createErrorMessage
 /* 
     controlla se l'item rispetta l'espressione regolare ==> ritorna booleano
 */
-function validInput(item, reg_expr = null, isLogin){
+function validInput(item, reg_expr, isLogin){
     if (item.value == "" || !reg_expr.test(item.value)){
         createErrorMessage(item,isLogin);
         return false;
@@ -33,7 +33,7 @@ function validateFormLogin() {
         return false; 
     } 
    
-    if (!validInput(password, true))                               
+    if (!validInput(password, null, true))                               
     { 
         alert(errorMessage); 
         password.focus(); 
@@ -146,7 +146,7 @@ function imageValidation() {
             
     var filePath = fileInput.value; 
 
-    if (!filePath==""){
+    if (filePath!=""){
 
         //estensioni accettate
         var allowedExtensions =  
@@ -177,8 +177,8 @@ function imageValidation() {
   se una password ripetuta non è corretta segnala un errore
 */
 function checkRepeatPassword(password, rpassword) {
-    if (!rpassword.value == '') {
-      if (!(password.value == rpassword.value)) {
+    if (rpassword.value != '') {
+      if (password.value != rpassword.value) {
         return false;
       }
     }
@@ -226,7 +226,6 @@ function createErrorMessage(item, isLogin){
                 break;
         }
     }
-
     
 }
 
