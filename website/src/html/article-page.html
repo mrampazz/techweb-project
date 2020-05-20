@@ -1,0 +1,32 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="it" xml:lang="it">
+    <head>
+        <title>Dettaglio</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <link href="https://fonts.googleapis.com/css?family=Montserrat:200,400,500,600,700&amp;display=swap" rel="stylesheet" type="text/css"/>
+        <link rel="stylesheet" type="text/css" media="all" href="../assets/styles/style.css"/>
+        <script type="text/javascript" src="../scripts/formChecker.js"></script>
+    </head>
+    <body class="secondary-bg">
+        <div id="article-page-container">
+            <h1 class="secondary-color margin-top-1" tabindex="0">Apple iPhone 11</h1>
+            <img id="article-image" class="margin-bottom-1" src="../assets/img/iphone11.jpg" alt="Immagine telefono" tabindex="0" />
+            <p id="article-description" tabindex="0">
+                Apple iPhone 11 è uno degli smartphone iOS più avanzati e completi che ci siano in circolazione. 
+                Dispone di un grande display da 6.1 pollici con una risoluzione di 1792x828 pixel.
+                Le funzionalità offerte da questo Apple iPhone 11 sono veramente tante e all'avanguardia. A cominciare dal modulo LTE 4G che permette un trasferimento dati e una navigazione in internet eccellente.
+                Fotocamera da 12 megapixel ma che permette ugualmente al Apple iPhone 11 di scattare foto di buona qualità con una risoluzione di 4000x3000 pixel e di registrare video in 4K alla risoluzione di 3840x2160 pixel. Lo spessore di 8.3mm è contenuto e rende questo Apple iPhone 11 molto interessante.
+            </p>
+            <h1 class="secondary-color margin-top-1 padding-bottom-0-5" tabindex="0">Le vostra voce</h1>
+            <form id="comment-form-container" action="php/post_comment.php" method="post">
+                <label for="comment-input" tabindex="0">E tu cosa ne pensi di questo prodotto? Inserisci qui il tuo commento!</label> 
+                <textarea id="comment-input" name="message" rows="5" cols="70" class="margin-top-0-5 secondary-bg" tabindex="0"></textarea>           
+                <button type="submit" name="commentSubmit" class="form-button margin-top-0-5" tabindex="0"> Invia </button>
+            </form>
+            <div class="margin-bottom-2">
+                {commentList}
+            </div>
+        </div>
+    </body>
+</html>
