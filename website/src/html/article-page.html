@@ -18,14 +18,25 @@
                 Le funzionalità offerte da questo Apple iPhone 11 sono veramente tante e all'avanguardia. A cominciare dal modulo LTE 4G che permette un trasferimento dati e una navigazione in internet eccellente.
                 Fotocamera da 12 megapixel ma che permette ugualmente al Apple iPhone 11 di scattare foto di buona qualità con una risoluzione di 4000x3000 pixel e di registrare video in 4K alla risoluzione di 3840x2160 pixel. Lo spessore di 8.3mm è contenuto e rende questo Apple iPhone 11 molto interessante.
             </p>
-            <h1 class="secondary-color margin-top-1 padding-bottom-0-5" tabindex="0">Le vostra voce</h1>
+            <h1 class="secondary-color margin-top-1 padding-bottom-0-5" tabindex="0">La vostra voce</h1>
             <form id="comment-form-container" action="php/post_comment.php" method="post">
+                <div>
                 <label for="comment-input" tabindex="0">E tu cosa ne pensi di questo prodotto? Inserisci qui il tuo commento!</label> 
                 <textarea id="comment-input" name="message" rows="5" cols="70" class="margin-top-0-5 secondary-bg" tabindex="0"></textarea>           
                 <button type="submit" name="commentSubmit" class="form-button margin-top-0-5" tabindex="0"> Invia </button>
+            </div>
             </form>
-            <div class="margin-bottom-2">
+            <div id="comments-container">
                 {commentList}
+                <div class="flex-container flex-direction-row">
+                    <div>
+                    <img class="avatar-comment" src="../assets/img/avatar.png" alt="immagine profilo utente" />
+                    </div>
+                    <div class="margin-left-0-5 text-align-justify">
+                        <p class="font-weight-bold font-size-1-125" tabindex="0" aria-label="Nome utente">Giuseppe Rossi</p>
+                        <p tabindex="0">Lorem ipsum dolor sit amet, consectetur adipisci elit, sed eiusmod tempor incidunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur. Quis aute iure reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint obcaecat cupiditat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                    </div>
+                </div>
             </div>
         </div>
     </body>
