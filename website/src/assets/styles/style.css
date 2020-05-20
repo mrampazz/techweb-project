@@ -11,7 +11,7 @@ body {
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  font-family: 'Montserrat', sans-serif;;
+  font-family: 'Montserrat', sans-serif;
 }
 
 .header-container {
@@ -512,7 +512,7 @@ input:focus ~ .highlight {
   display: none;
 }
 
-.upload-foto {
+.upload-image {
   border: 0.07em solid #ccc;
   display: inline-block;
   padding: .4em .8em;
@@ -523,7 +523,6 @@ input:focus ~ .highlight {
 #avatar {
   width: 16em;
   height: 16em;
-  background-size: cover;
   position: relative;
   border-radius: 50%;
   -webkit-border-radius: 50%;
@@ -532,6 +531,37 @@ input:focus ~ .highlight {
   object-fit: cover;
 }
 
+/* Article-page */
+
+#article-page-container{
+  text-align: center;
+  margin:auto;
+}
+
+#article-image {
+  width: 16em;
+  height: 16em;
+  object-fit: cover
+}
+
+#article-description{
+  margin-top: 1em;
+  text-align: justify;
+  max-width: 70%;
+  margin:auto;
+}
+
+#comment-form-container{
+  margin: auto;
+  width: 70%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#comment-input {
+  width:100%;
+}
 
 @media only screen and (max-width: 700px) {
   .menu-container {
