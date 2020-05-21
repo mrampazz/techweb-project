@@ -451,7 +451,7 @@ body {
   background-color: #506180;
   color: white;
   font-weight: 700;
-  box-shadow: .1em .1em .1em #506180;
+  box-shadow: .1em .1em .1em #262e3d;
   opacity: .95;
 }
 
@@ -614,7 +614,6 @@ input:focus ~ .highlight {
 }
 
 #article-description{
-  margin-top: 1em;
   text-align: justify;
   max-width: 70%;
   margin:auto;
@@ -656,6 +655,17 @@ input:focus ~ .highlight {
 
   .content-container {
     margin: 0;
+  }
+
+  #article-description{
+    max-width: 85%;
+  }
+  #comment-form-container{
+    width: 85%;
+  }
+  #comments-container{
+    width: 85%;
+
   }
 
 }
