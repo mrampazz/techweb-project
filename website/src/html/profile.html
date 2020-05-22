@@ -3,13 +3,14 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="it" xml:lang="it">
     <head>
         <title>Profilo</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
         <link href="https://fonts.googleapis.com/css?family=Montserrat:200,400,500,600,700&amp;display=swap" rel="stylesheet" type="text/css"/>
         <link rel="stylesheet" type="text/css" media="all" href="../assets/styles/style.css"/>
         <script type="text/javascript" src="../scripts/formChecker.js"></script>
         <script src="https://kit.fontawesome.com/cfeebd4134.js"></script>
     </head>
     <body class="secondary-bg">
-        <img id="avatar" src="../assets/img/avatar.png" alt="Immagine profilo" tabindex="0" />
+        <img id="avatar" class="margin-top-1" src="../assets/img/avatar.png" alt="Immagine profilo" tabindex="0" />
         <form class="margin-top-1" onsubmit="return validateFormProfile()" method="post" enctype="multipart/form-data">
             <div class="group margin-top-1">
                 <label for="file-upload" class="upload-image" tabindex="0">
@@ -18,31 +19,31 @@
                 <input id="file-upload" name="avatar" type="file" onchange="return imageValidation()"/>
             </div>
             <div class="group">
-                <label for="name" tabindex="0">Nome</label>
+                <label for="name">Nome</label>
                 <input type="text" name="name" id="name" value="{name}"/>
                 <span class="highlight"></span>
                 <span class="bar"></span>
             </div>
             <div class="group">
-                <label for="surname" tabindex="0">Cognome</label>
+                <label for="surname">Cognome</label>
                 <input type="text" name="surname" id="surname" value="{surname}"/>
                 <span class="highlight"></span>
                 <span class="bar"></span>
             </div>
             <div class="group">
-                <label for="email" tabindex="0" aria-label="La tua email è {email}">Email</label>
+                <label for="email" aria-label="La tua email è {email}">Email</label>
                 <input type="text" name="email" id="email" value="{email}"/>
                 <span class="highlight"></span>
                 <span class="bar"></span>
             </div>
             <div class="group">
-                <label for="username" aria-label="Il tuo username è {username}" tabindex="0">Username</label>
+                <label for="username" aria-label="Il tuo username è {username}">Username</label>
                 <input type="text" name="username" id="username" value="{username}"/>
                 <span class="highlight"></span>
                 <span class="bar"></span>
             </div>
             <div class="flex-container flex-content-center">
-                <input type="submit" value="Aggiorna profilo" class="form-button"></input>
+                <input type="submit" value="Aggiorna profilo" class="form-button margin-bottom-1"></input>
             </div>
         </form>
     </body>

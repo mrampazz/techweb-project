@@ -443,7 +443,7 @@ body {
 
 .form-button {
   width: 9em;
-  height: 2.2em;
+  height: 2.5em;
   border-radius: .5em;
   -webkit-border-radius: .5em;
   -moz-border-radius: .5em;
@@ -451,7 +451,6 @@ body {
   background-color: #506180;
   color: white;
   font-weight: 700;
-  box-shadow: .1em .1em .1em #506180;
   opacity: .95;
 }
 
@@ -459,16 +458,13 @@ body {
   opacity: 1;
 }
 
-.form-button:active{
-  border: .1em solid white
-}
 
 .group {
   position: relative;
   margin-bottom: 2.8em;
 }
 
-input {
+input[type="text"], input[type="password"] {
   font-size: 1.125em;
   padding-bottom: .1em;
   display: block;
@@ -478,7 +474,7 @@ input {
   background-color: white;
   color: #506180;
 }
-input:focus {
+input[type="text"]:focus, input[type="password"]:focus {
   outline: none;
 }
 /* LABEL */
@@ -614,7 +610,6 @@ input:focus ~ .highlight {
 }
 
 #article-description{
-  margin-top: 1em;
   text-align: justify;
   max-width: 70%;
   margin:auto;
@@ -656,6 +651,17 @@ input:focus ~ .highlight {
 
   .content-container {
     margin: 0;
+  }
+
+  #article-description{
+    max-width: 85%;
+  }
+  #comment-form-container{
+    width: 85%;
+  }
+  #comments-container{
+    width: 85%;
+
   }
 
 }
