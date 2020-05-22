@@ -3,6 +3,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="it" xml:lang="it">
     <head>
         <title>Registrazione</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
         <link href="https://fonts.googleapis.com/css?family=Montserrat:200,400,500,600,700&amp;display=swap" rel="stylesheet" type="text/css"/>
         <link rel="stylesheet" type="text/css" media="all" href="../assets/styles/style.css"/>
@@ -10,7 +11,13 @@
     </head>
     <body class="secondary-bg">
         <h1 class="flex-container flex-content-center secondary-color margin-top-1">Registrazione</h1>
-        <form onsubmit="return validateFormRegistration()">
+        <div class='margin-top-2 hidden'>
+            <div class="error-message-box">
+                <p class="font-weight-bold">Credenziali invalide</p>
+                <p>Controlla le tue credenziali e riprova ad effettuare la registrazione: {error-message} </p>
+            </div>
+        </div>
+        <form action="../php/validate_registration_data.php" method="post" onsubmit="return validateFormRegistration()">
             <div class="group margin-top-3">     
                 <label for="name" class="label-log-reg">Nome</label>
                 <input type="text" name="name" id="name" tabindex="0"/> 

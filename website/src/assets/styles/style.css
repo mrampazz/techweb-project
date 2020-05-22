@@ -273,7 +273,11 @@ body {
 .custom-thumbs-down:hover {
   color: lightcoral;
 }
+/* GENERAL SECTION */
 
+.hidden{
+  display: none;
+}
 
 /* FONT SECTION */
 .font-size-0-625 {
@@ -458,10 +462,20 @@ body {
   opacity: 1;
 }
 
-
 .group {
   position: relative;
   margin-bottom: 2.8em;
+}
+
+.error-message-box {
+  width: 50%;
+  border-radius: .5em;
+  background-color: #d80404;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  padding: 1em;
+  margin: auto;
 }
 
 input[type="text"], input[type="password"] {

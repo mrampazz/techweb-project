@@ -95,8 +95,10 @@ function validateFormRegistration() {
         rpassword.focus(); 
         return false; 
     } 
-   
-    return true; 
+
+    checkPasswords(password,rpassword);
+
+    return true;
 }
 
 /*
@@ -150,10 +152,10 @@ function imageValidation() {
 
         //estensioni accettate
         var allowedExtensions =  
-                /(\.jpg|\.jpeg|\.png|\.gif)$/i; 
+                /(\.jpg|\.jpeg|\.png)$/i; 
                 
         if (!allowedExtensions.exec(filePath)) { 
-            alert("Il tipo di file selezionato non \u00E8 valido."); 
+            alert("Il tipo di file selezionato non \u00E8 valido. Solo i formati JPG, JPEG e PNG sono supportati."); 
             fileInput.value = ''; 
             return false; 
         }  
@@ -174,13 +176,16 @@ function imageValidation() {
 }
 
 /*
-  se una password ripetuta non è corretta segnala un errore
+  controlla se la password di conferma e la password sono uguali
 */
-function checkRepeatPassword(password, rpassword) {
-    if (rpassword.value != '') {
-      if (password.value != rpassword.value) {
-        return false;
-      }
+function checkPasswords(password, rpassword) {
+    if (rpassword.value != "") {
+        if (password.value != rpassword.value) {
+            createErrorMessage(rpassword,false);
+            alert(errorMessage); 
+            rpassword.focus(); 
+            return false;
+        }
     }
 }
 
