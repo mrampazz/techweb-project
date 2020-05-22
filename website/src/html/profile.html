@@ -11,7 +11,13 @@
     </head>
     <body class="secondary-bg">
         <img id="avatar" class="margin-top-1" src="../assets/img/avatar.png" alt="Immagine profilo" tabindex="0" />
-        <form class="margin-top-1" onsubmit="return validateFormProfile()" method="post" enctype="multipart/form-data">
+        <div class='margin-top-2 hidden'>
+            <div class="error-message-box">
+                <p class="font-weight-bold">Errore!</p>
+                <p>Si è verificato un errore: {error-message} </p>
+            </div>
+        </div>
+        <form class="margin-top-1" action="../php/update_profile.php" method="post" onsubmit="return validateFormProfile()" enctype="multipart/form-data">
             <div class="group margin-top-1">
                 <label for="file-upload" class="upload-image" tabindex="0">
                 <i class="fas fa-camera"></i> Cambia immagine profilo

@@ -8,7 +8,7 @@ class SessionManager
     private const USERNAME_KEY = "username";
     private const PUBLISH_KEY = "canPublish";
 
-    public const BASE_URL = "http://localhost/techweb-project/website/public/php/layout.php?page=";
+    public const BASE_URL = "http://localhost/techweb-project/website/src/php/layout.php?page=";
 
     private function __construct()
     {

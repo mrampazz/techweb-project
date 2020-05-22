@@ -32,13 +32,13 @@ $output = str_replace("{menuLinks}", Utils::getMenuLinks($links), $output);
 if (SessionManager::isUserLogged()) {
     $username = SessionManager::getUsername();
     $user = User::getUser(SessionManager::getUserId());
-    $output = str_replace("{loginLink}", "./php/login.php?page=profilo", $output);
-    $output = str_replace("{registrationLink}", "./php/login.php?logout=true", $output);
+    $output = str_replace("{loginLink}", "../php/login.php?page=profilo", $output);
+    $output = str_replace("{registrationLink}", "../php/login.php?logout=true", $output);
     $output = str_replace("{LOGIN}", "PROFILO", $output);
     $output = str_replace("{REGISTRAZIONE}", "LOGOUT", $output);
 } else {
-    $output = str_replace("{loginLink}", "./php/login.php", $output);
-    $output = str_replace("{registrationLink}", "./php/login.php", $output);
+    $output = str_replace("{loginLink}", "../php/login.php", $output);
+    $output = str_replace("{registrationLink}", "../php/login.php", $output);
     $output = str_replace("{LOGIN}", "LOGIN", $output);
     $output = str_replace("{REGISTRAZIONE}", "REGISTRAZIONE", $output);
 }
@@ -54,7 +54,7 @@ switch ($_GET['page']) {
         $page = file_get_contents("../html/home.html");
         $output = str_replace("{content}", $page, $output);
         $output = str_replace("{currentPage}", "Homepage", $output);
-        include_once("./home.php");
+        include_once("../php/home.php");
         break;
 
     case 'profile':
@@ -62,7 +62,7 @@ switch ($_GET['page']) {
         $page = file_get_contents("../html/profilo.html");
         $output = str_replace("{content}", $page, $output);
         $output = str_replace("{currentPage}", "Il tuo profilo", $output);
-        include_once("./profile.php");
+        include_once("../php/profile.php");
         break;
 
     case 'article':
@@ -74,7 +74,7 @@ switch ($_GET['page']) {
         $page = file_get_contents("../html/article-page.html");
         $output = str_replace("{content}", $page, $output);
         $output = str_replace("{currentPage}", "Articolo {$article->name}", $output);
-        include_once("./article-page.php");
+        include_once("../php/article-page.php");
         break;
 
     case 'rules':
@@ -82,7 +82,7 @@ switch ($_GET['page']) {
         $page = file_get_contents("../html/rules.html");
         $output = str_replace("{content}", $page, $output);
         $output = str_replace("{currentPage}", "Regolamento", $output);
-        include_once("./rules.php");
+        include_once("../php/rules.php");
         break;
 
     case 'about':
@@ -90,7 +90,7 @@ switch ($_GET['page']) {
         $page = file_get_contents("../html/about.html");
         $output = str_replace("{content}", $page, $output);
         $output = str_replace("{currentPage}", "Chi siamo?", $output);
-        include_once("./about.php");
+        include_once("../php/about.php");
         break;
 
     case 'faq':
@@ -98,7 +98,7 @@ switch ($_GET['page']) {
         $page = file_get_contents("../html/faq.html");
         $output = str_replace("{content}", $page, $output);
         $output = str_replace("{currentPage}", "FAQ", $output);
-        include_once("./faq.php");
+        include_once("../php/faq.php");
         break;
 }
 
