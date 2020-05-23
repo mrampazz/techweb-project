@@ -38,7 +38,7 @@ if (SessionManager::isUserLogged()) {
     $output = str_replace("{REGISTRAZIONE}", "LOGOUT", $output);
 } else {
     $output = str_replace("{loginLink}", "../php/login.php", $output);
-    $output = str_replace("{registrationLink}", "../php/login.php", $output);
+    $output = str_replace("{registrationLink}", "../php/registration.php", $output);
     $output = str_replace("{LOGIN}", "LOGIN", $output);
     $output = str_replace("{REGISTRAZIONE}", "REGISTRAZIONE", $output);
 }
@@ -59,7 +59,7 @@ switch ($_GET['page']) {
 
     case 'profile':
         $breadcrumb = "<li>&#62;&#62; href='" . SessionManager::BASE_URL . 'home' . "'<a>Home</a></li><li>&#62;&#62;<a>Profilo</a></li>";
-        $page = file_get_contents("../html/profilo.html");
+        $page = file_get_contents("../html/profile.html");
         $output = str_replace("{content}", $page, $output);
         $output = str_replace("{currentPage}", "Il tuo profilo", $output);
         include_once("../php/profile.php");

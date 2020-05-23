@@ -30,3 +30,5 @@ if ($articlesList != '') {
 } else {
     $output = str_replace("{articles}", "Nessun articolo trovato.", $output);
 }
+
+?>

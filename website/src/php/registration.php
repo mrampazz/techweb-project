@@ -7,33 +7,33 @@ if(isset($_SESSION['error-message']) && isset($_SESSION['registration']) && !$_S
     $output = str_replace("<div class='margin-top-2 hidden'>","<div class='margin-top-2' tabindex='0'>",$output);
     $output = str_replace("{error-message}",$_SESSION['error-message'],$output);
 }
-/* controlla se sono impostate le variabili di sessione con i rispettivi valori 
- per ri-assegnare i rispettivi valori al campo value dell'input della form 
- (evitando il re-inserimento per l'utente)
+/* check if session variables are set
+    true -> re-assign values (prevents the user from re-entering values)
+    false -> set empty string values
  */
 if (isset($_SESSION['username'])){
-    $output = str_replace("'{username}'",$_SESSION['username'],$output);
+    $output = str_replace("{username}",$_SESSION['username'],$output);
 }
 else{
-    $output = str_replace("'{username}'","",$output);
+    $output = str_replace("{username}","",$output);
 }
 if (isset($_SESSION['name'])){
-    $output = str_replace("'{name}'",$_SESSION['name'],$output);
+    $output = str_replace("{name}",$_SESSION['name'],$output);
 }
 else{
-    $output = str_replace("'{name}'","",$output);
+    $output = str_replace("{name}","",$output);
 }
 if (isset($_SESSION['surname'])){
-    $output = str_replace("'{surname}'",$_SESSION['surname'],$output);
+    $output = str_replace("{surname}",$_SESSION['surname'],$output);
 }
 else{
-    $output = str_replace("'{surname}'","",$output);
+    $output = str_replace("{surname}","",$output);
 }
 if (isset($_SESSION['email'])){
-    $output = str_replace("'{email}'",$_SESSION['email'],$output);
+    $output = str_replace("{email}",$_SESSION['email'],$output);
 }
 else{
-    $output = str_replace("'{email}'","",$output);
+    $output = str_replace("{email}","",$output);
 }
 
 Utils::unsetAll(array('username','name','surname','email','error-message'));

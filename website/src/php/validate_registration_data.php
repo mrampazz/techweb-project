@@ -4,7 +4,7 @@ include_once("../../server/db_manager.php");
 include_once("../../server/models/models.php");
 
 // define variables and set to empty values
-$_SESSION['registration'] = false; //non registrato di default
+$_SESSION['registration'] = false; //not registered by default
 $_SESSION['error-message'] = "";
 $username = "";
 $name = "";
@@ -25,17 +25,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $_SESSION['email'] = $email;
    
     
-  if (checkParameters($username, $password, $confirmationPassword, $name, $surname, $email, $errorMessage)) // se true, i dati sono nel formato corretto, provo ad autentificare l'utente
+  if (checkParameters($username, $password, $confirmationPassword, $name, $surname, $email, $errorMessage)) // if true parameters are in the correct format -> try to register
   {
     $man = DBManager::getInstance();
     $reg = $man->register($username, $password, $name, $surname, $email);
-    if ($reg!=false) // se registrato correttamente
+    if ($reg!=false) //if registered correctly
     {
       $_SESSION['registration'] = true;
       SessionManager::startSessionForUser($reg, $username, false);
       userRegisteredCorrectly();
     } else {
-      $_SESSION['error-message'] = "le tue credenziali non sono valide";
+      $_SESSION['error-message'] = "la registrazione non ha avuto successo.";
     }
   }
   else{
@@ -44,7 +44,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 }
 
-function checkParameters($username, $password, $confirmationPassword, $name, $surname, $email, &$errorMessage) // controlla il formato dei dati e ritorna true se sono corretti, altrimenti ritorna false e setta le stringhe di errore nella variabile errormessage
+// check data format -> return true if correct. Otherwise, return false and set errormessage
+function checkParameters($username, $password, $confirmationPassword, $name, $surname, $email, &$errorMessage)
 {
 	if (empty($username)) {
 	  $_SESSION['error-message'] .= " l'username è richiesto! ";

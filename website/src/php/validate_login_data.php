@@ -3,7 +3,7 @@ include_once("../../server/session_manager.php");
 include_once("../../server/db_manager.php");
 include_once("../../server/models/models.php");
 
-// define session variables and set to empty values
+// define session variables 
 $_SESSION['login'] = false; //not logged by default
 $_SESSION['error-message'] = "";
 
@@ -13,7 +13,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   $password = $_POST["password"];
   $_SESSION['username'] = $username;
 
-  if (checkParameters($username, $password, $errorMessage)) // se true, i dati sono nel formato corretto, provo ad autentificare l'utente
+  if (checkParameters($username, $password, $errorMessage)) // if true parameters are in the correct format -> try to login
   {
     $man = DBManager::getInstance();
     $log = $man->login($username, $password);
@@ -22,7 +22,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
       $_SESSION['login'] = true;
       userLoggedCorrectly(); 
     } else {
-      $_SESSION['error-message'] = "le tue credenziali non sono valide.";
+      $_SESSION['error-message'] = " autenticazione fallita.";
       header("Location: ../php/login.php");
     }
   }
@@ -32,7 +32,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 }
 
-function checkParameters($username, $password, &$errorMessage) // controlla il formato dei dati e ritorna true se sono corretti, altrimenti ritorna false e setta le stringhe di errore nella variabile errormessage
+// check data format -> return true if correct. Otherwise, return false and set errormessage
+function checkParameters($username, $password, &$errorMessage)
 {
 	if (empty($username)) {
 	  $_SESSION['error-message'] .= " l'username è richiesto! ";
