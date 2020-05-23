@@ -109,27 +109,27 @@ class Utils
         if($check !== false) {
         $uploadOk = 1;
         } else {
-            return ["success" => false, "error" => "Errore: il file non è un'immagine."];
+            return ["success" => false, "error" => "il file caricato non è un'immagine."];
             $uploadOk = 0;
         }
 
         if ($imageReq["size"] > 5000000) {
-            return ["success" => false, "error" => "Errore: il file è troppo grande."];
+            return ["success" => false, "error" => "il file caricato è troppo grande."];
             $uploadOk = 0;
         }
 
         if($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg") {
-            return ["success" => false, "error" => "Errore: solo i formati JPG, JPEG e PNG sono supportati."];
+            return ["success" => false, "error" => "solo i formati JPG, JPEG e PNG sono supportati."];
             $uploadOk = 0;
         }
 
         if ($uploadOk == 0) {
-            return ["success" => false, "error" => "Errore: il tuo file non è stato caricato."];
+            return ["success" => false, "error" => "il tuo file non è stato caricato."];
         } else {
             if (move_uploaded_file($imageReq["tmp_name"], $prepath.$target_file)) {
                 return ["success" => true, "url" => $target_file];
             } else {
-                return ["success" => false, "error" => "Ci dispiace, si è verificato un errore durante il caricamento del file."];
+                return ["success" => false, "error" => "si è verificato un errore durante il caricamento del file."];
             }
         }
     }

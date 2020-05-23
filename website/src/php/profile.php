@@ -7,7 +7,7 @@ $output = file_get_contents("../html/profile.html");
 $dbMan = DBManager::getInstance();
 
 if(!SessionManager::isUserLogged()){
-  //header("Location: ".SessionManager::BASE_URL."home");
+  header("Location: ".SessionManager::BASE_URL."home");
 }
 
 if(isset($_SESSION['error-message'])) {
@@ -17,15 +17,15 @@ if(isset($_SESSION['error-message'])) {
 
 $userId = null;
 $userId = SessionManager::getUserId();
-$user=User::getUser($userId);
+$user = User::getUser($userId);
 
-$output=str_replace("{name}", $user->name,$output);
-$output=str_replace("{surname}", $user->surname,$output);
-$output=str_replace("avatar_url", "../public/".$user->avatarUrl,$output);
-$output=str_replace("{email}", $user->email,$output);
-$output=str_replace("{username}",$user->username,$output);
+$output = str_replace("{surname}", $user->surname,$output);
+$output = str_replace("{name}", $user->name,$output);
+$output = str_replace("avatar_url", "../public/".$user->avatarUrl,$output);
+$output = str_replace("{email}", $user->email,$output);
+$output = str_replace("{username}",$user->username,$output);
 
-
+unset($_SESSION['error-message']);
 echo $output;
 
 ?>
