@@ -30,28 +30,26 @@
             <h1 class="secondary-color margin-top-1" tabindex="0">La vostra voce</h1>
             <p class="margin-top-1" tabindex="0"> E tu cosa ne pensi di questo prodotto? </p>
             <div class="flex-container flex-content-center margin-top-1 margin-bottom-1"> 
-                <div class="vote-container margin-right-1">
-                    <input
-                    id="like"
-                    aria-label="Consiglia questo prodotto"
-                    name="vote"
-                    type="submit"
-                    value="&#xf164;"
-                    class="custom-thumbs-up far fa-thumbs-up"
-                    ></input>
-                    <label for="like">Lo consiglio</label>
-                </div>
-                <div class="vote-container">
-                    <input
-                    id="dislike"
-                    aria-label="Sconsiglia questo prodotto"
-                    name="vote"
-                    type="submit"
-                    value="&#xf165;"
-                    class="custom-thumbs-down far fa-thumbs-down"
-                    ></input>
-                    <label for="dislike">Lo sconsiglio</label>
-                </div>
+                <form class="flex-container" method="post" action="">
+                    <div class="vote-container margin-right-1">
+                        <input
+                        id="thumbs-up"
+                        aria-label="Consiglia questo prodotto"
+                        name="vote"
+                        type="submit"
+                        value="Lo consiglio &#xf164;"
+                        ></input>
+                    </div>
+                    <div class="vote-container">
+                        <input
+                        id="thumbs-down"
+                        aria-label="Sconsiglia questo prodotto"
+                        name="vote"
+                        type="submit"
+                        value="Lo sconsiglio &#xf165;"
+                        ></input>
+                    </div>
+                </form>
             </div>
             <form action="php/post_comment.php" method="post">
                 <div id="comment-form-container"> 
@@ -64,7 +62,7 @@
                 {commentList}
                 <div class="flex-container flex-direction-row margin-bottom-1">
                     <div>
-                    <img class="avatar-comment" src="../assets/img/avatar.png" alt="immagine profilo utente"/>
+                    <img class="avatar-comment" src="../assets/img/avatars/avatar.png" alt="immagine profilo utente"/>
                     </div>
                     <div class="margin-left-0-5 text-align-justify">
                         <p class="font-weight-bold font-size-1-125" tabindex="0" aria-label="Nome commentatore">Giuseppe Rossi</p>
@@ -73,7 +71,7 @@
                 </div>
                 <div class="flex-container flex-direction-row margin-bottom-1">
                     <div>
-                    <img class="avatar-comment" src="../assets/img/avatar.png" alt="immagine profilo utente"/>
+                    <img class="avatar-comment" src="../assets/img/avatars/avatar.png" alt="immagine profilo utente"/>
                     </div>
                     <div class="margin-left-0-5 text-align-justify">
                         <p class="font-weight-bold font-size-1-125" tabindex="0" aria-label="Nome commentatore">Giuseppe Rossi</p>
