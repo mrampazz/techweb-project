@@ -77,9 +77,11 @@ class Utils
         return implode($articlesList);
     }
 
-
-    public static function is_email($email) {
-        return filter_var($email, FILTER_VALIDATE_EMAIL);
+    public static function validateInput($data) {
+        $data = trim($data);
+        $data = stripslashes($data);
+        $data = htmlspecialchars($data);
+        return $data;
     }
 
     public static function unsetAll($variablesToUnset){

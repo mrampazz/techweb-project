@@ -51,10 +51,10 @@
                     </div>
                 </form>
             </div>
-            <form action="php/post_comment.php" method="post">
+            <form action="php/validate_comment.php" method="post" onsubmit="return validateComment()">
                 <div id="comment-form-container"> 
-                    <label for="comment-input" class="margin-top-1">Facci sapere qualcosa di pi&ugrave;, inserisci qui il tuo commento!</label> 
-                    <textarea id="comment-input" name="message" rows="5" cols="70" class="margin-top-0-5 secondary-bg" tabindex="0"></textarea>           
+                    <label for="comment-input" class="margin-top-1">Facci sapere qualcosa di più, inserisci qui il tuo commento!</label> 
+                    <textarea id="comment-input" name="comment" rows="5" cols="70" class="margin-top-0-5 secondary-bg" tabindex="0"></textarea>           
                     <input type="submit" value="Invia commento" name="commentSubmit" class="form-button margin-top-0-5"></input>
                 </div>
             </form>

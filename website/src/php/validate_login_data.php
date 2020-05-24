@@ -1,6 +1,7 @@
 <?php
 include_once("../../server/session_manager.php");
 include_once("../../server/db_manager.php");
+include_once("../../server/utils.php");
 include_once("../../server/models/models.php");
 
 // define session variables 
@@ -9,8 +10,8 @@ $_SESSION['error-message'] = "";
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
-  $username = $_POST["username"];
-  $password = $_POST["password"];
+  $username = Utils::validateInput($_POST["username"]);
+  $password = Utils::validateInput($_POST["password"]);
   $_SESSION['username'] = $username;
 
   if (checkParameters($username, $password, $errorMessage)) // if true parameters are in the correct format -> try to login

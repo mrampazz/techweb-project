@@ -1,6 +1,7 @@
 <?php
 include_once("../../server/session_manager.php");
 include_once("../../server/db_manager.php");
+include_once("../../server/utils.php");
 include_once("../../server/models/models.php");
 
 // define variables and set to empty values
@@ -13,16 +14,16 @@ $email = "";
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     
-	$username = $_POST["username"];
-    $password = $_POST["password"];
-    $confirmationPassword = $_POST["confirmationPassword"];
-    $name = $_POST["name"];
-    $surname = $_POST["surname"];
-    $email = $_POST["email"];
-    $_SESSION['username'] = $username;
-    $_SESSION['name'] = $name;
-    $_SESSION['surname'] = $surname;
-    $_SESSION['email'] = $email;
+  $username = Utils::validateInput($_POST["username"]);
+  $password = Utils::validateInput($_POST["password"]);
+  $confirmationPassword = Utils::validateInput($_POST["confirmationPassword"]);
+  $name = Utils::validateInput($_POST["name"]);
+  $surname = Utils::validateInput($_POST["surname"]);
+  $email = Utils::validateInput($_POST["email"]);
+  $_SESSION['username'] = $username;
+  $_SESSION['name'] = $name;
+  $_SESSION['surname'] = $surname;
+  $_SESSION['email'] = $email;
    
     
   if (checkParameters($username, $password, $confirmationPassword, $name, $surname, $email, $errorMessage)) // if true parameters are in the correct format -> try to register

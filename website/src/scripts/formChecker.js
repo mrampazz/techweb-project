@@ -142,10 +142,8 @@ function validateFormProfile(){
 /*
     validazione immagine in input e visualizzazione preview
 */
-function imageValidation() { 
-    var fileInput =  
-        document.getElementById('file-upload'); 
-            
+function validateImage() { 
+    var fileInput =  document.getElementById('file-upload'); 
     var filePath = fileInput.value; 
 
     if (filePath!=""){
@@ -173,6 +171,15 @@ function imageValidation() {
             } 
         }
     }
+}
+
+function validateComment(){
+    var comment =  document.getElementById('comment-input');
+    if (comment.value==""){
+        alert("Inserisci un commento!");
+        return false;
+    }
+    return true;
 }
 
 /*

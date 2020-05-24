@@ -10,8 +10,8 @@ if (!SessionManager::isUserLogged()) {
   return;                               
 }
 
-$name = $_POST['name'];
-$surname = $_POST['surname']; 
+$name = Utils::validateInput($_POST['name']);
+$surname = Utils::validateInput($_POST['surname']); 
 
 // get current user info
 $userId = SessionManager::getUserId();
