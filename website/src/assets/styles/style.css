@@ -297,6 +297,10 @@ body {
 .font-size-1-5 {
   font-size: 1.5em;
 }
+.font-size-2-5 {
+  font-size: 2-5em;
+}
+
 .font-weight-light {
   font-weight: 200;
 }
@@ -665,4 +669,14 @@ input:focus ~ .highlight {
   }
 
 }
+
+
+/* RULES */
+
+.rules_list {
+  margin-top: 0.5em;
+}
+
+
+
 
