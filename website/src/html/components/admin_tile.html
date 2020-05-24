@@ -1,1 +1,58 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <title>{currentPage}</title>
+    <meta name="author" content="Daniel James Tronca, Gabriel Ciulei, Andrea Polo, Marco Rampazzo"/>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <script type="text/javascript" src="https://kit.fontawesome.com/cfeebd4134.js"></script>
+    <script type="text/javascript" src="../scripts/formChecker.js"></script>
+    <link rel="stylesheet" href="../../assets/styles/style.css"/>
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:200,400,500,600,700&amp;display=swap" rel="stylesheet" type="text/css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/>
+</head>
+<body>
+<header class="header-container">
+    <div class="title-container">
+        <h1>My very cool title</h1>
+        <div class="header-button-container">
+            <a class="header-button" href="{loginLink}">{LOGIN}</a>
+            <a class="header-button" href="{registrationLink}">{REGISTRAZIONE}</a>
+        </div>
+    </div>
+    <div class="breadcrumb-container">
+        <ul>
+            <li>Ti trovi in</li>
+            {breadcrumb}
+            <li>&#62;&#62; <a href="#">Home</a></li>
+        </ul>
+    </div>
+</header>
 
+<main class="main-container">
+    <nav class="menu-container">
+        {menu-links}
+    </nav>
+    <div class="content-container">
+        <div>
+            <div class="first_content">
+                <img src="../../assets/img/iphone11.jpg" alt="Immagine del telefono" class="image_size_admin">
+                <div class="font-size-0-625 info_admin_tile">
+                    <h2 class="document-font font-size-1-5" tabindex="0">MODELLO: {model}</h2>
+                    <h2 class="document-font font-size-1-5 margin-top-1" tabindex="0">MEMORIA: {size}</h2>
+                    <h2 class="document-font font-size-1-5 margin-top-1" tabindex="0">PREZZO: {price}</h2>
+                </div>
+                <div class="mobile_margin">
+                    <button class="modify_device margin-top-0-5">Modifica</button>
+                    <button class="modify_device margin-top-0-5">Elimina</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+
+<footer class="footer-container">
+    Untitled &copy; Un prodotto UNIPD. 2020. Tutti i diritti riservati.
+</footer>
+</body>
+</html>
