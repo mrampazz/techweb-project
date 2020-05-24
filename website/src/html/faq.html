@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <title>{currentPage}</title>
+    <meta name="author" content="Daniel James Tronca, Gabriel Ciulei, Andrea Polo, Marco Rampazzo"/>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <script type="text/javascript" src="https://kit.fontawesome.com/cfeebd4134.js"></script>
+    <script type="text/javascript" src="../scripts/formChecker.js"></script>
+    <link rel="stylesheet" href="../assets/styles/style.css"/>
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:200,400,500,600,700&amp;display=swap" rel="stylesheet" type="text/css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/>
+</head>
+<body>
+<header class="header-container">
+    <div class="title-container">
+        <h1>My very cool title</h1>
+        <div class="header-button-container">
+            <a class="header-button" href="{loginLink}">{LOGIN}</a>
+            <a class="header-button" href="{registrationLink}">{REGISTRAZIONE}</a>
+        </div>
+    </div>
+    <div class="breadcrumb-container">
+        <ul>
+            <li>Ti trovi in</li>
+            {breadcrumb}
+            <li>&#62;&#62; <a href="#">Home</a></li>
+        </ul>
+    </div>
+</header>
+
+<main class="main-container">
+    <nav class="menu-container">
+        {menu-links}
+    </nav>
+    <div class="content-container">
+        <div class="margin-left-2-5 margin-top-1 margin-right-2-5">
+            <h1 class="font-size-2-5 font-weight-bold margin-bottom-0-5"> FAQ </h1>
+
+            <button class="accordion">È possible eliminare il mio profilo?</button>
+            <div class="panel">
+                <p> Attualmente l’unico modo per far si che il tuo profilo venga completamente eliminato dal sito è contattare un amministratore. Ma non esitare, sono disponibili e molto veloci nella risposta!</p>
+            </div>
+
+            <button class="accordion">Quante recensioni posso lasciare?
+            </button>
+            <div class="panel">
+                <p> Non vi è alcun limite in vigore se non quello dettato dal buon senso, aiuta gli altri utenti a sapere di più del telefono con quante recensioni ritieni necessario! Ricorda: non esagerare.</p>
+            </div>
+
+            <button class="accordion"> È possibile modificare le informazioni relative al mio profilo?
+            </button>
+            <div class="panel">
+                <p> Semplicemente recandoti nella pagina profilo , hai a disposizioni alcune informazioni modificabili quali: nome e cognome. Per motivi di autenticazione non ti è concesso cambiare la mail e la password.</p>
+            </div>
+            <button class="accordion">Chi può vedere le mie recensioni?
+            </button>
+            <div class="panel">
+                <p> Essendo l’obbiettivo del sito quello di fornire chiarezza e consigli da parte degli utenti che hanno realmente maneggiato il cellulare in questione, le recensioni lasciate da qualsiasi utente sono visibili a tutti. </p>
+            </div>
+
+            <button class="accordion">È possibile modificare un voto che ho lasciato?
+            </button>
+            <div class="panel">
+                <p> Il nostro sito ha preso in considerazione la possibilità che un telefono possa non suscitare lo stesso effetto a distanza di qualche giorno. Per questo motivo ti è concesso non solo cambiare il voto che hai lasciato, ma anche eliminare e modificare un commento!</p>
+            </div>
+
+            <button class="accordion"> Chi si occupa dell’inserimento dei telefoni e dei dettagli?
+            </button>
+            <div class="panel">
+                <p> Per poter garantire affidabilità nelle informazioni fornite, l’inserimento di un dispositivo mobile e i dettagli ad esso associati vengono inseriti da un team di amministratori preparati in materia. Nel caso in cui volessi farne parte o ritieni manchi qualche telefono puoi contattarci! Prenderemo in seria considerazione la tua proposta.</p>
+            </div>
+
+
+        </div>
+    </div>
+</main>
+
+<footer class="footer-container">
+    Untitled &copy; Un prodotto UNIPD. 2020. Tutti i diritti riservati.
+</footer>
+</body>
+</html>
+
+
+<script>
+    var acc = document.getElementsByClassName("accordion");
+    var i;
+
+    for (i = 0; i < acc.length; i++) {
+        acc[i].addEventListener("click", function() {
+            this.classList.toggle("active");
+            var panel = this.nextElementSibling;
+            if (panel.style.display === "block") {
+                panel.style.display = "none";
+            } else {
+                panel.style.display = "block";
+            }
+        });
+    }
+</script>
+
