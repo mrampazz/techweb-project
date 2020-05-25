@@ -10,25 +10,29 @@ $articleInfo = loadInfo($articleId);
 
 $articleName=""; //$articleInfo[0]
 $articleImageUrl=""; //$articleInfo[1]
-$description="";
-$likes = ""; 
-$airDate = ""; 
-$newDate = date("d-m-Y", strtotime($airDate));
+$articlePrice = ""; //$articleInfo[2]
+$articleDescription=""; //$articleInfo[3]
+$releaseDate = ""; //$articleInfo[4]
+$purchaseLink = ""; //$articleInfo[5]
+
+$formattedDate = date("d-m-Y", strtotime($releaseDate));
 
 $output = str_replace("{article-id}",$articleId,$output);
 $output = str_replace("article-id-link",$articleId,$output);
 $output = str_replace("{article-name}", $articleName,$output);
-$output = str_replace("article_image", "../assetes/img/articles/".$articleImageUrl,$output);
-$output = str_replace("{description}", $description,$output);
-$output = str_replace("{air-date}", $newDate, $output);
+$output = str_replace("{article-image}", "../assetes/img/articles/".$articleImageUrl,$output);
+$output = str_replace("{article-price}", $articlePrice,$output);
+$output = str_replace("{article-description}", $articleDescription,$output);
+$output = str_replace("{article-release-date}", $formattedDate, $output);
+$output = str_replace("{article-purchase-link}", $purchaseLink, $output);
 
 
+//obtains and sets users' votes for the article
 $totalVotes = getTotalAndPositiveVotes($articleId)[0];
 $positiveVotes = getTotalAndPositiveVotes($articleId)[1];
 $negativeVotes = $totalVotes-$positiveVotes;
-
-$output = str_replace("{likes}", ($positiveVotes==null) ? 0 : $positiveVotes, $output);
-$output = str_replace("{dislikes}", ($negativeVotes==null) ? 0 : ($negativeVotes), $output); 
+$output = str_replace("{article-likes}", ($positiveVotes==null) ? 0 : $positiveVotes, $output);
+$output = str_replace("{article-dislikes}", ($negativeVotes==null) ? 0 : ($negativeVotes), $output); 
 
 //check whether or not the user likes the article and set the thumb accordingly
 $check = likeCheck($articleId);
@@ -39,7 +43,7 @@ switch($check) {
   case 0: //dislike
     $output = str_replace("{dislike-selected}", "thumb-selected", $output);
   break;
-  default: { //no opinion
+  default: { //no opinion or not logged
     $output = str_replace("{like-selected}", "", $output);
     $output = str_replace("{dislike-selected}", "", $output);
   } break;
@@ -94,9 +98,9 @@ function getCommentList($comments) {
     $userAvatarUrl = $userAvatar[0]->avatar_url;
     
     $comment = file_get_contents("../html/comment.html");
-    $comment = str_replace("{user-comment}", $userFullName, $comment);
+    $comment = str_replace("{user-full-name-comment}", $userFullName, $comment);
     $comment = str_replace("{content-comment}", $commentContent, $comment);
-    $comment = str_replace("avatar_url_comment", "../assets/img/avatars/".$userAvatarUrl, $comment);
+    $comment = str_replace("{avatar-url-comment}", "../assets/img/avatars/".$userAvatarUrl, $comment);
 
     array_push($commentList, $comment);
   }
