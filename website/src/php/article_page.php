@@ -3,25 +3,23 @@ include_once("../../server/db_manager.php");
 include_once("../../server/models/models.php");
 include_once("../../server/session_manager.php");
 
-$title="";
-$coverUrl="";
-$description="";
 
 $dbMan = DBManager::getInstance();
-
 $articleId = $_GET["articleId"];
 $articleInfo = loadInfo($articleId);
 
-
-$likes = $articleInfo[9];
-$airDate = $articleInfo[10];
+$articleName=""; //$articleInfo[0]
+$articleImageUrl=""; //$articleInfo[1]
+$description="";
+$likes = ""; 
+$airDate = ""; 
 $newDate = date("d-m-Y", strtotime($airDate));
 
 $output = str_replace("{article-id}",$articleId,$output);
 $output = str_replace("article-id-link",$articleId,$output);
-$output = str_replace("{title}", $articleInfo[0],$output);
-$output = str_replace("cover_url", "../public/".$articleInfo[2],$output);
-$output = str_replace("{description}", $articleInfo[3],$output);
+$output = str_replace("{article-name}", $articleName,$output);
+$output = str_replace("article_image", "../assetes/img/articles/".$articleImageUrl,$output);
+$output = str_replace("{description}", $description,$output);
 $output = str_replace("{air-date}", $newDate, $output);
 
 
@@ -32,16 +30,16 @@ $negativeVotes = $totalVotes-$positiveVotes;
 $output = str_replace("{likes}", ($positiveVotes==null) ? 0 : $positiveVotes, $output);
 $output = str_replace("{dislikes}", ($negativeVotes==null) ? 0 : ($negativeVotes), $output); 
 
-//check user opinion for the article
+//check whether or not the user likes the article and set the thumb accordingly
 $check = likeCheck($articleId);
 switch($check) {
-  case 1:
+  case 1: //like
     $output = str_replace("{like-selected}", "thumb-selected", $output);
   break;
-  case 0:
+  case 0: //dislike
     $output = str_replace("{dislike-selected}", "thumb-selected", $output);
   break;
-  case -1: {
+  default: { //no opinion
     $output = str_replace("{like-selected}", "", $output);
     $output = str_replace("{dislike-selected}", "", $output);
   } break;
@@ -57,7 +55,7 @@ function loadInfo($id){
   return array($list->title, $list->coverUrl, $list->description);
 }
 
-//CAMBIA è una funzione get per voti totali e voti positivi
+
 function getTotalAndPositiveVotes($articleId){
   $likesList = Article::list();
   for($i=0; $i<count($likesList); $i++){
@@ -75,9 +73,9 @@ function likeCheck($id) {
     $votedArticles = Article::getUserVotes($userId);
   }   
   if ($votedArticles != null) {
-    for ($x = 0; $x < count($votedArticles); $x++) {
-      if ($votedArticles[$x]->article_id == $id) {
-        return $votedArticles[$x]->positive ? 1 : 0;  
+    for ($i = 0; $i < count($votedArticles); $i++) {
+      if ($votedArticles[$i]->article_id == $id) {
+        return $votedArticles[$i]->positive ? 1 : 0;  
       }
     }
   } 
@@ -87,10 +85,10 @@ function likeCheck($id) {
 function getCommentList($comments) {
   $commentList = [];
 
-  for ($x = 0; $x < count($comments); $x++) {
-    $commentContent = $comments[$x]->content;
-    $userFullName = $comments[$x]->userFullName;
-    $userId = $comments[$x]->userId;
+  for ($i = 0; $i < count($comments); $i++) {
+    $commentContent = $comments[$i]->content;
+    $userFullName = $comments[$i]->userFullName;
+    $userId = $comments[$i]->userId;
 
     $userAvatar = Comment::getAvatar($userId);
     $userAvatarUrl = $userAvatar[0]->avatar_url;
@@ -98,7 +96,7 @@ function getCommentList($comments) {
     $comment = file_get_contents("../html/comment.html");
     $comment = str_replace("{user-comment}", $userFullName, $comment);
     $comment = str_replace("{content-comment}", $commentContent, $comment);
-    $comment = str_replace("avatar_url_comment", "../public/".$userAvatarUrl, $comment);
+    $comment = str_replace("avatar_url_comment", "../assets/img/avatars/".$userAvatarUrl, $comment);
 
     array_push($commentList, $comment);
   }
