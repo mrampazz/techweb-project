@@ -4,10 +4,8 @@ include_once("../../server/models/models.php");
 include_once("../../server/session_manager.php");
 
 $title="";
-$cover_url="";
+$coverUrl="";
 $description="";
-
-$userId = null;
 
 $dbMan = DBManager::getInstance();
 
@@ -15,28 +13,27 @@ $articleId = $_GET["articleId"];
 $articleInfo = loadInfo($articleId);
 
 
-$likes=$articleInfo[9];
-$data_rilascio=$articleInfo[10];
-$newDate = date("m-Y", strtotime($data_rilascio));
+$likes = $articleInfo[9];
+$airDate = $articleInfo[10];
+$newDate = date("d-m-Y", strtotime($airDate));
 
-$output=str_replace("{starNumber}", count($starNumber),$output);
-$output=str_replace("{articleid}",$articleId,$output);
-$output=str_replace("article-id-link",$articleId,$output);
-
-$output=str_replace("{title}", $articleInfo[0],$output);
-$output=str_replace("cover_url", "../public/".$articleInfo[2],$output);
-$output=str_replace("{description}", $articleInfo[3],$output);
-$output = str_replace("{air_date}", $newDate, $output);
+$output = str_replace("{article-id}",$articleId,$output);
+$output = str_replace("article-id-link",$articleId,$output);
+$output = str_replace("{title}", $articleInfo[0],$output);
+$output = str_replace("cover_url", "../public/".$articleInfo[2],$output);
+$output = str_replace("{description}", $articleInfo[3],$output);
+$output = str_replace("{air-date}", $newDate, $output);
 
 
-$both_likes=setLikes($articleId);
-$positive_votes=$both_likes[1];
-$total_votes=$both_likes[0];
+$totalVotes = getTotalAndPositiveVotes($articleId)[0];
+$positiveVotes = getTotalAndPositiveVotes($articleId)[1];
+$negativeVotes = $totalVotes-$positiveVotes;
 
-$output=str_replace("{likes}", ($positive_votes==null) ? 0 : $positive_votes,$output);
-$output=str_replace("{dislikes}", (($total_votes-$positive_votes)==null) ? 0 : ($total_votes-$positive_votes) ,$output); 
+$output = str_replace("{likes}", ($positiveVotes==null) ? 0 : $positiveVotes, $output);
+$output = str_replace("{dislikes}", ($negativeVotes==null) ? 0 : ($negativeVotes), $output); 
 
-$check = like_check($articleId);
+//check user opinion for the article
+$check = likeCheck($articleId);
 switch($check) {
   case 1:
     $output = str_replace("{like-selected}", "thumb-selected", $output);
@@ -45,79 +42,65 @@ switch($check) {
     $output = str_replace("{dislike-selected}", "thumb-selected", $output);
   break;
   case -1: {
-    $output = str_replace("{like-selected}", " ", $output);
-    $output = str_replace("{dislike-selected}", " ", $output);
+    $output = str_replace("{like-selected}", "", $output);
+    $output = str_replace("{dislike-selected}", "", $output);
   } break;
 }
 
 
-$comments=Comment::getCommentsFor($articleId);
-$output = str_replace("{commentList}", getCommentList($comments), $output);
-$output = str_replace("{movieList}", getSimilarMovies($realGenre, $genre_variable), $output);
-
+$comments = Comment::getCommentsFor($articleId);
+$output = str_replace("{comment-list}", getCommentList($comments), $output);
 
 
 function loadInfo($id){
-  $list=Article::fetch($id);
-
-  $arr=array($list->title, $list->coverUrl, $list->description);
-  return $arr;
+  $list = Article::fetch($id);
+  return array($list->title, $list->coverUrl, $list->description);
 }
 
-function setLikes($iddd){
-  $likes_list = Article::list();
-  for($p=0; $p<count($likes_list); $p++){
-    $lola=$likes_list[$p]->id;
-    if($iddd==$lola){
-      return $arr2=array($likes_list[$p]->votesTotal, $likes_list[$p]->votesPositive);
+//CAMBIA è una funzione get per voti totali e voti positivi
+function getTotalAndPositiveVotes($articleId){
+  $likesList = Article::list();
+  for($i=0; $i<count($likesList); $i++){
+    if($articleId == $likesList[$i]->id){
+      return array($likesList[$i]->votesTotal, $likesList[$i]->votesPositive);
     }
   }
 }
 
-function like_check($id) {
-  $votedMovies = null;
+
+function likeCheck($id) {
+  $votedArticles = null;
   if (SessionManager::isUserLogged()) {
     $userId = SessionManager::getUserId();
-    $votedMovies = Article::getUserVotes($userId);
+    $votedArticles = Article::getUserVotes($userId);
   }   
-  if ($votedMovies != null) {
-    for ($x = 0; $x < count($votedMovies); $x++) {
-      if ($votedMovies[$x]->article_id == $id) {
-        switch ($votedMovies[$x]->positive) {
-          case 1:
-            return 1;
-          break;
-          case 0:
-            return 0;
-          break;
-        }
+  if ($votedArticles != null) {
+    for ($x = 0; $x < count($votedArticles); $x++) {
+      if ($votedArticles[$x]->article_id == $id) {
+        return $votedArticles[$x]->positive ? 1 : 0;  
       }
     }
-    return -1;
-  } else {
-    return -1;
-  }
+  } 
+  return -1;
 }
 
 function getCommentList($comments) {
   $commentList = [];
-  $y=0;
 
   for ($x = 0; $x < count($comments); $x++) {
-    
-    $contenuto = $comments[$x]->content;
-    $nome_commento=$comments[$x]->userFullName;
-    $id_to_url=$comments[$x]->userId;
+    $commentContent = $comments[$x]->content;
+    $userFullName = $comments[$x]->userFullName;
+    $userId = $comments[$x]->userId;
 
-    $id_to_url_aux=Comment::getAvatar($id_to_url);
-    $finally_url=$id_to_url_aux[$y]->avatar_url;
+    $userAvatar = Comment::getAvatar($userId);
+    $userAvatarUrl = $userAvatar[0]->avatar_url;
     
-    $commento = file_get_contents("../html/comment.html");
-    $commento = str_replace("{nome_commento}", $nome_commento, $commento);
-    $commento = str_replace("{contenuto_commento}", $contenuto, $commento);
-    $commento = str_replace("avatar_url_commento", "../public/".$finally_url, $commento);
+    $comment = file_get_contents("../html/comment.html");
+    $comment = str_replace("{user-comment}", $userFullName, $comment);
+    $comment = str_replace("{content-comment}", $commentContent, $comment);
+    $comment = str_replace("avatar_url_comment", "../public/".$userAvatarUrl, $comment);
 
-    array_push($commentList, $commento);
+    array_push($commentList, $comment);
   }
   return implode($commentList);
 }

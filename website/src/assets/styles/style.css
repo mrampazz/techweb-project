@@ -270,9 +270,11 @@ body {
   color: #506180;
 }
 .custom-thumbs-up:hover,
-.custom-thumbs-down:hover {
+.custom-thumbs-down:hover,
+.thumb-selected {
   color: lightcoral;
 }
+
 /* GENERAL SECTION */
 
 .hidden{
@@ -614,7 +616,7 @@ input:focus ~ .highlight {
 /* Article-page */
 
 #article-page-container {
-  max-width: 70%;
+  max-width: 90%;
   text-align: center;
   margin-top: 1em;
 }
@@ -625,8 +627,8 @@ input:focus ~ .highlight {
 }
 
 #article-image {
-  width: 18em;
-  height: 18em;
+  width: auto;
+  height: 20em;
   object-fit: cover
 }
 
@@ -670,10 +672,6 @@ input:focus ~ .highlight {
 
   .content-container {
     margin: 0;
-  }
-
-  #article-page-container {
-    max-width: 85%;
   }
 
   #article-info-container {
