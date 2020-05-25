@@ -700,9 +700,6 @@ input:focus ~ .highlight {
 .accordion:before {
   content: "⬇️";
   display: block;
-  /*
-  background: url("icon.png") no-repeat;
-  */
   width: 20px;
   height: 20px;
   float: left;
