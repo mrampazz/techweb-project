@@ -1,1 +1,86 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <title>{currentPage}</title>
+    <meta name="author" content="Daniel James Tronca, Gabriel Ciulei, Andrea Polo, Marco Rampazzo"/>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <script type="text/javascript" src="https://kit.fontawesome.com/cfeebd4134.js"></script>
+    <script type="text/javascript" src="../scripts/formChecker.js"></script>
+    <link rel="stylesheet" href="../assets/styles/style.css"/>
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:200,400,500,600,700&amp;display=swap" rel="stylesheet" type="text/css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/>
+</head>
+<body>
+<header class="header-container">
+    <div class="title-container">
+        <h1>My very cool title</h1>
+        <div class="header-button-container">
+            <a class="header-button" href="{loginLink}">{LOGIN}</a>
+            <a class="header-button" href="{registrationLink}">{REGISTRAZIONE}</a>
+        </div>
+    </div>
+    <div class="breadcrumb-container">
+        <ul>
+            <li>Ti trovi in</li>
+            {breadcrumb}
+            <li>&#62;&#62; <a href="#">Home</a></li>
+        </ul>
+    </div>
+</header>
 
+<main class="main-container">
+    <nav class="menu-container">
+        {menu-links}
+    </nav>
+    <div class="content-container">
+        <div class="margin-left-2-5 margin-top-1 margin-right-2-5">
+            <h1 class="font-size-2-5 font-weight-bold"> Regolamento </h1>
+            <p class="margin-top-0-5 font-size-1"> Con il fine di garantire un’esperienza piacevole alla nostra utenza
+                è stato sottoscritto il seguente regolamento utile a definire linee guida generali da adottare.
+                Qualsiasi violazione o infrazione verrà analizzata e punita dagli amministratori del sito.
+            </p>
+            <h2 class="margin-top-1 font-size-2 font-weight-bold text-align-center"> Condizioni d'uso </h2>
+            <p class="margin-top-0-5 font-size-1"> Nel nostro sito è possibile visualizzare, recensire ed entrare nel dettaglio
+                di diversi modelli di telefoni. Esistono quindi due tipologie di utente: l’amministratore che inserisce cellulari
+                e controlla che le regole vengano rispettate, e l’utente generico che senza registrazione ha la sola possibilità
+                di navigare il sito, e l’utente autenticato che può votare e recensire telefoni per aiutare la community.
+            </p>
+            <p class="margin-top-0-5 font-size-1 font-weight-bold"> L'amminstratore puo: </p>
+            <ul class="margin-top-0-5 margin-left-2-5">
+                <li class="rules_list">Inserire un nuovo telefonino</li>
+                <li class="rules_list">Inserire i dettagli, dopo un’accurata analisi, di quest’ultimo</li>
+                <li class="rules_list">Accedere alla pagina Admin</li>
+                <li class="rules_list">Monitorare il corretto utilizzo della sezione commenti</li>
+            </ul>
+            <p class="margin-top-0-5 font-size-1 font-weight-bold"> L'utente autenticato ha la possibilità di:  </p>
+            <ul class="margin-top-0-5 margin-left-2-5">
+                <li class="rules_list">Ricercare telefoni</li>
+                <li class="rules_list">Consigliare o sconsigliare un telefono attraverso il sistema di “mi piace” “non mi piace”</li>
+                <li class="rules_list">Visualizzare e modificare il proprio profilo</li>
+                <li class="rules_list">Entrare nel dettaglio del telefono per poter visualizzare le specifiche</li>
+            </ul>
+            <p class="margin-top-1 font-size-1"> Per ulteriori dubbi è consigliato visualizzare la sezione FAQ. </p>
+            <h2 class="margin-top-1 font-size-2 font-weight-bold text-align-center"> Cosa è vietato? </h2>
+            <p class="margin-top-0-5"> Di seguito un elenco di cose rigorosamente vietate all'interno del nostro sito:</p>
+            <ul class="margin-top-0-5 margin-left-2-5">
+                <li class="rules_list">È vietato utilizzare un linguaggio scurrile/bestemmie all’interno del nostro sito. </li>
+                <li class="rules_list">È vietato lo spam </li>
+                <li class="rules_list">È vietato pubblicare link se non strettamente inerenti al telefonino </li>
+                <li class="rules_list">È vietato istigare alla violenza. </li>
+                <li class="rules_list">Le immagini profilo devono essere appropriate al loro scopo ovvero quello di identificare l’utente </li>
+                <li class="rules_list">Non è in alcun modo ammesso razzismo, incitamento all’odio. </li>
+            </ul>
+            <p class="margin-top-1 font-size-1"> Il personale del sito garantisce la conservazione e il
+                trattamento dei dati personali e dei suoi utenti che non verranno in alcun modo forniti a terzi.
+            </p>
+
+        </div>
+    </div>
+</main>
+
+<footer class="footer-container">
+    Untitled &copy; Un prodotto UNIPD. 2020. Tutti i diritti riservati.
+</footer>
+</body>
+</html>

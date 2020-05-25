@@ -297,6 +297,10 @@ body {
 .font-size-1-5 {
   font-size: 1.5em;
 }
+.font-size-2-5 {
+  font-size: 2-5em;
+}
+
 .font-weight-light {
   font-weight: 200;
 }
@@ -694,12 +698,22 @@ input:focus ~ .highlight {
   cursor: pointer;
   padding: 10px;
   border: none;
+  margin-left: 4em;
+}
+
+/* RULES */
+.accordion {
+  background-color: white;
+  cursor: pointer;
+  padding: 18px;
+  width: 100%;
+  border: none;
+  text-align: left;
   outline: none;
   font-size: 15px;
   transition: 0.4s;
   font-size: 1em;
   font-weight: bold;
-  margin-left: 4em;
 }
 
 /* ADMIN TILE */
@@ -734,8 +748,22 @@ input:focus ~ .highlight {
   margin-left: 0em;
 }
 
+.active, .accordion:hover {
+  background-color: #ccc;
+}
 
+.panel {
+  padding: 0 18px;
+  display: none;
+  background-color: white;
+  overflow: hidden;
+}
 
-
-
-
+.accordion:before {
+  content: "⬇️";
+  display: block;
+  width: 20px;
+  height: 20px;
+  float: left;
+  margin: 0 6px 0 0;
+}
