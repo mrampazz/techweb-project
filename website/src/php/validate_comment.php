@@ -4,19 +4,18 @@ include_once("../../server/db_manager.php");
 include_once("../../server/utils.php");
 include_once("../../server/models/models.php");
 
-// IS USER LOGGED? 
+$content = Utils::validateInput($_POST['comment-input']);
+$_SESSION['comment'] = $content;
 
 if (!SessionManager::isUserLogged()) {
-    echo "Error, no user logged";
+    header("Location: ".SessionManager::BASE_URL."login");
     return;
 }
 
-if (!isset($_POST["comment"])) {
+if (!isset($content)) {
     echo "Error, Missing comment";
     return;
 }
-
-$content = Utils::validateInput($_POST["comment"]);
 
 if (!(isset($content) && !empty($content))) {
     echo "Error, invalid comment";
@@ -25,13 +24,10 @@ if (!(isset($content) && !empty($content))) {
 
 // SAVE COMMENT
 $userId = SessionManager::getUserId();
-$movieId=$_POST["movieId"];
+$articleId=$_POST["articleId"];
 
-Comment::createComment($userId,$movieId,htmlentities($content, ENT_QUOTES)); 
+Comment::createComment($userId,$articleId,htmlentities($content, ENT_QUOTES)); 
 
-header("Location: ".SessionManager::BASE_URL."dettaglio"."&movieId=".$movieId);
-
-
-
+header("Location: ".SessionManager::BASE_URL."article-page"."&articleId=".$articleId);
 ?>
 

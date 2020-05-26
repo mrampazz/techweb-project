@@ -633,9 +633,9 @@ input:focus ~ .highlight {
 }
 
 #article-description {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
+  display: block;
+  text-align: left;
+  max-width: 100%;
 }
 
 #comment-form-container {
@@ -685,7 +685,7 @@ input:focus ~ .highlight {
   }
 
   #article-description {
-    align-items: center;
+    text-align: center;
   }
 }
 

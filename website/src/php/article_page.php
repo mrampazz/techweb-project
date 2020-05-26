@@ -3,30 +3,33 @@ include_once("../../server/db_manager.php");
 include_once("../../server/models/models.php");
 include_once("../../server/session_manager.php");
 
-
 $dbMan = DBManager::getInstance();
 $articleId = $_GET["articleId"];
-$articleInfo = loadInfo($articleId);
 
+//--ARTICLE INFO--
+$articleInfo = loadInfo($articleId);
 $articleName=""; //$articleInfo[0]
 $articleImageUrl=""; //$articleInfo[1]
 $articlePrice = ""; //$articleInfo[2]
 $articleDescription=""; //$articleInfo[3]
 $releaseDate = ""; //$articleInfo[4]
 $purchaseLink = ""; //$articleInfo[5]
-
 $formattedDate = date("d-m-Y", strtotime($releaseDate));
 
 $output = str_replace("{article-id}",$articleId,$output);
 $output = str_replace("article-id-link",$articleId,$output);
 $output = str_replace("{article-name}", $articleName,$output);
-$output = str_replace("{article-image}", "../assetes/img/articles/".$articleImageUrl,$output);
+$output = str_replace("article-image-url", "../assetes/img/articles/".$articleImageUrl,$output);
 $output = str_replace("{article-price}", $articlePrice,$output);
 $output = str_replace("{article-description}", $articleDescription,$output);
 $output = str_replace("{article-release-date}", $formattedDate, $output);
-$output = str_replace("{article-purchase-link}", $purchaseLink, $output);
+$output = str_replace("article-purchase-url", $purchaseLink, $output);
 
 
+//--LIKES--
+if (!SessionManager::isUserLogged()){
+  $output = str_replace("{article-likes}", ($positiveVotes==null) ? 0 : $positiveVotes, $output);
+}
 //obtains and sets users' votes for the article
 $totalVotes = getTotalAndPositiveVotes($articleId)[0];
 $positiveVotes = getTotalAndPositiveVotes($articleId)[1];
@@ -50,15 +53,25 @@ switch($check) {
 }
 
 
+//--COMMENTS--
+//check if a previously written comment needs to be restored
+if (isset($_SESSION['comment'])){
+  $output = str_replace("{comment-input}", $_SESSION['comment'], $output);
+}
+else{
+  $output = str_replace("{comment-input}", "", $output);
+}
+
 $comments = Comment::getCommentsFor($articleId);
 $output = str_replace("{comment-list}", getCommentList($comments), $output);
+unset($_SESSION['comment']);
 
 
+//--HELPER FUNCTIONS--
 function loadInfo($id){
   $list = Article::fetch($id);
   return array($list->title, $list->coverUrl, $list->description);
 }
-
 
 function getTotalAndPositiveVotes($articleId){
   $likesList = Article::list();
@@ -68,7 +81,6 @@ function getTotalAndPositiveVotes($articleId){
     }
   }
 }
-
 
 function likeCheck($id) {
   $votedArticles = null;
@@ -106,5 +118,4 @@ function getCommentList($comments) {
   }
   return implode($commentList);
 }
-
 ?>
