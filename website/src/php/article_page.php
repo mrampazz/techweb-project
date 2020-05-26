@@ -27,9 +27,6 @@ $output = str_replace("article-purchase-url", $purchaseLink, $output);
 
 
 //--LIKES--
-if (!SessionManager::isUserLogged()){
-  $output = str_replace("{article-likes}", ($positiveVotes==null) ? 0 : $positiveVotes, $output);
-}
 //obtains and sets users' votes for the article
 $totalVotes = getTotalAndPositiveVotes($articleId)[0];
 $positiveVotes = getTotalAndPositiveVotes($articleId)[1];
@@ -37,6 +34,17 @@ $negativeVotes = $totalVotes-$positiveVotes;
 $output = str_replace("{article-likes}", ($positiveVotes==null) ? 0 : $positiveVotes, $output);
 $output = str_replace("{article-dislikes}", ($negativeVotes==null) ? 0 : ($negativeVotes), $output); 
 
+//check if the user is logged and shows elements accordingly 
+if (!SessionManager::isUserLogged()){
+  $output = str_replace("{comment-form-visible}", "hidden", $output);
+  $output = str_replace("{login-link-visible}", "", $output);
+  $output = str_replace("login-url", "../php/login.php?articleId=$articleId", $output);
+}
+else{
+  $output = str_replace("{comment-form-visible}", "", $output);
+  $output = str_replace("{login-link-visible}", "hidden", $output);
+  $output = str_replace("login-url", "", $output);
+}
 //check whether or not the user likes the article and set the thumb accordingly
 $check = likeCheck($articleId);
 switch($check) {
@@ -112,7 +120,7 @@ function getCommentList($comments) {
     $comment = file_get_contents("../html/comment.html");
     $comment = str_replace("{user-full-name-comment}", $userFullName, $comment);
     $comment = str_replace("{content-comment}", $commentContent, $comment);
-    $comment = str_replace("{avatar-url-comment}", "../assets/img/avatars/".$userAvatarUrl, $comment);
+    $comment = str_replace("avatar-url-comment", "../assets/img/avatars/".$userAvatarUrl, $comment);
 
     array_push($commentList, $comment);
   }

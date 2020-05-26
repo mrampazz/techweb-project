@@ -59,8 +59,14 @@ function logUser($username, $password)
 
 function userLoggedCorrectly()
 {
-	// redirect to home and save session data
-	header("Location: ".SessionManager::BASE_URL."home");
+  // if the user comes from the link of the article redirect to the page
+  if (isset($_GET['articleId'])){
+    header("Location: ".SessionManager::BASE_URL."article-page"."&articleId=".$_GET['articleId']);
+  }
+  else{
+	  // redirect to home 
+    header("Location: ".SessionManager::BASE_URL."home");
+  }
 }
 
 ?>
