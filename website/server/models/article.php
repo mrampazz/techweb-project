@@ -4,7 +4,6 @@ include_once("base.php");
 
 class Article extends Base 
 {
-    const TITLE_KEY = "title";
     const CONTENT_KEY = "content";
     const BRAND_KEY = "brand";
     const MODEL_KEY = "model";
@@ -17,7 +16,7 @@ class Article extends Base
 
     const TABLE_NAME = "Article";
 
-    var $votesTotal, $votesPositive, $title, $content, $brand, $model, $initialPrice, $link, $launchDate, $image;
+    var $votesTotal, $votesPositive, $content, $brand, $model, $initialPrice, $link, $launchDate, $image;
  
     public function __set( $name, $value ) {
         switch ($name)
@@ -27,9 +26,6 @@ class Article extends Base
                 break;
             case self::VOTES_POSITIVE_KEY: 
                 $this->votesPositive = $value;
-                break;
-            case self::TITLE_KEY: 
-                $this->title = $value;
                 break;
             case self::CONTENT_KEY: 
                 $this->content = $value;
@@ -60,15 +56,15 @@ class Article extends Base
 
     public function saveInDB() {
         $dbman = DBManager::getInstance();
-        $insertQuery = "INSERT INTO ".(self::TABLE_NAME)." (".(self::TITLE_KEY).", ".(self::CONTENT_KEY).", ".(self::BRAND_KEY).", ".(self::MODEL_KEY).", ".(self::INITIAL_PRICE_KEY).", ".(self::LINK_KEY).", ".(self::LAUNCH_DATE_KEY).", ".(self::IMAGE_KEY).") ";
-        $insertQuery .= "VALUES ('".$this->title."', '".$this->content."', '".$this->brand."', '".$this->model."', ".$this->initialPrice.", '".$this->link."', '".$this->launchDate."', '".$this->image."');";
+        $insertQuery = "INSERT INTO ".(self::TABLE_NAME)." (".(self::CONTENT_KEY).", ".(self::BRAND_KEY).", ".(self::MODEL_KEY).", ".(self::INITIAL_PRICE_KEY).", ".(self::LINK_KEY).", ".(self::LAUNCH_DATE_KEY).", ".(self::IMAGE_KEY).") ";
+        $insertQuery .= "VALUES ('".$this->content."', '".$this->brand."', '".$this->model."', ".$this->initialPrice.", '".$this->link."', '".$this->launchDate."', '".$this->image."');";
         echo $insertQuery;
         return $dbman->query($insertQuery);
     }
 
     public function updateInDB() {
         $dbman = DBManager::getInstance();
-        $insertQuery = "UPDATE ".(self::TABLE_NAME)." SET  ".(self::TITLE_KEY)."='".$this->title."', ".(self::CONTENT_KEY)."='".$this->content."', ".(self::BRAND_KEY)."='".$this->brand."', ".(self::MODEL_KEY)."='".$this->model."', ".(self::INITIAL_PRICE_KEY)."=".$this->initialPrice.", ".(self::LINK_KEY)."='".$this->link."', ".(self::LAUNCH_DATE_KEY)."='".$this->launchDate."', ".(self::IMAGE_KEY)."='".$this->image."' ";
+        $insertQuery = "UPDATE ".(self::TABLE_NAME)." SET  ".(self::CONTENT_KEY)."='".$this->content."', ".(self::BRAND_KEY)."='".$this->brand."', ".(self::MODEL_KEY)."='".$this->model."', ".(self::INITIAL_PRICE_KEY)."=".$this->initialPrice.", ".(self::LINK_KEY)."='".$this->link."', ".(self::LAUNCH_DATE_KEY)."='".$this->launchDate."', ".(self::IMAGE_KEY)."='".$this->image."' ";
         $insertQuery .= " WHERE id=".$this->id;
         echo $insertQuery;
         return $dbman->query($insertQuery);

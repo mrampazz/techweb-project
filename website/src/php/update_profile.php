@@ -1,7 +1,7 @@
 <?php
+include_once("../../../database/session_manager.php");
+include_once("../../../database/db_manager.php");
 include_once("../../server/utils.php");
-include_once("../../server/session_manager.php");
-include_once("../../server/db_manager.php");
 include_once("../../server/models/models.php");
 
 //user not logged -> redirect to login page

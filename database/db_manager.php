@@ -7,7 +7,7 @@ class DBManager
     private $host = "localhost"; //da modificare
     private $user = 'app';
     private $pass = 'appdbpasswd';
-    private $database = 'flixy';
+    private $database = 'db-techweb';
     
     // The db connection is established in the private constructor.
     private function __construct()

@@ -14,16 +14,13 @@
     <body class="secondary-bg">
         <div id="article-page-container">
             <div id="article-info-container">
-                <img id="article-image" class="margin-right-2" src="../assets/img/articles/iphone11.jpg" alt="Immagine telefono" tabindex="0" />
+                <img id="article-image" class="margin-right-2" src="article-image-url" alt="Immagine telefono" tabindex="0" />
                 <div id="article-description">
-                    <h1 class="secondary-color" tabindex="0">Apple iPhone 11</h1>
-                    <h2 tabindex="0" class="font-size-1-125"><i class="fa fa-tag" aria-hidden="true"></i> Prezzo di lancio: 829,00&euro; </h2>
-                    <h2 tabindex="0" class="font-size-1-125"><i class="fa fa-calendar margin-bottom-1" aria-hidden="true"></i> Data di lancio: 20-09-2020 </h2>
+                    <h1 class="secondary-color" tabindex="0">{article-name}</h1>
+                    <h2 tabindex="0" class="font-size-1-125"><i class="fa fa-tag" aria-hidden="true"></i> Prezzo di lancio: {article-price}&euro; </h2>
+                    <h2 tabindex="0" class="font-size-1-125"><i class="fa fa-calendar margin-bottom-1" aria-hidden="true"></i> Data di lancio: {release-date} </h2>
                     <p class="text-align-justify" tabindex="0">
-                        Apple iPhone 11 è uno degli smartphone iOS più avanzati e completi che ci siano in circolazione. 
-                        Dispone di un grande display da 6.1 pollici con una risoluzione di 1792x828 pixel.
-                        Le funzionalità offerte da questo Apple iPhone 11 sono veramente tante e all'avanguardia. A cominciare dal modulo LTE 4G che permette un trasferimento dati e una navigazione in internet eccellente.
-                        Fotocamera da 12 megapixel ma che permette ugualmente al Apple iPhone 11 di scattare foto di buona qualità con una risoluzione di 4000x3000 pixel e di registrare video in 4K alla risoluzione di 3840x2160 pixel. Lo spessore di 8.3mm è contenuto e rende questo Apple iPhone 11 molto interessante.
+                        {article-description}
                     </p>
                     <div class="margin-top-1">
                         <i class="fa fa-shopping-cart" aria-hidden="true"></i>
@@ -32,10 +29,10 @@
                 </div>
             </div>
             <h1 class="secondary-color margin-top-1" tabindex="0">La voce degli utenti</h1>
-            <h2 tabindex="0" class="font-size-1-125"><i class="fa fa-thumbs-up margin-top-1" aria-hidden="true"></i> Consigliato da: 23 utenti </h2>
-            <h2 tabindex="0" class="font-size-1-125"><i class="fa fa-thumbs-down margin-bottom-1" aria-hidden="true"></i> Sconsigliato da: 5 utenti </h2>
+            <h2 tabindex="0" class="font-size-1-125"><i class="fa fa-thumbs-up margin-top-1" aria-hidden="true"></i> Consigliato da: {likes} utenti </h2>
+            <h2 tabindex="0" class="font-size-1-125"><i class="fa fa-thumbs-down margin-bottom-1" aria-hidden="true"></i> Sconsigliato da: {dislikes} utenti </h2>
             <p class="margin-top-1 margin-bottom-0-5" tabindex="0">E tu cosa ne pensi di questo prodotto?</p>
-            <a href="../php/login.php" class="{login-link-visible}">Accedi e condividi la tua opinione!</a>
+            <a href="login-url" class="{login-link-visible}">Accedi e condividi la tua opinione!</a>
             <div class="{comment-form-visible}">
                 <form method="post" action="../php/add_vote.php">
                     <div class="flex-container flex-content-center margin-top-1 margin-bottom-1"> 
@@ -51,7 +48,7 @@
                         <input type="hidden" value="article-page&amp;articleId={article-id}" name="redirectURL"/>
                     </div>
                 </form>
-                <div class="margin-top-2">
+                <div class="margin-top-2 hidden">
                     <div class="error-message-box">
                         <p class="font-weight-bold">Errore caricamento commento</p>
                         <p>Si è verificato un problema durante l'invio del tuo commento: {error-message}</p>
@@ -60,30 +57,13 @@
                 <form action="../php/validate_comment.php" method="post" onsubmit="return validateComment()">
                     <div id="comment-form-container"> 
                         <label for="comment-input" class="margin-top-1">Facci sapere qualcosa di più, inserisci qui il tuo commento!</label> 
-                        <textarea id="comment-input" name="comment-input" rows="5" cols="70" class="margin-top-0-5 secondary-bg" tabindex="0"></textarea>           
+                        <textarea id="comment-input" name="comment-input" rows="5" cols="70" class="margin-top-0-5 secondary-bg" tabindex="0">{comment-input}</textarea>           
                         <input type="submit" value="Invia commento" name="commentSubmit" class="form-button margin-top-0-5"/>
                     </div>
                 </form>
             </div>
             <div id="comments-container">
-                <div class="flex-container flex-direction-row margin-bottom-1">
-                    <div>
-                    <img class="avatar-comment" src="../assets/img/avatars/avatar.png" alt="immagine profilo utente"/>
-                    </div>
-                    <div class="margin-left-0-5">
-                        <p class="font-weight-bold text-align-left" tabindex="0">Giuseppe Rossi</p>
-                        <p class="text-align-justify" tabindex="0">Lorem ipsum dolor sit amet, consectetur adipisci elit, sed eiusmod tempor incidunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur. Quis aute iure reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint obcaecat cupiditat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-                    </div>
-                </div>
-                <div class="flex-container flex-direction-row margin-bottom-1">
-                    <div>
-                    <img class="avatar-comment" src="../assets/img/avatars/avatar.png" alt="immagine profilo utente"/>
-                    </div>
-                    <div class="margin-left-0-5">
-                        <p class="font-weight-bold text-align-left" tabindex="0">Giuseppe Rossi</p>
-                        <p class="text-align-justify" tabindex="0">Lorem ipsum dolor sit amet, consectetur adipisci elit, sed eiusmod tempor incidunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur. Quis aute iure reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint obcaecat cupiditat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-                    </div>
-                </div>
+                {comment-list}
             </div>
         </div>
     </body>

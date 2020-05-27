@@ -107,7 +107,7 @@ class Utils
     }
 
     public static function uploadImage($target_dir, $imageReq, $prepath = "") {
-        $target_file = $target_dir . Utils::randomString(10);
+        $target_file = $target_dir . Utils::generateRandomString(10);
         $uploadOk = 1;
         $imageFileType = strtolower(pathinfo($imageReq["name"],PATHINFO_EXTENSION));
         $target_file .= "." . $imageFileType;

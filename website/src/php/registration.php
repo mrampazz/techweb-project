@@ -1,5 +1,5 @@
 <?php
-include_once("../../server/session_manager.php");
+include_once("../../../database/session_manager.php");
 include_once("../../server/utils.php");
 $output = file_get_contents("../html/registration.html");
 

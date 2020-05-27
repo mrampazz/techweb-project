@@ -1,8 +1,7 @@
 <?php
-include_once("../../server/session_manager.php");
-include_once("../../server/db_manager.php");
+include_once("../../../database/session_manager.php");
+include_once("../../../database/db_manager.php");
 include_once("../../server/models/models.php");
-$output = file_get_contents("../html/profile.html");
 
 $dbMan = DBManager::getInstance();
 
@@ -26,6 +25,6 @@ $output = str_replace("{email}", $user->email,$output);
 $output = str_replace("{username}",$user->username,$output);
 
 unset($_SESSION['error-message']);
-echo $output;
+
 
 ?>

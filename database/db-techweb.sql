@@ -2,8 +2,8 @@
 -- version 4.9.1
 -- https://www.phpmyadmin.net/
 --
--- Host: localhost
--- Creato il: Mag 27, 2020 alle 17:26
+-- Host: 127.0.0.1
+-- Creato il: Mag 27, 2020 alle 21:52
 -- Versione del server: 10.4.8-MariaDB
 -- Versione PHP: 7.3.10
 
@@ -19,18 +19,17 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `tecweb`
+-- Database: `db-techweb`
 --
 
 -- --------------------------------------------------------
 
 --
--- Struttura della tabella `Article`
+-- Struttura della tabella `article`
 --
 
-CREATE TABLE `Article` (
+CREATE TABLE `article` (
   `id` int(11) NOT NULL COMMENT 'identificativo univoco',
-  `title` text NOT NULL COMMENT 'titolo articolo',
   `content` text DEFAULT NULL COMMENT 'contentuo testuale',
   `brand` text DEFAULT NULL COMMENT 'marca',
   `model` text DEFAULT NULL COMMENT 'modello',
@@ -43,34 +42,34 @@ CREATE TABLE `Article` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dump dei dati per la tabella `Article`
+-- Dump dei dati per la tabella `article`
 --
 
-INSERT INTO `Article` (`id`, `title`, `content`, `brand`, `model`, `initial_price`, `buy_link`, `launch_date`, `main_image`, `created_at`, `updated_at`) VALUES
-(7, 'Test', 'content', 'alfa', 'mod', 12.33, 'link', '2020-10-10 00:00:00', 'url', '2020-05-27 12:13:13', '2020-05-27 12:13:13'),
-(8, 'Test', 'content', 'alfa romeo', 'mod', 12.33, 'link', '2020-10-10 00:00:00', 'url', '2020-05-27 12:14:22', '2020-05-27 12:20:01'),
-(9, 'Test', 'content', 'alfa', 'mod', 12.33, 'link', '2020-10-10 00:00:00', 'url', '2020-05-27 12:14:45', '2020-05-27 12:14:45'),
-(10, 'Test', 'content', 'alfa', 'mod', 12.33, 'link', '2020-10-10 00:00:00', 'url', '2020-05-27 12:17:21', '2020-05-27 12:17:21'),
-(11, 'Test', 'content', 'alfa', 'mod', 12.33, 'link', '2020-10-10 00:00:00', 'url', '2020-05-27 12:18:21', '2020-05-27 12:18:21'),
-(12, 'Test', 'content', 'alfa', 'mod', 12.33, 'link', '2020-10-10 00:00:00', 'url', '2020-05-27 12:18:51', '2020-05-27 12:18:51'),
-(13, 'Test', 'content', 'alfa', 'mod', 12.33, 'link', '2020-10-10 00:00:00', 'url', '2020-05-27 12:20:01', '2020-05-27 12:20:01'),
-(14, 'Test', 'content', 'alfa', 'mod', 12.33, 'link', '2020-10-10 00:00:00', 'url', '2020-05-27 12:20:01', '2020-05-27 12:20:01');
+INSERT INTO `article` (`id`, `content`, `brand`, `model`, `initial_price`, `buy_link`, `launch_date`, `main_image`, `created_at`, `updated_at`) VALUES
+(7, 'content', 'alfa', 'mod', 12.33, 'link', '2020-10-10 00:00:00', 'url', '2020-05-27 12:13:13', '2020-05-27 12:13:13'),
+(8, 'content', 'Apple', 'iPhone 11', 12.33, 'https://amzn.to/3bQlAzS', '2020-10-10 00:00:00', 'iphone11.jpg', '2020-05-27 12:14:22', '2020-05-27 19:17:17'),
+(9, 'content', 'alfa', 'mod', 12.33, 'link', '2020-10-10 00:00:00', 'url', '2020-05-27 12:14:45', '2020-05-27 12:14:45'),
+(10, 'content', 'alfa', 'mod', 12.33, 'link', '2020-10-10 00:00:00', 'url', '2020-05-27 12:17:21', '2020-05-27 12:17:21'),
+(11, 'content', 'alfa', 'mod', 12.33, 'link', '2020-10-10 00:00:00', 'url', '2020-05-27 12:18:21', '2020-05-27 12:18:21'),
+(12, 'content', 'alfa', 'mod', 12.33, 'link', '2020-10-10 00:00:00', 'url', '2020-05-27 12:18:51', '2020-05-27 12:18:51'),
+(13, 'content', 'alfa', 'mod', 12.33, 'link', '2020-10-10 00:00:00', 'url', '2020-05-27 12:20:01', '2020-05-27 12:20:01'),
+(14, 'content', 'alfa', 'mod', 12.33, 'link', '2020-10-10 00:00:00', 'url', '2020-05-27 12:20:01', '2020-05-27 12:20:01');
 
 --
--- Trigger `Article`
+-- Trigger `article`
 --
 DELIMITER $$
-CREATE TRIGGER `updater_med` BEFORE UPDATE ON `Article` FOR EACH ROW SET NEW.updated_at = CURRENT_TIMESTAMP()
+CREATE TRIGGER `updater_med` BEFORE UPDATE ON `article` FOR EACH ROW SET NEW.updated_at = CURRENT_TIMESTAMP()
 $$
 DELIMITER ;
 
 -- --------------------------------------------------------
 
 --
--- Struttura della tabella `Comment`
+-- Struttura della tabella `comment`
 --
 
-CREATE TABLE `Comment` (
+CREATE TABLE `comment` (
   `id` int(11) NOT NULL COMMENT 'identificatore univoco del commento',
   `content` text NOT NULL COMMENT 'contenuto testuale del commento',
   `created_at` timestamp NOT NULL DEFAULT current_timestamp() COMMENT 'datetime di creazione del commento',
@@ -80,20 +79,20 @@ CREATE TABLE `Comment` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Trigger `Comment`
+-- Trigger `comment`
 --
 DELIMITER $$
-CREATE TRIGGER `updater` BEFORE UPDATE ON `Comment` FOR EACH ROW SET NEW.updated_at = CURRENT_TIMESTAMP()
+CREATE TRIGGER `updater` BEFORE UPDATE ON `comment` FOR EACH ROW SET NEW.updated_at = CURRENT_TIMESTAMP()
 $$
 DELIMITER ;
 
 -- --------------------------------------------------------
 
 --
--- Struttura della tabella `FAQ`
+-- Struttura della tabella `faq`
 --
 
-CREATE TABLE `FAQ` (
+CREATE TABLE `faq` (
   `id` int(11) UNSIGNED NOT NULL COMMENT 'identificatore univoco',
   `title` text NOT NULL COMMENT 'titolo elemento faq',
   `content` text NOT NULL COMMENT 'contenuto elemento faq',
@@ -104,10 +103,10 @@ CREATE TABLE `FAQ` (
 -- --------------------------------------------------------
 
 --
--- Struttura della tabella `Keychain`
+-- Struttura della tabella `keychain`
 --
 
-CREATE TABLE `Keychain` (
+CREATE TABLE `keychain` (
   `user_id` int(11) NOT NULL COMMENT 'identificatore univoco dell''account',
   `username` varchar(250) NOT NULL COMMENT 'username dell''account',
   `password` varchar(64) NOT NULL COMMENT 'password dell''account (sha256)',
@@ -117,27 +116,27 @@ CREATE TABLE `Keychain` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dump dei dati per la tabella `Keychain`
+-- Dump dei dati per la tabella `keychain`
 --
 
-INSERT INTO `Keychain` (`user_id`, `username`, `password`, `created_at`, `updated_at`, `can_publish`) VALUES
+INSERT INTO `keychain` (`user_id`, `username`, `password`, `created_at`, `updated_at`, `can_publish`) VALUES
 (17, 'test', '37268335dd6931045bdcdf92623ff819a64244b53d0e746d438797349d4da578', '2020-05-27 11:05:02', '2020-05-27 11:05:02', 0);
 
 --
--- Trigger `Keychain`
+-- Trigger `keychain`
 --
 DELIMITER $$
-CREATE TRIGGER `updater_key` BEFORE UPDATE ON `Keychain` FOR EACH ROW SET NEW.updated_at = CURRENT_TIMESTAMP()
+CREATE TRIGGER `updater_key` BEFORE UPDATE ON `keychain` FOR EACH ROW SET NEW.updated_at = CURRENT_TIMESTAMP()
 $$
 DELIMITER ;
 
 -- --------------------------------------------------------
 
 --
--- Struttura della tabella `User`
+-- Struttura della tabella `user`
 --
 
-CREATE TABLE `User` (
+CREATE TABLE `user` (
   `name` varchar(250) NOT NULL COMMENT 'nome dell''utente',
   `surname` varchar(250) NOT NULL COMMENT 'cognome dell''utente',
   `id` int(10) UNSIGNED NOT NULL COMMENT 'identificativo univoco dell''utente',
@@ -148,27 +147,27 @@ CREATE TABLE `User` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dump dei dati per la tabella `User`
+-- Dump dei dati per la tabella `user`
 --
 
-INSERT INTO `User` (`name`, `surname`, `id`, `email`, `avatar_url`, `created_at`, `updated_at`) VALUES
+INSERT INTO `user` (`name`, `surname`, `id`, `email`, `avatar_url`, `created_at`, `updated_at`) VALUES
 ('tester', 'tester', 17, 'fdsf@sdfmc.com', '/assets/images/avatars/default.png', '2020-05-27 11:05:02', '2020-05-27 11:05:02');
 
 --
--- Trigger `User`
+-- Trigger `user`
 --
 DELIMITER $$
-CREATE TRIGGER `updater_usr` BEFORE UPDATE ON `User` FOR EACH ROW SET NEW.updated_at = CURRENT_TIMESTAMP()
+CREATE TRIGGER `updater_usr` BEFORE UPDATE ON `user` FOR EACH ROW SET NEW.updated_at = CURRENT_TIMESTAMP()
 $$
 DELIMITER ;
 
 -- --------------------------------------------------------
 
 --
--- Struttura della tabella `Vote`
+-- Struttura della tabella `vote`
 --
 
-CREATE TABLE `Vote` (
+CREATE TABLE `vote` (
   `id` int(11) NOT NULL COMMENT 'identificativo del voto',
   `user_id` int(11) NOT NULL COMMENT 'identificativo utente che ha votato',
   `article_id` int(11) NOT NULL COMMENT 'identificativo dell''articolo votato',
@@ -178,17 +177,17 @@ CREATE TABLE `Vote` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dump dei dati per la tabella `Vote`
+-- Dump dei dati per la tabella `vote`
 --
 
-INSERT INTO `Vote` (`id`, `user_id`, `article_id`, `created_at`, `updated_at`, `positive`) VALUES
+INSERT INTO `vote` (`id`, `user_id`, `article_id`, `created_at`, `updated_at`, `positive`) VALUES
 (10, 17, 10, '2020-05-27 12:28:12', '2020-05-27 12:28:12', 1);
 
 --
--- Trigger `Vote`
+-- Trigger `vote`
 --
 DELIMITER $$
-CREATE TRIGGER `updater_vot` BEFORE UPDATE ON `Vote` FOR EACH ROW SET NEW.updated_at = CURRENT_TIMESTAMP()
+CREATE TRIGGER `updater_vot` BEFORE UPDATE ON `vote` FOR EACH ROW SET NEW.updated_at = CURRENT_TIMESTAMP()
 $$
 DELIMITER ;
 
@@ -197,45 +196,45 @@ DELIMITER ;
 --
 
 --
--- Indici per le tabelle `Article`
+-- Indici per le tabelle `article`
 --
-ALTER TABLE `Article`
+ALTER TABLE `article`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indici per le tabelle `Comment`
+-- Indici per le tabelle `comment`
 --
-ALTER TABLE `Comment`
+ALTER TABLE `comment`
   ADD PRIMARY KEY (`id`),
   ADD KEY `media_id` (`article_id`);
 
 --
--- Indici per le tabelle `FAQ`
+-- Indici per le tabelle `faq`
 --
-ALTER TABLE `FAQ`
+ALTER TABLE `faq`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indici per le tabelle `Keychain`
+-- Indici per le tabelle `keychain`
 --
-ALTER TABLE `Keychain`
+ALTER TABLE `keychain`
   ADD PRIMARY KEY (`user_id`),
   ADD UNIQUE KEY `username_2` (`username`),
   ADD KEY `user_id` (`user_id`);
-ALTER TABLE `Keychain` ADD FULLTEXT KEY `username` (`username`);
+ALTER TABLE `keychain` ADD FULLTEXT KEY `username` (`username`);
 
 --
--- Indici per le tabelle `User`
+-- Indici per le tabelle `user`
 --
-ALTER TABLE `User`
+ALTER TABLE `user`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `email` (`email`),
   ADD KEY `id` (`id`);
 
 --
--- Indici per le tabelle `Vote`
+-- Indici per le tabelle `vote`
 --
-ALTER TABLE `Vote`
+ALTER TABLE `vote`
   ADD PRIMARY KEY (`id`),
   ADD KEY `media_id` (`article_id`);
 
@@ -244,33 +243,33 @@ ALTER TABLE `Vote`
 --
 
 --
--- AUTO_INCREMENT per la tabella `Article`
+-- AUTO_INCREMENT per la tabella `article`
 --
-ALTER TABLE `Article`
+ALTER TABLE `article`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'identificativo univoco', AUTO_INCREMENT=15;
 
 --
--- AUTO_INCREMENT per la tabella `Comment`
+-- AUTO_INCREMENT per la tabella `comment`
 --
-ALTER TABLE `Comment`
+ALTER TABLE `comment`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'identificatore univoco del commento', AUTO_INCREMENT=25;
 
 --
--- AUTO_INCREMENT per la tabella `FAQ`
+-- AUTO_INCREMENT per la tabella `faq`
 --
-ALTER TABLE `FAQ`
+ALTER TABLE `faq`
   MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT COMMENT 'identificatore univoco';
 
 --
--- AUTO_INCREMENT per la tabella `User`
+-- AUTO_INCREMENT per la tabella `user`
 --
-ALTER TABLE `User`
+ALTER TABLE `user`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT COMMENT 'identificativo univoco dell''utente', AUTO_INCREMENT=19;
 
 --
--- AUTO_INCREMENT per la tabella `Vote`
+-- AUTO_INCREMENT per la tabella `vote`
 --
-ALTER TABLE `Vote`
+ALTER TABLE `vote`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'identificativo del voto', AUTO_INCREMENT=11;
 COMMIT;
 

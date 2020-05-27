@@ -1,6 +1,6 @@
 <?php
-include_once("../../server/db_manager.php");
-include_once("../../server/session_manager.php");
+include_once("../../../database/session_manager.php");
+include_once("../../../database/db_manager.php");
 include_once("../../server/models/models.php");
 include_once("../../server/utils.php");
 
@@ -32,7 +32,7 @@ $output = str_replace("{menuLinks}", Utils::getMenuLinks($links), $output);
 if (SessionManager::isUserLogged()) {
     $username = SessionManager::getUsername();
     $user = User::getUser(SessionManager::getUserId());
-    $output = str_replace("{loginLink}", "../php/login.php?page=profilo", $output);
+    $output = str_replace("{loginLink}", "../php/login.php?page=profile", $output);
     $output = str_replace("{registrationLink}", "../php/login.php?logout=true", $output);
     $output = str_replace("{LOGIN}", "PROFILO", $output);
     $output = str_replace("{REGISTRAZIONE}", "LOGOUT", $output);
@@ -74,7 +74,7 @@ switch ($_GET['page']) {
         $page = file_get_contents("../html/article-page.html");
         $output = str_replace("{content}", $page, $output);
         $output = str_replace("{currentPage}", "Articolo {$article->name}", $output);
-        include_once("../php/article-page.php");
+        include_once("../php/article_page.php");
         break;
 
     case 'rules':
