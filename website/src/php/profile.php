@@ -11,7 +11,7 @@ if(!SessionManager::isUserLogged()){
 }
 
 if(isset($_SESSION['error-message'])) {
-  $output = str_replace("<div class='margin-top-2 hidden'>","<div class='margin-top-2' tabindex='0'>",$output);
+  $output = str_replace("<div class=\"margin-top-2 hidden\">","<div class=\"margin-top-2\" tabindex=\"0\">",$output);
   $output = str_replace("{error-message}",$_SESSION['error-message'],$output);
 }
 
