@@ -31,7 +31,7 @@
             <h1 class="secondary-color margin-top-1" tabindex="0">La voce degli utenti</h1>
             <h2 tabindex="0" class="font-size-1-125"><i class="fa fa-thumbs-up margin-top-1" aria-hidden="true"></i> Consigliato da: {likes} utenti </h2>
             <h2 tabindex="0" class="font-size-1-125"><i class="fa fa-thumbs-down margin-bottom-1" aria-hidden="true"></i> Sconsigliato da: {dislikes} utenti </h2>
-            <p class="margin-top-1" tabindex="0">E tu cosa ne pensi di questo prodotto?</p>
+            <p class="margin-top-1 margin-bottom-0-5" tabindex="0">E tu cosa ne pensi di questo prodotto?</p>
             <a href="login-url" class="{login-link-visible}">Accedi e condividi la tua opinione!</a>
             <div class="{comment-form-visible}">
                 <form method="post" action="../php/add_vote.php">
@@ -48,6 +48,12 @@
                         <input type="hidden" value="article-page&amp;articleId={article-id}" name="redirectURL"/>
                     </div>
                 </form>
+                <div class="margin-top-2 hidden">
+                    <div class="error-message-box">
+                        <p class="font-weight-bold">Errore caricamento commento</p>
+                        <p>Si è verificato un problema durante l'invio del tuo commento: {error-message}</p>
+                    </div>
+                </div>
                 <form action="../php/validate_comment.php" method="post" onsubmit="return validateComment()">
                     <div id="comment-form-container"> 
                         <label for="comment-input" class="margin-top-1">Facci sapere qualcosa di più, inserisci qui il tuo commento!</label> 

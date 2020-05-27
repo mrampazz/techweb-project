@@ -62,9 +62,17 @@ switch($check) {
 
 
 //--COMMENTS--
+
+//check if an error has occurred
+if(isset($_SESSION['error-message']) && isset($_SESSION['login']) && !$_SESSION['login']) {
+  $output = str_replace("<div class=\"margin-top-2 hidden\">","<div class=\"margin-top-2\" tabindex=\"0\">",$output);
+  $output = str_replace("{error-message}",$_SESSION['error-message'],$output);
+  unset($_SESSION['error-message']);
+}
 //check if a previously written comment needs to be restored
 if (isset($_SESSION['comment'])){
   $output = str_replace("{comment-input}", $_SESSION['comment'], $output);
+  unset($_SESSION['comment']);
 }
 else{
   $output = str_replace("{comment-input}", "", $output);
@@ -72,7 +80,6 @@ else{
 
 $comments = Comment::getCommentsFor($articleId);
 $output = str_replace("{comment-list}", getCommentList($comments), $output);
-unset($_SESSION['comment']);
 
 
 //--HELPER FUNCTIONS--

@@ -4,27 +4,24 @@ include_once("../../server/db_manager.php");
 include_once("../../server/utils.php");
 include_once("../../server/models/models.php");
 
+$articleId=$_POST["articleId"];
 $content = Utils::validateInput($_POST['comment-input']);
 $_SESSION['comment'] = $content;
+
 
 if (!SessionManager::isUserLogged()) {
     header("Location: ".SessionManager::BASE_URL."login");
     return;
 }
 
-if (!isset($content)) {
-    echo "Error, Missing comment";
-    return;
-}
-
-if (!(isset($content) && !empty($content))) {
-    echo "Error, invalid comment";
+if (empty($content)) {
+    $_SESSION['error-message'] = "il commento non può essere vuoto!";
+    header("Location: ".SessionManager::BASE_URL."article-page"."&articleId=".$articleId);
     return;
 }
 
 // SAVE COMMENT
 $userId = SessionManager::getUserId();
-$articleId=$_POST["articleId"];
 
 Comment::createComment($userId,$articleId,htmlentities($content, ENT_QUOTES)); 
 
