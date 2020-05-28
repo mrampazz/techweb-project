@@ -2,20 +2,20 @@
   <div class="search-container">
     <fieldset class="custom-fieldset">
       <legend class="custom-legend">Ricerca</legend>
-      <form class="inline-form">
+      <form class="inline-form" method="get">
         <div>
-          <label class="custom-label" type="text" name="search" for="search-input">Cerca un telefono</label>
-          <input class="custom-input" id="search-input" />
+          <label class="custom-label" for="search-input">Cerca un telefono</label>
+          <input class="custom-input" id="search-input" type="text" name="search" />
         </div>
         <div>
-          <label class="custom-label" type="text" name="search" for="search-select">Modello</label>
-          <select class="custom-select" id="search-select">
+          <label class="custom-label" for="search-select">Modello</label>
+          <select class="custom-select" id="search-select" type="text" name="model">
             <option value="all">Tutti i modelli</option>
             <option>{modelOptions}</option>
           </select>
         </div>
         <div>
-          <button class="custom-button" type="submit">Cerca</button>
+          <button class="custom-button" type="submit" name="page" value="home">Cerca</button>
         </div>
       </form>
     </fieldset>

@@ -1,11 +1,16 @@
 <?php
 class Utils
 {
-    public static function getMenuLinks($array)
+    public static function getMenuLinks($array, $name)
     {
         $list = [];
         for ($x = 0; $x < count($array); $x++) {
-            $element = "<a class='menu-item' href='{$array[$x]->link}'>{$array[$x]->name}</a>";
+            if ($name && $array[$x]->name == $name) {
+                $element = "<span class='menu-item-active'>{$array[$x]->name}</span>";
+            } else {
+                $element = "<a class='menu-item' href='{$array[$x]->link}'>{$array[$x]->name}</a>";
+            }
+
             array_push($list, $element);
         }
         return implode($list);
@@ -39,12 +44,12 @@ class Utils
     }
 
     public static function replaceContentsArticleItem($html, $item)
-    { 
+    {
         $html = str_replace("{article-model}", $item->model, $html);
         $html = str_replace("{article-link}", "./layout.php?page=article&amp;articleId={$item->id}", $html);
         $html = str_replace("{article-likes}", $item->votesPositive, $html);
-        $html = str_replace("{article-dislikes}", ($item->votesTotal)-($item->votesPositive), $html);
-        $html = str_replace("{article-img}", "../assets/img/articles/".$item->image, $html);
+        $html = str_replace("{article-dislikes}", ($item->votesTotal) - ($item->votesPositive), $html);
+        $html = str_replace("{article-img}", "../assets/img/articles/" . $item->image, $html);
         if (SessionManager::isUserLogged()) {
             switch (Utils::isArticleLiked($item->id)) {
                 case 1:
@@ -63,12 +68,21 @@ class Utils
     public static function replaceContentsAdminArticleItem($html, $item)
     {
         $html = str_replace("{article-model}", $item->model, $html);
-        $html = str_replace("{article-link}", "./php/layout.php?page=article&amp;id={$item->id}", $html);
+        $html = str_replace("{article-link}", "./layout.php?page=article&amp;id={$item->id}", $html);
         $html = str_replace("{article-memory}", $item->likes, $html);
         $html = str_replace("{article-price}", $item->dislikes, $html);
-        $html = str_replace("{article-img}", "../assets/img/articles/".$item->image, $html);
-        $html = str_replace("{article-modify}", "./php/layout.php?page=modifyArticle&amp;id={$item->id}", $html);
+        $html = str_replace("{article-img}", "../assets/img/articles/" . $item->image, $html);
+        $html = str_replace("{article-modify}", "./layout.php?page=modifyArticle&amp;id={$item->id}", $html);
+        return $html;
     }
+
+    public static function replaceContentsFaqItem($html, $item)
+    {
+        $html = str_replace("{question}", $item->title, $html);
+        $html = str_replace("{answer}", $item->content, $html);
+        return $html;
+    }
+
 
     public static function getArticles($search, $model, $userId = null)
     {
@@ -89,6 +103,19 @@ class Utils
         return implode($articlesList);
     }
 
+    public static function generateFaqList($array)
+    {
+        $faqList = [];
+        if (!is_array($array)) {
+            $array = [];
+        }
+        for ($x = 0; $x < count($array); $x++) {
+            $item = Utils::replaceContentsFaqItem(file_get_contents("../html/faq-item.html"), $array[$x]);
+            array_push($faqList, $item);
+        }
+        return implode($faqList);
+    }
+
     public static function generateAdminArticlesList($array)
     {
         $articlesList = [];
@@ -102,43 +129,53 @@ class Utils
         return implode($articlesList);
     }
 
-    public static function validateInput($data) {
+    public static function validateInput($data)
+    {
         $data = trim($data);
         $data = stripslashes($data);
         $data = htmlspecialchars($data);
         return $data;
     }
 
-    public static function unsetAll($variablesToUnset){
-        foreach ($variablesToUnset as $var){
+    public static function unsetAll($variablesToUnset)
+    {
+        foreach ($variablesToUnset as $var) {
             unset($_SESSION[$var]);
         }
     }
 
-    public static function generateRandomString($length) {
-        $characters = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'; 
-        $randomString = ''; 
-    
-        for ($i = 0; $i < $length; $i++) { 
-            $index = rand(0, strlen($characters) - 1); 
-            $randomString .= $characters[$index]; 
-        } 
-    
-        return $randomString; 
+    public static function getArticleFromId($id)
+    {
+        return Article::fetch($id);
     }
 
-    public static function createDate($day,$month,$year){
-        return $year."-".$month."-".$day." 00:00:00";
+    public static function generateRandomString($length)
+    {
+        $characters = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        $randomString = '';
+
+        for ($i = 0; $i < $length; $i++) {
+            $index = rand(0, strlen($characters) - 1);
+            $randomString .= $characters[$index];
+        }
+
+        return $randomString;
     }
 
-    public static function uploadImage($target_dir, $imageReq, $prepath = "") {
+    public static function createDate($day, $month, $year)
+    {
+        return $year . "-" . $month . "-" . $day . " 00:00:00";
+    }
+
+    public static function uploadImage($target_dir, $imageReq, $prepath = "")
+    {
         $target_file = $target_dir . Utils::generateRandomString(10);
         $uploadOk = 1;
-        $imageFileType = strtolower(pathinfo($imageReq["name"],PATHINFO_EXTENSION));
+        $imageFileType = strtolower(pathinfo($imageReq["name"], PATHINFO_EXTENSION));
         $target_file .= "." . $imageFileType;
         $check = getimagesize($imageReq["tmp_name"]);
-        if($check !== false) {
-           $uploadOk = 1;
+        if ($check !== false) {
+            $uploadOk = 1;
         } else {
             return ["success" => false, "error" => "il file caricato non è un'immagine."];
             $uploadOk = 0;
@@ -149,7 +186,7 @@ class Utils
             $uploadOk = 0;
         }
 
-        if($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg") {
+        if ($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg") {
             return ["success" => false, "error" => "solo i formati JPG, JPEG e PNG sono supportati."];
             $uploadOk = 0;
         }
@@ -157,7 +194,7 @@ class Utils
         if ($uploadOk == 0) {
             return ["success" => false, "error" => "il tuo file non è stato caricato."];
         } else {
-            if (move_uploaded_file($imageReq["tmp_name"], $prepath.$target_file)) {
+            if (move_uploaded_file($imageReq["tmp_name"], $prepath . $target_file)) {
                 return ["success" => true, "url" => $target_file];
             } else {
                 return ["success" => false, "error" => "si è verificato un errore durante il caricamento del file."];
