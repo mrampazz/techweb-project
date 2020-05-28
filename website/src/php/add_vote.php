@@ -1,35 +1,31 @@
 <?php
-include_once("../../src/db_manager.php");
-include_once("../../src/models/models.php");
-include_once("../../src/session_manager.php");
+include_once("../../../database/session_manager.php");
+include_once("../../../database/db_manager.php");
+include_once("../../server/models/models.php");
 
-$userId = null;
 if (SessionManager::isUserLogged()) {
     $userId = SessionManager::getUserId();
 } else {
     // user not logged
-    header("Location: ../php/login.php");
+    header("Location: ".SessionManager::BASE_URL."login");
     return;
 }
 
-if (isset($_POST["redirectURL"]) && isset($_POST["articleID"]) && isset($_POST["vote"])) {
-    $redirectURL = $_POST["redirectURL"];
-    $articleID = $_POST["articleID"];
+if (isset($_POST["vote"])) {
+    $articleId = $_POST["articleID"];
     $vote = $_POST["vote"];
-
-    $article = Article::fetch($articleID);
+    $article = Article::fetch($articleId);
     switch ($vote) {
         case "like":
-            $article->addVote($userId, $articleID, 1);
+            $article->addVote($userId, $articleId, 1);
         break;
         case "dislike":
-            $article->addVote($userId, $articleID, 0);
+            $article->addVote($userId, $articleId, 0);
         break;
     }
-
-    header("Location: ".SessionManager::BASE_URL.$redirectURL);
-} else {
+    header("Location: ".SessionManager::BASE_URL."article"."&articleId=".$articleId);
+} 
+else {
     echo "Parametri incorretti";
 }
-
 ?>

@@ -79,6 +79,11 @@ class Article extends Base
         return $results;
     }
 
+    public static function getUserVotes($userId) {
+        $dbman = DBManager::getInstance();
+        return $dbman->query("SELECT * FROM Vote WHERE user_id = ".$userId);
+    }
+
     public static function fetch($id)
     {
         $dbman = DBManager::getInstance();

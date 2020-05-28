@@ -8,18 +8,18 @@ $articleId = $_GET["articleId"];
 
 //--ARTICLE INFO--
 $articleInfo = loadInfo($articleId);
-$articleName = $articleInfo[0];
-$articleImageUrl = $articleInfo[1];
-$articlePrice = $articleInfo[2];
-$releaseDate = $articleInfo[3];
-$articleDescription = $articleInfo[4];
-$purchaseLink = $articleInfo[5];
+$articleFullName = $articleInfo[0]." ".$articleInfo[1];
+$articleImageUrl = $articleInfo[2];
+$articlePrice = $articleInfo[3];
+$releaseDate = $articleInfo[4];
+$articleDescription = $articleInfo[5];
+$purchaseLink = $articleInfo[6];
 $formattedDate = date("d-m-Y", strtotime($releaseDate));
 
 $output = str_replace("{article-id}",$articleId,$output);
 $output = str_replace("article-id-link",$articleId,$output);
-$output = str_replace("{article-name}", $articleName,$output);
-$output = str_replace("article-image-url", "../assetes/img/articles/".$articleImageUrl,$output);
+$output = str_replace("{article-name}", $articleFullName,$output);
+$output = str_replace("article-image-url", "../assets/img/articles/".$articleImageUrl,$output);
 $output = str_replace("{article-price}", $articlePrice,$output);
 $output = str_replace("{article-description}", $articleDescription,$output);
 $output = str_replace("{article-release-date}", $formattedDate, $output);
@@ -31,8 +31,8 @@ $output = str_replace("article-purchase-url", $purchaseLink, $output);
 $totalVotes = getTotalAndPositiveVotes($articleId)[0];
 $positiveVotes = getTotalAndPositiveVotes($articleId)[1];
 $negativeVotes = $totalVotes-$positiveVotes;
-$output = str_replace("{article-likes}", ($positiveVotes==null) ? 0 : $positiveVotes, $output);
-$output = str_replace("{article-dislikes}", ($negativeVotes==null) ? 0 : ($negativeVotes), $output); 
+$output = str_replace("{article-likes}", ($positiveVotes==null) ? "0" : $positiveVotes, $output);
+$output = str_replace("{article-dislikes}", ($negativeVotes==null) ? "0" : $negativeVotes, $output); 
 
 //check if the user is logged and shows elements accordingly 
 if (!SessionManager::isUserLogged()){
@@ -62,7 +62,6 @@ switch($check) {
 
 
 //--COMMENTS--
-
 //check if an error has occurred
 if(isset($_SESSION['error-message']) && isset($_SESSION['login']) && !$_SESSION['login']) {
   $output = str_replace("<div class=\"margin-top-2 hidden\">","<div class=\"margin-top-2\" tabindex=\"0\">",$output);
@@ -79,7 +78,13 @@ else{
 }
 
 $comments = Comment::getCommentsFor($articleId);
-$output = str_replace("{comment-list}", getCommentList($comments), $output);
+if (!empty($comments)){
+  $output = str_replace("{comment-list}", getCommentList($comments), $output);
+}
+else{
+  $output = str_replace("{comment-list}", "<p class=\"font-size-0-75\"> Nessun commento presente per questo prodotto. </p>", $output);
+}
+
 
 
 //--HELPER FUNCTIONS--

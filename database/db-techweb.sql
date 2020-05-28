@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Creato il: Mag 27, 2020 alle 21:52
+-- Creato il: Mag 28, 2020 alle 02:00
 -- Versione del server: 10.4.8-MariaDB
 -- Versione PHP: 7.3.10
 
@@ -47,7 +47,7 @@ CREATE TABLE `article` (
 
 INSERT INTO `article` (`id`, `content`, `brand`, `model`, `initial_price`, `buy_link`, `launch_date`, `main_image`, `created_at`, `updated_at`) VALUES
 (7, 'content', 'alfa', 'mod', 12.33, 'link', '2020-10-10 00:00:00', 'url', '2020-05-27 12:13:13', '2020-05-27 12:13:13'),
-(8, 'content', 'Apple', 'iPhone 11', 12.33, 'https://amzn.to/3bQlAzS', '2020-10-10 00:00:00', 'iphone11.jpg', '2020-05-27 12:14:22', '2020-05-27 19:17:17'),
+(8, 'Apple iPhone 11 è uno degli smartphone iOS più avanzati e completi che ci siano in circolazione. Dispone di un grande display da 6.1 pollici con una risoluzione di 1792x828 pixel. Le funzionalità offerte da questo Apple iPhone 11 sono veramente tante e all\'avanguardia. A cominciare dal modulo LTE 4G che permette un trasferimento dati e una navigazione in internet eccellente. Fotocamera da 12 megapixel ma che permette ugualmente al Apple iPhone 11 di scattare foto di buona qualità con una risoluzione di 4000x3000 pixel e di registrare video in 4K alla risoluzione di 3840x2160 pixel. Lo spessore di 8.3mm è contenuto e rende questo Apple iPhone 11 molto interessante.', 'Apple', 'iPhone 11', 829, 'https://amzn.to/3bQlAzS', '2019-09-19 22:00:00', 'iphone11.jpg', '2020-05-27 12:14:22', '2020-05-27 23:57:25'),
 (9, 'content', 'alfa', 'mod', 12.33, 'link', '2020-10-10 00:00:00', 'url', '2020-05-27 12:14:45', '2020-05-27 12:14:45'),
 (10, 'content', 'alfa', 'mod', 12.33, 'link', '2020-10-10 00:00:00', 'url', '2020-05-27 12:17:21', '2020-05-27 12:17:21'),
 (11, 'content', 'alfa', 'mod', 12.33, 'link', '2020-10-10 00:00:00', 'url', '2020-05-27 12:18:21', '2020-05-27 12:18:21'),
@@ -120,7 +120,8 @@ CREATE TABLE `keychain` (
 --
 
 INSERT INTO `keychain` (`user_id`, `username`, `password`, `created_at`, `updated_at`, `can_publish`) VALUES
-(17, 'test', '37268335dd6931045bdcdf92623ff819a64244b53d0e746d438797349d4da578', '2020-05-27 11:05:02', '2020-05-27 11:05:02', 0);
+(17, 'test', '37268335dd6931045bdcdf92623ff819a64244b53d0e746d438797349d4da578', '2020-05-27 11:05:02', '2020-05-27 11:05:02', 0),
+(19, 'ads', '049a68c15c0d6e26c8b4a0743e6b87f074864c2fae5983c88956cb2882d608f5', '2020-05-27 23:13:23', '2020-05-27 23:13:23', 0);
 
 --
 -- Trigger `keychain`
@@ -181,7 +182,7 @@ CREATE TABLE `vote` (
 --
 
 INSERT INTO `vote` (`id`, `user_id`, `article_id`, `created_at`, `updated_at`, `positive`) VALUES
-(10, 17, 10, '2020-05-27 12:28:12', '2020-05-27 12:28:12', 1);
+(19, 17, 8, '2020-05-27 23:46:25', '2020-05-27 23:52:01', 1);
 
 --
 -- Trigger `vote`
@@ -264,13 +265,13 @@ ALTER TABLE `faq`
 -- AUTO_INCREMENT per la tabella `user`
 --
 ALTER TABLE `user`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT COMMENT 'identificativo univoco dell''utente', AUTO_INCREMENT=19;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT COMMENT 'identificativo univoco dell''utente', AUTO_INCREMENT=20;
 
 --
 -- AUTO_INCREMENT per la tabella `vote`
 --
 ALTER TABLE `vote`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'identificativo del voto', AUTO_INCREMENT=11;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'identificativo del voto', AUTO_INCREMENT=20;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

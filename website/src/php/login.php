@@ -18,6 +18,11 @@ else{
     $output = str_replace("{username}","",$output);
 }
 
+//if the user comes from the login link in the article save the articleId 
+if (isset($_GET['articleId'])){
+    $_SESSION['article-id'] = Utils::validateInput($_GET['articleId']);
+}
+
 Utils::unsetAll(array('username','error-message'));
 echo $output;
 ?>

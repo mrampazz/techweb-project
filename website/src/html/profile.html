@@ -1,56 +1,44 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
-"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" lang="it" xml:lang="it">
-    <head>
-        <title>Profilo</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-        <link href="https://fonts.googleapis.com/css?family=Montserrat:200,400,500,600,700&amp;display=swap" rel="stylesheet" type="text/css"/>
-        <link rel="stylesheet" type="text/css" media="all" href="../assets/styles/style.css"/>
-        <script type="text/javascript" src="../scripts/formChecker.js"></script>
-        <script src="https://kit.fontawesome.com/cfeebd4134.js"></script>
-    </head>
-    <body class="secondary-bg">
-        <img id="avatar" class="margin-top-1" src="../assets/img/avatars/avatar.png" alt="Immagine profilo" tabindex="0" />
-        <div class="margin-top-2 hidden">
-            <div class="error-message-box">
-                <p class="font-weight-bold">Attenzione!</p>
-                <p>Si è verificato un errore durante l'aggiornamento di alcuni dati: {error-message} </p>
-            </div>
+<div id="profile-container">
+    <img id="avatar" class="margin-top-1" src="../assets/img/avatars/avatar.png" alt="Immagine profilo" tabindex="0" />
+    <div class="margin-top-2 hidden">
+        <div class="error-message-box">
+            <p class="font-weight-bold">Attenzione!</p>
+            <p>Si è verificato un errore durante l'aggiornamento di alcuni dati: {error-message} </p>
         </div>
-        <form class="margin-top-1" action="../php/update_profile.php" method="post" onsubmit="return validateFormProfile()" enctype="multipart/form-data">
-            <div class="group margin-top-1">
-                <label for="file-upload" class="upload-image" tabindex="0">
-                <i class="fas fa-camera"></i> Cambia immagine profilo
-                </label>
-                <input id="file-upload" name="avatar" type="file" onchange="return validateImage()"/>
-            </div>
-            <div class="group">
-                <label for="name">Nome</label>
-                <input type="text" name="name" id="name" value="{name}"/>
-                <span class="highlight"></span>
-                <span class="bar"></span>
-            </div>
-            <div class="group">
-                <label for="surname">Cognome</label>
-                <input type="text" name="surname" id="surname" value="{surname}"/>
-                <span class="highlight"></span>
-                <span class="bar"></span>
-            </div>
-            <div class="group">
-                <label for="email" aria-label="La tua email è {email}">Email</label>
-                <input type="text" name="email" id="email" value="{email}"/>
-                <span class="highlight"></span>
-                <span class="bar"></span>
-            </div>
-            <div class="group">
-                <label for="username" aria-label="Il tuo username è {username}">Username</label>
-                <input type="text" name="username" id="username" value="{username}"/>
-                <span class="highlight"></span>
-                <span class="bar"></span>
-            </div>
-            <div class="flex-container flex-content-center">
-                <input type="submit" value="Aggiorna profilo" class="form-button margin-bottom-1"/>
-            </div>
-        </form>
-    </body>
-</html>
+    </div>
+    <form class="margin-top-1" action="../php/update_profile.php" method="post" onsubmit="return validateFormProfile()" enctype="multipart/form-data">
+        <div class="group margin-top-1">
+            <label for="file-upload" class="upload-image" tabindex="0">
+            <i class="fas fa-camera"></i> Cambia immagine profilo
+            </label>
+            <input id="file-upload" name="avatar" type="file" onchange="return validateImage()"/>
+        </div>
+        <div class="group">
+            <label for="name">Nome</label>
+            <input type="text" name="name" id="name" value="{name}"/>
+            <span class="highlight"></span>
+            <span class="bar"></span>
+        </div>
+        <div class="group">
+            <label for="surname">Cognome</label>
+            <input type="text" name="surname" id="surname" value="{surname}"/>
+            <span class="highlight"></span>
+            <span class="bar"></span>
+        </div>
+        <div class="group">
+            <label for="email" aria-label="La tua email è {email}">Email</label>
+            <input type="text" name="email" id="email" value="{email}"/>
+            <span class="highlight"></span>
+            <span class="bar"></span>
+        </div>
+        <div class="group">
+            <label for="username" aria-label="Il tuo username è {username}">Username</label>
+            <input type="text" name="username" id="username" value="{username}"/>
+            <span class="highlight"></span>
+            <span class="bar"></span>
+        </div>
+        <div class="flex-container flex-content-center">
+            <input type="submit" value="Aggiorna profilo" class="form-button margin-bottom-1"/>
+        </div>
+    </form>
+</div>

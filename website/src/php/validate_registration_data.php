@@ -26,7 +26,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   $_SESSION['email'] = $email;
    
     
-  if (checkParameters($username, $password, $confirmationPassword, $name, $surname, $email, $errorMessage)) // if true parameters are in the correct format -> try to register
+  if (checkParameters($username, $password, $confirmationPassword, $name, $surname, $email)) // if true parameters are in the correct format -> try to register
   {
     $man = DBManager::getInstance();
     $reg = $man->register($username, $password, $name, $surname, $email);
@@ -46,7 +46,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 }
 
 // check data format -> return true if correct. Otherwise, return false and set errormessage
-function checkParameters($username, $password, $confirmationPassword, $name, $surname, $email, &$errorMessage)
+function checkParameters($username, $password, $confirmationPassword, $name, $surname, $email)
 {
 	if (empty($username)) {
 	  $_SESSION['error-message'] .= " l'username è richiesto! ";
@@ -99,12 +99,6 @@ function checkParameters($username, $password, $confirmationPassword, $name, $su
 	} 
 
 	return true;
-}
-
-function RegUser($username, $password, $confirmationPassword, $name, $surname, $email)
-{		
-	// ask db manager to create a new account
-	return false;
 }
 
 function userRegisteredCorrectly()

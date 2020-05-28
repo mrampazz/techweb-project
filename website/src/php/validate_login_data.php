@@ -14,7 +14,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   $password = Utils::validateInput($_POST["password"]);
   $_SESSION['username'] = $username;
 
-  if (checkParameters($username, $password, $errorMessage)) // if true parameters are in the correct format -> try to login
+  if (checkParameters($username, $password)) // if true parameters are in the correct format -> try to login
   {
     $man = DBManager::getInstance();
     $log = $man->login($username, $password);
@@ -34,7 +34,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 }
 
 // check data format -> return true if correct. Otherwise, return false and set errormessage
-function checkParameters($username, $password, &$errorMessage)
+function checkParameters($username, $password)
 {
 	if (empty($username)) {
 	  $_SESSION['error-message'] .= " l'username è richiesto! ";
@@ -51,17 +51,12 @@ function checkParameters($username, $password, &$errorMessage)
 	return true;
 }
 
-function logUser($username, $password)
-{		
-	// ask db manager if user credentials are correct
-	return false;
-}
-
 function userLoggedCorrectly()
 {
   // if the user comes from the link of the article redirect to the page
-  if (isset($_GET['articleId'])){
-    header("Location: ".SessionManager::BASE_URL."article-page"."&articleId=".$_GET['articleId']);
+  if (isset($_SESSION['article-id'])){
+    header("Location: ".SessionManager::BASE_URL."article"."&articleId=".$_SESSION['article-id']);
+    unset($_SESSION['article-id']);
   }
   else{
 	  // redirect to home 
