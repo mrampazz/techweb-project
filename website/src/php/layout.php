@@ -103,3 +103,4 @@ switch ($_GET['page']) {
 }
 
 echo $output;
+?>

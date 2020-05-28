@@ -38,15 +38,15 @@ class Utils
         }
     }
 
-    public static function replaceContentsArticleItem($html, $id, $title, $imgUrl, $likes, $dislikes)
+    public static function replaceContentsArticleItem($html, $item)
     {
-        $html = str_replace("{article-title}", $title, $html);
-        $html = str_replace("{article-link}", "./php/layout.php?page=article&amp;id={$id}", $html);
-        $html = str_replace("{article-likes}", $likes, $html);
-        $html = str_replace("{article-dislikes}", $dislikes, $html);
-        $html = str_replace("{article-img}", $imgUrl, $html);
+        $html = str_replace("{article-model}", $item->model, $html);
+        $html = str_replace("{article-link}", "./php/layout.php?page=article&amp;id={$item->id}", $html);
+        $html = str_replace("{article-likes}", $item->likes, $html);
+        $html = str_replace("{article-dislikes}", $item->dislikes, $html);
+        $html = str_replace("{article-img}", $item->imgUrl, $html);
         if (SessionManager::isUserLogged()) {
-            switch (Utils::isArticleLiked($id)) {
+            switch (Utils::isArticleLiked($item->id)) {
                 case 1:
                     $html = str_replace("{article-liked}", 'article-liked', $html);
                     break;
@@ -57,6 +57,16 @@ class Utils
                     break;
             }
         }
+    }
+
+    public static function replaceContentsAdminArticleItem($html, $item)
+    {
+        $html = str_replace("{article-model}", $item->model, $html);
+        $html = str_replace("{article-link}", "./php/layout.php?page=article&amp;id={$item->id}", $html);
+        $html = str_replace("{article-memory}", $item->likes, $html);
+        $html = str_replace("{article-price}", $item->dislikes, $html);
+        $html = str_replace("{article-img}", $item->imgUrl, $html);
+        $html = str_replace("{article-modify}", "./php/layout.php?page=modifyArticle&amp;id={$item->id}", $html);
     }
 
     public static function getArticles($search, $model, $userId = null)
@@ -71,7 +81,20 @@ class Utils
             $array = [];
         }
         for ($x = 0; $x < count($array); $x++) {
-            $card = Utils::replaceContentsArticleItem(file_get_contents("../html/article-item.html"), $array->id, $array->title, $array->imgUrl, $array->likes, $array->dislikes);
+            $card = Utils::replaceContentsArticleItem(file_get_contents("../html/article-item.html"), $array[$x]);
+            array_push($articlesList, $card);
+        }
+        return implode($articlesList);
+    }
+
+    public static function generateAdminArticlesList($array)
+    {
+        $articlesList = [];
+        if (!is_array($array)) {
+            $array = [];
+        }
+        for ($x = 0; $x < count($array); $x++) {
+            $card = Utils::replaceContentsAdminArticleItem(file_get_contents("../html/article-admin-item.html"), $array[$x]);
             array_push($articlesList, $card);
         }
         return implode($articlesList);
