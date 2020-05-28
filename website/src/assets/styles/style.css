@@ -450,6 +450,12 @@ body {
 
 /* login/registration/form */
 
+.log-reg-container{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
 /* FORM starting stylings */
 
 .form-button {

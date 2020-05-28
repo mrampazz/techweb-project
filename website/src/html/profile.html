@@ -26,16 +26,12 @@
             <span class="bar"></span>
         </div>
         <div class="group">
-            <label for="email" aria-label="La tua email è {email}">Email</label>
-            <input type="text" name="email" id="email" value="{email}"/>
-            <span class="highlight"></span>
-            <span class="bar"></span>
+            <p id="email-label">Email</p>
+            <p aria-labelledby="email-label" class="secondary-color font-size-1-125">{email}</p>
         </div>
         <div class="group">
-            <label for="username" aria-label="Il tuo username è {username}">Username</label>
-            <input type="text" name="username" id="username" value="{username}"/>
-            <span class="highlight"></span>
-            <span class="bar"></span>
+            <p id="username-label">Username</p>
+            <p aria-labelledby="username-label" class="secondary-color font-size-1-125">{username}</p>
         </div>
         <div class="flex-container flex-content-center">
             <input type="submit" value="Aggiorna profilo" class="form-button margin-bottom-1"/>

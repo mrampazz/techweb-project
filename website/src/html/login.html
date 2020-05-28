@@ -1,25 +1,27 @@
-<h1 class="flex-container flex-content-center secondary-color margin-top-1">Login</h1>
-<div class="margin-top-2 hidden">
-    <div class="error-message-box">
-        <p class="font-weight-bold">Credenziali invalide</p>
-        <p>Controlla le tue credenziali e riprova a fare l’accesso: {error-message}</p>
+<div class="log-reg-container">
+    <h1 class="flex-container flex-content-center secondary-color margin-top-1">Login</h1>
+    <div class="margin-top-2 hidden">
+        <div class="error-message-box">
+            <p class="font-weight-bold">Credenziali invalide</p>
+            <p>Controlla le tue credenziali e riprova a fare l’accesso: {error-message}</p>
+        </div>
     </div>
+    <form action="../php/validate_login_data.php" method="post" onsubmit="return validateFormLogin()">
+        <div class="group margin-top-3">     
+            <label for="username" class="label-log-reg">Username</label>
+            <input type="text" name="username" id="username" tabindex="0" value="{username}"/> 
+            <span class="highlight"></span>
+            <span class="bar"></span> 
+        </div>
+        <div class="group">      
+            <label for="password" class="label-log-reg">Password</label>
+            <input type="password" name="password" id="password" tabindex="0"/>
+            <span class="highlight"></span>
+            <span class="bar"></span>
+        </div>
+        <div class="flex-container flex-content-center margin-bottom-2">
+            <input type="submit" value="Accedi" class="form-button"/>
+        </div>
+    </form>
+    <a href="../php/registration.php" class="font-size-0-75">Non sei ancora registrato? CLICCA QUI</a>
 </div>
-<form action="../php/validate_login_data.php" method="post" onsubmit="return validateFormLogin()">
-    <div class="group margin-top-3">     
-        <label for="username" class="label-log-reg">Username</label>
-        <input type="text" name="username" id="username" tabindex="0" value="{username}"/> 
-        <span class="highlight"></span>
-        <span class="bar"></span> 
-    </div>
-    <div class="group">      
-        <label for="password" class="label-log-reg">Password</label>
-        <input type="password" name="password" id="password" tabindex="0"/>
-        <span class="highlight"></span>
-        <span class="bar"></span>
-    </div>
-    <div class="flex-container flex-content-center margin-bottom-2">
-        <input type="submit" value="Accedi" class="form-button"/>
-    </div>
-</form>
-<a href="../php/registration.php" class="font-size-0-75">Non sei ancora registrato? CLICCA QUI</a>

@@ -17,15 +17,7 @@ $surname = Utils::validateInput($_POST['surname']);
 $userId = SessionManager::getUserId();
 $user = User::getUser($userId);
 
-//updates the current data only if those provided are valid
-if (isValidName($name)){
-  $user->name = $name;
-}
-if (isValidSurname($surname)){
-  $user->surname = $surname;
-}
-
-// good to go on these parameters, now check image upload
+//check image upload
 $target_dir = "../assets/img/avatars/";
 if ($_FILES["avatar"]["name"] != null) {
   $upload_result = Utils::uploadImage($target_dir, $_FILES["avatar"]);
@@ -37,7 +29,15 @@ if ($_FILES["avatar"]["name"] != null) {
   }
 }
 
-$user->saveUser(); 
+//updates the current user data only if those provided are valid
+if (isValidSurname($surname)){
+  $user->surname = $surname;
+}
+if (isValidName($name)){
+  $user->name = $name;
+}
+
+$user->saveUser();
 header("Location: ".SessionManager::BASE_URL."profile");
 
 
@@ -45,22 +45,28 @@ header("Location: ".SessionManager::BASE_URL."profile");
 function isValidName($nameToCheck){
   if (empty($nameToCheck)) {
     $_SESSION['error-message'] = "inserisci il nome e richiedi l'aggiornamento del profilo. In caso contrario verrà ripristinato il nome precedente.";
+    $_SESSION['name'] = $nameToCheck;
     return false;
   }
   else if(!preg_match("/^[a-zA-Z ]{1,16}$/",$nameToCheck)){
-    $_SESSION['error-message'] .= " controlla il nome! Il campo dev'essere composto solamente da lettere. Quando hai finito richiedi l'aggiornamento del profilo. In caso contrario verrà ripristinato il nome precedente.";
+    $_SESSION['error-message'] = " controlla il nome! Il campo dev'essere composto solamente da lettere. Quando hai finito richiedi l'aggiornamento del profilo. In caso contrario verrà ripristinato il nome precedente.";
+    $_SESSION['name'] = $nameToCheck;
     return false;
   }
+  return true;
 }
 
 function isValidSurname($surnameToCheck){
   if (empty($surnameToCheck)) {
     $_SESSION['error-message'] = "inserisci il cognome e richiedi l'aggiornamento del profilo. In caso contrario verrà ripristinato il cognome precedente.";
+    $_SESSION['surname'] = $surnameToCheck;
     return false;
   } 
   else if(!preg_match("/^[a-zA-Z ]{1,16}$/",$surnameToCheck)){
-    $_SESSION['error-message'] .= " controlla il cognome! Il campo dev'essere composto solamente da lettere. Quando hai finito richiedi l'aggiornamento del profilo. In caso contrario verrà ripristinato il cognome precedente.";
+    $_SESSION['error-message'] = " controlla il cognome! Il campo dev'essere composto solamente da lettere. Quando hai finito richiedi l'aggiornamento del profilo. In caso contrario verrà ripristinato il cognome precedente.";
+    $_SESSION['surname'] = $surnameToCheck;
     return false;
   }
+  return true;
 }
 ?>

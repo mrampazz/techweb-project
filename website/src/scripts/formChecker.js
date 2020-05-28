@@ -20,6 +20,28 @@ function validInput(item, reg_expr, isLogin){
 }
 
 /*
+    validazione form profilo
+*/
+function validateFormProfile(){
+    var name = document.getElementById("name");
+    var surname = document.getElementById("surname");
+
+    if (!validInput(name, RE_NAME, false))                                  
+    { 
+        alert(errorMessage); 
+        name.focus(); 
+        return false; 
+    } 
+   
+    if (!validInput(surname, RE_NAME, false))                               
+    { 
+        alert(errorMessage); 
+        surname.focus(); 
+        return false; 
+    } 
+}
+
+/*
     validazione form login
 */
 function validateFormLogin() {
@@ -99,44 +121,6 @@ function validateFormRegistration() {
     checkPasswords(password,rpassword);
 
     return true;
-}
-
-/*
-    validazione form profilo
-*/
-function validateFormProfile(){
-    var name = document.getElementById("name");
-    var surname = document.getElementById("surname");
-    var username = document.getElementById("username");
-    var email = document.getElementById("email");
-
-    if (!validInput(name, RE_NAME, false))                                  
-    { 
-        alert(errorMessage); 
-        name.focus(); 
-        return false; 
-    } 
-   
-    if (!validInput(surname, RE_NAME, false))                               
-    { 
-        alert(errorMessage); 
-        surname.focus(); 
-        return false; 
-    } 
-    
-    if (!validInput(username, RE_USERNAME, false))                                  
-    { 
-        alert(errorMessage); 
-        username.focus(); 
-        return false; 
-    } 
-
-    if (!validInput(email, RE_EMAIL, false))                                  
-    { 
-        alert(errorMessage); 
-        email.focus(); 
-        return false; 
-    } 
 }
 
 /*
