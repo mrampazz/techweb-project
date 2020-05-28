@@ -520,6 +520,10 @@ body {
 input[type="text"]:focus, input[type="password"]:focus {
   outline: none;
 }
+#username:disabled, #email:disabled{
+  border-bottom: none;
+  opacity: .85;
+}
 /* LABEL */
 
 .label-log-reg {
@@ -537,6 +541,7 @@ input:valid ~ label {
   font-size: .8em;
   color: #506180;
 }
+
 /* BOTTOM BARS */
 
 .bar {
