@@ -1,7 +1,4 @@
 <?php
-include_once("../../../database/session_manager.php");
-include_once("../../server/utils.php");
-$output = file_get_contents("../html/registration.html");
 
 if(isset($_SESSION['error-message']) && isset($_SESSION['registration']) && !$_SESSION['registration']) {
     $output = str_replace("<div class=\"margin-top-2 hidden\">","<div class=\"margin-top-2\" tabindex=\"0\">",$output);
@@ -37,5 +34,4 @@ else{
 }
 
 Utils::unsetAll(array('username','name','surname','email','error-message'));
-echo $output;
 ?>

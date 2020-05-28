@@ -26,19 +26,19 @@ $links = [
     new Link("FAQ", SessionManager::BASE_URL . "faq"),
 ];
 
-$output = str_replace("{menuLinks}", Utils::getMenuLinks($links), $output);
+$output = str_replace("{menu-links}", Utils::getMenuLinks($links), $output);
 
 
 if (SessionManager::isUserLogged()) {
     $username = SessionManager::getUsername();
     $user = User::getUser(SessionManager::getUserId());
-    $output = str_replace("{loginLink}", "../php/login.php?page=profile", $output);
+    $output = str_replace("{loginLink}", "../php/layout.php?page=profile", $output);
     $output = str_replace("{registrationLink}", "../php/login.php?logout=true", $output);
     $output = str_replace("{LOGIN}", "PROFILO", $output);
     $output = str_replace("{REGISTRAZIONE}", "LOGOUT", $output);
 } else {
-    $output = str_replace("{loginLink}", "../php/login.php", $output);
-    $output = str_replace("{registrationLink}", "../php/registration.php", $output);
+    $output = str_replace("{loginLink}", "../php/layout.php?page=login", $output);
+    $output = str_replace("{registrationLink}", "../php/layout.php?page=registration", $output);
     $output = str_replace("{LOGIN}", "LOGIN", $output);
     $output = str_replace("{REGISTRAZIONE}", "REGISTRAZIONE", $output);
 }
@@ -49,6 +49,22 @@ if (isset($_GET["logout"])) {
 }
 
 switch ($_GET['page']) {
+    case 'login':
+        $breadcrumb = "<li>&#62;&#62; <a>Login</a></li>";
+        $page = file_get_contents("../html/login.html");
+        $output = str_replace("{content}", $page, $output);
+        $output = str_replace("{currentPage}", "Login", $output);
+        include_once("../php/login.php");
+        break;
+
+    case 'registration':
+        $breadcrumb = "<li>&#62;&#62; <a>Registrazione</a></li>";
+        $page = file_get_contents("../html/registration.html");
+        $output = str_replace("{content}", $page, $output);
+        $output = str_replace("{currentPage}", "Registrazione", $output);
+        include_once("../php/registration.php");
+        break;
+        
     case 'home':
         $breadcrumb = "<li>&#62;&#62; <a>Home</a></li>";
         $page = file_get_contents("../html/home.html");
@@ -68,7 +84,6 @@ switch ($_GET['page']) {
     case 'article':
         if (isset($_GET['id'])) {
             $id = $_GET['id'];
-            $article = Articles::getArticleFrom($id);
         }
         $breadcrumb = "<li>&#62;&#62; href='" . SessionManager::BASE_URL . 'home' . "'<a>Home</a></li><li>&#62;&#62;<a>Articolo {$article->name} </a></li>";
         $page = file_get_contents("../html/article-page.html");

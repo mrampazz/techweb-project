@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Creato il: Mag 28, 2020 alle 02:00
+-- Creato il: Mag 28, 2020 alle 12:21
 -- Versione del server: 10.4.8-MariaDB
 -- Versione PHP: 7.3.10
 
@@ -121,7 +121,7 @@ CREATE TABLE `keychain` (
 
 INSERT INTO `keychain` (`user_id`, `username`, `password`, `created_at`, `updated_at`, `can_publish`) VALUES
 (17, 'test', '37268335dd6931045bdcdf92623ff819a64244b53d0e746d438797349d4da578', '2020-05-27 11:05:02', '2020-05-27 11:05:02', 0),
-(19, 'ads', '049a68c15c0d6e26c8b4a0743e6b87f074864c2fae5983c88956cb2882d608f5', '2020-05-27 23:13:23', '2020-05-27 23:13:23', 0);
+(21, 'admin', '240be518fabd2724ddb6f04eeb1da5967448d7e831c08c8fa822809f74c720a9', '2020-05-28 10:01:46', '2020-05-28 10:02:02', 1);
 
 --
 -- Trigger `keychain`
@@ -152,7 +152,8 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`name`, `surname`, `id`, `email`, `avatar_url`, `created_at`, `updated_at`) VALUES
-('tester', 'tester', 17, 'fdsf@sdfmc.com', '/assets/images/avatars/default.png', '2020-05-27 11:05:02', '2020-05-27 11:05:02');
+('tester', 'tester', 17, 'fdsf@sdfmc.com', '/assets/images/avatars/default.png', '2020-05-27 11:05:02', '2020-05-27 11:05:02'),
+('admin', 'admin', 21, 'admin@gmail.com', '/assets/images/avatars/default.png', '2020-05-28 10:01:46', '2020-05-28 10:01:46');
 
 --
 -- Trigger `user`
@@ -265,7 +266,7 @@ ALTER TABLE `faq`
 -- AUTO_INCREMENT per la tabella `user`
 --
 ALTER TABLE `user`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT COMMENT 'identificativo univoco dell''utente', AUTO_INCREMENT=20;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT COMMENT 'identificativo univoco dell''utente', AUTO_INCREMENT=22;
 
 --
 -- AUTO_INCREMENT per la tabella `vote`

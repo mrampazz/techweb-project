@@ -5,7 +5,7 @@ class Utils
     {
         $list = [];
         for ($x = 0; $x < count($array); $x++) {
-            $element = "<a class='menu-item' href='{$array->link}'>{$array->name}</a>";
+            $element = "<a class='menu-item' href='{$array[$x]->link}'>{$array[$x]->name}</a>";
             array_push($list, $element);
         }
         return implode($list);
@@ -15,7 +15,7 @@ class Utils
     {
         $list = [];
         for ($x = 0; $x < count($array); $x++) {
-            $element = "<option value='{$array[$x]}'>{$array[$x]}</option>";
+            $element = "<option value='{$array[$x]->brand}'>{$array[$x]->brand}</option>";
             array_push($list, $element);
         }
         return implode($list);
@@ -24,7 +24,7 @@ class Utils
     public static function isArticleLiked($id)
     {
         $userId = SessionManager::getUserId();
-        $votedArticles = Articles::getUserVotes($userId);
+        $votedArticles = Article::getUserVotes($userId);
         for ($x = 0; $x < count($votedArticles); $x++) {
             if ($votedArticles[$x]->id == $id) {
                 if ($votedArticles[$x]->liked) {
@@ -39,12 +39,12 @@ class Utils
     }
 
     public static function replaceContentsArticleItem($html, $item)
-    {
+    { 
         $html = str_replace("{article-model}", $item->model, $html);
-        $html = str_replace("{article-link}", "./php/layout.php?page=article&amp;id={$item->id}", $html);
-        $html = str_replace("{article-likes}", $item->likes, $html);
-        $html = str_replace("{article-dislikes}", $item->dislikes, $html);
-        $html = str_replace("{article-img}", $item->imgUrl, $html);
+        $html = str_replace("{article-link}", "./layout.php?page=article&amp;articleId={$item->id}", $html);
+        $html = str_replace("{article-likes}", $item->votesPositive, $html);
+        $html = str_replace("{article-dislikes}", ($item->votesTotal)-($item->votesPositive), $html);
+        $html = str_replace("{article-img}", "../assets/img/articles/".$item->image, $html);
         if (SessionManager::isUserLogged()) {
             switch (Utils::isArticleLiked($item->id)) {
                 case 1:
@@ -57,6 +57,7 @@ class Utils
                     break;
             }
         }
+        return $html;
     }
 
     public static function replaceContentsAdminArticleItem($html, $item)
@@ -65,13 +66,14 @@ class Utils
         $html = str_replace("{article-link}", "./php/layout.php?page=article&amp;id={$item->id}", $html);
         $html = str_replace("{article-memory}", $item->likes, $html);
         $html = str_replace("{article-price}", $item->dislikes, $html);
-        $html = str_replace("{article-img}", $item->imgUrl, $html);
+        $html = str_replace("{article-img}", "../assets/img/articles/".$item->image, $html);
         $html = str_replace("{article-modify}", "./php/layout.php?page=modifyArticle&amp;id={$item->id}", $html);
     }
 
     public static function getArticles($search, $model, $userId = null)
     {
-        return Articles::list($userId, null, $search, $model, null, "ASC");
+        //return Article::list($userId, null, $search, $model, null, "ASC");
+        return Article::list();
     }
 
     public static function generateArticlesList($array)

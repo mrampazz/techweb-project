@@ -1,7 +1,4 @@
 <?php
-include_once("../../../database/session_manager.php");
-include_once("../../server/utils.php");
-$output = file_get_contents("../html/login.html");
 
 if(isset($_SESSION['error-message']) && isset($_SESSION['login']) && !$_SESSION['login']) {
     $output = str_replace("<div class=\"margin-top-2 hidden\">","<div class=\"margin-top-2\" tabindex=\"0\">",$output);
@@ -24,5 +21,5 @@ if (isset($_GET['articleId'])){
 }
 
 Utils::unsetAll(array('username','error-message'));
-echo $output;
+
 ?>

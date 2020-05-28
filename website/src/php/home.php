@@ -1,5 +1,7 @@
 <?php
-$modelsList = Utils::getModelsOptions(ArticleModels::getModelsList());
+
+$modelsList = Utils::getModelsOptions(Article::getModelsList());
+
 
 $output = str_replace("<option>{modelOptions}</option>", $modelsList, $output);
 
@@ -24,7 +26,6 @@ if (SessionManager::isUserLogged()) {
 
 $list = Utils::getArticles($search, $model, $userId);
 $articlesList = Utils::generateArticlesList($list);
-
 if ($articlesList != '') {
     $output = str_replace("{articles}", $articlesList, $output);
 } else {

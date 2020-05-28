@@ -1,8 +1,4 @@
 <?php
-include_once("../../../database/session_manager.php");
-include_once("../../../database/db_manager.php");
-include_once("../../server/models/models.php");
-
 $dbMan = DBManager::getInstance();
 $articleId = $_GET["articleId"];
 

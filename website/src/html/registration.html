@@ -1,63 +1,49 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
-"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" lang="it" xml:lang="it">
-    <head>
-        <title>Registrazione</title>
-        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-        <link href="https://fonts.googleapis.com/css?family=Montserrat:200,400,500,600,700&amp;display=swap" rel="stylesheet" type="text/css"/>
-        <link rel="stylesheet" type="text/css" media="all" href="../assets/styles/style.css"/>
-        <script type="text/javascript" src="../scripts/formChecker.js"></script>
-    </head>
-    <body class="secondary-bg">
-        <h1 class="flex-container flex-content-center secondary-color margin-top-1">Registrazione</h1>
-        <div class="margin-top-2 hidden">
-            <div class="error-message-box">
-                <p class="font-weight-bold">Credenziali invalide</p>
-                <p>Controlla le tue credenziali e riprova ad effettuare la registrazione: {error-message} </p>
-            </div>
-        </div>
-        <form action="../php/validate_registration_data.php" method="post" onsubmit="return validateFormRegistration()">
-            <div class="group margin-top-3">     
-                <label for="name" class="label-log-reg">Nome</label>
-                <input type="text" name="name" id="name" tabindex="0" value="{name}"/> 
-                <span class="highlight"></span>
-                <span class="bar"></span> 
-            </div>
-            <div class="group">     
-                <label for="surname" class="label-log-reg">Cognome</label>
-                <input type="text" name="surname" id="surname" tabindex="0" value="{surname}"/> 
-                <span class="highlight"></span>
-                <span class="bar"></span> 
-            </div>
-            <div class="group">     
-                <label for="username" class="label-log-reg">Username</label>
-                <input type="text" name="username" id="username" tabindex="0" value="{username}"/> 
-                <span class="highlight"></span>
-                <span class="bar"></span> 
-            </div>
-            <div class="group">     
-                <label for="email" class="label-log-reg">Email</label>
-                <input type="text" name="email" id="email" tabindex="0" value="{email}"/> 
-                <span class="highlight"></span>
-                <span class="bar"></span> 
-            </div>
-            <div class="group">      
-                <label for="password" class="label-log-reg">Password</label>
-                <input type="password" name="password" id="password" tabindex="0"/>
-                <span class="highlight"></span>
-                <span class="bar"></span>
-            </div>
-            <div class="group">      
-                <label for="confirmationPassword" class="label-log-reg">Conferma password</label>
-                <input type="password" name="confirmationPassword" id="confirmationPassword" tabindex="0"/>
-                <span class="highlight"></span>
-                <span class="bar"></span>
-            </div>
-            <div class="flex-container flex-content-center margin-bottom-2">
-                <input type="submit" value="Registrati" class="form-button" tabindex="0"/>
-            </div>
-        </form>
-        <a href="../php/login.php" class="font-size-0-75">Sei già registrato? CLICCA QUI</a>
-    </body>
-</html>
+<h1 class="flex-container flex-content-center secondary-color margin-top-1">Registrazione</h1>
+<div class="margin-top-2 hidden">
+    <div class="error-message-box">
+        <p class="font-weight-bold">Credenziali invalide</p>
+        <p>Controlla le tue credenziali e riprova ad effettuare la registrazione: {error-message} </p>
+    </div>
+</div>
+<form action="../php/validate_registration_data.php" method="post" onsubmit="return validateFormRegistration()">
+    <div class="group margin-top-3">     
+        <label for="name" class="label-log-reg">Nome</label>
+        <input type="text" name="name" id="name" tabindex="0" value="{name}"/> 
+        <span class="highlight"></span>
+        <span class="bar"></span> 
+    </div>
+    <div class="group">     
+        <label for="surname" class="label-log-reg">Cognome</label>
+        <input type="text" name="surname" id="surname" tabindex="0" value="{surname}"/> 
+        <span class="highlight"></span>
+        <span class="bar"></span> 
+    </div>
+    <div class="group">     
+        <label for="username" class="label-log-reg">Username</label>
+        <input type="text" name="username" id="username" tabindex="0" value="{username}"/> 
+        <span class="highlight"></span>
+        <span class="bar"></span> 
+    </div>
+    <div class="group">     
+        <label for="email" class="label-log-reg">Email</label>
+        <input type="text" name="email" id="email" tabindex="0" value="{email}"/> 
+        <span class="highlight"></span>
+        <span class="bar"></span> 
+    </div>
+    <div class="group">      
+        <label for="password" class="label-log-reg">Password</label>
+        <input type="password" name="password" id="password" tabindex="0"/>
+        <span class="highlight"></span>
+        <span class="bar"></span>
+    </div>
+    <div class="group">      
+        <label for="confirmationPassword" class="label-log-reg">Conferma password</label>
+        <input type="password" name="confirmationPassword" id="confirmationPassword" tabindex="0"/>
+        <span class="highlight"></span>
+        <span class="bar"></span>
+    </div>
+    <div class="flex-container flex-content-center margin-bottom-2">
+        <input type="submit" value="Registrati" class="form-button" tabindex="0"/>
+    </div>
+</form>
+<a href="../php/login.php" class="font-size-0-75">Sei già registrato? CLICCA QUI</a>

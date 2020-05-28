@@ -111,6 +111,11 @@ class Article extends Base
             return $dbman->query("INSERT INTO Vote (`id`, `user_id`, `article_id`, `created_at`, `updated_at`, `positive`) VALUES (NULL, {$userId}, {$articleId}, current_timestamp(), current_timestamp(), {$vote})");
         }
     }
+
+    public static function getModelsList(){
+        $dbman = DBManager::getInstance();
+        return $dbman->query("SELECT DISTINCT ".(self::BRAND_KEY)." as brand FROM ".(self::TABLE_NAME));
+    }
 }
 
 ?>
