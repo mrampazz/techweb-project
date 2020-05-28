@@ -24,11 +24,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
       userLoggedCorrectly(); 
     } else {
       $_SESSION['error-message'] = " autenticazione fallita.";
-      header("Location: ../php/login.php");
+      header("Location: ../php/layout.php?page=login");
     }
   }
   else{
-    header("Location: ../php/login.php");
+    header("Location: ../php/layout.php?page=login");
   }
 
 }

@@ -2,7 +2,6 @@
 
 $modelsList = Utils::getModelsOptions(Article::getModelsList());
 
-
 $output = str_replace("<option>{modelOptions}</option>", $modelsList, $output);
 
 $model = null;

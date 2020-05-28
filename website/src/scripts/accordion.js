@@ -1,14 +1,32 @@
-var acc = document.getElementsByClassName("accordion");
-var i;
+document.addEventListener("DOMContentLoaded", theDomHasLoaded, false);
 
-for (i = 0; i < acc.length; i++) {
-  acc[i].addEventListener("click", function () {
-    this.classList.toggle("active");
-    var panel = this.nextElementSibling;
-    if (panel.style.display === "block") {
-      panel.style.display = "none";
-    } else {
-      panel.style.display = "block";
-    }
-  });
+const togglePanel = (panel) => {
+  if (panel.style.opacity == '0') {
+    panel.style.opacity = '1';
+    panel.style.height = '5em';
+  } else {
+    panel.style.opacity = '0';
+    panel.style.height = '0';
+  }
+};
+
+function theDomHasLoaded(e) {
+  const acc = document.getElementsByClassName("accordion-button");
+  const titles = document.getElementsByClassName("accordion-title");
+  const panels = document.getElementsByClassName("panel");
+
+  for (let i = 0; i < acc.length; i++) {
+    let button = acc[i];
+    let title = titles[i];
+    button.addEventListener("click", function() {
+      this.classList.toggle('accordion-button-reversed');
+      this.classList.toggle('accordion-button');
+      togglePanel(panels[i]);
+    });
+    title.addEventListener("click", () => {
+      button.classList.toggle('accordion-button-reversed');
+      button.classList.toggle('accordion-button');
+      togglePanel(panels[i]);
+    });
+  }
 }

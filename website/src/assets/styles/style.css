@@ -72,9 +72,13 @@ body {
   font-weight: bold;
 }
 
+.breadcrumb-container a {
+  margin-right: 0.2em;
+}
+
 .breadcrumb-container > ul {
   list-style-type: none;
-  margin-left: 1em;
+  margin-left: 2em;
 }
 
 .breadcrumb-container li {
@@ -107,7 +111,6 @@ body {
   flex-basis: 0;
   margin: 0.5em;
   margin-left: 0;
-  background-color: white;
 }
 
 .menu-item {
@@ -116,6 +119,19 @@ body {
   justify-content: center;
   align-items: center;
   font-size: 1.2em;
+  margin-bottom: 0.2em;
+  background-color: white;
+}
+
+.menu-item-active {
+  height: 4rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.2em;
+  background-color: #506180;
+  color: white;
+  margin-bottom: 0.2em;
 }
 
 .menu-item:hover {
@@ -214,11 +230,11 @@ body {
 
 .articles-container {
   display: flex;
-  justify-content: flex-start;
+  justify-content: center;
   align-items: center;
   flex-wrap: wrap;
   margin-top: 1em;
-  width: 90%;
+  /* width: 90%; */
 }
 
 .article-info {
@@ -229,7 +245,7 @@ body {
 .article-item {
   width: 30%;
   max-width: 12em;
-  /* height: 17em; */
+  width: 12em;
   display: block;
   margin: 1em;
 }
@@ -243,7 +259,7 @@ body {
 .article-img {
   display: block;
   height: 13em;
-  width: 100%;
+  width: 12em;
 }
 
 .vote-container {
@@ -485,7 +501,7 @@ body {
   margin: auto;
 }
 
-input[type="text"], input[type="password"] {
+#username, #name, #surname, #email, input[type="password"] {
   font-size: 1.125em;
   padding-bottom: .1em;
   display: block;
@@ -675,8 +691,6 @@ input:focus ~ .highlight {
 }
 
 
-}
-
 /* ADMIN */
 
 .inline_tex {
@@ -697,16 +711,67 @@ input:focus ~ .highlight {
 /* RULES */
 .accordion {
   background-color: white;
-  cursor: pointer;
-  padding: 18px;
-  width: 100%;
+  padding: 0.5em;
+  width: 95%;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  flex-direction: row;
   border: none;
   text-align: left;
   outline: none;
-  font-size: 15px;
   transition: 0.4s;
+  margin-top: 1em;
+  margin-bottom: 0.5em;
+  border: 1px solid #506180;
+}
+
+.accordion > h2 {
   font-size: 1em;
   font-weight: bold;
+  user-select: none;
+  cursor: pointer;
+  flex-grow: 3;
+  flex-shrink: 3;
+  flex-basis: 0;
+  padding: 1em;
+}
+
+.panel:focus,
+.accordion-title:focus {
+  outline: none !important;
+}
+
+.accordion > button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  flex-grow: 0;
+  flex-shrink: 1;
+  flex-basis: 0;
+  border: none;
+  padding: 1em;
+  background-color: #506180;
+}
+.accordion-button path {
+  fill: white;
+}
+
+.accordion-button svg {
+  transform: scaleY(-1);
+}
+
+.accordion-button-reversed svg {
+  transform: scaleY(1);
+}
+
+.accordion-button-reversed path {
+  fill: white;
+}
+
+.accordion-button:focus {
+  outline: 1px solid #506180;
 }
 
 /* ADMIN TILE */
@@ -741,26 +806,16 @@ input:focus ~ .highlight {
   margin-left: 0em;
 }
 
-.active, .accordion:hover {
-  background-color: #ccc;
-}
-
 .panel {
-  padding: 0 18px;
-  display: none;
+  padding: 0 1em;
+  display: block;
+  opacity: 1;
   background-color: white;
   overflow: hidden;
+  margin-bottom: 0.5em;
+  height: 5em;
+  transition: all 0.3s ease-in-out;
 }
-
-.accordion:before {
-  content: "⬇️";
-  display: block;
-  width: 20px;
-  height: 20px;
-  float: left;
-  margin: 0 6px 0 0;
-}
-
 
 @media only screen and (max-width: 700px) {
   .menu-container {
