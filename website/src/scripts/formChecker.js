@@ -95,8 +95,10 @@ function validateFormRegistration() {
         rpassword.focus(); 
         return false; 
     } 
-   
-    return true; 
+
+    checkPasswords(password,rpassword);
+
+    return true;
 }
 
 /*
@@ -140,20 +142,18 @@ function validateFormProfile(){
 /*
     validazione immagine in input e visualizzazione preview
 */
-function imageValidation() { 
-    var fileInput =  
-        document.getElementById('file-upload'); 
-            
+function validateImage() { 
+    var fileInput =  document.getElementById('file-upload'); 
     var filePath = fileInput.value; 
 
     if (filePath!=""){
 
         //estensioni accettate
         var allowedExtensions =  
-                /(\.jpg|\.jpeg|\.png|\.gif)$/i; 
+                /(\.jpg|\.jpeg|\.png)$/i; 
                 
         if (!allowedExtensions.exec(filePath)) { 
-            alert("Il tipo di file selezionato non \u00E8 valido."); 
+            alert("Il tipo di file selezionato non \u00E8 valido. Solo i formati JPG, JPEG e PNG sono supportati."); 
             fileInput.value = ''; 
             return false; 
         }  
@@ -173,14 +173,26 @@ function imageValidation() {
     }
 }
 
-/*
-  se una password ripetuta non è corretta segnala un errore
-*/
-function checkRepeatPassword(password, rpassword) {
-    if (rpassword.value != '') {
-      if (password.value != rpassword.value) {
+function validateComment(){
+    var comment =  document.getElementById('comment-input');
+    if (comment.value==""){
+        alert("Inserisci un commento!");
         return false;
-      }
+    }
+    return true;
+}
+
+/*
+  controlla se la password di conferma e la password sono uguali
+*/
+function checkPasswords(password, rpassword) {
+    if (rpassword.value != "") {
+        if (password.value != rpassword.value) {
+            createErrorMessage(rpassword,false);
+            alert(errorMessage); 
+            rpassword.focus(); 
+            return false;
+        }
     }
 }
 

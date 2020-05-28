@@ -1,0 +1,90 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="it" xml:lang="it">
+    <head>
+        <title>Dettaglio</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <link href="https://fonts.googleapis.com/css?family=Montserrat:200,400,500,600,700&amp;display=swap" rel="stylesheet" type="text/css"/>
+        <link rel="stylesheet" type="text/css" media="all" href="../assets/styles/style.css"/>
+        <script type="text/javascript" src="../scripts/formChecker.js"></script>
+        <script type="text/javascript" src="https://kit.fontawesome.com/cfeebd4134.js"></script>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/>
+    </head>
+    <body class="secondary-bg">
+        <div id="article-page-container">
+            <div id="article-info-container">
+                <img id="article-image" class="margin-right-2" src="../assets/img/articles/iphone11.jpg" alt="Immagine telefono" tabindex="0" />
+                <div id="article-description">
+                    <h1 class="secondary-color" tabindex="0">Apple iPhone 11</h1>
+                    <h2 tabindex="0" class="font-size-1-125"><i class="fa fa-tag" aria-hidden="true"></i> Prezzo di lancio: 829,00&euro; </h2>
+                    <h2 tabindex="0" class="font-size-1-125"><i class="fa fa-calendar margin-bottom-1" aria-hidden="true"></i> Data di lancio: 20-09-2019 </h2>
+                    <p class="text-align-justify" tabindex="0">
+                        Apple iPhone 11 è uno degli smartphone iOS più avanzati e completi che ci siano in circolazione. 
+                        Dispone di un grande display da 6.1 pollici con una risoluzione di 1792x828 pixel.
+                        Le funzionalità offerte da questo Apple iPhone 11 sono veramente tante e all'avanguardia. A cominciare dal modulo LTE 4G che permette un trasferimento dati e una navigazione in internet eccellente.
+                        Fotocamera da 12 megapixel ma che permette ugualmente al Apple iPhone 11 di scattare foto di buona qualità con una risoluzione di 4000x3000 pixel e di registrare video in 4K alla risoluzione di 3840x2160 pixel. Lo spessore di 8.3mm è contenuto e rende questo Apple iPhone 11 molto interessante.
+                    </p>
+                    <div class="margin-top-1">
+                        <i class="fa fa-shopping-cart" aria-hidden="true"></i>
+                        <a href="https://amzn.to/3bQlAzS" tabindex="0"> Vuoi compralo su Amazon? CLICCA QUI!</a>
+                    </div>
+                </div>
+            </div>
+            <h1 class="secondary-color margin-top-1" tabindex="0">La voce degli utenti</h1>
+            <h2 tabindex="0" class="font-size-1-125"><i class="fa fa-thumbs-up margin-top-1" aria-hidden="true"></i> Consigliato da: 23 utenti </h2>
+            <h2 tabindex="0" class="font-size-1-125"><i class="fa fa-thumbs-down margin-bottom-1" aria-hidden="true"></i> Sconsigliato da: 5 utenti </h2>
+            <p class="margin-top-1 margin-bottom-0-5" tabindex="0">E tu cosa ne pensi di questo prodotto?</p>
+            <a href="../php/login.php" class="{login-link-visible}">Accedi e condividi la tua opinione!</a>
+            <div class="{comment-form-visible}">
+                <form method="post" action="../php/add_vote.php">
+                    <div class="flex-container flex-content-center margin-top-1 margin-bottom-1"> 
+                        <button aria-label="Consiglia questo prodotto" name="vote" type="submit" value="like" class="custom-thumbs-up" tabindex="0">
+                            <i id="thumbs-up" class="far fa-thumbs-up {like-selected}"></i>
+                            <span class="font-size-0-75 flex-container">Lo consiglio</span>
+                        </button>
+                        <button aria-label="Sconsiglia questo prodotto" name="vote" type="submit" value="dislike" class="custom-thumbs-down" tabindex="0">
+                            <i id="thumbs-down" class="far fa-thumbs-down {dislike-selected}"></i>
+                            <span class="font-size-0-75 flex-container">Lo consiglio</span>
+                        </button>
+                        <input type="hidden" value="{article-id}" name="articleID"/>
+                        <input type="hidden" value="article-page&amp;articleId={article-id}" name="redirectURL"/>
+                    </div>
+                </form>
+                <div class="margin-top-2">
+                    <div class="error-message-box">
+                        <p class="font-weight-bold">Errore caricamento commento</p>
+                        <p>Si è verificato un problema durante l'invio del tuo commento: {error-message}</p>
+                    </div>
+                </div>
+                <form action="../php/validate_comment.php" method="post" onsubmit="return validateComment()">
+                    <div id="comment-form-container"> 
+                        <label for="comment-input" class="margin-top-1">Facci sapere qualcosa di più, inserisci qui il tuo commento!</label> 
+                        <textarea id="comment-input" name="comment-input" rows="5" cols="70" class="margin-top-0-5 secondary-bg" tabindex="0"></textarea>           
+                        <input type="submit" value="Invia commento" name="commentSubmit" class="form-button margin-top-0-5"/>
+                    </div>
+                </form>
+            </div>
+            <div id="comments-container">
+                <div class="flex-container flex-direction-row margin-bottom-1">
+                    <div>
+                    <img class="avatar-comment" src="../assets/img/avatars/avatar.png" alt="immagine profilo utente"/>
+                    </div>
+                    <div class="margin-left-0-5">
+                        <p class="font-weight-bold text-align-left" tabindex="0">Giuseppe Rossi</p>
+                        <p class="text-align-justify" tabindex="0">Lorem ipsum dolor sit amet, consectetur adipisci elit, sed eiusmod tempor incidunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur. Quis aute iure reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint obcaecat cupiditat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                    </div>
+                </div>
+                <div class="flex-container flex-direction-row margin-bottom-1">
+                    <div>
+                    <img class="avatar-comment" src="../assets/img/avatars/avatar.png" alt="immagine profilo utente"/>
+                    </div>
+                    <div class="margin-left-0-5">
+                        <p class="font-weight-bold text-align-left" tabindex="0">Giuseppe Rossi</p>
+                        <p class="text-align-justify" tabindex="0">Lorem ipsum dolor sit amet, consectetur adipisci elit, sed eiusmod tempor incidunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur. Quis aute iure reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint obcaecat cupiditat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

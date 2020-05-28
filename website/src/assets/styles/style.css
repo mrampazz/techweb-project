@@ -270,8 +270,15 @@ body {
   color: #506180;
 }
 .custom-thumbs-up:hover,
-.custom-thumbs-down:hover {
+.custom-thumbs-down:hover,
+.thumb-selected {
   color: lightcoral;
+}
+
+/* GENERAL SECTION */
+
+.hidden{
+  display: none;
 }
 
 
@@ -396,7 +403,7 @@ body {
 
 /* FLEX CONTAINER */
 
-.flex-container{
+.flex-container {
   display: flex;
 }
 .flex-content-center {
@@ -428,11 +435,11 @@ body {
 }
 
 /* COLOR SECTION */
-.primary-color{
+.primary-color {
   color: #eef4ff;
 }
 
-.secondary-color{
+.secondary-color {
   color: #506180;
 }
 
@@ -454,14 +461,24 @@ body {
   opacity: .95;
 }
 
-.form-button:hover{
+.form-button:hover {
   opacity: 1;
 }
-
 
 .group {
   position: relative;
   margin-bottom: 2.8em;
+}
+
+.error-message-box {
+  width: 50%;
+  border-radius: .5em;
+  background-color: #d80404;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  padding: 1em;
+  margin: auto;
 }
 
 input[type="text"], input[type="password"] {
@@ -573,6 +590,12 @@ input:focus ~ .highlight {
 
 /* Profile */
 
+#profile-container{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
 #file-upload {
   display: none;
 }
@@ -598,26 +621,31 @@ input:focus ~ .highlight {
 
 /* Article-page */
 
-#article-page-container{
+#article-page-container {
+  max-width: 90%;
   text-align: center;
-  margin:auto;
+  margin-top: 1em;
+}
+
+#article-info-container {
+  display:flex;
+  flex-direction:row;
 }
 
 #article-image {
-  width: 16em;
-  height: 16em;
+  width: auto;
+  height: 20em;
   object-fit: cover
 }
 
-#article-description{
-  text-align: justify;
-  max-width: 70%;
-  margin:auto;
+#article-description {
+  display: block;
+  text-align: left;
+  max-width: 100%;
 }
 
-#comment-form-container{
+#comment-form-container {
   margin: auto;
-  width: 70%;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -627,9 +655,8 @@ input:focus ~ .highlight {
   width:100%;
 }
 
-#comments-container{
-  width: 70%;
-  margin-top: 1em;
+#comments-container {
+  margin-top: 2em;
   margin-bottom: 2em;
   margin-left: auto;
   margin-right: auto;
@@ -653,16 +680,18 @@ input:focus ~ .highlight {
     margin: 0;
   }
 
-  #article-description{
-    max-width: 85%;
-  }
-  #comment-form-container{
-    width: 85%;
-  }
-  #comments-container{
-    width: 85%;
-
+  #article-info-container {
+    flex-direction:column;
+    align-items: center;
   }
 
+  #article-image {
+    margin-right: 0em;
+    margin-bottom: 1em;
+  }
+
+  #article-description {
+    text-align: center;
+  }
 }
 
