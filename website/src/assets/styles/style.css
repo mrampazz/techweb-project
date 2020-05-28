@@ -14,6 +14,35 @@ body {
   font-family: 'Montserrat', sans-serif;
 }
 
+.skip-to-content {
+  background: #506180;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 2em;
+  left: 50%;
+  color: white;
+  padding: 0.5em;
+  position: absolute;
+  transform: translateY(-100%);
+  top: 0;
+  transition: transform 0.3s;
+}
+
+.skip-to-content:focus {
+  transform: translateY(0%);
+}
+
+#back-to-top {
+  position: fixed;
+  display: none;
+  padding: 0.5em;
+  background-color: #506180;
+  color: white;
+  bottom: 5em;
+  right: 5em;
+}
+
 .header-container {
   width: 100%;
   display: flex;
@@ -687,7 +716,7 @@ input:focus ~ .highlight {
   width: 2.85em;
   object-fit: cover;
   border-radius: 50%;
-  border: 2px solid white;
+  border: 0.125em solid white;
 }
 
 
@@ -703,7 +732,7 @@ input:focus ~ .highlight {
   color: white;
   float: right;
   cursor: pointer;
-  padding: 10px;
+  padding: 0.625em;
   border: none;
   margin-left: 4em;
 }
@@ -723,7 +752,7 @@ input:focus ~ .highlight {
   transition: 0.4s;
   margin-top: 1em;
   margin-bottom: 0.5em;
-  border: 1px solid #506180;
+  border: 0.0625em solid #506180;
 }
 
 .accordion > h2 {
@@ -771,7 +800,7 @@ input:focus ~ .highlight {
 }
 
 .accordion-button:focus {
-  outline: 1px solid #506180;
+  outline: 0.0625em solid #506180;
 }
 
 /* ADMIN TILE */
@@ -796,14 +825,13 @@ input:focus ~ .highlight {
   background-color: #506180;
   color: white;
   cursor: pointer;
-  padding: 10px;
+  padding: 0.625em;
   border: none;
   outline: none;
-  font-size: 15px;
   transition: 0.4s;
   font-size: 1em;
   font-weight: bold;
-  margin-left: 0em;
+  margin-left: 0;
 }
 
 .panel {
@@ -824,6 +852,8 @@ input:focus ~ .highlight {
 
   .content-container {
     margin: 0;
+    flex-grow: 1;
+    flex-shrink: 1;
   }
 
   #article-info-container {

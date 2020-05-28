@@ -24,7 +24,6 @@ class Link
 $links = [
     new Link("Home", SessionManager::BASE_URL . "home"),
     new Link("Il tuo profilo", SessionManager::BASE_URL . "profile"),
-    new Link("I tuoi voti", SessionManager::BASE_URL . "profile&likes=true"),
     new Link("Regolamento", SessionManager::BASE_URL . "rules"),
     new Link("Chi siamo?", SessionManager::BASE_URL . "about"),
     new Link("FAQ", SessionManager::BASE_URL . "faq"),
@@ -38,7 +37,6 @@ if (SessionManager::isUserLogged()) {
     $output = str_replace("{LOGIN}", "PROFILO", $output);
     $output = str_replace("{REGISTRAZIONE}", "LOGOUT", $output);
     $links[1]->setLink(SessionManager::BASE_URL . "profile");
-    $links[2]->setLink(SessionManager::BASE_URL . "profile&likes=true");
     if (SessionManager::userCanPublish()) {
         array_push($links, new Link("Amministratore", SessionManager::BASE_URL . "admin" ));
     }
@@ -48,7 +46,6 @@ if (SessionManager::isUserLogged()) {
     $output = str_replace("{LOGIN}", "LOGIN", $output);
     $output = str_replace("{REGISTRAZIONE}", "REGISTRAZIONE", $output);
     $links[1]->setLink("../php/layout.php?page=login");
-    $links[2]->setLink("../php/layout.php?page=login");
 }
 
 if (isset($_GET["logout"])) {

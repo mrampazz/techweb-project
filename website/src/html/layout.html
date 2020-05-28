@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="it">
+<html lang="it" xml:lang="it">
   <head>
     <title>{currentPage}</title>
     <meta name="author" content="Daniel James Tronca, Gabriel Ciulei, Andrea Polo, Marco Rampazzo"/>
@@ -13,6 +13,9 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/>
   </head>
   <body>
+    <a class="skip-to-content" href="#content">
+      Skip to content
+    </a>
     <header class="header-container">
       <div class="title-container">
         <h1>My very cool title</h1>
@@ -33,10 +36,14 @@
       <nav class="menu-container">
         {menu-links}
       </nav>
-      <div class="content-container">
+      <div id="content" class="content-container">
         {content}
       </div>
     </main>
+
+    <a id="back-to-top" href="#">
+      Back to top
+    </a>
 
     <footer class="footer-container">
       Untitled &copy; Un prodotto UNIPD. 2020. Tutti i diritti riservati.
