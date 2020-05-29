@@ -17,7 +17,6 @@ if (isset($_GET['search'])) {
     $search = $_GET['search'];
 }
 
-
 $userId = null;
 if (SessionManager::isUserLogged()) {
     $userId = SessionManager::getUserId();
