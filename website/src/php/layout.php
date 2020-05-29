@@ -17,13 +17,16 @@ class Link
         $this->link = $l;
         $this->hidden = $h;
     }
-    public function setHidden($h) {
+    public function setHidden($h)
+    {
         $this->hidden = $h;
     }
-    public function setLink($l) {
+    public function setLink($l)
+    {
         $this->link = $l;
     }
-    public function setName($n) {
+    public function setName($n)
+    {
         $this->name = $n;
     }
 }
@@ -89,7 +92,7 @@ switch ($_GET['page']) {
         $output = str_replace("{mobile-menu-links}", $linkItems, $output);
         include_once("../php/registration.php");
         break;
-        
+
     case 'home':
         $breadcrumb = "<li>&#62;&#62; <a>Home</a></li>";
         $page = file_get_contents("../html/home.html");
@@ -124,8 +127,8 @@ switch ($_GET['page']) {
         $page = file_get_contents("../html/article-page.html");
         $output = str_replace("{breadcrumb}", $breadcrumb, $output);
         $output = str_replace("{content}", $page, $output);
-        $output = str_replace("{menu-links}", $linkItems, $output);
         $linkItems = Utils::getMenuLinks($links, null);
+        $output = str_replace("{menu-links}", $linkItems, $output);
         $output = str_replace("{mobile-menu-links}", $linkItems, $output);
         $output = str_replace("{currentPage}", "Articolo {$article->model}", $output);
         include_once("../php/article_page.php");
@@ -166,7 +169,18 @@ switch ($_GET['page']) {
         $output = str_replace("{mobile-menu-links}", $linkItems, $output);
         include_once("../php/faq_page.php");
         break;
+
+    case 'admin':
+        $breadcrumb = "<li>&#62;&#62; <a href='" . SessionManager::BASE_URL . 'home' . "'>Home</a></li><li>&#62;&#62; <span>Area Amministratore</span></li>";
+        $page = file_get_contents("../html/admin.html");
+        $output = str_replace("{breadcrumb}", $breadcrumb, $output);
+        $output = str_replace("{content}", $page, $output);
+        $output = str_replace("{currentPage}", "FAQ", $output);
+        $linkItems = Utils::getMenuLinks($links, 'FAQ');
+        $output = str_replace("{menu-links}", $linkItems, $output);
+        $output = str_replace("{mobile-menu-links}", $linkItems, $output);
+        include_once("../php/admin.php");
+        break;
 }
 
 echo $output;
-?>

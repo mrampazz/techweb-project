@@ -1,5 +1,5 @@
 <?php
-$list = Utils::getArticles($search, $model, $userId);
+$list = Utils::getArticles(null, null, null);
 $articlesList = Utils::generateAdminArticlesList($list);
 
 if ($articlesList != '') {
