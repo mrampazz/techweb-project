@@ -1,7 +1,28 @@
 <?php
 class Utils
 {
+
     public static function getMenuLinks($array, $name)
+    {
+        $list = [];
+        for ($x = 0; $x < count($array); $x++) {
+            if ($name && $array[$x]->name == $name) {
+                $element = "<span class='menu-item-active'>{$array[$x]->name}</span>";
+            } else {
+                if ($array[$x]->hidden) {
+                    $element = "<a class='menu-item hidden' href='{$array[$x]->link}'>{$array[$x]->name}</a>";
+                } else {
+                    $element = "<a class='menu-item' href='{$array[$x]->link}'>{$array[$x]->name}</a>";
+                }
+                
+            }
+
+            array_push($list, $element);
+        }
+        return implode($list);
+    }
+
+    public static function getMobileMenuLinks($array, $name)
     {
         $list = [];
         for ($x = 0; $x < count($array); $x++) {

@@ -11,7 +11,36 @@ body {
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  font-family: 'Montserrat', sans-serif;
+  font-family: "Montserrat", sans-serif;
+}
+
+.skip-to-content {
+  background: #506180;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 2em;
+  left: 50%;
+  color: white;
+  padding: 0.5em;
+  position: absolute;
+  transform: translateY(-100%);
+  top: 0;
+  transition: transform 0.3s;
+}
+
+.skip-to-content:focus {
+  transform: translateY(0%);
+}
+
+#back-to-top {
+  position: fixed;
+  display: none;
+  padding: 0.5em;
+  background-color: #506180;
+  color: white;
+  bottom: 5em;
+  right: 2em;
 }
 
 .header-container {
@@ -22,7 +51,7 @@ body {
   flex-direction: column;
 }
 
-.header-container > div {
+.el-container {
   background-color: white;
   width: 100%;
   max-width: 70rem;
@@ -34,6 +63,61 @@ body {
   justify-content: center;
   align-items: center;
   flex-direction: row;
+}
+
+.hidden {
+  display: none;
+}
+
+.mobile-menu {
+  display: none;
+}
+
+#ham-button-open,
+#ham-button-close {
+  width: 2em;
+  height: 2em;
+  border: none;
+  background-color: transparent;
+  margin: 0.5em;
+  position: absolute;
+  right: 2em;
+  top: 8em;
+}
+
+#ham-button-close path {
+  transform: scale(2);
+}
+
+.mobile-button-container {
+  display: none;
+}
+
+.mobile-menu-links {
+  width: 100vw;
+  height: 100vh;
+  min-height: 100vh;
+  position: fixed;
+  z-index: 98;
+  top: 0;
+  left: 100vw;
+  box-sizing: border-box;
+  background-color: white;
+  transition: all 0.2s ease-in-out;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  margin: 0;
+  display: none;
+}
+
+.ham-menu-open {
+  transform: translateX(-100vw);
+}
+
+.mobile-menu-links > a {
+  width: 50%;
 }
 
 .header-button {
@@ -62,6 +146,8 @@ body {
 .title-container > h1 {
   text-transform: uppercase;
   font-weight: bold;
+  width: 90%;
+  text-align: center;
 }
 
 .breadcrumb-container {
@@ -97,6 +183,7 @@ body {
 .content-container {
   background-color: white;
   width: 100%;
+  max-width: 1115px;
   flex-grow: 0.8;
   flex-shrink: 0.8;
   flex-basis: 0;
@@ -204,8 +291,8 @@ body {
   background-color: #eef4ff;
   font-size: 1.2em;
   padding: 0.5em;
-  width: 8rem;
-  max-width: 8rem;
+  /* width: 8rem;
+  max-width: 8rem; */
 }
 
 .custom-select {
@@ -213,8 +300,8 @@ body {
   background-color: #eef4ff;
   font-size: 1.2em;
   padding: 0.5em;
-  max-width: 9.8rem;
-  width: 9.8rem;
+  /* max-width: 9.8rem;
+  width: 9.8rem; */
 }
 
 .custom-button {
@@ -234,7 +321,7 @@ body {
   align-items: center;
   flex-wrap: wrap;
   margin-top: 1em;
-  /* width: 90%; */
+  width: 100%;
 }
 
 .article-info {
@@ -294,10 +381,9 @@ body {
 
 /* GENERAL SECTION */
 
-.hidden{
+.hidden {
   display: none;
 }
-
 
 /* FONT SECTION */
 .font-size-0-625 {
@@ -343,7 +429,7 @@ body {
   margin-top: 0.5em;
 }
 .margin-top-0-7 {
-  margin-top: .7em;
+  margin-top: 0.7em;
 }
 .margin-top-1 {
   margin-top: 1em;
@@ -407,7 +493,6 @@ body {
   margin-right: 2.5em;
 }
 
-
 /* TEXT ALIGN */
 .text-align-center {
   text-align: center;
@@ -446,7 +531,6 @@ body {
   flex-direction: column;
 }
 
-
 /* BG SECTION */
 .primary-bg {
   background-color: #eef4ff;
@@ -464,7 +548,6 @@ body {
   color: #506180;
 }
 
-
 /* login/registration/form */
 
 .log-reg-container{
@@ -478,14 +561,14 @@ body {
 .form-button {
   width: 9em;
   height: 2.5em;
-  border-radius: .5em;
-  -webkit-border-radius: .5em;
-  -moz-border-radius: .5em;
+  border-radius: 0.5em;
+  -webkit-border-radius: 0.5em;
+  -moz-border-radius: 0.5em;
   text-decoration: none;
   background-color: #506180;
   color: white;
   font-weight: 700;
-  opacity: .95;
+  opacity: 0.95;
 }
 
 .form-button:hover {
@@ -499,7 +582,7 @@ body {
 
 .error-message-box {
   width: 50%;
-  border-radius: .5em;
+  border-radius: 0.5em;
   background-color: #d80404;
   color: white;
   display: flex;
@@ -519,17 +602,22 @@ body {
   margin: auto;
 }
 
-#username, #name, #surname, #email, input[type="password"] {
+#username,
+#name,
+#surname,
+#email,
+input[type="password"] {
   font-size: 1.125em;
-  padding-bottom: .1em;
+  padding-bottom: 0.1em;
   display: block;
   width: 100%;
   border: none;
-  border-bottom: .065em solid #506180;
+  border-bottom: 0.065em solid #506180;
   background-color: white;
   color: #506180;
 }
-input[type="text"]:focus, input[type="password"]:focus {
+input[type="text"]:focus,
+input[type="password"]:focus {
   outline: none;
 }
 #username:disabled, #email:disabled{
@@ -542,7 +630,7 @@ input[type="text"]:focus, input[type="password"]:focus {
   font-size: 0.8em;
   font-weight: normal;
   position: absolute;
-  left: .3em;
+  left: 0.3em;
   bottom: 1.8em;
 }
 /* active state */
@@ -550,7 +638,7 @@ input[type="text"]:focus, input[type="password"]:focus {
 input:focus ~ label,
 input:valid ~ label {
   top: -1.25em;
-  font-size: .8em;
+  font-size: 0.8em;
   color: #506180;
 }
 
@@ -562,10 +650,10 @@ input:valid ~ label {
 }
 .bar:before,
 .bar:after {
-  content: '';
-  height: .1em;
+  content: "";
+  height: 0.1em;
   width: 0;
-  bottom: .06em;
+  bottom: 0.06em;
   position: absolute;
   background: #506180;
   transition: 0.2s ease all;
@@ -586,11 +674,11 @@ input:focus ~ .bar:after {
 /* HIGHLIGHTER */
 
 .highlight {
-  position:absolute;
-  height:60%; 
-  width:6.25em; 
-  top:25%; 
-  opacity:0.5;
+  position: absolute;
+  height: 60%;
+  width: 6.25em;
+  top: 25%;
+  opacity: 0.5;
   pointer-events: none;
 }
 /* active state */
@@ -633,7 +721,7 @@ input:focus ~ .highlight {
 
 /* Profile */
 
-#profile-container{
+#profile-container {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -646,7 +734,7 @@ input:focus ~ .highlight {
 .upload-image {
   border: 0.07em solid #ccc;
   display: inline-block;
-  padding: .4em .8em;
+  padding: 0.4em 0.8em;
   cursor: pointer;
   text-align: center;
 }
@@ -673,8 +761,8 @@ input:focus ~ .highlight {
 }
 
 #article-info-container {
-  display:flex;
-  flex-direction:row;
+  display: flex;
+  flex-direction: row;
 }
 
 #article-image-container {
@@ -701,7 +789,7 @@ input:focus ~ .highlight {
 }
 
 #comment-input {
-  width:100%;
+  width: 100%;
 }
 
 #comments-container {
@@ -714,9 +802,8 @@ input:focus ~ .highlight {
   width: 2.85em;
   object-fit: cover;
   border-radius: 50%;
-  border: 2px solid white;
+  border: 0.125em solid white;
 }
-
 
 /* ADMIN */
 
@@ -730,7 +817,7 @@ input:focus ~ .highlight {
   color: white;
   float: right;
   cursor: pointer;
-  padding: 10px;
+  padding: 0.625em;
   border: none;
   margin-left: 4em;
 }
@@ -750,7 +837,7 @@ input:focus ~ .highlight {
   transition: 0.4s;
   margin-top: 1em;
   margin-bottom: 0.5em;
-  border: 1px solid #506180;
+  border: 0.0625em solid #506180;
 }
 
 .accordion > h2 {
@@ -798,7 +885,7 @@ input:focus ~ .highlight {
 }
 
 .accordion-button:focus {
-  outline: 1px solid #506180;
+  outline: 0.0625em solid #506180;
 }
 
 /* ADMIN TILE */
@@ -823,14 +910,13 @@ input:focus ~ .highlight {
   background-color: #506180;
   color: white;
   cursor: pointer;
-  padding: 10px;
+  padding: 0.625em;
   border: none;
   outline: none;
-  font-size: 15px;
   transition: 0.4s;
   font-size: 1em;
   font-weight: bold;
-  margin-left: 0em;
+  margin-left: 0;
 }
 
 .panel {
@@ -840,17 +926,25 @@ input:focus ~ .highlight {
   background-color: white;
   overflow: hidden;
   margin-bottom: 0.5em;
-  height: 5em;
+  height: auto;
+  max-height: 20em;
   transition: all 0.3s ease-in-out;
 }
 
 @media only screen and (max-width: 700px) {
+  .mobile-button-container,
+  .mobile-menu-links {
+    display: flex;
+  }
+
   .menu-container {
     display: none;
   }
 
   .content-container {
     margin: 0;
+    flex-grow: 1;
+    flex-shrink: 1;
   }
 
   #article-page-container{
@@ -859,7 +953,7 @@ input:focus ~ .highlight {
   }
 
   #article-info-container {
-    flex-direction:column;
+    flex-direction: column;
     align-items: center;
   }
 
@@ -885,5 +979,8 @@ input:focus ~ .highlight {
   }
   .mobile_margin {
     margin-bottom: 1em;
+  }
+  .inline-form > div {
+    flex-basis: 100%;
   }
 }
