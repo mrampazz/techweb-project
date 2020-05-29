@@ -125,6 +125,7 @@ switch ($_GET['page']) {
         $output = str_replace("{breadcrumb}", $breadcrumb, $output);
         $output = str_replace("{content}", $page, $output);
         $output = str_replace("{menu-links}", $linkItems, $output);
+        $linkItems = Utils::getMenuLinks($links, null);
         $output = str_replace("{mobile-menu-links}", $linkItems, $output);
         $output = str_replace("{currentPage}", "Articolo {$article->model}", $output);
         include_once("../php/article_page.php");
