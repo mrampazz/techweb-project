@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Creato il: Mag 28, 2020 alle 12:21
+-- Creato il: Mag 29, 2020 alle 15:50
 -- Versione del server: 10.4.8-MariaDB
 -- Versione PHP: 7.3.10
 
@@ -36,7 +36,7 @@ CREATE TABLE `article` (
   `initial_price` float DEFAULT NULL COMMENT 'prezzo iniziale',
   `buy_link` text DEFAULT NULL COMMENT 'link acquisto',
   `launch_date` timestamp NULL DEFAULT NULL COMMENT 'data di lancio',
-  `main_image` varchar(1000) NOT NULL COMMENT 'url immagine principale',
+  `main_image` varchar(1000) NOT NULL DEFAULT 'default.png' COMMENT 'url immagine principale',
   `created_at` timestamp NOT NULL DEFAULT current_timestamp() COMMENT 'datetime creazione',
   `updated_at` timestamp NOT NULL DEFAULT current_timestamp() COMMENT 'datetime ultimo aggiornamento'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -46,14 +46,14 @@ CREATE TABLE `article` (
 --
 
 INSERT INTO `article` (`id`, `content`, `brand`, `model`, `initial_price`, `buy_link`, `launch_date`, `main_image`, `created_at`, `updated_at`) VALUES
-(7, 'content', 'alfa', 'mod', 12.33, 'link', '2020-10-10 00:00:00', 'url', '2020-05-27 12:13:13', '2020-05-27 12:13:13'),
-(8, 'Apple iPhone 11 è uno degli smartphone iOS più avanzati e completi che ci siano in circolazione. Dispone di un grande display da 6.1 pollici con una risoluzione di 1792x828 pixel. Le funzionalità offerte da questo Apple iPhone 11 sono veramente tante e all\'avanguardia. A cominciare dal modulo LTE 4G che permette un trasferimento dati e una navigazione in internet eccellente. Fotocamera da 12 megapixel ma che permette ugualmente al Apple iPhone 11 di scattare foto di buona qualità con una risoluzione di 4000x3000 pixel e di registrare video in 4K alla risoluzione di 3840x2160 pixel. Lo spessore di 8.3mm è contenuto e rende questo Apple iPhone 11 molto interessante.', 'Apple', 'iPhone 11', 829, 'https://amzn.to/3bQlAzS', '2019-09-19 22:00:00', 'iphone11.jpg', '2020-05-27 12:14:22', '2020-05-27 23:57:25'),
-(9, 'content', 'alfa', 'mod', 12.33, 'link', '2020-10-10 00:00:00', 'url', '2020-05-27 12:14:45', '2020-05-27 12:14:45'),
-(10, 'content', 'alfa', 'mod', 12.33, 'link', '2020-10-10 00:00:00', 'url', '2020-05-27 12:17:21', '2020-05-27 12:17:21'),
-(11, 'content', 'alfa', 'mod', 12.33, 'link', '2020-10-10 00:00:00', 'url', '2020-05-27 12:18:21', '2020-05-27 12:18:21'),
-(12, 'content', 'alfa', 'mod', 12.33, 'link', '2020-10-10 00:00:00', 'url', '2020-05-27 12:18:51', '2020-05-27 12:18:51'),
-(13, 'content', 'alfa', 'mod', 12.33, 'link', '2020-10-10 00:00:00', 'url', '2020-05-27 12:20:01', '2020-05-27 12:20:01'),
-(14, 'content', 'alfa', 'mod', 12.33, 'link', '2020-10-10 00:00:00', 'url', '2020-05-27 12:20:01', '2020-05-27 12:20:01');
+(7, 'content', 'alfa', 'mod', 12.33, 'link', '2020-10-10 00:00:00', 'default.png', '2020-05-27 12:13:13', '2020-05-29 13:13:45'),
+(8, 'Apple iPhone 11 è uno degli smartphone iOS più avanzati e completi che ci siano in circolazione. Dispone di un grande display da 6.1 pollici con una risoluzione di 1792x828 pixel. Le funzionalità offerte da questo Apple iPhone 11 sono veramente tante e all\'avanguardia. A cominciare dal modulo LTE 4G che permette un trasferimento dati e una navigazione in internet eccellente. Fotocamera da 12 megapixel ma che permette ugualmente al Apple iPhone 11 di scattare foto di buona qualità con una risoluzione di 4000x3000 pixel e di registrare video in 4K alla risoluzione di 3840x2160 pixel. Lo spessore di 8.3mm è contenuto e rende questo Apple iPhone 11 molto interessante.', 'Apple', 'iPhone 11', 829, 'https://amzn.to/2M9awDD', '2019-09-19 22:00:00', 'iphone11.jpg', '2020-05-27 12:14:22', '2020-05-29 13:43:37'),
+(9, 'content', 'alfa', 'mod', 12.33, 'link', '2020-10-10 00:00:00', 'default.png', '2020-05-27 12:14:45', '2020-05-29 13:14:04'),
+(10, 'content', 'alfa', 'mod', 12.33, 'link', '2020-10-10 00:00:00', 'default.png', '2020-05-27 12:17:21', '2020-05-29 13:14:13'),
+(11, 'content', 'alfa', 'mod', 12.33, 'link', '2020-10-10 00:00:00', 'default.png', '2020-05-27 12:18:21', '2020-05-29 13:14:21'),
+(12, 'content', 'alfa', 'mod', 12.33, 'link', '2020-10-10 00:00:00', 'default.png', '2020-05-27 12:18:51', '2020-05-29 13:14:42'),
+(13, 'content', 'alfa', 'mod', 12.33, 'link', '2020-10-10 00:00:00', 'default.png', '2020-05-27 12:20:01', '2020-05-29 13:14:30'),
+(14, 'content', 'alfa', 'mod', 12.33, 'link', '2020-10-10 00:00:00', 'default.png', '2020-05-27 12:20:01', '2020-05-29 13:14:57');
 
 --
 -- Trigger `article`
@@ -142,7 +142,7 @@ CREATE TABLE `user` (
   `surname` varchar(250) NOT NULL COMMENT 'cognome dell''utente',
   `id` int(10) UNSIGNED NOT NULL COMMENT 'identificativo univoco dell''utente',
   `email` varchar(150) NOT NULL COMMENT 'email del''utente',
-  `avatar_url` varchar(1000) NOT NULL DEFAULT '/assets/images/avatars/default.png' COMMENT 'url immagine profilo dell''utente',
+  `avatar_url` varchar(1000) NOT NULL DEFAULT 'default.png' COMMENT 'url immagine profilo dell''utente',
   `created_at` timestamp NOT NULL DEFAULT current_timestamp() COMMENT 'data di creazione dell''utente',
   `updated_at` timestamp NOT NULL DEFAULT current_timestamp() COMMENT 'data di ultimo aggiornamento dell''utente'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -152,8 +152,8 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`name`, `surname`, `id`, `email`, `avatar_url`, `created_at`, `updated_at`) VALUES
-('tester', 'tester', 17, 'fdsf@sdfmc.com', '/assets/images/avatars/default.png', '2020-05-27 11:05:02', '2020-05-27 11:05:02'),
-('admin', 'admin', 21, 'admin@gmail.com', '/assets/images/avatars/default.png', '2020-05-28 10:01:46', '2020-05-28 10:01:46');
+('tester', 'tester', 17, 'fdsf@sdfmc.com', 'default.png', '2020-05-27 11:05:02', '2020-05-29 13:17:21'),
+('admin', 'admin', 21, 'admin@gmail.com', 'default.png', '2020-05-28 10:01:46', '2020-05-29 10:51:43');
 
 --
 -- Trigger `user`
@@ -183,7 +183,7 @@ CREATE TABLE `vote` (
 --
 
 INSERT INTO `vote` (`id`, `user_id`, `article_id`, `created_at`, `updated_at`, `positive`) VALUES
-(19, 17, 8, '2020-05-27 23:46:25', '2020-05-27 23:52:01', 1);
+(20, 17, 8, '2020-05-28 14:06:09', '2020-05-29 10:04:32', 1);
 
 --
 -- Trigger `vote`
@@ -254,7 +254,7 @@ ALTER TABLE `article`
 -- AUTO_INCREMENT per la tabella `comment`
 --
 ALTER TABLE `comment`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'identificatore univoco del commento', AUTO_INCREMENT=25;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'identificatore univoco del commento', AUTO_INCREMENT=27;
 
 --
 -- AUTO_INCREMENT per la tabella `faq`
@@ -266,13 +266,13 @@ ALTER TABLE `faq`
 -- AUTO_INCREMENT per la tabella `user`
 --
 ALTER TABLE `user`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT COMMENT 'identificativo univoco dell''utente', AUTO_INCREMENT=22;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT COMMENT 'identificativo univoco dell''utente', AUTO_INCREMENT=23;
 
 --
 -- AUTO_INCREMENT per la tabella `vote`
 --
 ALTER TABLE `vote`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'identificativo del voto', AUTO_INCREMENT=20;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'identificativo del voto', AUTO_INCREMENT=22;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

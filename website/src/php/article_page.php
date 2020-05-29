@@ -4,12 +4,12 @@ $articleId = $_GET["articleId"];
 
 //--ARTICLE INFO--
 $articleInfo = loadInfo($articleId);
-$articleFullName = $articleInfo[0]." ".$articleInfo[1];
-$articleImageUrl = $articleInfo[2];
-$articlePrice = $articleInfo[3];
-$releaseDate = $articleInfo[4];
-$articleDescription = $articleInfo[5];
-$purchaseLink = $articleInfo[6];
+$articleFullName = $articleInfo["brand"]." ".$articleInfo["model"];
+$articleImageUrl = $articleInfo["urlImage"];
+$articlePrice = $articleInfo["initialPrice"];
+$releaseDate = $articleInfo["launchDate"];
+$articleDescription = $articleInfo["description"];
+$purchaseLink = $articleInfo["purchaseLink"];
 $formattedDate = date("d-m-Y", strtotime($releaseDate));
 
 $output = str_replace("{article-id}",$articleId,$output);
@@ -34,7 +34,7 @@ $output = str_replace("{article-dislikes}", ($negativeVotes==null) ? "0" : $nega
 if (!SessionManager::isUserLogged()){
   $output = str_replace("{comment-form-visible}", "hidden", $output);
   $output = str_replace("{login-link-visible}", "", $output);
-  $output = str_replace("login-url", "../php/login.php?articleId=$articleId", $output);
+  $output = str_replace("login-url", SessionManager::BASE_URL."login"."&articleId=".$articleId, $output);
 }
 else{
   $output = str_replace("{comment-form-visible}", "", $output);
@@ -86,7 +86,8 @@ else{
 //--HELPER FUNCTIONS--
 function loadInfo($id){
   $list = Article::fetch($id);
-  return array($list->brand, $list->model, $list->image, $list->initialPrice, $list->launchDate, $list->content, $list->link);
+  return array("brand"=>$list->brand, "model"=>$list->model, "urlImage"=>$list->image, "initialPrice"=>$list->initialPrice,
+   "launchDate"=>$list->launchDate, "description"=>$list->content, "purchaseLink"=>$list->link);
 }
 
 function getTotalAndPositiveVotes($articleId){

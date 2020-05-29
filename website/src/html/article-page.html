@@ -1,6 +1,6 @@
 <div id="article-page-container">
     <div id="article-info-container">
-        <img id="article-image" class="margin-right-2" src="article-image-url" alt="Immagine telefono" tabindex="0" />
+        <img id="article-image" class="margin-right-1-5" src="article-image-url" alt="Immagine telefono" tabindex="0" />
         <div id="article-description">
             <h1 class="secondary-color" tabindex="0">{article-name}</h1>
             <h2 tabindex="0" class="font-size-1-125"><i class="fa fa-tag" aria-hidden="true"></i> Prezzo di lancio: {article-price}&euro; </h2>
@@ -10,7 +10,7 @@
             </p>
             <div class="margin-top-1">
                 <i class="fa fa-shopping-cart" aria-hidden="true"></i>
-                <a href="https://amzn.to/3bQlAzS" tabindex="0"> Vuoi compralo su Amazon? CLICCA QUI!</a>
+                <a href="article-purchase-url" tabindex="0"> Vuoi compralo su Amazon? CLICCA QUI!</a>
             </div>
         </div>
     </div>
@@ -42,7 +42,8 @@
         <form action="../php/validate_comment.php" method="post" onsubmit="return validateComment()">
             <div id="comment-form-container"> 
                 <label for="comment-input" class="margin-top-1">Facci sapere qualcosa di più, inserisci qui il tuo commento!</label> 
-                <textarea id="comment-input" name="comment-input" rows="5" cols="70" class="margin-top-0-5 secondary-bg" tabindex="0">{comment-input}</textarea>           
+                <textarea id="comment-input" name="comment-input" rows="5" cols="70" class="margin-top-0-5 secondary-bg" tabindex="0">{comment-input}</textarea>
+                <input type="hidden" value="{article-id}" name="articleId"/>           
                 <input type="submit" value="Invia commento" name="commentSubmit" class="form-button margin-top-0-5"/>
             </div>
         </form>

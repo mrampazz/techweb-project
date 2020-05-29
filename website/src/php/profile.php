@@ -29,7 +29,7 @@ else{
   $output = str_replace("{surname}", $user->surname,$output);
 }
 
-$output = str_replace("avatar_url", "../public/".$user->avatarUrl,$output);
+$output = str_replace("avatar-url","../assets/img/avatars/".$user->avatarUrl,$output);
 $output = str_replace("{email}", $user->email,$output);
 $output = str_replace("{username}",$user->username,$output);
 

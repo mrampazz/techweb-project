@@ -25,7 +25,7 @@ if ($_FILES["avatar"]["name"] != null) {
     $_SESSION['error-message'] = $upload_result["error"];
   }
   else{
-    $user->avatarUrl = "/".$upload_result["url"];
+    $user->avatarUrl = $upload_result["url"];
   }
 }
 
