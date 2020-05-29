@@ -6,10 +6,19 @@ if(!SessionManager::isUserLogged()){
   return;
 }
 
-if(isset($_SESSION['error-message'])) {
+if(isset($_SESSION['error-message']) && !empty($_SESSION['error-message'])) {
   $output = str_replace("<div class=\"margin-top-2 hidden\">","<div class=\"margin-top-2\" tabindex=\"0\">",$output);
-  $output = str_replace("{error-message}",$_SESSION['error-message'],$output);
+  $output = str_replace("{message-box-class}","error-message-box",$output);
+  $output = str_replace("{message-box-title}","Errore",$output);
+  $output = str_replace("{message-box-text}",$_SESSION['error-message'],$output);
   unset($_SESSION['error-message']);
+}
+else if(isset($_SESSION['updated-correctly'])){
+  $output = str_replace("<div class=\"margin-top-2 hidden\">","<div class=\"margin-top-2\" tabindex=\"0\">",$output);
+  $output = str_replace("{message-box-class}","success-message-box",$output);
+  $output = str_replace("{message-box-title}","Profilo aggiornato!",$output);
+  $output = str_replace("{message-box-text}","Tutti i tuoi dati sono stati correttamente aggiornati.",$output);
+  unset($_SESSION['updated-correctly']);
 }
 
 $userId = SessionManager::getUserId();

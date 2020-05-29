@@ -508,6 +508,17 @@ body {
   margin: auto;
 }
 
+.success-message-box {
+  width: 50%;
+  border-radius: .5em;
+  background-color: green;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  padding: 1em;
+  margin: auto;
+}
+
 #username, #name, #surname, #email, input[type="password"] {
   font-size: 1.125em;
   padding-bottom: .1em;
@@ -651,6 +662,7 @@ input:focus ~ .highlight {
   object-fit: cover;
 }
 
+
 /* Article-page */
 
 #article-page-container {
@@ -663,6 +675,10 @@ input:focus ~ .highlight {
 #article-info-container {
   display:flex;
   flex-direction:row;
+}
+
+#article-image-container {
+  margin-right: 1.5em;
 }
 
 #article-image {
@@ -845,6 +861,10 @@ input:focus ~ .highlight {
   #article-info-container {
     flex-direction:column;
     align-items: center;
+  }
+
+  #article-image-container {
+    margin-right: 0em;
   }
 
   #article-image {

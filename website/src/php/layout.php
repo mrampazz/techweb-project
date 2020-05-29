@@ -34,7 +34,7 @@ if (SessionManager::isUserLogged()) {
     $username = SessionManager::getUsername();
     $user = User::getUser(SessionManager::getUserId());
     $output = str_replace("{loginLink}", "../php/layout.php?page=profile", $output);
-    $output = str_replace("{registrationLink}", "../php/login.php?logout=true", $output);
+    $output = str_replace("{registrationLink}", "../php/layout.php?page=login&logout=true", $output);
     $output = str_replace("{LOGIN}", "PROFILO", $output);
     $output = str_replace("{REGISTRAZIONE}", "LOGOUT", $output);
     $links[1]->setLink(SessionManager::BASE_URL . "profile");
