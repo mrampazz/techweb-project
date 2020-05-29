@@ -1,13 +1,13 @@
-<!DOCTYPE html>
-<html lang="it" xml:lang="it">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML + ARIA 1.0//EN" "http://www.w3.org/WAI/ARIA/schemata/xhtml-aria-1.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="it">
   <head>
     <title>{currentPage}</title>
-    <meta name="author" content="Daniel James Tronca, Gabriel Ciulei, Andrea Polo, Marco Rampazzo"/>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta name="author" content="Daniel James Tronca, Gabriel Ciulei, Andrea Polo, Marco Rampazzo"></meta>
+    <meta charset="utf-8"></meta>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"></meta>
     <script type="text/javascript" src="https://kit.fontawesome.com/cfeebd4134.js"></script>
     <script type="text/javascript" src="../scripts/formChecker.js"></script>
-    <script type="text/javascript" src="../scripts/accordion.js"></script>
+    <script type="text/javascript" src="../scripts/scripts.js"></script>
     <link rel="stylesheet" href="../assets/styles/style.css"/>
     <link href="https://fonts.googleapis.com/css?family=Montserrat:200,400,500,600,700&amp;display=swap" rel="stylesheet" type="text/css"/>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/>
@@ -16,37 +16,43 @@
     <a class="skip-to-content" href="#content">
       Skip to content
     </a>
-    <header class="header-container">
-      <div class="title-container">
+    <div class="header-container">
+      <div class="title-container el-container">
         <h1>My very cool title</h1>
-        <div class="header-button-container">
-          <a class="header-button" href="{loginLink}">{LOGIN}</a>
-          <a class="header-button" href="{registrationLink}">{REGISTRAZIONE}</a>
-        </div>
       </div>
-      <div class="breadcrumb-container">
+      
+        <div class="mobile-button-container" aria-label="Apri menu hamburger"> 
+          <button id="ham-button-open"><svg height="32" width="32" xmlns="http://www.w3.org/2000/svg"><path d="M4 10h24a2 2 0 000-4H4a2 2 0 000 4zm24 4H4a2 2 0 000 4h24a2 2 0 000-4zm0 8H4a2 2 0 000 4h24a2 2 0 000-4z"/></svg></button>
+        </div>
+        <div id="ham-menu-links" class="mobile-menu-links">
+          <button id="ham-button-close" aria-label="Chiudi menu hamburger">
+            <svg height="32" width="32" xmlns="http://www.w3.org/2000/svg"><g fill="none" stroke="#000" stroke-width="2"><path d="M2 14L14 2M2 2l12 12"/></g></svg></button>
+          {mobile-menu-links}
+        </div>
+
+      <div class="breadcrumb-container el-container">
         <ul>
           <li>Ti trovi in</li>
           {breadcrumb}
         </ul>
       </div>
-    </header>
+    </div>
 
-    <main class="main-container">
-      <nav class="menu-container">
+    <div class="main-container">
+      <div class="menu-container">
         {menu-links}
-      </nav>
+      </div>
       <div id="content" class="content-container">
         {content}
       </div>
-    </main>
+    </div>
 
     <a id="back-to-top" href="#">
       Back to top
     </a>
 
-    <footer class="footer-container">
+    <div class="footer-container el-container">
       Untitled &copy; Un prodotto UNIPD. 2020. Tutti i diritti riservati.
-    </footer>
+    </div>
   </body>
 </html>

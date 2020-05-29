@@ -10,48 +10,60 @@ class Link
 {
     public $name;
     public $link;
-    public function __construct($n, $l)
+    public $hidden;
+    public function __construct($n, $l, $h)
     {
         $this->name = $n;
         $this->link = $l;
+        $this->hidden = $h;
     }
-    
+    public function setHidden($h) {
+        $this->hidden = $h;
+    }
     public function setLink($l) {
         $this->link = $l;
+    }
+    public function setName($n) {
+        $this->name = $n;
     }
 }
 
 $links = [
-    new Link("Home", SessionManager::BASE_URL . "home"),
-    new Link("Il tuo profilo", SessionManager::BASE_URL . "profile"),
-    new Link("Regolamento", SessionManager::BASE_URL . "rules"),
-    new Link("Chi siamo?", SessionManager::BASE_URL . "about"),
-    new Link("FAQ", SessionManager::BASE_URL . "faq"),
+    new Link("Home", SessionManager::BASE_URL . "home", false),
+    new Link("Il tuo profilo", SessionManager::BASE_URL . "profile", false),
+    new Link("Regolamento", SessionManager::BASE_URL . "rules", false),
+    new Link("Chi siamo?", SessionManager::BASE_URL . "about", false),
+    new Link("Zona amministratori", SessionManager::BASE_URL . "admin", false),
+    new Link("Login", SessionManager::BASE_URL . "login", false),
+    new Link("Registrati", SessionManager::BASE_URL . "registration", false),
+    new Link("FAQ", SessionManager::BASE_URL . "faq", false)
 ];
 
 if (SessionManager::isUserLogged()) {
     $username = SessionManager::getUsername();
     $user = User::getUser(SessionManager::getUserId());
-    $output = str_replace("{loginLink}", "../php/layout.php?page=profile", $output);
-    $output = str_replace("{registrationLink}", "../php/login.php?logout=true", $output);
-    $output = str_replace("{LOGIN}", "PROFILO", $output);
-    $output = str_replace("{REGISTRAZIONE}", "LOGOUT", $output);
-    $links[1]->setLink(SessionManager::BASE_URL . "profile");
+    $links[1]->setHidden(false);
+    $links[4]->setHidden(true);
+    $links[5]->setHidden(true);
+    $links[6]->setName("Log out");
+    $links[6]->setLink(SessionManager::BASE_URL . "home&amp;logout=true");
+
     if (SessionManager::userCanPublish()) {
-        array_push($links, new Link("Amministratore", SessionManager::BASE_URL . "admin" ));
+        $links[4]->setHidden(false);
     }
 } else {
-    $output = str_replace("{loginLink}", "../php/layout.php?page=login", $output);
-    $output = str_replace("{registrationLink}", "../php/layout.php?page=registration", $output);
-    $output = str_replace("{LOGIN}", "LOGIN", $output);
-    $output = str_replace("{REGISTRAZIONE}", "REGISTRAZIONE", $output);
-    $links[1]->setLink("../php/layout.php?page=login");
+    $links[1]->setHidden(true);
+    $links[5]->setHidden(false);
+    $links[4]->setHidden(true);
+    $links[6]->setName("Registrati");
+    $links[6]->setLink(SessionManager::BASE_URL . "registration");
 }
 
 if (isset($_GET["logout"])) {
     SessionManager::logout();
     header("Location: " . SessionManager::BASE_URL . "home");
 }
+
 
 switch ($_GET['page']) {
     case 'login':
@@ -60,7 +72,9 @@ switch ($_GET['page']) {
         $output = str_replace("{breadcrumb}", $breadcrumb, $output);
         $output = str_replace("{content}", $page, $output);
         $output = str_replace("{currentPage}", "Login", $output);
-        $output = str_replace("{menu-links}", Utils::getMenuLinks($links, null), $output);
+        $linkItems = Utils::getMenuLinks($links, 'Login');
+        $output = str_replace("{menu-links}", $linkItems, $output);
+        $output = str_replace("{mobile-menu-links}", $linkItems, $output);
         include_once("../php/login.php");
         break;
 
@@ -70,7 +84,9 @@ switch ($_GET['page']) {
         $output = str_replace("{breadcrumb}", $breadcrumb, $output);
         $output = str_replace("{content}", $page, $output);
         $output = str_replace("{currentPage}", "Registrazione", $output);
-        $output = str_replace("{menu-links}", Utils::getMenuLinks($links, null), $output);
+        $linkItems = Utils::getMenuLinks($links, 'Registrati');
+        $output = str_replace("{menu-links}", $linkItems, $output);
+        $output = str_replace("{mobile-menu-links}", $linkItems, $output);
         include_once("../php/registration.php");
         break;
         
@@ -80,7 +96,9 @@ switch ($_GET['page']) {
         $output = str_replace("{breadcrumb}", $breadcrumb, $output);
         $output = str_replace("{content}", $page, $output);
         $output = str_replace("{currentPage}", "Homepage", $output);
-        $output = str_replace("{menu-links}", Utils::getMenuLinks($links, "Home"), $output);
+        $linkItems = Utils::getMenuLinks($links, 'Home');
+        $output = str_replace("{menu-links}", $linkItems, $output);
+        $output = str_replace("{mobile-menu-links}", $linkItems, $output);
         include_once("../php/home.php");
         break;
 
@@ -90,7 +108,9 @@ switch ($_GET['page']) {
         $output = str_replace("{breadcrumb}", $breadcrumb, $output);
         $output = str_replace("{content}", $page, $output);
         $output = str_replace("{currentPage}", "Il tuo profilo", $output);
-        $output = str_replace("{menu-links}", Utils::getMenuLinks($links, "Il tuo profilo"), $output);
+        $linkItems = Utils::getMenuLinks($links, 'Il tuo profilo');
+        $output = str_replace("{menu-links}", $linkItems, $output);
+        $output = str_replace("{mobile-menu-links}", $linkItems, $output);
         include_once("../php/profile.php");
         break;
 
@@ -104,8 +124,9 @@ switch ($_GET['page']) {
         $page = file_get_contents("../html/article-page.html");
         $output = str_replace("{breadcrumb}", $breadcrumb, $output);
         $output = str_replace("{content}", $page, $output);
+        $output = str_replace("{menu-links}", $linkItems, $output);
+        $output = str_replace("{mobile-menu-links}", $linkItems, $output);
         $output = str_replace("{currentPage}", "Articolo {$article->model}", $output);
-        $output = str_replace("{menu-links}", Utils::getMenuLinks($links, null), $output);
         include_once("../php/article_page.php");
         break;
 
@@ -115,7 +136,9 @@ switch ($_GET['page']) {
         $output = str_replace("{breadcrumb}", $breadcrumb, $output);
         $output = str_replace("{content}", $page, $output);
         $output = str_replace("{currentPage}", "Regolamento", $output);
-        $output = str_replace("{menu-links}", Utils::getMenuLinks($links, "Regolamento"), $output);
+        $linkItems = Utils::getMenuLinks($links, 'Regolamento');
+        $output = str_replace("{menu-links}", $linkItems, $output);
+        $output = str_replace("{mobile-menu-links}", $linkItems, $output);
         // include_once("../php/rules.php");
         break;
 
@@ -125,7 +148,9 @@ switch ($_GET['page']) {
         $output = str_replace("{breadcrumb}", $breadcrumb, $output);
         $output = str_replace("{content}", $page, $output);
         $output = str_replace("{currentPage}", "Chi siamo?", $output);
-        $output = str_replace("{menu-links}", Utils::getMenuLinks($links, "Chi siamo?"), $output);
+        $linkItems = Utils::getMenuLinks($links, 'Chi siamo?');
+        $output = str_replace("{menu-links}", $linkItems, $output);
+        $output = str_replace("{mobile-menu-links}", $linkItems, $output);
         // include_once("../php/about.php");
         break;
 
@@ -135,7 +160,9 @@ switch ($_GET['page']) {
         $output = str_replace("{breadcrumb}", $breadcrumb, $output);
         $output = str_replace("{content}", $page, $output);
         $output = str_replace("{currentPage}", "FAQ", $output);
-        $output = str_replace("{menu-links}", Utils::getMenuLinks($links, "FAQ"), $output);
+        $linkItems = Utils::getMenuLinks($links, 'FAQ');
+        $output = str_replace("{menu-links}", $linkItems, $output);
+        $output = str_replace("{mobile-menu-links}", $linkItems, $output);
         include_once("../php/faq_page.php");
         break;
 }
