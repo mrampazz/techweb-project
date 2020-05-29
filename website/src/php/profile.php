@@ -2,18 +2,20 @@
 $dbMan = DBManager::getInstance();
 
 if(!SessionManager::isUserLogged()){
-  header("Location: ".SessionManager::BASE_URL."home");
+  header("Location: ".SessionManager::BASE_URL."login");
+  return;
 }
 
 if(isset($_SESSION['error-message'])) {
   $output = str_replace("<div class=\"margin-top-2 hidden\">","<div class=\"margin-top-2\" tabindex=\"0\">",$output);
   $output = str_replace("{error-message}",$_SESSION['error-message'],$output);
+  unset($_SESSION['error-message']);
 }
 
 $userId = SessionManager::getUserId();
 $user = User::getUser($userId);
 
-//restore surname and/or name (these are set if an error has occurred)
+//restore surname and/or name from session variables (these are set if an error has occurred)
 if(isset($_SESSION['name'])){
   $output = str_replace("{name}", $_SESSION['name'],$output);
   unset($_SESSION['name']);
@@ -32,8 +34,6 @@ else{
 $output = str_replace("avatar-url","../assets/img/avatars/".$user->avatarUrl,$output);
 $output = str_replace("{email}", $user->email,$output);
 $output = str_replace("{username}",$user->username,$output);
-
-unset($_SESSION['error-message']);
 
 
 ?>
