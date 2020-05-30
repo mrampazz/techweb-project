@@ -335,6 +335,7 @@ body {
   width: 12em;
   display: block;
   margin: 1em;
+  text-align: center;
 }
 
 .article-title {
@@ -344,10 +345,8 @@ body {
 }
 
 .article-img {
-  display: block;
   height: 13em;
-  width: 12em;
-  object-fit: cover;
+  max-width: 13em;
 }
 
 .vote-container {
@@ -770,9 +769,8 @@ input:focus ~ .highlight {
 }
 
 #article-image {
-  width: 15em;
-  height: 20em;
-  object-fit: cover;
+  max-width: 15em;
+  max-height: 20em;
 }
 
 #article-description {
