@@ -74,10 +74,20 @@ class Article extends Base
         return $dbman->query($insertQuery);
     }
 
-    public static function list()
+    public static function list($title=null,$brand=null, $model=null)
     {
         $dbman = DBManager::getInstance();
         $whereClause = "1";
+
+        if ($title != null)
+            $whereClause = $whereClause." AND ".(self::TABLE_NAME).".".self::TITLE_KEY." LIKE '%{$title}%'";
+
+        if ($brand != null)
+            $whereClause = $whereClause." AND ".(self::TABLE_NAME).".".self::BRAND_KEY." LIKE '%{$brand}%'";
+        
+        if ($model != null)
+            $whereClause = $whereClause." AND ".(self::TABLE_NAME).".".self::MODEL_KEY." LIKE '%{$model}%'";
+
         $queryString = "SELECT Article.*, count(Vote.id) AS votes_count, sum(Vote.positive) as votes_positive FROM ".(self::TABLE_NAME)." LEFT JOIN Vote ON (".(self::TABLE_NAME).".id=Vote.article_id) WHERE ".$whereClause." GROUP BY Article.id;";
         $results = $dbman->query($queryString, Article::class);
         return $results;
