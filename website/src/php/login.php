@@ -14,9 +14,12 @@ else{
     $output = str_replace("{username}","",$output);
 }
 
-//if the user comes from the link of the article page then save the articleId 
+//if the user comes from the link of the article page then set url with the articleId (this will allow the redirection to the article)
 if (isset($_GET['articleId'])){
-    $_SESSION['article-id'] = Utils::validateInput($_GET['articleId']);
+    $output = str_replace("validate-login-url","../php/validate_login_data.php?articleId=".Utils::validateInput($_GET['articleId']),$output);
+}
+else{
+    $output = str_replace("validate-login-url","../php/validate_login_data.php",$output);
 }
 
 Utils::unsetAll(array('username','error-message'));

@@ -54,9 +54,8 @@ function checkParameters($username, $password)
 function userLoggedCorrectly()
 {
   // if the user comes from the link of the article redirect to the page
-  if (isset($_SESSION['article-id'])){
-    header("Location: ".SessionManager::BASE_URL."article"."&articleId=".$_SESSION['article-id']);
-    unset($_SESSION['article-id']);
+  if (isset($_GET['articleId'])){
+    header("Location: ".SessionManager::BASE_URL."article"."&articleId=".$_GET['articleId']);
   }
   else{
 	  // redirect to home 
