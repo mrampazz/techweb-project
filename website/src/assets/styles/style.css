@@ -810,7 +810,7 @@ input:focus ~ .highlight {
   display: inline-block;
 }
 
-.add_device {
+.add_device_a {
   background-color: #506180;
   color: white;
   float: right;
@@ -818,6 +818,19 @@ input:focus ~ .highlight {
   padding: 0.625em;
   border: none;
   margin-left: 4em;
+}
+
+.product_description {
+  font-size: 0.8em;
+  font-weight: normal;
+}
+
+.description_text_area {
+  width: 100%;
+}
+
+.insert_form {
+  margin: 2em;
 }
 
 /* RULES */
