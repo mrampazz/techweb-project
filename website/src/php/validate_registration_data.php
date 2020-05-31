@@ -15,7 +15,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     
   $username = Utils::validateInput($_POST["username"]);
   $password = Utils::validateInput($_POST["password"]);
-  $confirmationPassword = Utils::validateInput($_POST["confirmationPassword"]);
+  $confirmationPassword = Utils::validateInput($_POST["confirmation-password"]);
   $name = Utils::validateInput($_POST["name"]);
   $surname = Utils::validateInput($_POST["surname"]);
   $email = Utils::validateInput($_POST["email"]);

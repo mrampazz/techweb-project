@@ -4,11 +4,10 @@ var RE_EMAIL = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
 var RE_NAME = /^[a-zA-Z ]{1,16}$/;
 var RE_USERNAME = /^[A-Za-z0-9]+(?:[_-][A-Za-z0-9]+)*$/;
 
-var errorMessage = ""; //gestita da createErrorMessage
-
+var errorMessage = ""; //managed by createErrorMessage function
 
 /* 
-    controlla se l'item rispetta l'espressione regolare ==> ritorna booleano
+    check if the item respects the regular expression ==> return boolean
 */
 function validInput(item, reg_expr, isLogin){
     if (item.value == "" || !reg_expr.test(item.value)){
@@ -20,7 +19,7 @@ function validInput(item, reg_expr, isLogin){
 }
 
 /*
-    validazione form profilo
+    profile form validation
 */
 function validateFormProfile(){
     var name = document.getElementById("name");
@@ -42,7 +41,7 @@ function validateFormProfile(){
 }
 
 /*
-    validazione form login
+    login form validation
 */
 function validateFormLogin() {
     var username = document.getElementById("username");
@@ -66,7 +65,7 @@ function validateFormLogin() {
 }
 
 /*
-    validazione form registrazione
+    registration form validation
 */
 function validateFormRegistration() {
     var name = document.getElementById("name");
@@ -74,7 +73,7 @@ function validateFormRegistration() {
     var username = document.getElementById("username");
     var email = document.getElementById("email");
     var password = document.getElementById("password");
-    var rpassword = document.getElementById("confirmationPassword");
+    var rpassword = document.getElementById("confirmation-password");
     
     if (!validInput(name, RE_NAME, false))                                  
     { 
@@ -124,15 +123,13 @@ function validateFormRegistration() {
 }
 
 /*
-    validazione immagine in input e visualizzazione preview
+    input image validation
 */
 function validateImage() { 
     var fileInput =  document.getElementById('file-upload'); 
     var filePath = fileInput.value; 
 
     if (filePath!=""){
-
-        //estensioni accettate
         var allowedExtensions =  
                 /(\.jpg|\.jpeg|\.png)$/i; 
                 
@@ -143,7 +140,7 @@ function validateImage() {
         }  
         else  
         { 
-            //anteprima immagine 
+            //display image preview
             if (fileInput.files && fileInput.files[0]) { 
                 var reader = new FileReader(); 
                 reader.onload = function(e) { 
@@ -167,7 +164,7 @@ function validateComment(){
 }
 
 /*
-  controlla se la password di conferma e la password sono uguali
+    check if the confirmation password and the password are the same
 */
 function checkPasswords(password, rpassword) {
     if (rpassword.value != "") {
@@ -181,7 +178,7 @@ function checkPasswords(password, rpassword) {
 }
 
 /*
-  crea messaggio di errore personalizzato in base all'item passato
+    creates custom error message based on the provided item
 */
 function createErrorMessage(item, isLogin){
     if (item.value == ""){
@@ -196,7 +193,7 @@ function createErrorMessage(item, isLogin){
                 break;
             case 'password': errorMessage = "Inserisci la password.";
                 break;
-            case 'confirmationPassword': errorMessage = "Inserisci la password di conferma.";
+            case 'confirmation-password': errorMessage = "Inserisci la password di conferma.";
                 break;
         }
     }
@@ -218,7 +215,7 @@ function createErrorMessage(item, isLogin){
                 break;
             case 'password': errorMessage = "Controlla la password! Dev'essere alfanumerica ed essere composta da almeno 6 caratteri.";
                 break;
-            case 'confirmationPassword': errorMessage = "La password di conferma \u00E8 diversa dalla password!";
+            case 'confirmation-password': errorMessage = "La password di conferma \u00E8 diversa dalla password!";
                 break;
         }
     }

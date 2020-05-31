@@ -7,6 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <script type="text/javascript" src="https://kit.fontawesome.com/cfeebd4134.js"></script>
     <script type="text/javascript" src="../scripts/formChecker.js"></script>
+    <script type="text/javascript" src="../scripts/adminFormChecker.js"></script>
     <link rel="stylesheet" href="../assets/styles/style.css"/>
     <link href="https://fonts.googleapis.com/css?family=Montserrat:200,400,500,600,700&amp;display=swap" rel="stylesheet" type="text/css"/>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/>
@@ -35,43 +36,47 @@
     </nav>
     <div class="content-container">
         <div class="margin-left-2-5 margin-top-1 margin-right-2-5 flex-container">
-            <h1 class="font-size-2-5 font-weight-bold margin-bottom-0-5 inline_tex"> Inserimento telefono </h1>
+            <h1 class="font-size-2-5 font-weight-bold margin-bottom-0-5 inline-tex"> Inserimento telefono </h1>
         </div>
-        <div class="insert_form">
-            <form onsubmit="return validateFormRegistration()">
+        <div class="insert-form">
+            <form method="post" enctype="multipart/form-data" onsubmit="return validateFormAddArticle()">
                 <div class="group margin-top-3">
-                    <label for="marca" class="label-log-reg">Inserisci marca</label>
-                    <input type="text" name="marca" id="marca" tabindex="0"/>
+                    <label for="brand" class="form-label">Marca</label>
+                    <input type="text" name="brand" id="brand" tabindex="0"/>
                     <span class="highlight"></span>
                     <span class="bar"></span>
                 </div>
                 <div class="group">
-                    <label for="modello" class="label-log-reg">Inserisci modello</label>
-                    <input type="text" name="modello" id="modello" tabindex="0"/>
+                    <label for="model" class="form-label">Modello</label>
+                    <input type="text" name="model" id="model" tabindex="0"/>
                     <span class="highlight"></span>
                     <span class="bar"></span>
                 </div>
                 <div class="group">
-                    <label for="prezzo" class="label-log-reg">Inserisci prezzo di lancio</label>
-                    <input type="text" name="prezzo" id="prezzo" tabindex="0"/>
+                    <label for="price" class="form-label">Prezzo di lancio</label>
+                    <input type="text" name="price" id="price" tabindex="0"/>
                     <span class="highlight"></span>
                     <span class="bar"></span>
                 </div>
                 <div class="group">
-                    <label for="data_lancio" class="label-log-reg">Inserisci data di lancio</label>
-                    <input type="text" name="data_lancio" id="data_lancio" tabindex="0"/>
+                    <label for="date" class="form-label">Data di lancio</label>
+                    <input type="text" name="date" id="date" tabindex="0"/>
                     <span class="highlight"></span>
                     <span class="bar"></span>
                 </div>
                 <div class="group">
-                    <label for="amazon_link" class="label-log-reg">Inserisci link amazon per l'acquisto</label>
-                    <input type="text" name="amazon_link" id="amazon_link" tabindex="0"/>
+                    <label for="amazon-link" class="form-label">Link amazon</label>
+                    <input type="text" name="amazon-link" id="amazon-link" tabindex="0"/>
                     <span class="highlight"></span>
                     <span class="bar"></span>
                 </div>
                 <div class="group">
-                    <label for="descrizione" class="product_description">Inserisci descrizione prodotto</label>
-                    <textarea id="descrizione" name="message" rows="7" cols="50" class="margin-top-0-5 secondary-bg description_text_area" tabindex="0"></textarea>
+                    <label for="product-image" class="form-label">Immagine prodotto</label>
+                    <input name="product-image" id="product-image" type="file" onchange="return validateImage()"/>
+                </div>
+                <div class="group">
+                    <label for="description" class="product-description">Descrizione prodotto</label>
+                    <textarea id="description" name="description" rows="7" cols="50" class="margin-top-0-5 secondary-bg description-text-area" tabindex="0"></textarea>
                     <span class="highlight"></span>
                     <span class="bar"></span>
                 </div>
