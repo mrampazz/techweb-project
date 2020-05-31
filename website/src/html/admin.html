@@ -1,27 +1,9 @@
 <div class="admin-tile">
-  <div class="margin-left-2-5 margin-top-1 margin-right-2-5 flex-container">
+  <div class="margin-top-1 margin-bottom-1 margin-right-2-5 flex-container flex-wrap flex-items-center">
     <h1 class="font-size-2-5 font-weight-bold margin-bottom-0-5 inline-tex">Pagina amministratore</h1>
-    <button class="add_device">Aggiungi nuovo dispositivo</button>
+    <a href='../php/layout.php?page=add-article&amp;edit=false' class="add_device">Aggiungi nuovo dispositivo</a>
   </div>
   <div>
     {articles}
   </div>
 </div>
-
-<main class="main-container">
-    <nav class="menu-container">
-        {menu-links}
-    </nav>
-    <div class="content-container">
-        <div class="margin-left-2-5 margin-top-1 margin-right-2-5 flex-container">
-            <h1 class="font-size-2-5 font-weight-bold margin-bottom-0-5 inline-tex"> Pagina amministratore </h1>
-            <a class="add-device-a" href="{registrationLink}">Aggiungi nuovo dispositivo</a>
-        </div>
-    </div>
-</main>
-
-<footer class="footer-container">
-    Untitled &copy; Un prodotto UNIPD. 2020. Tutti i diritti riservati.
-</footer>
-</body>
-</html>

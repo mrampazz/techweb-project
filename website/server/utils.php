@@ -90,6 +90,8 @@ class Utils
     {
         $html = str_replace("{article-model}", $item->model, $html);
         $html = str_replace("{article-link}", "./layout.php?page=article&amp;id={$item->id}", $html);
+        $html = str_replace("{modify-article}", "./layout.php?page=modify-article&amp;edit=true&amp;id={$item->id}", $html);
+        
         $html = str_replace("{article-memory}", $item->votesPositive, $html);
         $html = str_replace("{article-price}", ($item->votesTotal) - ($item->votesPositive), $html);
         $html = str_replace("{article-img}", "../assets/img/articles/" . $item->image, $html);
@@ -144,7 +146,7 @@ class Utils
             $array = [];
         }
         for ($x = 0; $x < count($array); $x++) {
-            $card = Utils::replaceContentsAdminArticleItem(file_get_contents("../html/admin_tile.html"), $array[$x]);
+            $card = Utils::replaceContentsAdminArticleItem(file_get_contents("../html/admin-tile.html"), $array[$x]);
             array_push($articlesList, $card);
         }
         return implode($articlesList);

@@ -7,8 +7,8 @@
         </div>
     </div>
     <form class="margin-top-1" action="../php/update_profile.php" method="post" onsubmit="return validateFormProfile()" enctype="multipart/form-data">
-        <div class="group margin-top-1">
-            <label for="file-upload" class="upload-image" role="button" tabindex="0"><i class="fas fa-camera"></i> Cambia immagine profilo</label>
+        <div id="file-upload-container">
+            <label for="file-upload" class="margin-bottom-0-5">Cambia immagine profilo:</label>
             <input id="file-upload" name="file-upload" type="file" onchange="return validateImage('avatar')"/>
         </div>
         <div class="group">
