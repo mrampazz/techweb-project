@@ -175,11 +175,33 @@ switch ($_GET['page']) {
         $page = file_get_contents("../html/admin.html");
         $output = str_replace("{breadcrumb}", $breadcrumb, $output);
         $output = str_replace("{content}", $page, $output);
-        $output = str_replace("{currentPage}", "FAQ", $output);
-        $linkItems = Utils::getMenuLinks($links, 'FAQ');
+        $output = str_replace("{currentPage}", "Zona amministratori", $output);
+        $linkItems = Utils::getMenuLinks($links, 'Zona amministratori');
         $output = str_replace("{menu-links}", $linkItems, $output);
         $output = str_replace("{mobile-menu-links}", $linkItems, $output);
         include_once("../php/admin.php");
+        break;
+    case 'add-article':
+        $breadcrumb = "<li>&#62;&#62; <a href='" . SessionManager::BASE_URL . 'home' . "'>Home</a></li><li>&#62;&#62; <a href='" . SessionManager::BASE_URL . 'admin' . "'>Area Amministratore</a></li><li>&#62;&#62; <span>Aggiungi articolo</span></li>";
+        $page = file_get_contents("../html/admin-form.html");
+        $output = str_replace("{breadcrumb}", $breadcrumb, $output);
+        $output = str_replace("{content}", $page, $output);
+        $output = str_replace("{currentPage}", "Aggiungi articolo", $output);
+        $linkItems = Utils::getMenuLinks($links, null);
+        $output = str_replace("{menu-links}", $linkItems, $output);
+        $output = str_replace("{mobile-menu-links}", $linkItems, $output);
+        include_once("../php/admin-add-article.php");
+        break;
+    case 'modify-article':
+        $breadcrumb = "<li>&#62;&#62; <a href='" . SessionManager::BASE_URL . 'home' . "'>Home</a></li><li>&#62;&#62; <a href='" . SessionManager::BASE_URL . 'admin' . "'>Area Amministratore</a></li><li>&#62;&#62; <span>Modifica articolo</span></li>";
+        $page = file_get_contents("../html/admin-form.html");
+        $output = str_replace("{breadcrumb}", $breadcrumb, $output);
+        $output = str_replace("{content}", $page, $output);
+        $output = str_replace("{currentPage}", "Modifica articolo", $output);
+        $linkItems = Utils::getMenuLinks($links, null);
+        $output = str_replace("{menu-links}", $linkItems, $output);
+        $output = str_replace("{mobile-menu-links}", $linkItems, $output);
+        include_once("../php/admin-modify-article.php");
         break;
 }
 
