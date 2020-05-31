@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Creato il: Mag 30, 2020 alle 21:17
+-- Creato il: Mag 31, 2020 alle 11:34
 -- Versione del server: 10.4.8-MariaDB
 -- Versione PHP: 7.3.10
 
@@ -127,8 +127,8 @@ CREATE TABLE `keychain` (
 --
 
 INSERT INTO `keychain` (`user_id`, `username`, `password`, `created_at`, `updated_at`, `can_publish`) VALUES
-(17, 'test', '37268335dd6931045bdcdf92623ff819a64244b53d0e746d438797349d4da578', '2020-05-27 11:05:02', '2020-05-27 11:05:02', 0),
-(21, 'admin', '240be518fabd2724ddb6f04eeb1da5967448d7e831c08c8fa822809f74c720a9', '2020-05-28 10:01:46', '2020-05-28 10:02:02', 1);
+(17, 'user', '04f8996da763b7a969b1028ee3007569eaf3a635486ddab211d512c85b9df8fb', '2020-05-27 11:05:02', '2020-05-31 09:33:37', 0),
+(21, 'admin', '8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918', '2020-05-28 10:01:46', '2020-05-31 09:30:32', 1);
 
 --
 -- Trigger `keychain`
@@ -159,8 +159,8 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`name`, `surname`, `id`, `email`, `avatar_url`, `created_at`, `updated_at`) VALUES
-('tester', 'tester', 17, 'fdsf@sdfmc.com', 'default.png', '2020-05-27 11:05:02', '2020-05-29 20:00:33'),
-('admin', 'admin', 21, 'admin@gmail.com', 'default.png', '2020-05-28 10:01:46', '2020-05-29 22:29:09');
+('Mario', 'Rossi', 17, 'user@gmail.com', 'user.png', '2020-05-27 11:05:02', '2020-05-31 09:20:15'),
+('admin', 'admin', 21, 'admin@gmail.com', 'admin.png', '2020-05-28 10:01:46', '2020-05-31 09:16:37');
 
 --
 -- Trigger `user`
