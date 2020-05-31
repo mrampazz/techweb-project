@@ -529,6 +529,12 @@ body {
 .flex-direction-col {
   flex-direction: column;
 }
+.flex-wrap {
+  flex-wrap: wrap;
+}
+.flex-items-center {
+  align-items: center;
+}
 
 /* BG SECTION */
 .primary-bg {
@@ -944,6 +950,38 @@ input:focus ~ .highlight {
   justify-content: center;
   align-items: center;
   flex-direction: column;
+}
+
+.admin-tile > div {
+  width: 90%;
+}
+
+.simple-content {
+  width: 90%;
+  margin: auto;
+  margin-top: 2em;
+  text-align: center;
+}
+
+.simple-content > a,
+.simple-content > h1 {
+  display: block;
+  margin-top: 1em;
+  margin-bottom: 1em;
+  width: 100%;
+}
+
+.add_device {
+  background-color: #506180;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 2em;
+  padding-left: 0.5em;
+  padding-right: 0.5em;
+  margin-left: 0.5em;
+  margin-right: 0.5em;
 }
 
 @media only screen and (max-width: 700px) {

@@ -64,9 +64,19 @@ if (SessionManager::isUserLogged()) {
 
 if (isset($_GET["logout"])) {
     SessionManager::logout();
-    header("Location: " . SessionManager::BASE_URL . "home");
+    if (isset($_GET['page'])) {
+        header("Location: " . SessionManager::BASE_URL . $_GET['page']);
+    } else {
+        header("Location: " . SessionManager::BASE_URL . "home");
+    }
 }
 
+function noPermissions()
+{
+    if (!SessionManager::isUserLogged() || (SessionManager::isUserLogged() && !SessionManager::userCanPublish())) {
+        header("Location: " . SessionManager::BASE_URL . "no-permissions");
+    }
+}
 
 switch ($_GET['page']) {
     case 'login':
@@ -74,7 +84,7 @@ switch ($_GET['page']) {
         $page = file_get_contents("../html/login.html");
         $output = str_replace("{breadcrumb}", $breadcrumb, $output);
         $output = str_replace("{content}", $page, $output);
-        $output = str_replace("{currentPage}", "Login", $output);
+        $output = str_replace("{currentPage}", "Smartphy - Login", $output);
         $linkItems = Utils::getMenuLinks($links, 'Login');
         $output = str_replace("{menu-links}", $linkItems, $output);
         $output = str_replace("{mobile-menu-links}", $linkItems, $output);
@@ -86,7 +96,7 @@ switch ($_GET['page']) {
         $page = file_get_contents("../html/registration.html");
         $output = str_replace("{breadcrumb}", $breadcrumb, $output);
         $output = str_replace("{content}", $page, $output);
-        $output = str_replace("{currentPage}", "Registrazione", $output);
+        $output = str_replace("{currentPage}", "Smartphy - Registrazione", $output);
         $linkItems = Utils::getMenuLinks($links, 'Registrati');
         $output = str_replace("{menu-links}", $linkItems, $output);
         $output = str_replace("{mobile-menu-links}", $linkItems, $output);
@@ -98,7 +108,7 @@ switch ($_GET['page']) {
         $page = file_get_contents("../html/home.html");
         $output = str_replace("{breadcrumb}", $breadcrumb, $output);
         $output = str_replace("{content}", $page, $output);
-        $output = str_replace("{currentPage}", "Homepage", $output);
+        $output = str_replace("{currentPage}", "Smartphy - Homepage", $output);
         $linkItems = Utils::getMenuLinks($links, 'Home');
         $output = str_replace("{menu-links}", $linkItems, $output);
         $output = str_replace("{mobile-menu-links}", $linkItems, $output);
@@ -110,7 +120,7 @@ switch ($_GET['page']) {
         $page = file_get_contents("../html/profile.html");
         $output = str_replace("{breadcrumb}", $breadcrumb, $output);
         $output = str_replace("{content}", $page, $output);
-        $output = str_replace("{currentPage}", "Il tuo profilo", $output);
+        $output = str_replace("{currentPage}", "Smartphy - Il tuo profilo", $output);
         $linkItems = Utils::getMenuLinks($links, 'Il tuo profilo');
         $output = str_replace("{menu-links}", $linkItems, $output);
         $output = str_replace("{mobile-menu-links}", $linkItems, $output);
@@ -130,7 +140,7 @@ switch ($_GET['page']) {
         $linkItems = Utils::getMenuLinks($links, null);
         $output = str_replace("{menu-links}", $linkItems, $output);
         $output = str_replace("{mobile-menu-links}", $linkItems, $output);
-        $output = str_replace("{currentPage}", "Articolo {$article->model}", $output);
+        $output = str_replace("{currentPage}", "Smartphy - Articolo {$article->model}", $output);
         include_once("../php/article_page.php");
         break;
 
@@ -139,7 +149,7 @@ switch ($_GET['page']) {
         $page = file_get_contents("../html/rules.html");
         $output = str_replace("{breadcrumb}", $breadcrumb, $output);
         $output = str_replace("{content}", $page, $output);
-        $output = str_replace("{currentPage}", "Regolamento", $output);
+        $output = str_replace("{currentPage}", "Smartphy - Regolamento", $output);
         $linkItems = Utils::getMenuLinks($links, 'Regolamento');
         $output = str_replace("{menu-links}", $linkItems, $output);
         $output = str_replace("{mobile-menu-links}", $linkItems, $output);
@@ -151,7 +161,7 @@ switch ($_GET['page']) {
         $page = file_get_contents("../html/about.html");
         $output = str_replace("{breadcrumb}", $breadcrumb, $output);
         $output = str_replace("{content}", $page, $output);
-        $output = str_replace("{currentPage}", "Chi siamo?", $output);
+        $output = str_replace("{currentPage}", "Smartphy - Chi siamo?", $output);
         $linkItems = Utils::getMenuLinks($links, 'Chi siamo?');
         $output = str_replace("{menu-links}", $linkItems, $output);
         $output = str_replace("{mobile-menu-links}", $linkItems, $output);
@@ -163,7 +173,7 @@ switch ($_GET['page']) {
         $page = file_get_contents("../html/faq.html");
         $output = str_replace("{breadcrumb}", $breadcrumb, $output);
         $output = str_replace("{content}", $page, $output);
-        $output = str_replace("{currentPage}", "FAQ", $output);
+        $output = str_replace("{currentPage}", "Smartphy - FAQ", $output);
         $linkItems = Utils::getMenuLinks($links, 'FAQ');
         $output = str_replace("{menu-links}", $linkItems, $output);
         $output = str_replace("{mobile-menu-links}", $linkItems, $output);
@@ -171,37 +181,60 @@ switch ($_GET['page']) {
         break;
 
     case 'admin':
+        noPermissions();
         $breadcrumb = "<li>&#62;&#62; <a href='" . SessionManager::BASE_URL . 'home' . "'>Home</a></li><li>&#62;&#62; <span>Area Amministratore</span></li>";
         $page = file_get_contents("../html/admin.html");
         $output = str_replace("{breadcrumb}", $breadcrumb, $output);
         $output = str_replace("{content}", $page, $output);
-        $output = str_replace("{currentPage}", "Zona amministratori", $output);
+        $output = str_replace("{currentPage}", "Smartphy - Zona amministratori", $output);
         $linkItems = Utils::getMenuLinks($links, 'Zona amministratori');
         $output = str_replace("{menu-links}", $linkItems, $output);
         $output = str_replace("{mobile-menu-links}", $linkItems, $output);
         include_once("../php/admin.php");
         break;
     case 'add-article':
+        noPermissions();
         $breadcrumb = "<li>&#62;&#62; <a href='" . SessionManager::BASE_URL . 'home' . "'>Home</a></li><li>&#62;&#62; <a href='" . SessionManager::BASE_URL . 'admin' . "'>Area Amministratore</a></li><li>&#62;&#62; <span>Aggiungi articolo</span></li>";
         $page = file_get_contents("../html/admin-form.html");
         $output = str_replace("{breadcrumb}", $breadcrumb, $output);
         $output = str_replace("{content}", $page, $output);
-        $output = str_replace("{currentPage}", "Aggiungi articolo", $output);
+        $output = str_replace("{currentPage}", "Smartphy - Aggiungi articolo", $output);
         $linkItems = Utils::getMenuLinks($links, null);
         $output = str_replace("{menu-links}", $linkItems, $output);
         $output = str_replace("{mobile-menu-links}", $linkItems, $output);
         include_once("../php/admin-add-article.php");
         break;
     case 'modify-article':
+        noPermissions();
         $breadcrumb = "<li>&#62;&#62; <a href='" . SessionManager::BASE_URL . 'home' . "'>Home</a></li><li>&#62;&#62; <a href='" . SessionManager::BASE_URL . 'admin' . "'>Area Amministratore</a></li><li>&#62;&#62; <span>Modifica articolo</span></li>";
         $page = file_get_contents("../html/admin-form.html");
         $output = str_replace("{breadcrumb}", $breadcrumb, $output);
         $output = str_replace("{content}", $page, $output);
-        $output = str_replace("{currentPage}", "Modifica articolo", $output);
+        $output = str_replace("{currentPage}", "Smartphy - Modifica articolo", $output);
         $linkItems = Utils::getMenuLinks($links, null);
         $output = str_replace("{menu-links}", $linkItems, $output);
         $output = str_replace("{mobile-menu-links}", $linkItems, $output);
         include_once("../php/admin-modify-article.php");
+        break;
+    case 'no-permissions':
+        $breadcrumb = "<li>&#62;&#62; <a href='" . SessionManager::BASE_URL . 'home' . "'>Home</a></li><li>&#62;&#62; <span>Zona Amministratore</span></li>";
+        $page = file_get_contents("../html/no-permissions.html");
+        $output = str_replace("{breadcrumb}", $breadcrumb, $output);
+        $output = str_replace("{content}", $page, $output);
+        $output = str_replace("{currentPage}", "Smartphy - Non hai i permessi", $output);
+        $linkItems = Utils::getMenuLinks($links, null);
+        $output = str_replace("{menu-links}", $linkItems, $output);
+        $output = str_replace("{mobile-menu-links}", $linkItems, $output);
+        break;
+    default:
+        $breadcrumb = "<li>&#62;&#62; <a href='" . SessionManager::BASE_URL . 'home' . "'>Home</a></li><li>&#62;&#62; <span>404</span></li>";
+        $page = file_get_contents("../html/404.html");
+        $output = str_replace("{breadcrumb}", $breadcrumb, $output);
+        $output = str_replace("{content}", $page, $output);
+        $output = str_replace("{currentPage}", "Smartphy - 404", $output);
+        $linkItems = Utils::getMenuLinks($links, null);
+        $output = str_replace("{menu-links}", $linkItems, $output);
+        $output = str_replace("{mobile-menu-links}", $linkItems, $output);
         break;
 }
 
