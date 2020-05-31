@@ -3,19 +3,30 @@
     <fieldset class="custom-fieldset">
       <legend class="custom-legend">Ricerca</legend>
       <form class="inline-form" method="get">
-        <div>
+        <div class="search-bar-container">
           <label class="custom-label" for="search-input">Cerca un telefono</label>
           <input class="custom-input" id="search-input" type="text" name="search" />
         </div>
-        <div>
-          <label class="custom-label" for="search-select">Modello</label>
-          <select class="custom-select" id="search-select" name="model">
-            <option value="all">Tutti i modelli</option>
-            <option>{modelOptions}</option>
-          </select>
-        </div>
-        <div>
-          <button class="custom-button" type="submit" name="page" value="home">Cerca</button>
+
+        <div class="filters-container">
+          <div>
+            <label class="custom-label" for="search-select">Marca</label>
+            <select class="custom-select" id="search-select" name="model">
+              <option value="all">Tutte le marche</option>
+              <option>{modelOptions}</option>
+            </select>
+          </div>
+
+          <div>
+            <label class="custom-label" for="search-select">Ordina per</label>
+            <select class="custom-select" id="search-select" name="ordine">
+              <option value="all">Nessun filtro</option>
+              <option>{orderOptions}</option>
+            </select>
+          </div>
+          <div>
+            <button class="custom-button" type="submit" name="page" value="home">Cerca</button>
+          </div>
         </div>
       </form>
     </fieldset>
