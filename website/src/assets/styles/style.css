@@ -986,3 +986,35 @@ input:focus ~ .highlight {
     flex-basis: 100%;
   }
 }
+
+@media only print {
+  * {
+    color: black;
+    background-color: transparent;
+  }
+  
+  a {
+    color: auto;
+  }
+
+  .menu-container {
+    display: none;
+  }
+  .title-container {
+    height: 5em;
+  }
+  .main-container {
+    justify-content: flex-start;
+  }
+  .content-container {
+    max-width: none;
+    flex-basis: 100%;
+  }
+  .skip-to-content {
+    display: none;
+  }
+  #back-to-top {
+    display: none;
+    visibility: hidden;
+  }
+}

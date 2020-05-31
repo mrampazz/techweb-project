@@ -175,8 +175,8 @@ switch ($_GET['page']) {
         $page = file_get_contents("../html/admin.html");
         $output = str_replace("{breadcrumb}", $breadcrumb, $output);
         $output = str_replace("{content}", $page, $output);
-        $output = str_replace("{currentPage}", "FAQ", $output);
-        $linkItems = Utils::getMenuLinks($links, 'FAQ');
+        $output = str_replace("{currentPage}", "Zona amministratori", $output);
+        $linkItems = Utils::getMenuLinks($links, 'Zona amministratori');
         $output = str_replace("{menu-links}", $linkItems, $output);
         $output = str_replace("{mobile-menu-links}", $linkItems, $output);
         include_once("../php/admin.php");
