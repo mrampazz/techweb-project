@@ -6,7 +6,6 @@ include_once("../../server/models/models.php");
 
 // define session variables 
 $_SESSION['login'] = false; //not logged by default
-$_SESSION['error-message'] = "";
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
@@ -41,7 +40,7 @@ function checkParameters($username, $password)
 		return false;
   }
   else if(!preg_match("/^[A-Za-z0-9]+(?:[_-][A-Za-z0-9]+)*$/",$username)){
-    $_SESSION['error-message'] .= " controlla l'username! Il campo non può essere composto da caratteri speciali. ";
+    $_SESSION['error-message'] .= " controlla l'username! Il campo non può essere composto da caratteri speciali o spazi. ";
 		return false;
   } 
 	if (empty($password)) {

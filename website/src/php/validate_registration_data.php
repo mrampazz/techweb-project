@@ -6,7 +6,6 @@ include_once("../../server/models/models.php");
 
 // define variables and set to empty values
 $_SESSION['registration'] = false; //not registered by default
-$_SESSION['error-message'] = "";
 $username = "";
 $name = "";
 $surname = "";
@@ -53,7 +52,7 @@ function checkParameters($username, $password, $confirmationPassword, $name, $su
 		return false;
   }
   else if(!preg_match("/^[A-Za-z0-9]+(?:[_-][A-Za-z0-9]+)*$/",$username)){
-    $_SESSION['error-message'] .= " controlla l'username! Il campo non può essere composto da caratteri speciali. ";
+    $_SESSION['error-message'] .= " controlla l'username! Il campo non può essere composto da caratteri speciali o spazi. ";
 		return false;
   } 
   if (empty($name)) {
