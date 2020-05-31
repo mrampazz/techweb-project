@@ -123,9 +123,9 @@ function validateFormRegistration() {
 }
 
 /*
-    input image validation
+    image format validation and preview
 */
-function validateImage() { 
+function validateImage($previewElemId) { 
     var fileInput =  document.getElementById('file-upload'); 
     var filePath = fileInput.value; 
 
@@ -145,7 +145,7 @@ function validateImage() {
                 var reader = new FileReader(); 
                 reader.onload = function(e) { 
                     document.getElementById( 
-                        'avatar').setAttribute("src",e.target.result);
+                        $previewElemId).setAttribute("src",e.target.result);
                 }; 
                         
                 reader.readAsDataURL(fileInput.files[0]); 

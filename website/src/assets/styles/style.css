@@ -534,9 +534,6 @@ body {
 .primary-bg {
   background-color: #eef4ff;
 }
-.secondary-bg {
-  background-color: white; /* this is temporary, will became #506180 (if needed) after layout integration */
-}
 
 /* COLOR SECTION */
 .primary-color {
@@ -766,6 +763,7 @@ input:focus ~ .highlight {
 #article-image {
   max-width: 15em;
   max-height: 20em;
+  margin-bottom: 1em;
 }
 
 #article-description {
@@ -978,7 +976,6 @@ input:focus ~ .highlight {
 
   #article-image {
     margin-right: 0em;
-    margin-bottom: 1em;
   }
 
   #article-description {

@@ -44,3 +44,4 @@ function validateFormAddArticle(){
     } 
     return true;
 }
+

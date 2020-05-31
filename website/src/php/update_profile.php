@@ -19,8 +19,8 @@ $user = User::getUser($userId);
 
 //check image upload
 $target_dir = "../assets/img/avatars/";
-if ($_FILES["avatar"]["name"] != null) {
-  $upload_result = Utils::uploadImage($target_dir, $_FILES["avatar"]);
+if ($_FILES["file-upload"]["name"] != null) {
+  $upload_result = Utils::uploadImage($target_dir, $_FILES["file-upload"]);
   if ($upload_result["success"] === false) {
     $_SESSION['error-message'] = $upload_result["error"];
   }
