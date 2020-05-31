@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <title>{currentPage}</title>
+    <meta name="author" content="Daniel James Tronca, Gabriel Ciulei, Andrea Polo, Marco Rampazzo"/>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <script type="text/javascript" src="https://kit.fontawesome.com/cfeebd4134.js"></script>
+    <script type="text/javascript" src="../scripts/formChecker.js"></script>
+    <link rel="stylesheet" href="../assets/styles/style.css"/>
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:200,400,500,600,700&amp;display=swap" rel="stylesheet" type="text/css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/>
+</head>
+<body>
+<header class="header-container">
+    <div class="title-container">
+        <h1>My very cool title</h1>
+        <div class="header-button-container">
+            <a class="header-button" href="{loginLink}">{LOGIN}</a>
+            <a class="header-button" href="{registrationLink}">{REGISTRAZIONE}</a>
+        </div>
+    </div>
+    <div class="breadcrumb-container">
+        <ul>
+            <li>Ti trovi in</li>
+            {breadcrumb}
+            <li>&#62;&#62; <a href="#">Home</a></li>
+        </ul>
+    </div>
+</header>
+
+<main class="main-container">
+    <nav class="menu-container">
+        {menu-links}
+    </nav>
+    <div class="content-container">
+        <div class="margin-left-2-5 margin-top-1 margin-right-2-5 flex-container">
+            <h1 class="font-size-2-5 font-weight-bold margin-bottom-0-5 inline_tex"> Inserimento telefono </h1>
+        </div>
+        <div class="insert_form">
+            <form onsubmit="return validateFormRegistration()">
+                <div class="group margin-top-3">
+                    <label for="marca" class="label-log-reg">Inserisci marca</label>
+                    <input type="text" name="marca" id="marca" tabindex="0"/>
+                    <span class="highlight"></span>
+                    <span class="bar"></span>
+                </div>
+                <div class="group">
+                    <label for="modello" class="label-log-reg">Inserisci modello</label>
+                    <input type="text" name="modello" id="modello" tabindex="0"/>
+                    <span class="highlight"></span>
+                    <span class="bar"></span>
+                </div>
+                <div class="group">
+                    <label for="prezzo" class="label-log-reg">Inserisci prezzo di lancio</label>
+                    <input type="text" name="prezzo" id="prezzo" tabindex="0"/>
+                    <span class="highlight"></span>
+                    <span class="bar"></span>
+                </div>
+                <div class="group">
+                    <label for="data_lancio" class="label-log-reg">Inserisci data di lancio</label>
+                    <input type="text" name="data_lancio" id="data_lancio" tabindex="0"/>
+                    <span class="highlight"></span>
+                    <span class="bar"></span>
+                </div>
+                <div class="group">
+                    <label for="amazon_link" class="label-log-reg">Inserisci link amazon per l'acquisto</label>
+                    <input type="text" name="amazon_link" id="amazon_link" tabindex="0"/>
+                    <span class="highlight"></span>
+                    <span class="bar"></span>
+                </div>
+                <div class="group">
+                    <label for="descrizione" class="product_description">Inserisci descrizione prodotto</label>
+                    <textarea id="descrizione" name="message" rows="7" cols="50" class="margin-top-0-5 secondary-bg description_text_area" tabindex="0"></textarea>
+                    <span class="highlight"></span>
+                    <span class="bar"></span>
+                </div>
+                <div class="flex-container flex-content-center margin-bottom-2">
+                    <input type="submit" value="Inserisci" class="form-button" tabindex="0"/>
+                </div>
+            </form>
+        </div>
+    </div>
+</main>
+
+<footer class="footer-container">
+    Untitled &copy; Un prodotto UNIPD. 2020. Tutti i diritti riservati.
+</footer>
+</body>
+</html>
