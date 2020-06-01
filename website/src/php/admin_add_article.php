@@ -1,5 +1,5 @@
 <?php
-    $output = str_replace('{edit}', 'Modifica', $output);
+    $output = str_replace('{edit}', 'Inserimento', $output);
     $output = str_replace('{brand}', '', $output);
     $output = str_replace('{model}', '', $output);
     $output = str_replace('{price}', '', $output);

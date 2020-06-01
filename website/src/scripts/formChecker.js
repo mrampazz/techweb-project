@@ -3,7 +3,7 @@ var RE_PASSWORD = /^(?=.*[0-9])(?=.*[a-zA-Z])[a-zA-Z0-9!.@#$%^&*]{6,16}$/;
 var RE_EMAIL = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
 var RE_NAME = /^[a-zA-Z ]{1,16}$/;
 var RE_USERNAME = /^[A-Za-z0-9]+(?:[_-][A-Za-z0-9]+)*$/;
-var RE_DATE = /^[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])$/;
+var RE_DATE = /^(0[1-9]|[12][0-9]|3[01])[- /.](0[1-9]|1[012])[- /.](19|20)\d\d$/;
 var RE_AMAZON = /^(?:https?:\/\/)?(?:www\.)?(?:amazon\..*\/.*|amzn\.com\/.*|amzn\.to\/.*)$/;
 
 var errorMessage = ""; //managed by createErrorMessage function
@@ -260,7 +260,7 @@ function validateFormAddArticle(){
         return false; 
     } 
     else if(!isValidDate(date.value)){
-        alert("La data inserita non è valida. Controllala e segui il formato yyyy-mm-dd.");
+        alert("La data inserita non è valida. Controllala e segui il formato dd-mm-yyyy.");
         return false;
     }
     if (amazonLink.value=="")                                 
@@ -283,7 +283,7 @@ function validateFormAddArticle(){
     return true;
 }
 
-// Validates that the input string is a valid date formatted as "yyyy-mm-dd"
+// Validates that the input string is a valid date formatted as "dd-mm-yyyy"
 function isValidDate(dateString)
 {
     // First check for the pattern
@@ -292,9 +292,9 @@ function isValidDate(dateString)
 
     // Parse the date parts to integers
     var parts = dateString.split("-");
-    var year = parseInt(parts[0], 10);
+    var day = parseInt(parts[0], 10);
     var month = parseInt(parts[1], 10);
-    var day = parseInt(parts[2], 10);
+    var year = parseInt(parts[2], 10);
 
     // Check the ranges of month and year
     if(year < 1000 || year > 3000 || month == 0 || month > 12)

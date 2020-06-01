@@ -202,7 +202,7 @@ switch ($_GET['page']) {
         $linkItems = Utils::getMenuLinks($links, null);
         $output = str_replace("{menu-links}", $linkItems, $output);
         $output = str_replace("{mobile-menu-links}", $linkItems, $output);
-        include_once("../php/admin-add-article.php");
+        include_once("../php/admin_add_article.php");
         break;
     case 'modify-article':
         noPermissions();
@@ -214,7 +214,7 @@ switch ($_GET['page']) {
         $linkItems = Utils::getMenuLinks($links, null);
         $output = str_replace("{menu-links}", $linkItems, $output);
         $output = str_replace("{mobile-menu-links}", $linkItems, $output);
-        include_once("../php/admin-modify-article.php");
+        include_once("../php/admin_modify_article.php");
         break;
     case 'no-permissions':
         $breadcrumb = "<li>&#62;&#62; <a href='" . SessionManager::BASE_URL . 'home' . "'>Home</a></li><li>&#62;&#62; <span>Zona Amministratore</span></li>";
