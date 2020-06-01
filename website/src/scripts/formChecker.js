@@ -13,7 +13,7 @@ var errorMessage = ""; //managed by createErrorMessage function
     check if the item respects the regular expression ==> return boolean
 */
 function validInput(item, reg_expr, isLogin){
-    if (item.value == "" || !reg_expr.test(item.value)){
+    if (item.value.trim() == "" || !reg_expr.test(item.value)){
         createErrorMessage(item,isLogin);
         return false;
     } 
