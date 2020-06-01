@@ -3,6 +3,8 @@ var RE_PASSWORD = /^(?=.*[0-9])(?=.*[a-zA-Z])[a-zA-Z0-9!.@#$%^&*]{6,16}$/;
 var RE_EMAIL = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
 var RE_NAME = /^[a-zA-Z ]{1,16}$/;
 var RE_USERNAME = /^[A-Za-z0-9]+(?:[_-][A-Za-z0-9]+)*$/;
+var RE_DATE = /^[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])$/;
+var RE_AMAZON = /^(?:https?:\/\/)?(?:www\.)?(?:amazon\..*\/.*|amzn\.com\/.*|amzn\.to\/.*)$/;
 
 var errorMessage = ""; //managed by createErrorMessage function
 
@@ -221,6 +223,93 @@ function createErrorMessage(item, isLogin){
     }
     
 }
+
+/*
+    admin form checker
+*/
+function validateFormAddArticle(){
+    var brand = document.getElementById("brand");
+    var model = document.getElementById("model");
+    var price = document.getElementById("price");
+    var date = document.getElementById("date");
+    var amazonLink = document.getElementById("amazon-link");
+    var description = document.getElementById("description");
+
+    if (brand.value=="")                                 
+    {
+        alert("Il campo \"marca\" non può essere vuoto."); 
+        brand.focus(); 
+        return false; 
+    } 
+    if (model.value=="")                                 
+    {
+        alert("Il campo \"modello\" non può essere vuoto."); 
+        model.focus(); 
+        return false; 
+    } 
+    if (price.value=="")                                 
+    {
+        alert("Il campo \"prezzo di lancio\" non può essere vuoto."); 
+        price.focus(); 
+        return false; 
+    } 
+    if (date.value=="")                                 
+    {
+        alert("Il campo \"data di lancio\" non può essere vuoto."); 
+        date.focus(); 
+        return false; 
+    } 
+    else if(!isValidDate(date.value)){
+        alert("La data inserita non è valida. Controllala e segui il formato yyyy-mm-dd.");
+        return false;
+    }
+    if (amazonLink.value=="")                                 
+    {
+        alert("Il campo \"link amazon\" non può essere vuoto."); 
+        amazonLink.focus(); 
+        return false; 
+    } 
+    else if(!RE_AMAZON.test(amazonLink.value)){
+        alert("Il link da te inserito non è un link Amazon valido."); 
+        amazonLink.focus(); 
+        return false; 
+    }
+    if (description.value=="")                                 
+    {
+        alert("Il campo \"descrizione prodotto\" non può essere vuoto."); 
+        description.focus(); 
+        return false; 
+    } 
+    return true;
+}
+
+// Validates that the input string is a valid date formatted as "yyyy-mm-dd"
+function isValidDate(dateString)
+{
+    // First check for the pattern
+    if(!RE_DATE.test(dateString))
+        return false;
+
+    // Parse the date parts to integers
+    var parts = dateString.split("-");
+    var year = parseInt(parts[0], 10);
+    var month = parseInt(parts[1], 10);
+    var day = parseInt(parts[2], 10);
+
+    // Check the ranges of month and year
+    if(year < 1000 || year > 3000 || month == 0 || month > 12)
+        return false;
+
+    var monthLength = [ 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 ];
+
+    // Adjust for leap years
+    if(year % 400 == 0 || (year % 100 != 0 && year % 4 == 0))
+        monthLength[1] = 29;
+
+    // Check the range of the day
+    return day > 0 && day <= monthLength[month - 1];
+};
+
 
 
   
