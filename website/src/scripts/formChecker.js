@@ -1,10 +1,11 @@
-
 var RE_PASSWORD = /^(?=.*[0-9])(?=.*[a-zA-Z])[a-zA-Z0-9!.@#$%^&*]{6,16}$/;
 var RE_EMAIL = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
 var RE_NAME = /^[a-zA-Z ]{1,16}$/;
 var RE_USERNAME = /^[A-Za-z0-9]+(?:[_-][A-Za-z0-9]+)*$/;
 var RE_DATE = /^(0[1-9]|[12][0-9]|3[01])[- /.](0[1-9]|1[012])[- /.](19|20)\d\d$/;
 var RE_AMAZON = /^(?:https?:\/\/)?(?:www\.)?(?:amazon\..*\/.*|amzn\.com\/.*|amzn\.to\/.*)$/;
+var RE_NUMERIC = /^\d+(\.\d{1,2})?$/;
+
 
 var errorMessage = ""; //managed by createErrorMessage function
 
@@ -235,25 +236,30 @@ function validateFormAddArticle(){
     var amazonLink = document.getElementById("amazon-link");
     var description = document.getElementById("description");
 
-    if (brand.value=="")                                 
+    if (brand.value.trim()=="")                                 
     {
         alert("Il campo \"marca\" non può essere vuoto."); 
         brand.focus(); 
         return false; 
     } 
-    if (model.value=="")                                 
+    if (model.value.trim()=="")                                 
     {
         alert("Il campo \"modello\" non può essere vuoto."); 
         model.focus(); 
         return false; 
     } 
-    if (price.value=="")                                 
+    if (price.value.trim()=="")                                 
     {
         alert("Il campo \"prezzo di lancio\" non può essere vuoto."); 
         price.focus(); 
         return false; 
     } 
-    if (date.value=="")                                 
+    else if(!RE_NUMERIC.test(price.value)){
+        alert("Il campo \"prezzo di lancio\" deve contenere un valore numerico."); 
+        price.focus(); 
+        return false; 
+    }
+    if (date.value.trim()=="")                                 
     {
         alert("Il campo \"data di lancio\" non può essere vuoto."); 
         date.focus(); 
@@ -261,9 +267,10 @@ function validateFormAddArticle(){
     } 
     else if(!isValidDate(date.value)){
         alert("La data inserita non è valida. Controllala e segui il formato dd-mm-yyyy.");
+        date.focus();
         return false;
     }
-    if (amazonLink.value=="")                                 
+    if (amazonLink.value.trim()=="")                                 
     {
         alert("Il campo \"link amazon\" non può essere vuoto."); 
         amazonLink.focus(); 
@@ -274,7 +281,7 @@ function validateFormAddArticle(){
         amazonLink.focus(); 
         return false; 
     }
-    if (description.value=="")                                 
+    if (description.value.trim()=="")                                 
     {
         alert("Il campo \"descrizione prodotto\" non può essere vuoto."); 
         description.focus(); 
