@@ -7,20 +7,20 @@
             <h1 class="secondary-color">{article-name}</h1>
             <h2 class="font-size-1-125"><i class="fa fa-tag" aria-hidden="true"></i> Prezzo di lancio: {article-price}&euro; </h2>
             <h2 class="font-size-1-125"><i class="fa fa-calendar margin-bottom-1" aria-hidden="true"></i> Data di lancio: {article-release-date} </h2>
-            <p class="text-align-justify">
-                {article-description}
-            </p>
+            <p>{article-description}</p>
             <div class="margin-top-1">
                 <i class="fa fa-shopping-cart" aria-hidden="true"></i>
                 <a href="article-purchase-url"> Vuoi compralo su Amazon? CLICCA QUI!</a>
             </div>
         </div>
     </div>
-    <h1 class="secondary-color margin-top-1">La voce degli utenti</h1>
-    <h2 class="font-size-1-125"><i class="fa fa-thumbs-up margin-top-1" aria-hidden="true"></i> Consigliato da: {article-likes} utenti </h2>
-    <h2 class="font-size-1-125"><i class="fa fa-thumbs-down margin-bottom-1" aria-hidden="true"></i> Sconsigliato da: {article-dislikes} utenti </h2>
-    <p class="margin-top-1 margin-bottom-0-5">E tu cosa ne pensi di questo prodotto?</p>
-    <a href="login-url" class="{login-link-visible}">Accedi e condividi la tua opinione!</a>
+    <div class="text-align-center">
+        <h1 class="secondary-color margin-top-1">La voce degli utenti</h1>
+        <h2 class="font-size-1-125"><i class="fa fa-thumbs-up margin-top-1" aria-hidden="true"></i> Consigliato da: {article-likes} utenti </h2>
+        <h2 class="font-size-1-125"><i class="fa fa-thumbs-down margin-bottom-1" aria-hidden="true"></i> Sconsigliato da: {article-dislikes} utenti </h2>
+        <p class="margin-top-1 margin-bottom-0-5">E tu cosa ne pensi di questo prodotto?</p>
+        <a href="login-url" class="{login-link-visible}">Accedi e condividi la tua opinione!</a>
+    </div>
     <div class="{comment-form-visible}">
         <form method="post" action="../php/add_vote.php">
             <div class="flex-container flex-content-center margin-top-1 margin-bottom-1"> 
@@ -30,7 +30,7 @@
                 </button>
                 <button aria-label="Sconsiglia questo prodotto" name="vote" type="submit" value="dislike" class="custom-thumbs-down">
                     <i id="thumbs-down" class="far fa-thumbs-down {dislike-selected}"></i>
-                    <span class="font-size-0-75 flex-container {dislike-selected}">Lo consiglio</span>
+                    <span class="font-size-0-75 flex-container {dislike-selected}">Lo sconsiglio</span>
                 </button>
                 <input type="hidden" value="{article-id}" name="articleID"/>
             </div>

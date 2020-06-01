@@ -23,7 +23,7 @@ if (empty($content)) {
 // SAVE COMMENT
 $userId = SessionManager::getUserId();
 
-Comment::createComment($userId,$articleId,htmlentities($content, ENT_QUOTES)); 
+Comment::createComment($userId,$articleId,$content); 
 
 header("Location: ".SessionManager::BASE_URL."article"."&articleId=".$articleId);
 ?>
