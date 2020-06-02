@@ -4,7 +4,6 @@ include_once("../../../database/db_manager.php");
 include_once("../../server/utils.php");
 include_once("../../server/models/models.php");
 
-// define session variables 
 $_SESSION['login'] = false; //not logged by default
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -17,11 +16,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   {
     $man = DBManager::getInstance();
     $log = $man->login($username, $password);
-    if ($log !== false) // se loggato
-    {
+    if ($log !== false) { // if logged
       $_SESSION['login'] = true;
       userLoggedCorrectly(); 
-    } else {
+    } 
+    else {
       $_SESSION['error-message'] = " autenticazione fallita.";
       header("Location: ../php/layout.php?page=login");
     }
@@ -33,8 +32,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 }
 
 // check data format -> return true if correct. Otherwise, return false and set errormessage
-function checkParameters($username, $password)
-{
+function checkParameters($username, $password) {
 	if (empty($username)) {
 	  $_SESSION['error-message'] .= " l'username è richiesto! ";
 		return false;
@@ -50,8 +48,7 @@ function checkParameters($username, $password)
 	return true;
 }
 
-function userLoggedCorrectly()
-{
+function userLoggedCorrectly() {
   // if the user comes from the link of the article redirect to the page
   if (isset($_GET['articleId'])){
     header("Location: ".SessionManager::BASE_URL."article"."&articleId=".$_GET['articleId']);

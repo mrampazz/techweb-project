@@ -29,12 +29,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   {
     $man = DBManager::getInstance();
     $reg = $man->register($username, $password, $name, $surname, $email);
-    if ($reg!=false) //if registered correctly
-    {
+    if ($reg!=false) { //if registered correctly
       $_SESSION['registration'] = true;
       SessionManager::startSessionForUser($reg, $username, false);
       userRegisteredCorrectly();
-    } else {
+    } 
+    else {
       $_SESSION['error-message'] = "la registrazione non ha avuto successo.";
     }
   }
@@ -45,8 +45,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 }
 
 // check data format -> return true if correct. Otherwise, return false and set errormessage
-function checkParameters($username, $password, $confirmationPassword, $name, $surname, $email)
-{
+function checkParameters($username, $password, $confirmationPassword, $name, $surname, $email) {
 	if (empty($username)) {
 	  $_SESSION['error-message'] .= " l'username è richiesto! ";
 		return false;
@@ -100,8 +99,7 @@ function checkParameters($username, $password, $confirmationPassword, $name, $su
 	return true;
 }
 
-function userRegisteredCorrectly()
-{
+function userRegisteredCorrectly() {
   // redirect to home and save session data
   header("Location: ".SessionManager::BASE_URL."home");
 }

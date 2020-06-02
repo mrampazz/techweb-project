@@ -7,4 +7,5 @@
     $output = str_replace("{desc}", "", $output);
     $output = str_replace("{date}", "", $output);
     $output = str_replace("article-image-url", "../assets/img/articles/default.png", $output);
+    $output = str_replace("validate-form-url", "../php/validate_admin_form.php", $output);
 ?>

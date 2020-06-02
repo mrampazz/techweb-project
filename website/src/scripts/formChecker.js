@@ -259,7 +259,7 @@ function validateFormAddArticle(){
         return false; 
     } 
     else if(!RE_NUMERIC.test(price.value)){
-        alert("Il campo \"prezzo di lancio\" deve contenere un valore numerico."); 
+        alert("Il campo \"prezzo di lancio\" deve contenere un valore numerico valido."); 
         price.focus(); 
         return false; 
     }

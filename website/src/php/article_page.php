@@ -18,7 +18,7 @@ $output = str_replace("article-image-url", "../assets/img/articles/".$articleIma
 $output = str_replace("{article-price}", $articlePrice,$output);
 $output = str_replace("{article-description}", $articleDescription,$output);
 $output = str_replace("{article-release-date}", $formattedDate, $output);
-$output = str_replace("article-purchase-url", $purchaseLink, $output);
+$output = str_replace("article-purchase-url", (substr($purchaseLink, 0, 4) != "http") ? "//".$purchaseLink : $purchaseLink, $output);
 
 
 //--LIKES--
