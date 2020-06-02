@@ -166,6 +166,10 @@ function validateComment(){
     return true;
 }
 
+function askConfirmationDeleteComment(){
+    return confirm("Sei sicuro di voler eliminare questo commento?");
+}
+
 /*
     check if the confirmation password and the password are the same
 */
