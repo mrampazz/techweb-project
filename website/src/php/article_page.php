@@ -78,7 +78,7 @@ if (!empty($comments)){
   $output = str_replace("{comment-list}", getCommentList($comments), $output);
 }
 else{
-  $output = str_replace("{comment-list}", "<p class=\"font-size-0-75\"> Nessun commento presente per questo prodotto. </p>", $output);
+  $output = str_replace("{comment-list}", "<p class=\"font-size-0-75 text-align-center\"> Nessun commento presente per questo prodotto. </p>", $output);
 }
 
 
