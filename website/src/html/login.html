@@ -1,11 +1,6 @@
 <div class="log-reg-container">
     <h1 class="flex-container flex-content-center secondary-color margin-top-1">Login</h1>
-    <div class="margin-top-2 hidden">
-        <div class="error-message-box">
-            <p class="font-weight-bold">Credenziali invalide</p>
-            <p>Controlla le tue credenziali e riprova a fare l’accesso: {error-message}</p>
-        </div>
-    </div>
+    {message-box}
     <form action="validate-login-url" method="post" onsubmit="return validateFormLogin()">
         <div class="group margin-top-3">     
             <label for="username" class="form-label">Username</label>

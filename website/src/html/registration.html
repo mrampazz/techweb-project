@@ -1,11 +1,6 @@
 <div class="log-reg-container">
     <h1 class="flex-container flex-content-center secondary-color margin-top-1">Registrazione</h1>
-    <div class="margin-top-2 hidden">
-        <div class="error-message-box">
-            <p class="font-weight-bold">Credenziali invalide</p>
-            <p>Controlla le tue credenziali e riprova ad effettuare la registrazione: {error-message} </p>
-        </div>
-    </div>
+    {message-box}
     <form action="../php/validate_registration_data.php" method="post" onsubmit="return validateFormRegistration()">
         <div class="group margin-top-3">     
             <label for="name" class="form-label">Nome</label>

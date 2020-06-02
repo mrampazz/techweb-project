@@ -1,7 +1,13 @@
 <?php
 if(isset($_SESSION['error-message']) && isset($_SESSION['login']) && !$_SESSION['login']) {
-    $output = str_replace("<div class=\"margin-top-2 hidden\">","<div class=\"margin-top-2\" tabindex=\"0\">",$output);
-    $output = str_replace("{error-message}",$_SESSION['error-message'],$output);
+    $page = file_get_contents("../html/message-box.html");
+    $output = str_replace("{message-box}",$page,$output);
+    $output = str_replace("{message-box-class}","error-message-box",$output);
+    $output = str_replace("{message-box-title}","Credenziali invalide",$output);
+    $output = str_replace("{message-box-text}","Controlla le tue credenziali e riprova a fare l’accesso: ".$_SESSION['error-message'],$output);
+}
+else{
+    $output = str_replace("{message-box}","",$output);
 }
 /* check if login session variable is set
     true -> re-assign value (prevents the user from re-entering the username)

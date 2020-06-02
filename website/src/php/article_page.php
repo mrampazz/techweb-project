@@ -57,13 +57,33 @@ switch($check) {
 
 
 //--COMMENTS--
-//check if an error has occurred
+//checks whether a message (error or confirmation) should be displayed
 if(isset($_SESSION['error-message']) && isset($_SESSION['login']) && !$_SESSION['login']) {
-  $output = str_replace("<div class=\"margin-top-2 hidden\">","<div class=\"margin-top-2\" tabindex=\"0\">",$output);
-  $output = str_replace("{error-message}",$_SESSION['error-message'],$output);
+  $page = file_get_contents("../html/message-box.html");
+  $output = str_replace("{message-box}",$page,$output);
+  $output = str_replace("{message-box-class}","error-message-box",$output);
+  $output = str_replace("{message-box-title}","Errore caricamento commento",$output);
+  $output = str_replace("{message-box-text}","Si è verificato un problema durante l'invio del tuo commento: ".$_SESSION['error-message'],$output);
   unset($_SESSION['error-message']);
 }
-
+else if(isset($_SESSION['comment-deleted'])){
+  $page = file_get_contents("../html/message-box.html");
+  $output = str_replace("{message-box}",$page,$output);
+  if ($_SESSION['comment-deleted'] == true){
+    $output = str_replace("{message-box-class}","success-message-box",$output);
+    $output = str_replace("{message-box-title}","Commento cancellato!",$output);
+    $output = str_replace("{message-box-text}","Il commento da te selezionato è stato correttamente rimosso.",$output);
+  }
+  else{
+    $output = str_replace("{message-box-class}","error-message-box",$output);
+    $output = str_replace("{message-box-title}","Errore eliminazione commento",$output);
+    $output = str_replace("{message-box-text}","Ci dispiace, si è verificato un errore durante l'eliminazione del commento.",$output);
+  }
+  unset($_SESSION['comment-deleted']);
+}
+else{
+  $output = str_replace("{message-box}","",$output);
+}
 //check if a previously written comment needs to be restored
 if (isset($_SESSION['comment'])){
   $output = str_replace("{comment-input}", $_SESSION['comment'], $output);

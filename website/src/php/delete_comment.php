@@ -7,7 +7,7 @@ $dbMan = DBManager::getInstance();
 
 $commentUserId = Comment::getUserIdFor($_POST['comment-id'])[0]->user_id;
 if (SessionManager::getUserId() == $commentUserId || SessionManager::userCanPublish()){
-    $dbMan->deleteObject($_POST['comment-id'], "Comment");
+    $_SESSION['comment-deleted'] = $dbMan->deleteObject($_POST['comment-id'], "Comment");
     header("Location: ".SessionManager::BASE_URL."article"."&articleId=".$_GET["articleId"]); 
 }
 else{

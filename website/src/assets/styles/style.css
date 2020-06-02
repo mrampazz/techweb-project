@@ -373,9 +373,12 @@ body {
   color: #506180;
 }
 .custom-thumbs-up:hover,
-.custom-thumbs-down:hover,
+.custom-thumbs-down:hover{
+  color: darkslateblue;
+}
 .thumb-selected {
-  color: lightcoral;
+  color: darkslateblue;
+  font-weight: bold;
 }
 
 /* GENERAL SECTION */

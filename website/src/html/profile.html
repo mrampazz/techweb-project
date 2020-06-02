@@ -1,11 +1,6 @@
 <div id="profile-container">
     <img id="avatar" class="margin-top-1" src="avatar-url" alt="La tua immagine profilo" tabindex="0"/>
-    <div class="margin-top-2 hidden">
-        <div class="{message-box-class}">
-            <p class="font-weight-bold">{message-box-title}</p>
-            <p>{message-box-text}</p>
-        </div>
-    </div>
+    {message-box}
     <form class="margin-top-1" action="../php/update_profile.php" method="post" onsubmit="return validateFormProfile()" enctype="multipart/form-data">
         <div id="file-upload-container">
             <label for="file-upload" class="margin-bottom-0-5">Cambia immagine profilo:</label>

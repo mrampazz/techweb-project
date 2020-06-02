@@ -35,12 +35,7 @@
                 <input type="hidden" value="{article-id}" name="articleID"/>
             </div>
         </form>
-        <div class="margin-top-2 hidden">
-            <div class="error-message-box">
-                <p class="font-weight-bold">Errore caricamento commento</p>
-                <p>Si è verificato un problema durante l'invio del tuo commento: {error-message}</p>
-            </div>
-        </div>
+        {message-box}
         <form action="../php/validate_comment.php" method="post" onsubmit="return validateComment()">
             <div id="comment-form-container"> 
                 <label for="comment-input" class="margin-top-1">Facci sapere qualcosa di più, inserisci qui il tuo commento!</label> 
