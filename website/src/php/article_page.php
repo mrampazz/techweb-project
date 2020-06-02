@@ -63,6 +63,7 @@ if(isset($_SESSION['error-message']) && isset($_SESSION['login']) && !$_SESSION[
   $output = str_replace("{error-message}",$_SESSION['error-message'],$output);
   unset($_SESSION['error-message']);
 }
+
 //check if a previously written comment needs to be restored
 if (isset($_SESSION['comment'])){
   $output = str_replace("{comment-input}", $_SESSION['comment'], $output);

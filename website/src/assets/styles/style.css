@@ -794,6 +794,15 @@ input:focus ~ .highlight {
   margin-bottom: 2em;
 }
 
+/* comment/comment-deletable */
+
+.comment-outer-container{
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 1;
+  border-bottom: .05em solid #cccccc
+}
+
 .comment-content-container{
   margin-left: 0.5em;
   min-width: 0em;
@@ -808,6 +817,27 @@ input:focus ~ .highlight {
   object-fit: cover;
   border-radius: 50%;
   border: 0.125em solid white;
+}
+
+.comment-delete-btn-container{
+  display: flex;
+  align-items: center;
+}
+
+.delete-comment-btn{
+  width: 10em;
+  height: 2.5em;
+  border-radius: 0.5em;
+  -webkit-border-radius: 0.5em;
+  -moz-border-radius: 0.5em;
+  text-decoration: none;
+  background-color: #d80404;
+  color: white;
+  font-weight: 700;
+  opacity: 0.85;
+}
+.delete-comment-btn:hover {
+  opacity: 1;
 }
 
 /* ADMIN */
