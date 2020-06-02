@@ -1,5 +1,4 @@
 <?php
-$dbMan = DBManager::getInstance();
 $articleId = $_GET["articleId"];
 
 //--ARTICLE INFO--
@@ -121,17 +120,26 @@ function getCommentList($comments) {
   for ($i = 0; $i < count($comments); $i++) {
     $commentContent = $comments[$i]->content;
     $userFullName = $comments[$i]->userFullName;
-    $userId = $comments[$i]->userId;
-
-    $userAvatar = Comment::getAvatar($userId);
+    $commentUserId = $comments[$i]->userId;
+    $userAvatar = Comment::getAvatar($commentUserId);
     $userAvatarUrl = $userAvatar[0]->avatar_url;
-    
-    $comment = file_get_contents("../html/comment.html");
+
+    if ($commentUserId == SessionManager::getUserId() || SessionManager::userCanPublish()){
+      SessionManager::userCanPublish() ? $isPersonalComment = false : $isPersonalComment = true;
+      $comment = file_get_contents("../html/comment-deletable.html");
+      $comment = str_replace("delete-comment-url", "../php/delete_comment.php?articleId=".$_GET["articleId"], $comment);
+      $comment = str_replace("{comment-id}", $comments[$i]->id, $comment);
+    }
+    else{
+      $isPersonalComment = false;
+      $comment = file_get_contents("../html/comment.html"); 
+    }
     $comment = str_replace("{user-full-name-comment}", $userFullName, $comment);
     $comment = str_replace("{content-comment}", $commentContent, $comment);
     $comment = str_replace("avatar-url-comment", "../assets/img/avatars/".$userAvatarUrl, $comment);
 
-    array_push($commentList, $comment);
+    //shows personal comments first if it is not admin
+    $isPersonalComment ? array_unshift($commentList, $comment) : array_push($commentList, $comment);
   }
   return implode($commentList);
 }

@@ -1,0 +1,13 @@
+<div class="flex-container flex-direction-row margin-bottom-1">
+    <img class="avatar-comment" src="avatar-url-comment" alt=""/>
+    <div class="comment-content-container">
+        <p class="font-weight-bold text-align-left">{user-full-name-comment}</p>
+        <p>{content-comment}</p>
+    </div>
+</div>
+<div>
+    <form method="post" action="delete-comment-url">
+        <input type="hidden" name="comment-id" value="{comment-id}"/>
+        <input type="submit" value="Elimina commento"/>
+    </form>
+</div>
