@@ -13,9 +13,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $brand = Utils::validateInput($_POST["brand"]);
     $model = Utils::validateInput($_POST["model"]);
     $price = Utils::validateInput($_POST["price"]);
-    $date = Utils::validateInput($_POST["date"]);
     $amazonLink = Utils::validateInput($_POST["amazon-link"]);
     $description = Utils::validateInput($_POST["description"]);
+    $date = Utils::validateInput($_POST["date"]);
     $image = validateImage();
 
     if (checkParameters($brand, $model, $price, $date, $amazonLink, $description)) { // if true parameters are in the correct format -> try to login
@@ -23,7 +23,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $article->brand = $brand;
         $article->model = $model;
         $article->initialPrice = $price;
-        $article->launchDate = $date;
+        $article->launchDate = validateDate($date);
         $article->link = $amazonLink;
         $article->content = $description;
         $article->image = $image;
@@ -101,5 +101,11 @@ function validateImage(){
         }
     }
     return "default.png";
+}
+
+//from dd-mm-yyyy to yyyy-mm-dd
+function validateDate($date){
+    $splittedDate = explode('-',$date);
+    return Utils::createDate($splittedDate[0],$splittedDate[1],$splittedDate[2]);
 }
 ?>
