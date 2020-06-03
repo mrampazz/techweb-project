@@ -6,8 +6,19 @@ if (isset($_GET['id'])) {
         $id = $_GET['id'];
     }
 }
-$article = Utils::getArticleFromId($id);
+$article = Article::fetch($id);
 if ($article) {
+    if(isset($_SESSION['error-message'])) {
+        $page = file_get_contents("../html/message-box.html");
+        $output = str_replace("{message-box}",$page,$output);
+        $output = str_replace("{message-box-class}","error-message-box",$output);
+        $output = str_replace("{message-box-title}","Errore modifica telefono",$output);
+        $output = str_replace("{message-box-text}",$_SESSION['error-message'],$output);
+        unset($_SESSION['error-message']);
+    }
+    else{
+        $output = str_replace("{message-box}","",$output);
+    }
     $output = str_replace("{edit}", "Modifica", $output);
     $output = str_replace("{brand}", $article->brand, $output);
     $output = str_replace("{model}", $article->model, $output);

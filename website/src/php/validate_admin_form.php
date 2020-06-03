@@ -10,15 +10,16 @@ if (!SessionManager::userCanPublish()){
 }
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $isUpdateMode = isset($_GET['id']);
     $brand = Utils::validateInput($_POST["brand"]);
     $model = Utils::validateInput($_POST["model"]);
     $price = Utils::validateInput($_POST["price"]);
     $amazonLink = Utils::validateInput($_POST["amazon-link"]);
     $description = Utils::validateInput($_POST["description"]);
     $date = Utils::validateInput($_POST["date"]);
-    $image = validateImage();
+    $image = validateImage($isUpdateMode);
 
-    if (checkParameters($brand, $model, $price, $date, $amazonLink, $description)) { // if true parameters are in the correct format -> try to login
+    if (checkParameters($brand, $model, $price, $date, $amazonLink, $description) && !empty($image)) { // if true parameters are in the correct format -> try to login
         $article = new Article();
         $article->brand = $brand;
         $article->model = $model;
@@ -28,77 +29,91 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $article->content = $description;
         $article->image = $image;
 
-        if (!isset($_GET['id'])) {
-            // create new
-            $article->saveInDB();
-            header("Location: ".SessionManager::BASE_URL."admin");
-        } 
-        else {
+        if ($isUpdateMode) {
             // update
             $article->id = $_GET['id'];
-            $article->updateInDB();
-            header("Location: ".SessionManager::BASE_URL."modify-article&edit=true&id=".$_GET['id']);
+            $_SESSION['updated-correctly'] = $article->updateInDB();
+        } 
+        else {
+            // create new
+            $_SESSION['inserted-correctly'] = $article->saveInDB();
         }
+    }
+    if (!empty($_SESSION['updated-correctly']) || !empty($_SESSION['inserted-correctly'])){
+        header("Location: ".SessionManager::BASE_URL."admin");
+        return;
+    }
+    if ($isUpdateMode){
+        header("Location: ".SessionManager::BASE_URL."modify-article&edit=true&id=".$_GET['id']);
+        return;
     }
     else{
         header("Location: ".SessionManager::BASE_URL."add-article");
+        return;
     }
 }
 
 // check data format -> return true if correct. Otherwise, return false and set errormessage
 function checkParameters($brand, $model, $price, $date, $amazonLink, $description){
     if (empty($brand)) {
-        $_SESSION['error-message'] .= " il campo \"marca\" non può essere vuoto.";
+        $_SESSION['error-message'] = "Il campo \"marca\" non può essere vuoto.";
         return false;
     }
     if (empty($model)) {
-        $_SESSION['error-message'] .= " il campo \"modello\" non può essere vuoto.";
+        $_SESSION['error-message'] = "Il campo \"modello\" non può essere vuoto.";
         return false;
     }
     if (empty($price)) {
-        $_SESSION['error-message'] .= " il campo \"prezzo di lancio\" non può essere vuoto.";
+        $_SESSION['error-message'] = "Il campo \"prezzo di lancio\" non può essere vuoto.";
         return false;
     } 
     else if(!preg_match("/^\d+(\.\d{1,2})?$/",$price)){
-        $_SESSION['error-message'] .= " controlla il prezzo di lancio! Il campo deve contenere un valore numerico valido.";
+        $_SESSION['error-message'] = "Controlla il prezzo di lancio! Il campo deve contenere un valore numerico valido.";
         return false;
     }
     if (empty($date)) {
-        $_SESSION['error-message'] .= " il campo \"data di lancio\" non può essere vuoto.";
+        $_SESSION['error-message'] = "Il campo \"data di lancio\" non può essere vuoto.";
         return false;
     }
     else if(!preg_match("/^(0[1-9]|[12][0-9]|3[01])[- \/.](0[1-9]|1[012])[- \/.](19|20)\d\d$/",$date)){
-        $_SESSION['error-message'] .= " controlla la data di lancio!. La data inserita non risulta valida o non segue il formato dd-mm-yyyy.";
+        $_SESSION['error-message'] = "Controlla la data di lancio! La data inserita non risulta valida o non segue il formato dd-mm-yyyy.";
         return false;
     }
     if (empty($amazonLink)) {
-        $_SESSION['error-message'] .= " il campo \"link amazon\" non può essere vuoto.";
+        $_SESSION['error-message'] = "Il campo \"link amazon\" non può essere vuoto.";
         return false;
     }
     else if(!preg_match("/^(?:https?:\/\/)?(?:www\.)?(?:amazon\..*\/.*|amzn\.com\/.*|amzn\.to\/.*)$/",$amazonLink)){
-        $_SESSION['error-message'] .= " controlla il link! Il link da te inserito non è un link Amazon valido.";
+        $_SESSION['error-message'] = "Controlla il link! Il link da te inserito non è un link Amazon valido.";
         return false;
     }
 
     if (empty($description)) {
-        $_SESSION['error-message'] .= " il campo \"descrizione\" non può essere vuoto. ";
+        $_SESSION['error-message'] = " Il campo \"descrizione\" non può essere vuoto. ";
         return false;
     }
 
     return true;
 }
 
-function validateImage(){
+function validateImage($isUpdateMode){
     //check image upload
     $target_dir = "../assets/img/articles/";
     if ($_FILES["file-upload"]["name"] != null) {
         $upload_result = Utils::uploadImage($target_dir, $_FILES["file-upload"]);
         if ($upload_result["success"] === false) {
             $_SESSION['error-message'] = $upload_result["error"];
+            return false;
         }
         else{
             return $upload_result["url"];
         }
+    }
+    else if ($isUpdateMode){
+        $article = Article::fetch($_GET['id']);
+        $image = $article->image;
+        if(!empty($image))
+            return $image;
     }
     return "default.png";
 }
