@@ -17,18 +17,18 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $amazonLink = Utils::validateInput($_POST["amazon-link"]);
     $description = Utils::validateInput($_POST["description"]);
     $date = Utils::validateInput($_POST["date"]);
-    $image = validateImage($isUpdateMode);
+    setSessionVariables();
 
-    if (checkParameters($brand, $model, $price, $date, $amazonLink, $description) && !empty($image)) { // if true parameters are in the correct format -> try to login
+    if (checkParameters($brand, $model, $price, $date, $amazonLink, $description, $image, $isUpdateMode)) { // if true parameters are in the correct format -> try to login
         $article = new Article();
         $article->brand = $brand;
         $article->model = $model;
         $article->initialPrice = $price;
         $article->launchDate = validateDate($date);
         $article->link = $amazonLink;
-        $article->content = $description;
+        $article->content = $description;   
         $article->image = $image;
-
+        
         if ($isUpdateMode) {
             // update
             $article->id = $_GET['id'];
@@ -39,22 +39,32 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $_SESSION['inserted-correctly'] = $article->saveInDB();
         }
     }
+    //success! redirect
     if (!empty($_SESSION['updated-correctly']) || !empty($_SESSION['inserted-correctly'])){
+        Utils::unsetAll(array('brand','model','price','date','amazon-link','description'));
         header("Location: ".SessionManager::BASE_URL."admin");
         return;
     }
+
+    //an error has occurred, redirect
     if ($isUpdateMode){
         header("Location: ".SessionManager::BASE_URL."modify-article&edit=true&id=".$_GET['id']);
-        return;
     }
     else{
         header("Location: ".SessionManager::BASE_URL."add-article");
-        return;
     }
 }
 
 // check data format -> return true if correct. Otherwise, return false and set errormessage
-function checkParameters($brand, $model, $price, $date, $amazonLink, $description){
+function checkParameters($brand, $model, $price, $date, $amazonLink, $description, &$image, $isUpdateMode){
+
+    //first check image validity
+    $tempImg = validateImage($isUpdateMode);
+    if (is_null($tempImg))
+        return false;
+    else
+        $image = $tempImg;
+
     if (empty($brand)) {
         $_SESSION['error-message'] = "Il campo \"marca\" non può essere vuoto.";
         return false;
@@ -103,7 +113,7 @@ function validateImage($isUpdateMode){
         $upload_result = Utils::uploadImage($target_dir, $_FILES["file-upload"]);
         if ($upload_result["success"] === false) {
             $_SESSION['error-message'] = $upload_result["error"];
-            return false;
+            return null;
         }
         else{
             return $upload_result["url"];
@@ -112,8 +122,9 @@ function validateImage($isUpdateMode){
     else if ($isUpdateMode){
         $article = Article::fetch($_GET['id']);
         $image = $article->image;
-        if(!empty($image))
+        if(!empty($image)){
             return $image;
+        }
     }
     return "default.png";
 }
@@ -123,4 +134,14 @@ function validateDate($date){
     $splittedDate = explode('-',$date);
     return Utils::createDate($splittedDate[0],$splittedDate[1],$splittedDate[2]);
 }
+
+function setSessionVariables(){
+    $_SESSION['brand'] = Utils::validateInput($_POST["brand"]);
+    $_SESSION['model'] = Utils::validateInput($_POST["model"]);
+    $_SESSION['price'] = Utils::validateInput($_POST["price"]);
+    $_SESSION['amazon-link'] = Utils::validateInput($_POST["amazon-link"]);
+    $_SESSION['description'] = Utils::validateInput($_POST["description"]);
+    $_SESSION['date'] = Utils::validateInput($_POST["date"]);
+}
+
 ?>
