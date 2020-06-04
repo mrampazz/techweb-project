@@ -1,15 +1,14 @@
 <?php
-$dbMan = DBManager::getInstance();
 $articleId = $_GET["articleId"];
 
 //--ARTICLE INFO--
 $articleInfo = loadInfo($articleId);
-$articleFullName = $articleInfo[0]." ".$articleInfo[1];
-$articleImageUrl = $articleInfo[2];
-$articlePrice = $articleInfo[3];
-$releaseDate = $articleInfo[4];
-$articleDescription = $articleInfo[5];
-$purchaseLink = $articleInfo[6];
+$articleFullName = $articleInfo["brand"]." ".$articleInfo["model"];
+$articleImageUrl = $articleInfo["urlImage"];
+$articlePrice = $articleInfo["initialPrice"];
+$releaseDate = $articleInfo["launchDate"];
+$articleDescription = $articleInfo["description"];
+$purchaseLink = $articleInfo["purchaseLink"];
 $formattedDate = date("d-m-Y", strtotime($releaseDate));
 
 $output = str_replace("{article-id}",$articleId,$output);
@@ -19,7 +18,7 @@ $output = str_replace("article-image-url", "../assets/img/articles/".$articleIma
 $output = str_replace("{article-price}", $articlePrice,$output);
 $output = str_replace("{article-description}", $articleDescription,$output);
 $output = str_replace("{article-release-date}", $formattedDate, $output);
-$output = str_replace("article-purchase-url", $purchaseLink, $output);
+$output = str_replace("article-purchase-url", (substr($purchaseLink, 0, 4) != "http") ? "//".$purchaseLink : $purchaseLink, $output);
 
 
 //--LIKES--
@@ -34,7 +33,7 @@ $output = str_replace("{article-dislikes}", ($negativeVotes==null) ? "0" : $nega
 if (!SessionManager::isUserLogged()){
   $output = str_replace("{comment-form-visible}", "hidden", $output);
   $output = str_replace("{login-link-visible}", "", $output);
-  $output = str_replace("login-url", "../php/login.php?articleId=$articleId", $output);
+  $output = str_replace("login-url", SessionManager::BASE_URL."login"."&articleId=".$articleId, $output);
 }
 else{
   $output = str_replace("{comment-form-visible}", "", $output);
@@ -58,11 +57,32 @@ switch($check) {
 
 
 //--COMMENTS--
-//check if an error has occurred
+//checks whether a message (error or confirmation) should be displayed
 if(isset($_SESSION['error-message']) && isset($_SESSION['login']) && !$_SESSION['login']) {
-  $output = str_replace("<div class=\"margin-top-2 hidden\">","<div class=\"margin-top-2\" tabindex=\"0\">",$output);
-  $output = str_replace("{error-message}",$_SESSION['error-message'],$output);
+  $page = file_get_contents("../html/message-box.html");
+  $output = str_replace("{message-box}",$page,$output);
+  $output = str_replace("{message-box-class}","error-message-box",$output);
+  $output = str_replace("{message-box-title}","Errore caricamento commento",$output);
+  $output = str_replace("{message-box-text}","Si è verificato un problema durante l'invio del tuo commento: ".$_SESSION['error-message'],$output);
   unset($_SESSION['error-message']);
+}
+else if(isset($_SESSION['comment-deleted'])){
+  $page = file_get_contents("../html/message-box.html");
+  $output = str_replace("{message-box}",$page,$output);
+  if ($_SESSION['comment-deleted'] == true){
+    $output = str_replace("{message-box-class}","success-message-box",$output);
+    $output = str_replace("{message-box-title}","Commento cancellato!",$output);
+    $output = str_replace("{message-box-text}","Il commento da te selezionato è stato correttamente rimosso.",$output);
+  }
+  else{
+    $output = str_replace("{message-box-class}","error-message-box",$output);
+    $output = str_replace("{message-box-title}","Errore eliminazione commento",$output);
+    $output = str_replace("{message-box-text}","Ci dispiace, si è verificato un errore durante l'eliminazione del commento.",$output);
+  }
+  unset($_SESSION['comment-deleted']);
+}
+else{
+  $output = str_replace("{message-box}","",$output);
 }
 //check if a previously written comment needs to be restored
 if (isset($_SESSION['comment'])){
@@ -78,7 +98,7 @@ if (!empty($comments)){
   $output = str_replace("{comment-list}", getCommentList($comments), $output);
 }
 else{
-  $output = str_replace("{comment-list}", "<p class=\"font-size-0-75\"> Nessun commento presente per questo prodotto. </p>", $output);
+  $output = str_replace("{comment-list}", "<p class=\"font-size-0-75 text-align-center\"> Nessun commento presente per questo prodotto. </p>", $output);
 }
 
 
@@ -86,7 +106,8 @@ else{
 //--HELPER FUNCTIONS--
 function loadInfo($id){
   $list = Article::fetch($id);
-  return array($list->brand, $list->model, $list->image, $list->initialPrice, $list->launchDate, $list->content, $list->link);
+  return array("brand"=>$list->brand, "model"=>$list->model, "urlImage"=>$list->image, "initialPrice"=>$list->initialPrice,
+   "launchDate"=>$list->launchDate, "description"=>$list->content, "purchaseLink"=>$list->link);
 }
 
 function getTotalAndPositiveVotes($articleId){
@@ -120,17 +141,26 @@ function getCommentList($comments) {
   for ($i = 0; $i < count($comments); $i++) {
     $commentContent = $comments[$i]->content;
     $userFullName = $comments[$i]->userFullName;
-    $userId = $comments[$i]->userId;
-
-    $userAvatar = Comment::getAvatar($userId);
+    $commentUserId = $comments[$i]->userId;
+    $userAvatar = Comment::getAvatar($commentUserId);
     $userAvatarUrl = $userAvatar[0]->avatar_url;
-    
-    $comment = file_get_contents("../html/comment.html");
+
+    if ($commentUserId == SessionManager::getUserId() || SessionManager::userCanPublish()){
+      SessionManager::userCanPublish() ? $isPersonalComment = false : $isPersonalComment = true;
+      $comment = file_get_contents("../html/comment-deletable.html");
+      $comment = str_replace("delete-comment-url", "../php/delete_comment.php?articleId=".$_GET["articleId"], $comment);
+      $comment = str_replace("{comment-id}", $comments[$i]->id, $comment);
+    }
+    else{
+      $isPersonalComment = false;
+      $comment = file_get_contents("../html/comment.html"); 
+    }
     $comment = str_replace("{user-full-name-comment}", $userFullName, $comment);
     $comment = str_replace("{content-comment}", $commentContent, $comment);
     $comment = str_replace("avatar-url-comment", "../assets/img/avatars/".$userAvatarUrl, $comment);
 
-    array_push($commentList, $comment);
+    //shows personal comments first if it is not admin
+    $isPersonalComment ? array_unshift($commentList, $comment) : array_push($commentList, $comment);
   }
   return implode($commentList);
 }

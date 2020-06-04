@@ -1,17 +1,19 @@
-
 var RE_PASSWORD = /^(?=.*[0-9])(?=.*[a-zA-Z])[a-zA-Z0-9!.@#$%^&*]{6,16}$/;
 var RE_EMAIL = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
 var RE_NAME = /^[a-zA-Z ]{1,16}$/;
 var RE_USERNAME = /^[A-Za-z0-9]+(?:[_-][A-Za-z0-9]+)*$/;
+var RE_DATE = /^(0[1-9]|[12][0-9]|3[01])[- /.](0[1-9]|1[012])[- /.](19|20)\d\d$/;
+var RE_AMAZON = /^(?:https?:\/\/)?(?:www\.)?(?:amazon\..*\/.*|amzn\.com\/.*|amzn\.to\/.*)$/;
+var RE_NUMERIC = /^\d+(\.\d{1,2})?$/;
 
-var errorMessage = ""; //gestita da createErrorMessage
 
+var errorMessage = ""; //managed by createErrorMessage function
 
 /* 
-    controlla se l'item rispetta l'espressione regolare ==> ritorna booleano
+    check if the item respects the regular expression ==> return boolean
 */
 function validInput(item, reg_expr, isLogin){
-    if (item.value == "" || !reg_expr.test(item.value)){
+    if (item.value.trim() == "" || !reg_expr.test(item.value)){
         createErrorMessage(item,isLogin);
         return false;
     } 
@@ -20,7 +22,29 @@ function validInput(item, reg_expr, isLogin){
 }
 
 /*
-    validazione form login
+    profile form validation
+*/
+function validateFormProfile(){
+    var name = document.getElementById("name");
+    var surname = document.getElementById("surname");
+
+    if (!validInput(name, RE_NAME, false))                                  
+    { 
+        alert(errorMessage); 
+        name.focus(); 
+        return false; 
+    } 
+   
+    if (!validInput(surname, RE_NAME, false))                               
+    { 
+        alert(errorMessage); 
+        surname.focus(); 
+        return false; 
+    } 
+}
+
+/*
+    login form validation
 */
 function validateFormLogin() {
     var username = document.getElementById("username");
@@ -44,7 +68,7 @@ function validateFormLogin() {
 }
 
 /*
-    validazione form registrazione
+    registration form validation
 */
 function validateFormRegistration() {
     var name = document.getElementById("name");
@@ -52,7 +76,7 @@ function validateFormRegistration() {
     var username = document.getElementById("username");
     var email = document.getElementById("email");
     var password = document.getElementById("password");
-    var rpassword = document.getElementById("confirmationPassword");
+    var rpassword = document.getElementById("confirmation-password");
     
     if (!validInput(name, RE_NAME, false))                                  
     { 
@@ -102,53 +126,13 @@ function validateFormRegistration() {
 }
 
 /*
-    validazione form profilo
+    image format validation and preview
 */
-function validateFormProfile(){
-    var name = document.getElementById("name");
-    var surname = document.getElementById("surname");
-    var username = document.getElementById("username");
-    var email = document.getElementById("email");
-
-    if (!validInput(name, RE_NAME, false))                                  
-    { 
-        alert(errorMessage); 
-        name.focus(); 
-        return false; 
-    } 
-   
-    if (!validInput(surname, RE_NAME, false))                               
-    { 
-        alert(errorMessage); 
-        surname.focus(); 
-        return false; 
-    } 
-    
-    if (!validInput(username, RE_USERNAME, false))                                  
-    { 
-        alert(errorMessage); 
-        username.focus(); 
-        return false; 
-    } 
-
-    if (!validInput(email, RE_EMAIL, false))                                  
-    { 
-        alert(errorMessage); 
-        email.focus(); 
-        return false; 
-    } 
-}
-
-/*
-    validazione immagine in input e visualizzazione preview
-*/
-function validateImage() { 
+function validateImage($previewElemId) { 
     var fileInput =  document.getElementById('file-upload'); 
     var filePath = fileInput.value; 
 
     if (filePath!=""){
-
-        //estensioni accettate
         var allowedExtensions =  
                 /(\.jpg|\.jpeg|\.png)$/i; 
                 
@@ -159,12 +143,12 @@ function validateImage() {
         }  
         else  
         { 
-            //anteprima immagine 
+            //display image preview
             if (fileInput.files && fileInput.files[0]) { 
                 var reader = new FileReader(); 
                 reader.onload = function(e) { 
                     document.getElementById( 
-                        'avatar').setAttribute("src",e.target.result);
+                        $previewElemId).setAttribute("src",e.target.result);
                 }; 
                         
                 reader.readAsDataURL(fileInput.files[0]); 
@@ -182,8 +166,12 @@ function validateComment(){
     return true;
 }
 
+function askConfirmationDeleteComment(){
+    return confirm("Sei sicuro di voler eliminare questo commento?");
+}
+
 /*
-  controlla se la password di conferma e la password sono uguali
+    check if the confirmation password and the password are the same
 */
 function checkPasswords(password, rpassword) {
     if (rpassword.value != "") {
@@ -197,7 +185,7 @@ function checkPasswords(password, rpassword) {
 }
 
 /*
-  crea messaggio di errore personalizzato in base all'item passato
+    creates custom error message based on the provided item
 */
 function createErrorMessage(item, isLogin){
     if (item.value == ""){
@@ -212,7 +200,7 @@ function createErrorMessage(item, isLogin){
                 break;
             case 'password': errorMessage = "Inserisci la password.";
                 break;
-            case 'confirmationPassword': errorMessage = "Inserisci la password di conferma.";
+            case 'confirmation-password': errorMessage = "Inserisci la password di conferma.";
                 break;
         }
     }
@@ -234,12 +222,105 @@ function createErrorMessage(item, isLogin){
                 break;
             case 'password': errorMessage = "Controlla la password! Dev'essere alfanumerica ed essere composta da almeno 6 caratteri.";
                 break;
-            case 'confirmationPassword': errorMessage = "La password di conferma \u00E8 diversa dalla password!";
+            case 'confirmation-password': errorMessage = "La password di conferma \u00E8 diversa dalla password!";
                 break;
         }
     }
     
 }
+
+/*
+    admin form checker
+*/
+function validateFormAddArticle(){
+    var brand = document.getElementById("brand");
+    var model = document.getElementById("model");
+    var price = document.getElementById("price");
+    var date = document.getElementById("date");
+    var amazonLink = document.getElementById("amazon-link");
+    var description = document.getElementById("description");
+
+    if (brand.value.trim()=="")                                 
+    {
+        alert("Il campo \"marca\" non può essere vuoto."); 
+        brand.focus(); 
+        return false; 
+    } 
+    if (model.value.trim()=="")                                 
+    {
+        alert("Il campo \"modello\" non può essere vuoto."); 
+        model.focus(); 
+        return false; 
+    } 
+    if (price.value.trim()=="")                                 
+    {
+        alert("Il campo \"prezzo di lancio\" non può essere vuoto."); 
+        price.focus(); 
+        return false; 
+    } 
+    else if(!RE_NUMERIC.test(price.value)){
+        alert("Il campo \"prezzo di lancio\" deve contenere un valore numerico valido."); 
+        price.focus(); 
+        return false; 
+    }
+    if (date.value.trim()=="")                                 
+    {
+        alert("Il campo \"data di lancio\" non può essere vuoto."); 
+        date.focus(); 
+        return false; 
+    } 
+    else if(!isValidDate(date.value)){
+        alert("La data inserita non è valida. Controllala e segui il formato dd-mm-yyyy.");
+        date.focus();
+        return false;
+    }
+    if (amazonLink.value.trim()=="")                                 
+    {
+        alert("Il campo \"link amazon\" non può essere vuoto."); 
+        amazonLink.focus(); 
+        return false; 
+    } 
+    else if(!RE_AMAZON.test(amazonLink.value)){
+        alert("Il link da te inserito non è un link Amazon valido."); 
+        amazonLink.focus(); 
+        return false; 
+    }
+    if (description.value.trim()=="")                                 
+    {
+        alert("Il campo \"descrizione prodotto\" non può essere vuoto."); 
+        description.focus(); 
+        return false; 
+    } 
+    return true;
+}
+
+// Validates that the input string is a valid date formatted as "dd-mm-yyyy"
+function isValidDate(dateString)
+{
+    // First check for the pattern
+    if(!RE_DATE.test(dateString))
+        return false;
+
+    // Parse the date parts to integers
+    var parts = dateString.split("-");
+    var day = parseInt(parts[0], 10);
+    var month = parseInt(parts[1], 10);
+    var year = parseInt(parts[2], 10);
+
+    // Check the ranges of month and year
+    if(year < 1000 || year > 3000 || month == 0 || month > 12)
+        return false;
+
+    var monthLength = [ 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 ];
+
+    // Adjust for leap years
+    if(year % 400 == 0 || (year % 100 != 0 && year % 4 == 0))
+        monthLength[1] = 29;
+
+    // Check the range of the day
+    return day > 0 && day <= monthLength[month - 1];
+};
+
 
 
   

@@ -6,7 +6,6 @@ include_once("../../server/models/models.php");
 
 // define variables and set to empty values
 $_SESSION['registration'] = false; //not registered by default
-$_SESSION['error-message'] = "";
 $username = "";
 $name = "";
 $surname = "";
@@ -16,7 +15,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     
   $username = Utils::validateInput($_POST["username"]);
   $password = Utils::validateInput($_POST["password"]);
-  $confirmationPassword = Utils::validateInput($_POST["confirmationPassword"]);
+  $confirmationPassword = Utils::validateInput($_POST["confirmation-password"]);
   $name = Utils::validateInput($_POST["name"]);
   $surname = Utils::validateInput($_POST["surname"]);
   $email = Utils::validateInput($_POST["email"]);
@@ -30,12 +29,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   {
     $man = DBManager::getInstance();
     $reg = $man->register($username, $password, $name, $surname, $email);
-    if ($reg!=false) //if registered correctly
-    {
+    if ($reg!=false) { //if registered correctly
       $_SESSION['registration'] = true;
       SessionManager::startSessionForUser($reg, $username, false);
       userRegisteredCorrectly();
-    } else {
+    } 
+    else {
       $_SESSION['error-message'] = "la registrazione non ha avuto successo.";
     }
   }
@@ -46,14 +45,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 }
 
 // check data format -> return true if correct. Otherwise, return false and set errormessage
-function checkParameters($username, $password, $confirmationPassword, $name, $surname, $email)
-{
+function checkParameters($username, $password, $confirmationPassword, $name, $surname, $email) {
 	if (empty($username)) {
 	  $_SESSION['error-message'] .= " l'username è richiesto! ";
 		return false;
   }
   else if(!preg_match("/^[A-Za-z0-9]+(?:[_-][A-Za-z0-9]+)*$/",$username)){
-    $_SESSION['error-message'] .= " controlla l'username! Il campo non può essere composto da caratteri speciali. ";
+    $_SESSION['error-message'] .= " controlla l'username! Il campo non può essere composto da caratteri speciali o spazi. ";
 		return false;
   } 
   if (empty($name)) {
@@ -101,8 +99,7 @@ function checkParameters($username, $password, $confirmationPassword, $name, $su
 	return true;
 }
 
-function userRegisteredCorrectly()
-{
+function userRegisteredCorrectly() {
   // redirect to home and save session data
   header("Location: ".SessionManager::BASE_URL."home");
 }

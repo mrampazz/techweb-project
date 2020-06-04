@@ -356,6 +356,7 @@ body {
   width: 12em;
   display: block;
   margin: 1em;
+  text-align: center;
 }
 
 .article-title {
@@ -365,9 +366,8 @@ body {
 }
 
 .article-img {
-  display: block;
   height: 13em;
-  width: 12em;
+  max-width: 13em;
 }
 
 .vote-container {
@@ -394,9 +394,12 @@ body {
   color: #506180;
 }
 .custom-thumbs-up:hover,
-.custom-thumbs-down:hover,
+.custom-thumbs-down:hover{
+  color: darkslateblue;
+}
 .thumb-selected {
-  color: lightcoral;
+  color: darkslateblue;
+  font-weight: bold;
 }
 
 /* GENERAL SECTION */
@@ -428,7 +431,7 @@ body {
   font-size: 1.5em;
 }
 .font-size-2-5 {
-  font-size: 2-5em;
+  font-size: 2.5em;
 }
 
 .font-weight-light {
@@ -550,13 +553,16 @@ body {
 .flex-direction-col {
   flex-direction: column;
 }
+.flex-wrap {
+  flex-wrap: wrap;
+}
+.flex-items-center {
+  align-items: center;
+}
 
 /* BG SECTION */
 .primary-bg {
   background-color: #eef4ff;
-}
-.secondary-bg {
-  background-color: white; /* this is temporary, will became #506180 (if needed) after layout integration */
 }
 
 /* COLOR SECTION */
@@ -569,6 +575,12 @@ body {
 }
 
 /* login/registration/form */
+
+.log-reg-container{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
 
 /* FORM starting stylings */
 
@@ -605,11 +617,18 @@ body {
   margin: auto;
 }
 
-#username,
-#name,
-#surname,
-#email,
-input[type="password"] {
+.success-message-box {
+  width: 50%;
+  border-radius: .5em;
+  background-color: green;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  padding: 1em;
+  margin: auto;
+}
+
+.custom-form-input {
   font-size: 1.125em;
   padding-bottom: 0.1em;
   display: block;
@@ -619,13 +638,16 @@ input[type="password"] {
   background-color: white;
   color: #506180;
 }
-input[type="text"]:focus,
-input[type="password"]:focus {
+.custom-form-input:focus {
   outline: none;
+}
+#username:disabled, #email:disabled{
+  border-bottom: none;
+  opacity: .85;
 }
 /* LABEL */
 
-.label-log-reg {
+.form-label {
   font-size: 0.8em;
   font-weight: normal;
   position: absolute;
@@ -640,6 +662,7 @@ input:valid ~ label {
   font-size: 0.8em;
   color: #506180;
 }
+
 /* BOTTOM BARS */
 
 .bar {
@@ -725,16 +748,17 @@ input:focus ~ .highlight {
   align-items: center;
 }
 
-#file-upload {
-  display: none;
+#file-upload-container {
+  position: relative;
+  margin-bottom: 2.8em;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  align-items: center;
 }
 
-.upload-image {
-  border: 0.07em solid #ccc;
-  display: inline-block;
-  padding: 0.4em 0.8em;
-  cursor: pointer;
-  text-align: center;
+#file-upload {
+  border: .05em solid #cccccc
 }
 
 #avatar {
@@ -748,12 +772,13 @@ input:focus ~ .highlight {
   object-fit: cover;
 }
 
+
 /* Article-page */
 
 #article-page-container {
-  max-width: 90%;
-  text-align: center;
   margin-top: 1em;
+  margin-left: 2em;
+  margin-right: 2em;
 }
 
 #article-info-container {
@@ -761,10 +786,14 @@ input:focus ~ .highlight {
   flex-direction: row;
 }
 
+#article-image-container {
+  margin-right: 1.5em;
+}
+
 #article-image {
-  width: auto;
-  height: 20em;
-  object-fit: cover;
+  max-width: 15em;
+  max-height: 20em;
+  margin-bottom: 1em;
 }
 
 #article-description {
@@ -787,8 +816,23 @@ input:focus ~ .highlight {
 #comments-container {
   margin-top: 2em;
   margin-bottom: 2em;
-  margin-left: auto;
-  margin-right: auto;
+}
+
+/* comment/comment-deletable */
+
+.comment-outer-container{
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 1;
+  border-bottom: .05em solid #cccccc
+}
+
+.comment-content-container{
+  margin-left: 0.5em;
+  min-width: 0em;
+  width:100%;
+  word-wrap: break-word;
+  overflow-wrap: break-word; 
 }
 
 .avatar-comment {
@@ -799,14 +843,35 @@ input:focus ~ .highlight {
   border: 0.125em solid white;
 }
 
+.comment-delete-btn-container{
+  display: flex;
+  align-items: center;
+}
+
+.delete-comment-btn{
+  width: 10em;
+  height: 2.5em;
+  border-radius: 0.5em;
+  -webkit-border-radius: 0.5em;
+  -moz-border-radius: 0.5em;
+  text-decoration: none;
+  background-color: #d80404;
+  color: white;
+  font-weight: 700;
+  opacity: 0.85;
+}
+.delete-comment-btn:hover {
+  opacity: 1;
+}
+
 /* ADMIN */
 
-.inline_tex {
+.inline-tex {
   margin: 0;
   display: inline-block;
 }
 
-.add_device {
+.add-device-a {
   background-color: #506180;
   color: white;
   float: right;
@@ -814,6 +879,19 @@ input:focus ~ .highlight {
   padding: 0.625em;
   border: none;
   margin-left: 4em;
+}
+
+.product-description {
+  font-size: 0.8em;
+  font-weight: normal;
+}
+
+.description-text-area {
+  width: 100%;
+}
+
+.insert-form {
+  margin: 2em;
 }
 
 /* RULES */
@@ -884,11 +962,11 @@ input:focus ~ .highlight {
 
 /* ADMIN TILE */
 
-.image_size_admin {
+.image-size-admin {
   height: 15em;
 }
 
-.first_content {
+.first-content {
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -897,12 +975,12 @@ input:focus ~ .highlight {
   margin-bottom: 1em;
 }
 
-.info_admin_tile {
+.info-admin-tile {
   margin-left: 3em;
   margin-right: 3em;
 }
 
-.modify_device {
+.modify-device {
   background-color: #506180;
   color: white;
   cursor: pointer;
@@ -934,6 +1012,38 @@ input:focus ~ .highlight {
   flex-direction: column;
 }
 
+.admin-tile > div {
+  width: 90%;
+}
+
+.simple-content {
+  width: 90%;
+  margin: auto;
+  margin-top: 2em;
+  text-align: center;
+}
+
+.simple-content > a,
+.simple-content > h1 {
+  display: block;
+  margin-top: 1em;
+  margin-bottom: 1em;
+  width: 100%;
+}
+
+.add_device {
+  background-color: #506180;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 2em;
+  padding-left: 0.5em;
+  padding-right: 0.5em;
+  margin-left: 0.5em;
+  margin-right: 0.5em;
+}
+
 @media only screen and (max-width: 700px) {
   .mobile-button-container,
   .mobile-menu-links {
@@ -950,32 +1060,36 @@ input:focus ~ .highlight {
     flex-shrink: 1;
   }
 
+  #article-page-container{
+    margin-left: 1em;
+    margin-right: 1em;
+  }
+
   #article-info-container {
     flex-direction: column;
     align-items: center;
   }
 
+  #article-image-container {
+    margin-right: 0em;
+  }
+
   #article-image {
     margin-right: 0em;
-    margin-bottom: 1em;
-  }
-  #comments-container {
-    width: 85%;
   }
 
   #article-description {
     text-align: center;
     flex-direction: column;
     flex-wrap: wrap;
-    border-bottom: 0.1em solid #506180;
   }
-  .info_admin_tile {
+  .info-admin-tile {
     margin-left: 0em;
     margin-right: 0em;
     margin-bottom: 1em;
     margin-top: 1em;
   }
-  .mobile_margin {
+  .mobile-margin {
     margin-bottom: 1em;
   }
   .inline-form > div {

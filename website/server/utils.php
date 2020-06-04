@@ -90,6 +90,8 @@ class Utils
     {
         $html = str_replace("{article-model}", $item->model, $html);
         $html = str_replace("{article-link}", "./layout.php?page=article&amp;id={$item->id}", $html);
+        $html = str_replace("{modify-article}", "./layout.php?page=modify-article&amp;edit=true&amp;id={$item->id}", $html);
+        
         $html = str_replace("{article-memory}", $item->votesPositive, $html);
         $html = str_replace("{article-price}", ($item->votesTotal) - ($item->votesPositive), $html);
         $html = str_replace("{article-img}", "../assets/img/articles/" . $item->image, $html);
@@ -145,7 +147,7 @@ class Utils
             $array = [];
         }
         for ($x = 0; $x < count($array); $x++) {
-            $card = Utils::replaceContentsAdminArticleItem(file_get_contents("../html/admin_tile.html"), $array[$x]);
+            $card = Utils::replaceContentsAdminArticleItem(file_get_contents("../html/admin-tile.html"), $array[$x]);
             array_push($articlesList, $card);
         }
         return implode($articlesList);
@@ -189,9 +191,9 @@ class Utils
         return $year . "-" . $month . "-" . $day . " 00:00:00";
     }
 
-    public static function uploadImage($target_dir, $imageReq, $prepath = "")
+    public static function uploadImage($target_dir, $imageReq)
     {
-        $target_file = $target_dir . Utils::generateRandomString(10);
+        $target_file = Utils::generateRandomString(10);
         $uploadOk = 1;
         $imageFileType = strtolower(pathinfo($imageReq["name"], PATHINFO_EXTENSION));
         $target_file .= "." . $imageFileType;
@@ -216,7 +218,7 @@ class Utils
         if ($uploadOk == 0) {
             return ["success" => false, "error" => "il tuo file non è stato caricato."];
         } else {
-            if (move_uploaded_file($imageReq["tmp_name"], $prepath . $target_file)) {
+            if (move_uploaded_file($imageReq["tmp_name"], $target_dir . $target_file)) {
                 return ["success" => true, "url" => $target_file];
             } else {
                 return ["success" => false, "error" => "si è verificato un errore durante il caricamento del file."];

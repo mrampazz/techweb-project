@@ -4,7 +4,7 @@ include_once("../../../database/db_manager.php");
 include_once("../../server/utils.php");
 include_once("../../server/models/models.php");
 
-$articleId=$_POST["articleId"];
+$articleId = $_POST["articleId"];
 $content = Utils::validateInput($_POST['comment-input']);
 $_SESSION['comment'] = $content;
 
@@ -16,15 +16,15 @@ if (!SessionManager::isUserLogged()) {
 
 if (empty($content)) {
     $_SESSION['error-message'] = "il commento non può essere vuoto!";
-    header("Location: ".SessionManager::BASE_URL."article-page"."&articleId=".$articleId);
+    header("Location: ".SessionManager::BASE_URL."article"."&articleId=".$articleId);
     return;
 }
 
 // SAVE COMMENT
 $userId = SessionManager::getUserId();
 
-Comment::createComment($userId,$articleId,htmlentities($content, ENT_QUOTES)); 
+Comment::createComment($userId,$articleId,$content); 
 
-header("Location: ".SessionManager::BASE_URL."article-page"."&articleId=".$articleId);
+header("Location: ".SessionManager::BASE_URL."article"."&articleId=".$articleId);
 ?>
 

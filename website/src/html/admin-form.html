@@ -1,0 +1,54 @@
+<div class="content-container">
+  <div class="margin-left-2 margin-top-1 margin-right-2 text-align-center">
+    <h1 class="font-size-2-5 font-weight-bold inline-tex">{edit} telefono</h1>
+  </div>
+  <div class="insert-form">
+    <form method="post" enctype="multipart/form-data" action="validate-form-url" onsubmit="return validateFormAddArticle()">
+      {message-box}
+      <div id="file-upload-container">
+        <img id="article-image" class="article-img" src="article-image-url" alt=""/>
+        <label for="file-upload" class="margin-bottom-0-5">Carica immagine telefono:</label>
+        <input id="file-upload" name="file-upload" type="file" onchange="return validateImage('article-image')"/>
+      </div>
+      <div class="group">
+          <label for="brand" class="form-label">Marca</label>
+          <input type="text" class="custom-form-input" name="brand" id="brand" value="{brand}"/>
+          <span class="highlight"></span>
+          <span class="bar"></span>
+      </div>
+      <div class="group">
+          <label for="model" class="form-label">Modello</label>
+          <input type="text" class="custom-form-input" name="model" id="model" value="{model}"/>
+          <span class="highlight"></span>
+          <span class="bar"></span>
+      </div>
+      <div class="group">
+          <label for="price" class="form-label">Prezzo di lancio (&euro;)</label>
+          <input type="text" class="custom-form-input" name="price" id="price" value="{price}"/>
+          <span class="highlight"></span>
+          <span class="bar"></span>
+      </div>
+      <div class="group">
+          <label for="date" class="form-label">Data di lancio (dd-mm-yyyy)</label>
+          <input type="text" class="custom-form-input" name="date" id="date" value="{date}"/>
+          <span class="highlight"></span>
+          <span class="bar"></span>
+      </div>
+      <div class="group">
+          <label for="amazon-link" class="form-label">Link amazon</label>
+          <input type="text" class="custom-form-input" name="amazon-link" id="amazon-link" value="{amzn-link}"/>
+          <span class="highlight"></span>
+          <span class="bar"></span>
+      </div>
+      <div class="group">
+          <label for="description" class="product-description">Descrizione prodotto</label>
+          <textarea id="description" name="description" rows="7" cols="50" class="margin-top-0-5 secondary-bg description-text-area">{desc}</textarea>
+          <span class="highlight"></span>
+          <span class="bar"></span>
+      </div>
+      <div class="flex-container flex-content-center margin-bottom-2">
+          <input type="submit" value="Inserisci" class="form-button"/>
+      </div>
+    </form>
+  </div>
+</div>

@@ -10,6 +10,7 @@ class Comment extends Base
     const USER_FULLNAME_KEY = "user_fullname";
 
 
+
     const TABLE_NAME = "Comment";
 
     var $content, $userId, $articleId, $userFullName;
@@ -38,7 +39,7 @@ class Comment extends Base
     public static function getCommentsFor($articleId)
     {
         $dbman = DBManager::getInstance();
-        return $dbman->query("SELECT *, CONCAT(".User::TABLE_NAME.".".User::NAME_KEY.", ' ', ".User::TABLE_NAME.".".User::SURNAME_KEY.") as user_fullname FROM ".self::TABLE_NAME." JOIN ".User::TABLE_NAME." on ".Comment::TABLE_NAME.".".Comment::USER_ID_KEY." = ".User::TABLE_NAME.".".Base::ID_KEY." WHERE ".self::TABLE_NAME.".".self::ARTICLE_ID_KEY." = {$articleId} ORDER BY ".self::TABLE_NAME.".".Base::CREATED_KEY." DESC;", Comment::class);
+        return $dbman->query("SELECT Comment.*, CONCAT(".User::TABLE_NAME.".".User::NAME_KEY.", ' ', ".User::TABLE_NAME.".".User::SURNAME_KEY.") as user_fullname FROM ".self::TABLE_NAME." JOIN ".User::TABLE_NAME." on ".Comment::TABLE_NAME.".".Comment::USER_ID_KEY." = ".User::TABLE_NAME.".".Base::ID_KEY." WHERE ".self::TABLE_NAME.".".self::ARTICLE_ID_KEY." = {$articleId} ORDER BY ".self::TABLE_NAME.".".Base::CREATED_KEY." DESC;", Comment::class);
     }
 
     public static function createComment($userId, $articleId, $content)
@@ -53,6 +54,10 @@ class Comment extends Base
         return $dbman->query("SELECT avatar_url FROM User WHERE User.id='$id'");
     }
 
+    public static function getUserIdFor($commentId){
+        $dbman = DBManager::getInstance();
+        return $dbman->query("SELECT ".self::USER_ID_KEY." FROM Comment WHERE Comment.id='$commentId'");
+    }
  }
 
 ?>
