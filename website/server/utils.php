@@ -107,9 +107,10 @@ class Utils
     }
 
 
-    public static function getArticles($search, $model, $userId = null)
+    public static function getArticles($search, $model, $price, $userId = null)
     {
-        //return Article::list($userId, null, $search, $model, null, "ASC");
+        // TO DO : order by price
+        // return Article::list($userId, null, $search, $model, null, "ASC");
         return Article::list();
     }
 
