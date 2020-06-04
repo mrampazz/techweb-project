@@ -54,7 +54,6 @@ else{
 Utils::unsetAll(array('brand','model','price','date','amazon-link','description'));
 
 $output = str_replace("article-image-url", "../assets/img/articles/default.png", $output);
-$output = str_replace("validate-form-url", "../php/validate_admin_form.php", $output);
-
+$output = str_replace("validate-form-url", "../php/validate_admin_data.php", $output);
 
 ?>

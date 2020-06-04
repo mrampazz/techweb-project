@@ -62,7 +62,7 @@ if ($article) {
     Utils::unsetAll(array('brand','model','price','date','amazon-link','description'));
 
     $output = str_replace("article-image-url", "../assets/img/articles/".$article->image, $output);
-    $output = str_replace("validate-form-url", "../php/validate_admin_form.php?id=".$id, $output);
+    $output = str_replace("validate-form-url", "../php/validate_admin_data.php?id=".$id, $output);
 }
 else{ //no article with this id
     header("Location:".SessionManager::BASE_URL."404");
