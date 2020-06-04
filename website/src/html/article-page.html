@@ -1,4 +1,5 @@
 <div id="article-page-container">
+    {message-box}
     <div id="article-info-container">
         <div id="article-image-container">
             <img id="article-image" src="article-image-url" alt=""/>
@@ -35,7 +36,6 @@
                 <input type="hidden" value="{article-id}" name="articleID"/>
             </div>
         </form>
-        {message-box}
         <form action="../php/validate_comment.php" method="post" onsubmit="return validateComment()">
             <div id="comment-form-container"> 
                 <label for="comment-input" class="margin-top-1">Facci sapere qualcosa di più, inserisci qui il tuo commento!</label> 

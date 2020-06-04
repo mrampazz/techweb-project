@@ -10,7 +10,7 @@ if(isset($_SESSION['error-message']) && !empty($_SESSION['error-message'])) {
   $page = file_get_contents("../html/message-box.html");
   $output = str_replace("{message-box}",$page,$output);
   $output = str_replace("{message-box-class}","error-message-box",$output);
-  $output = str_replace("{message-box-title}","Errore",$output);
+  $output = str_replace("{message-box-title}","Errore aggiornamento dato",$output);
   $output = str_replace("{message-box-text}",$_SESSION['error-message'],$output);
   unset($_SESSION['error-message']);
 }

@@ -38,7 +38,7 @@ if (isValidName($name)){
 }
 
 $user->saveUser();
-if (empty($_SESSION['error-message'])){
+if (!isset($_SESSION['error-message'])){
   $_SESSION['updated-correctly'] = "true";
 }
 header("Location: ".SessionManager::BASE_URL."profile");
