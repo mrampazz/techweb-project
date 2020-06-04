@@ -84,10 +84,10 @@ class Utils
         if (SessionManager::isUserLogged()) {
             switch (Utils::isArticleLiked($item->id)) {
                 case 1:
-                    $html = str_replace("{article-liked}", 'article-liked', $html);
+                    $html = str_replace("{article-liked}", 'thumb-selected', $html);
                     break;
                 case 0:
-                    $html = str_replace("{article-disliked}", 'article-disliked', $html);
+                    $html = str_replace("{article-disliked}", 'thumb-selected', $html);
                     break;
                 case -1:
                     break;
