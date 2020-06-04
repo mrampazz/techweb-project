@@ -72,7 +72,7 @@ class DBManager
         $keyId = $this->conn->insert_id;
         $this->conn->query("INSERT INTO `Keychain` (`user_id`, `username`, `password`) VALUES ({$keyId}, '{$username}', '{$hashedPassword}');");
         if ($this->conn->commit())
-            return self::login($username,$password);
+            return $this->login($username,$password);
         else {
             $this->conn->rollback();
             return false;
