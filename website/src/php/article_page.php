@@ -1,5 +1,6 @@
 <?php
 $articleId = $_GET["articleId"];
+manageMessage($output);
 
 //--ARTICLE INFO--
 $articleInfo = loadInfo($articleId);
@@ -57,33 +58,6 @@ switch($check) {
 
 
 //--COMMENTS--
-//checks whether a message (error or confirmation) should be displayed
-if(isset($_SESSION['error-message']) && isset($_SESSION['login']) && !$_SESSION['login']) {
-  $page = file_get_contents("../html/message-box.html");
-  $output = str_replace("{message-box}",$page,$output);
-  $output = str_replace("{message-box-class}","error-message-box",$output);
-  $output = str_replace("{message-box-title}","Errore caricamento commento",$output);
-  $output = str_replace("{message-box-text}","Si è verificato un problema durante l'invio del tuo commento: ".$_SESSION['error-message'],$output);
-  unset($_SESSION['error-message']);
-}
-else if(isset($_SESSION['comment-deleted'])){
-  $page = file_get_contents("../html/message-box.html");
-  $output = str_replace("{message-box}",$page,$output);
-  if ($_SESSION['comment-deleted'] == true){
-    $output = str_replace("{message-box-class}","success-message-box",$output);
-    $output = str_replace("{message-box-title}","Commento cancellato!",$output);
-    $output = str_replace("{message-box-text}","Il commento da te selezionato è stato correttamente rimosso.",$output);
-  }
-  else{
-    $output = str_replace("{message-box-class}","error-message-box",$output);
-    $output = str_replace("{message-box-title}","Errore eliminazione commento",$output);
-    $output = str_replace("{message-box-text}","Ci dispiace, si è verificato un errore durante l'eliminazione del commento.",$output);
-  }
-  unset($_SESSION['comment-deleted']);
-}
-else{
-  $output = str_replace("{message-box}","",$output);
-}
 //check if a previously written comment needs to be restored
 if (isset($_SESSION['comment'])){
   $output = str_replace("{comment-input}", $_SESSION['comment'], $output);
@@ -145,6 +119,7 @@ function getCommentList($comments) {
     $userAvatar = Comment::getAvatar($commentUserId);
     $userAvatarUrl = $userAvatar[0]->avatar_url;
 
+    // if the comment belongs to the logged-in user or if admin-->shows the delete button
     if ($commentUserId == SessionManager::getUserId() || SessionManager::userCanPublish()){
       SessionManager::userCanPublish() ? $isPersonalComment = false : $isPersonalComment = true;
       $comment = file_get_contents("../html/comment-deletable.html");
@@ -163,5 +138,41 @@ function getCommentList($comments) {
     $isPersonalComment ? array_unshift($commentList, $comment) : array_push($commentList, $comment);
   }
   return implode($commentList);
+}
+
+//checks whether a message (error or confirmation) should be displayed
+function manageMessage(&$output){
+  if(isset($_SESSION['error-message']) || (isset($_SESSION['is-comment-published']) && is_null($_SESSION['is-comment-published']))) {
+    $page = file_get_contents("../html/message-box.html");
+    $output = str_replace("{message-box}",$page,$output);
+    $output = str_replace("{message-box-class}","error-message-box",$output);
+    $output = str_replace("{message-box-title}","Errore caricamento commento",$output);
+    $output = str_replace("{message-box-text}","Si è verificato un problema durante l'invio del tuo commento. ". isset($_SESSION['error-message']) ? $_SESSION['error-message'] : "",$output);
+  }
+  else if(isset($_SESSION['is-comment-deleted'])){
+    $page = file_get_contents("../html/message-box.html");
+    $output = str_replace("{message-box}",$page,$output);
+    if ($_SESSION['is-comment-deleted'] === true){
+      $output = str_replace("{message-box-class}","success-message-box",$output);
+      $output = str_replace("{message-box-title}","Commento cancellato!",$output);
+      $output = str_replace("{message-box-text}","Il commento da te selezionato è stato correttamente rimosso.",$output);
+    }
+    else{
+      $output = str_replace("{message-box-class}","error-message-box",$output);
+      $output = str_replace("{message-box-title}","Errore eliminazione commento",$output);
+      $output = str_replace("{message-box-text}","Ci dispiace, si è verificato un errore durante l'eliminazione del commento.",$output);
+    }
+  }
+  else if(isset($_SESSION['is-comment-published']) &&  $_SESSION['is-comment-published']===true){
+    $page = file_get_contents("../html/message-box.html");
+    $output = str_replace("{message-box}",$page,$output);
+    $output = str_replace("{message-box-class}","success-message-box",$output);
+    $output = str_replace("{message-box-title}","Commento pubblicato!",$output);
+    $output = str_replace("{message-box-text}","Il tuo commento è stato correttamente pubblicato. Grazie per aver condiviso la tua opinione!",$output);
+  }
+  else{
+    $output = str_replace("{message-box}","",$output);
+  }
+  Utils::unsetAll(array('error-message', 'is-comment-published','is-comment-deleted'));
 }
 ?>

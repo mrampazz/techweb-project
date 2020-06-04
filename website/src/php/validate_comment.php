@@ -15,7 +15,7 @@ if (!SessionManager::isUserLogged()) {
 }
 
 if (empty($content)) {
-    $_SESSION['error-message'] = "il commento non può essere vuoto!";
+    $_SESSION['error-message'] = "Il commento non può essere vuoto!";
     header("Location: ".SessionManager::BASE_URL."article"."&articleId=".$articleId);
     return;
 }
@@ -23,7 +23,7 @@ if (empty($content)) {
 // SAVE COMMENT
 $userId = SessionManager::getUserId();
 
-Comment::createComment($userId,$articleId,$content); 
+$_SESSION['is-comment-published'] = Comment::createComment($userId,$articleId,$content); 
 
 header("Location: ".SessionManager::BASE_URL."article"."&articleId=".$articleId);
 ?>
