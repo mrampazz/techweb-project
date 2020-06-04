@@ -1,6 +1,7 @@
 <div class="article-item">
   <a href="{article-link}" class="article-info">
     <img class="article-img" src="{article-img}" alt="{article-model}" />
+    <span class="article-title">{article-brand}</span>
     <span class="article-title">{article-model}</span>
   </a>
   <div class="article-votes">
@@ -11,8 +12,8 @@
           name="vote"
           type="submit"
           value="like"
-          class="custom-thumbs-up far fa-thumbs-up {article-liked}"
-        ></button>
+          class="{article-liked} custom-button"
+        >Lo consiglio</button>
         <span aria-label="Voti positivi">{article-likes}</span>
       </div>
       <div class="vote-container">
@@ -21,11 +22,11 @@
           name="vote"
           type="submit"
           value="dislike"
-          class="custom-thumbs-down far fa-thumbs-down {article-disliked}"
-        ></button>
+          class="{article-disliked} custom-button"
+        >Non lo consiglio</button>
         <span aria-label="Voti negativi">{article-dislikes}</span>
       </div>
-      <input type="hidden" value="{movieID}" name="movieID" />
+      <input type="hidden" value="{articleID}" name="articleID" />
       <input type="hidden" value="home" name="redirectURL" />
     </form>
   </div>

@@ -36,7 +36,7 @@ $links = [
     new Link("Il tuo profilo", SessionManager::BASE_URL . "profile", false),
     new Link("Regolamento", SessionManager::BASE_URL . "rules", false),
     new Link("Chi siamo?", SessionManager::BASE_URL . "about", false),
-    new Link("Zona amministratori", SessionManager::BASE_URL . "admin", false),
+    new Link("Area Amministratore", SessionManager::BASE_URL . "admin", false),
     new Link("Login", SessionManager::BASE_URL . "login", false),
     new Link("Registrati", SessionManager::BASE_URL . "registration", false),
     new Link("FAQ", SessionManager::BASE_URL . "faq", false)
@@ -186,8 +186,8 @@ switch ($_GET['page']) {
         $page = file_get_contents("../html/admin.html");
         $output = str_replace("{breadcrumb}", $breadcrumb, $output);
         $output = str_replace("{content}", $page, $output);
-        $output = str_replace("{currentPage}", "Smartphy - Zona amministratori", $output);
-        $linkItems = Utils::getMenuLinks($links, 'Zona amministratori');
+        $output = str_replace("{currentPage}", "Smartphy - Area Amministratore", $output);
+        $linkItems = Utils::getMenuLinks($links, 'Area Amministratore');
         $output = str_replace("{menu-links}", $linkItems, $output);
         $output = str_replace("{mobile-menu-links}", $linkItems, $output);
         include_once("../php/admin.php");

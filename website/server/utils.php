@@ -14,7 +14,6 @@ class Utils
                 } else {
                     $element = "<a class='menu-item' href='{$array[$x]->link}'>{$array[$x]->name}</a>";
                 }
-                
             }
 
             array_push($list, $element);
@@ -49,26 +48,37 @@ class Utils
 
     public static function isArticleLiked($id)
     {
-        $userId = SessionManager::getUserId();
-        $votedArticles = Article::getUserVotes($userId);
-        for ($x = 0; $x < count($votedArticles); $x++) {
-            if ($votedArticles[$x]->id == $id) {
-                if ($votedArticles[$x]->liked) {
-                    return 1;
-                } else if ($votedArticles[$x]->disliked) {
-                    return 0;
+        $votedArticles = null;
+        if (SessionManager::isUserLogged()) {
+            $userId = SessionManager::getUserId();
+            $votedArticles = Article::getUserVotes($userId);
+        }
+        if ($votedArticles != null) {
+            for ($x = 0; $x < count($votedArticles); $x++) {
+                if ($votedArticles[$x]->article_id == $id) {
+                    switch ($votedArticles[$x]->positive) {
+                        case 1:
+                            return 1;
+                            break;
+                        case 0:
+                            return 0;
+                            break;
+                    }
                 }
-            } else {
-                return -1;
             }
+            return -1;
+        } else {
+            return -1;
         }
     }
 
     public static function replaceContentsArticleItem($html, $item)
     {
+        $html = str_replace("{articleID}", $item->id, $html);
         $html = str_replace("{article-model}", $item->model, $html);
+        $html = str_replace("{article-brand}", $item->brand, $html);
         $html = str_replace("{article-link}", "./layout.php?page=article&amp;articleId={$item->id}", $html);
-        $html = str_replace("{article-likes}", $item->votesPositive, $html);
+        $html = str_replace("{article-likes}", $item->votesPositive ? $item->votesPositive : "0", $html);
         $html = str_replace("{article-dislikes}", ($item->votesTotal) - ($item->votesPositive), $html);
         $html = str_replace("{article-img}", "../assets/img/articles/" . $item->image, $html);
         if (SessionManager::isUserLogged()) {
@@ -91,7 +101,6 @@ class Utils
         $html = str_replace("{article-model}", $item->model, $html);
         $html = str_replace("{article-link}", "./layout.php?page=article&amp;id={$item->id}", $html);
         $html = str_replace("{modify-article}", "./layout.php?page=modify-article&amp;edit=true&amp;id={$item->id}", $html);
-        
         $html = str_replace("{article-memory}", $item->votesPositive, $html);
         $html = str_replace("{article-price}", ($item->votesTotal) - ($item->votesPositive), $html);
         $html = str_replace("{article-img}", "../assets/img/articles/" . $item->image, $html);
