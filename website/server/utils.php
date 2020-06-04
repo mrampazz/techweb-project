@@ -186,6 +186,18 @@ class Utils
         return $randomString;
     }
 
+    //check if a date formatted as dd-mm-yyyy is valid
+    public static function isValidDate($dateDMY){
+        $splittedDate = explode('-',$dateDMY);
+        $day = $splittedDate[0];
+        $month = $splittedDate[1];
+        $year = $splittedDate[2];
+        if (checkdate($month,$day,$year))
+            return true;
+        else
+            return false;
+    }
+
     public static function createDate($day, $month, $year)
     {
         return $year . "-" . $month . "-" . $day . " 00:00:00";

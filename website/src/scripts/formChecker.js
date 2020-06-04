@@ -1,6 +1,6 @@
 var RE_PASSWORD = /^(?=.*[0-9])(?=.*[a-zA-Z])[a-zA-Z0-9!.@#$%^&*]{6,16}$/;
 var RE_EMAIL = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
-var RE_NAME = /^[a-zA-Z ]{1,16}$/;
+var RE_NAME = /^[a-zA-Z]+(([',. -][a-zA-Z ])?[a-zA-Z]*)*$/;
 var RE_USERNAME = /^[A-Za-z0-9]+(?:[_-][A-Za-z0-9]+)*$/;
 var RE_DATE = /^(0[1-9]|[12][0-9]|3[01])[- /.](0[1-9]|1[012])[- /.](19|20)\d\d$/;
 var RE_AMAZON = /^(?:https?:\/\/)?(?:www\.)?(?:amazon\..*\/.*|amzn\.com\/.*|amzn\.to\/.*)$/;
@@ -212,9 +212,9 @@ function createErrorMessage(item, isLogin){
     }
     else{
         switch (item.name) {
-            case 'name': errorMessage = "Controlla il Nome! Il campo dev'essere composto solamente da lettere.";
+            case 'name': errorMessage = "Controlla il Nome! Il campo non può essere composto da valori numerici.";
                 break;
-            case 'surname': errorMessage = "Controlla il Cognome! Il campo dev'essere composto solamente da lettere.";
+            case 'surname': errorMessage = "Controlla il Cognome! Il campo non può essere composto da valori numerici.";
                 break;
             case 'username': errorMessage = "Controlla l'username! Il campo non pu\u00F2 essere composto da caratteri speciali.";
                 break;

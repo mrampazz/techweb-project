@@ -39,37 +39,37 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
   }
   else{
-    header("Location: ../php/registration.php");
+    header("Location: ".SessionManager::BASE_URL."registration");
   }
 
 }
 
 // check data format -> return true if correct. Otherwise, return false and set errormessage
 function checkParameters($username, $password, $confirmationPassword, $name, $surname, $email) {
-	if (empty($username)) {
-	  $_SESSION['error-message'] .= " l'username è richiesto! ";
-		return false;
-  }
-  else if(!preg_match("/^[A-Za-z0-9]+(?:[_-][A-Za-z0-9]+)*$/",$username)){
-    $_SESSION['error-message'] .= " controlla l'username! Il campo non può essere composto da caratteri speciali o spazi. ";
-		return false;
-  } 
   if (empty($name)) {
 		$_SESSION['error-message'] .= " il nome è richiesto! ";
 		return false;
   }
-  else if(!preg_match("/^[a-zA-Z ]{1,16}$/",$name)){
-    $_SESSION['error-message'] .= " controlla il Nome! Il campo dev'essere composto solamente da lettere. ";
+  else if(!preg_match("/^[a-zA-Z]+(([',. -][a-zA-Z ])?[a-zA-Z]*)*$/",$name)){
+    $_SESSION['error-message'] .= " controlla il Nome! Il campo non può essere composto da valori numerici. ";
 		return false;
   }
   if (empty($surname)) {
 		$_SESSION['error-message'] .= " il cognome è richiesto! ";
 		return false;
   } 
-  else if(!preg_match("/^[a-zA-Z ]{1,16}$/",$surname)){
-    $_SESSION['error-message'] .= " controlla il Cognome! Il campo dev'essere composto solamente da lettere. ";
+  else if(!preg_match("/^[a-zA-Z]+(([',. -][a-zA-Z ])?[a-zA-Z]*)*$/",$surname)){
+    $_SESSION['error-message'] .= " controlla il Cognome! Il campo non può essere composto da valori numerici. ";
 		return false;
   }
+  if (empty($username)) {
+    $_SESSION['error-message'] .= " l'username è richiesto! ";
+    return false;
+  }
+  else if(!preg_match("/^[A-Za-z0-9]+(?:[_-][A-Za-z0-9]+)*$/",$username)){
+    $_SESSION['error-message'] .= " controlla l'username! Il campo non può essere composto da caratteri speciali o spazi. ";
+    return false;
+  } 
 	if (empty($email)) {
 		$_SESSION['error-message'] .= " l'email è richiesta! ";
 		return false;

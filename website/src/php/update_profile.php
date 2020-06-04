@@ -51,8 +51,8 @@ function isValidName($nameToCheck){
     $_SESSION['name'] = $nameToCheck;
     return false;
   }
-  else if(!preg_match("/^[a-zA-Z ]{1,16}$/",$nameToCheck)){
-    $_SESSION['error-message'] = "Controlla il nome! Il campo dev'essere composto solamente da lettere. Quando hai finito richiedi l'aggiornamento del profilo. In caso contrario verrà ripristinato il nome precedente.";
+  else if(!preg_match("/^[a-zA-Z]+(([',. -][a-zA-Z ])?[a-zA-Z]*)*$/",$nameToCheck)){
+    $_SESSION['error-message'] = "Controlla il nome! Il campo non può essere composto da valori numerici. Quando hai finito richiedi l'aggiornamento del profilo. In caso contrario verrà ripristinato il nome precedente.";
     $_SESSION['name'] = $nameToCheck;
     return false;
   }
@@ -65,8 +65,8 @@ function isValidSurname($surnameToCheck){
     $_SESSION['surname'] = $surnameToCheck;
     return false;
   } 
-  else if(!preg_match("/^[a-zA-Z ]{1,16}$/",$surnameToCheck)){
-    $_SESSION['error-message'] = "Controlla il cognome! Il campo dev'essere composto solamente da lettere. Quando hai finito richiedi l'aggiornamento del profilo. In caso contrario verrà ripristinato il cognome precedente.";
+  else if(!preg_match("/^[a-zA-Z]+(([',. -][a-zA-Z ])?[a-zA-Z]*)*$/",$surnameToCheck)){
+    $_SESSION['error-message'] = "Controlla il cognome! Il campo non può essere composto da valori numerici. Quando hai finito richiedi l'aggiornamento del profilo. In caso contrario verrà ripristinato il cognome precedente.";
     $_SESSION['surname'] = $surnameToCheck;
     return false;
   }
