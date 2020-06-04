@@ -6,7 +6,7 @@ include_once("../../server/models/models.php");
 
 //user not logged -> redirect to login page
 if (!SessionManager::isUserLogged()) {
-  header("Location: ../php/login.php");
+  header("Location: ".SessionManager::BASE_URL."login");
   return;                               
 }
 

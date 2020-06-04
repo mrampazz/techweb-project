@@ -19,16 +19,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if ($log !== false) { // if logged
       $_SESSION['login'] = true;
       userLoggedCorrectly(); 
+      return;
     } 
     else {
       $_SESSION['error-message'] = " autenticazione fallita.";
-      header("Location: ../php/layout.php?page=login");
     }
   }
-  else{
-    header("Location: ../php/layout.php?page=login");
-  }
-
+  header("Location: ".SessionManager::BASE_URL."login");
+  
 }
 
 // check data format -> return true if correct. Otherwise, return false and set errormessage
