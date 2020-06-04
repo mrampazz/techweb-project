@@ -371,7 +371,6 @@ body {
   display: block;
   margin: 1em;
   text-align: center;
-  background-color: #eef4ff;
   padding: 1em;
 }
 
@@ -388,17 +387,23 @@ body {
   margin: 0 auto;
 }
 
+.article-votes > form {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+}
+
 .vote-container {
   display: flex;
   justify-content: center;
-  flex-direction: row;
+  flex-direction: column;
   align-items: center;
 }
 
 .vote-container > button {
   display: block;
-  width: 10em;
-  height: 2em;
+  font-size: 2em;
 }
 
 .article-votes {

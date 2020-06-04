@@ -5,26 +5,16 @@
     <span class="article-title">{article-model}</span>
   </a>
   <div class="article-votes">
-    <form class="inline-form" method="post" action="add_vote.php">
+    <form method="post" action="add_vote.php">
       <div class="vote-container">
-        <button
-          aria-label="Dai un voto positivo"
-          name="vote"
-          type="submit"
-          value="like"
-          class="{article-liked} custom-button"
-        >Lo consiglio</button>
         <span aria-label="Voti positivi">{article-likes}</span>
+        <button aria-label="Dai un voto positivo" name="vote" type="submit" value="like" class="custom-thumbs-up far fa-thumbs-up {article-liked}"></button>
+        <span>Lo consiglio</span>
       </div>
       <div class="vote-container">
-        <button
-          aria-label="Dai un voto negativo"
-          name="vote"
-          type="submit"
-          value="dislike"
-          class="{article-disliked} custom-button"
-        >Non lo consiglio</button>
         <span aria-label="Voti negativi">{article-dislikes}</span>
+        <button aria-label="Dai un voto negativo" name="vote" type="submit" value="dislike" class="custom-thumbs-down far fa-thumbs-down {article-disliked}"></button>
+        <span>Non lo consiglio</span>
       </div>
       <input type="hidden" value="{articleID}" name="articleID" />
       <input type="hidden" value="home" name="redirectURL" />
