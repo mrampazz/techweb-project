@@ -13,6 +13,8 @@ else{
 }
 
 $output = str_replace("{edit}", "Inserimento", $output);
+
+//restore previous user input in case of error, else set empty value
 if (isset($_SESSION['brand'])){
     $output = str_replace("{brand}",$_SESSION['brand'], $output);
 }
@@ -49,10 +51,10 @@ if (isset($_SESSION['description'])){
 else{
     $output = str_replace("{desc}", "", $output);
 }
+Utils::unsetAll(array('brand','model','price','date','amazon-link','description'));
 
 $output = str_replace("article-image-url", "../assets/img/articles/default.png", $output);
-
-
 $output = str_replace("validate-form-url", "../php/validate_admin_form.php", $output);
-Utils::unsetAll(array('brand','model','price','date','amazon-link','description'));
+
+
 ?>
