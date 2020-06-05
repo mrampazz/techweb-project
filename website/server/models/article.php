@@ -58,7 +58,6 @@ class Article extends Base
         $dbman = DBManager::getInstance();
         $insertQuery = "INSERT INTO ".(self::TABLE_NAME)." (".(self::CONTENT_KEY).", ".(self::BRAND_KEY).", ".(self::MODEL_KEY).", ".(self::INITIAL_PRICE_KEY).", ".(self::LINK_KEY).", ".(self::LAUNCH_DATE_KEY).", ".(self::IMAGE_KEY).") ";
         $insertQuery .= "VALUES ('".$this->content."', '".$this->brand."', '".$this->model."', ".$this->initialPrice.", '".$this->link."', '".$this->launchDate."', '".$this->image."');";
-        echo $insertQuery;
         return $dbman->query($insertQuery);
     }
 
@@ -66,7 +65,6 @@ class Article extends Base
         $dbman = DBManager::getInstance();
         $insertQuery = "UPDATE ".(self::TABLE_NAME)." SET  ".(self::CONTENT_KEY)."='".$this->content."', ".(self::BRAND_KEY)."='".$this->brand."', ".(self::MODEL_KEY)."='".$this->model."', ".(self::INITIAL_PRICE_KEY)."=".$this->initialPrice.", ".(self::LINK_KEY)."='".$this->link."', ".(self::LAUNCH_DATE_KEY)."='".$this->launchDate."', ".(self::IMAGE_KEY)."='".$this->image."' ";
         $insertQuery .= " WHERE id=".$this->id;
-        echo $insertQuery;
         return $dbman->query($insertQuery);
     }
 
@@ -88,7 +86,6 @@ class Article extends Base
         }
 
         $queryString = "SELECT Article.*, count(Vote.id) AS votes_count, sum(Vote.positive) as votes_positive FROM ".(self::TABLE_NAME)." LEFT JOIN Vote ON (".(self::TABLE_NAME).".id=Vote.article_id) WHERE ".$whereClause." GROUP BY Article.id {$orderClause};";
-        //print_r($queryString);
         $results = $dbman->query($queryString, Article::class);
         return $results;
     }

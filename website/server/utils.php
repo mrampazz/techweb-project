@@ -118,8 +118,13 @@ class Utils
 
     public static function getArticles($search, $brand, $order)
     {
-        $orderKey = $order != "all" ? "initial_price" : null;
-        return Article::list($search, $brand, $orderKey, substr($order, strpos($order, "-")+1));
+        $orderKey = 'created_at';
+        $ordering = 'desc';
+        if(strpos($order, 'price') !== false) {
+            $orderKey = "initial_price";
+            $ordering = substr($order, strpos($order, "-")+1);
+        }
+        return Article::list($search, $brand, $orderKey, $ordering);
     }
 
     public static function generateArticlesList($array)
