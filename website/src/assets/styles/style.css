@@ -388,6 +388,7 @@ body {
   margin: 1em;
   text-align: center;
   padding: 1em;
+  border: .01em solid #cccccc;
 }
 
 .article-title {
