@@ -164,7 +164,7 @@ function validateComment(){
         comment.focus();
         return false;
     }
-    if (comment.value.length>10){
+    if (comment.value.length>500){
         alert("Il commento non può essere più lungo di 500 caratteri. Il tuo è di " + comment.value.length + " caratteri.");
         comment.focus();
         return false;
