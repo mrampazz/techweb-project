@@ -161,6 +161,12 @@ function validateComment(){
     var comment =  document.getElementById('comment-input');
     if (comment.value==""){
         alert("Inserisci un commento!");
+        comment.focus();
+        return false;
+    }
+    if (comment.value.length>10){
+        alert("Il commento non può essere più lungo di 500 caratteri. Il tuo è di " + comment.value.length + " caratteri.");
+        comment.focus();
         return false;
     }
     return true;
