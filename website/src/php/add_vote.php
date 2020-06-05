@@ -23,7 +23,12 @@ if (isset($_POST["vote"])) {
             $article->addVote($userId, $articleId, 0);
         break;
     }
-    header("Location: ".SessionManager::BASE_URL."article"."&articleId=".$articleId);
+    if (isset($_POST['redirectURL'])) {
+        header("Location: ".SessionManager::BASE_URL."article"."&articleId=".$articleId);
+        if (isset($_POST['articleID'])) {
+            header("Location: ".SessionManager::BASE_URL.$_POST['redirectURL']."&articleId=".$articleId);
+        }
+    }
 } 
 else {
     echo "Parametri incorretti";
