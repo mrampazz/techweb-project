@@ -59,9 +59,8 @@ switch($check) {
 
 //--COMMENTS--
 //check if a previously written comment needs to be restored
-if (isset($_SESSION['comment'])){
+if (isset($_SESSION['comment']) && !isset($_SESSION['is-comment-published'])){
   $output = str_replace("{comment-input}", $_SESSION['comment'], $output);
-  unset($_SESSION['comment']);
 }
 else{
   $output = str_replace("{comment-input}", "", $output);
@@ -75,6 +74,7 @@ else{
   $output = str_replace("{comment-list}", "<p class=\"font-size-0-75 text-align-center\"> Nessun commento presente per questo prodotto. </p>", $output);
 }
 
+Utils::unsetAll(array('comment','error-message','is-comment-published','is-comment-deleted'));
 
 
 //--HELPER FUNCTIONS--
@@ -142,12 +142,15 @@ function getCommentList($comments) {
 
 //checks whether a message (error or confirmation) should be displayed
 function manageMessage(&$output){
-  if(isset($_SESSION['error-message']) || (isset($_SESSION['is-comment-published']) && is_null($_SESSION['is-comment-published']))) {
+  if(isset($_SESSION['error-message']) || (isset($_SESSION['is-comment-published']) && empty($_SESSION['is-comment-published']))){
     $page = file_get_contents("../html/message-box.html");
     $output = str_replace("{message-box}",$page,$output);
     $output = str_replace("{message-box-class}","error-message-box",$output);
     $output = str_replace("{message-box-title}","Errore caricamento commento",$output);
-    $output = str_replace("{message-box-text}","Si è verificato un problema durante l'invio del tuo commento. ". isset($_SESSION['error-message']) ? $_SESSION['error-message'] : "",$output);
+    if (isset($_SESSION['error-message']))
+      $output = str_replace("{message-box-text}","Si è verificato un problema durante l'invio del tuo commento. ".$_SESSION['error-message'],$output);
+    else
+      $output = str_replace("{message-box-text}","Si è verificato un problema durante l'invio del tuo commento.",$output);
   }
   else if(isset($_SESSION['is-comment-deleted'])){
     $page = file_get_contents("../html/message-box.html");
@@ -173,6 +176,5 @@ function manageMessage(&$output){
   else{
     $output = str_replace("{message-box}","",$output);
   }
-  Utils::unsetAll(array('error-message', 'is-comment-published','is-comment-deleted'));
 }
 ?>

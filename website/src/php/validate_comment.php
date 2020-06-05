@@ -8,7 +8,6 @@ $articleId = $_POST["articleId"];
 $content = Utils::validateInput($_POST['comment-input']);
 $_SESSION['comment'] = $content;
 
-
 if (!SessionManager::isUserLogged()) {
     header("Location: ".SessionManager::BASE_URL."login");
     return;
@@ -18,8 +17,8 @@ if (empty($content)) {
     header("Location: ".SessionManager::BASE_URL."article"."&articleId=".$articleId);
     return;
 }
-else if (strlen($content)>500){
-    $_SESSION['error-message'] = "Il commento non può essere più lungo di 500 caratteri. Il tuo è di ".strlen($content)." caratteri.";
+else if (strlen($content)>800){
+    $_SESSION['error-message'] = "Il commento non può essere più lungo di 800 caratteri. Il tuo è di ".strlen($content)." caratteri.";
     header("Location: ".SessionManager::BASE_URL."article"."&articleId=".$articleId);
     return;
 }
