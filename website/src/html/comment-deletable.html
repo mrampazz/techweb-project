@@ -4,10 +4,10 @@
         <p class="font-weight-bold text-align-left">{user-full-name-comment}</p>
         <p>{content-comment}</p>
     </div>
-    <div class="comment-delete-btn-container">
-        <form method="post" onclick="return askConfirmationDeleteComment()" action="delete-comment-url">
+    <form method="post" onclick="return askConfirmationDeleteComment()" action="delete-comment-url">
+        <div class="comment-delete-btn-container">
             <input type="hidden" name="comment-id" value="{comment-id}"/>
             <input type="submit" class="delete-comment-btn" value="Elimina commento"/>
-        </form>
-    </div>
+        </div>
+    </form>
 </div>

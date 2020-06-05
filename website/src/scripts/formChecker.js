@@ -6,7 +6,6 @@ var RE_DATE = /^(0[1-9]|[12][0-9]|3[01])[- /.](0[1-9]|1[012])[- /.](19|20)\d\d$/
 var RE_AMAZON = /^(?:https?:\/\/)?(?:www\.)?(?:amazon\..*\/.*|amzn\.com\/.*|amzn\.to\/.*)$/;
 var RE_NUMERIC = /^\d+(\.\d{1,2})?$/;
 
-
 var errorMessage = ""; //managed by createErrorMessage function
 
 /* 
