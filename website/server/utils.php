@@ -116,10 +116,10 @@ class Utils
     }
 
 
-    public static function getArticles($search, $model, $price, $userId = null)
+    public static function getArticles($search, $brand, $order)
     {
-        // return Article::list($userId, null, $search, $model, null, "ASC");
-        return Article::list();
+        $orderKey = $order != "all" ? "initial_price" : null;
+        return Article::list($search, $brand, $orderKey, substr($order, strpos($order, "-")+1));
     }
 
     public static function generateArticlesList($array)

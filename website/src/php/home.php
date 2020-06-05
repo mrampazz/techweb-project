@@ -15,7 +15,7 @@ if (isset($_GET['model'])) {
 
 if (isset($_GET['ordine'])) {
     if ($_GET['ordine'] != 'all') {
-        $model = $_GET['ordine'];
+        $ordine = $_GET['ordine'];
     }
 }
 
@@ -23,12 +23,7 @@ if (isset($_GET['search'])) {
     $search = $_GET['search'];
 }
 
-$userId = null;
-if (SessionManager::isUserLogged()) {
-    $userId = SessionManager::getUserId();
-}
-
-$list = Utils::getArticles($search, $model, $ordine, $userId);
+$list = Utils::getArticles($search, $model, $ordine);
 $articlesList = Utils::generateArticlesList($list);
 if ($articlesList != '') {
     $output = str_replace("{articles}", $articlesList, $output);

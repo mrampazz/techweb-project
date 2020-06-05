@@ -70,11 +70,25 @@ class Article extends Base
         return $dbman->query($insertQuery);
     }
 
-    public static function list()
+    public static function list($search=null, $brand=null, $order = null, $asc = "ASC")
     {
         $dbman = DBManager::getInstance();
         $whereClause = "1";
-        $queryString = "SELECT Article.*, count(Vote.id) AS votes_count, sum(Vote.positive) as votes_positive FROM ".(self::TABLE_NAME)." LEFT JOIN Vote ON (".(self::TABLE_NAME).".id=Vote.article_id) WHERE ".$whereClause." GROUP BY Article.id;";
+
+        if ($brand != null)
+            $whereClause = $whereClause." AND ".(self::TABLE_NAME).".".self::BRAND_KEY." LIKE '$brand'";
+        
+        if ($search != null)
+            $whereClause = $whereClause." AND (".(self::TABLE_NAME).".".self::MODEL_KEY." LIKE '%{$search}%' OR ".(self::TABLE_NAME).".".self::BRAND_KEY." LIKE '%{$search}%')";
+
+        $orderClause = "";
+        if ($order != null)
+        {
+            $orderClause = " ORDER BY {$order} {$asc} ";
+        }
+
+        $queryString = "SELECT Article.*, count(Vote.id) AS votes_count, sum(Vote.positive) as votes_positive FROM ".(self::TABLE_NAME)." LEFT JOIN Vote ON (".(self::TABLE_NAME).".id=Vote.article_id) WHERE ".$whereClause." GROUP BY Article.id {$orderClause};";
+        //print_r($queryString);
         $results = $dbman->query($queryString, Article::class);
         return $results;
     }
