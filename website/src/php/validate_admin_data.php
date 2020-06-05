@@ -86,7 +86,7 @@ function checkParameters($brand, $model, $price, $date, $amazonLink, $descriptio
         $_SESSION['error-message'] = "Il campo \"data di lancio\" non può essere vuoto.";
         return false;
     }
-    else if(!preg_match("/^(0[1-9]|[12][0-9]|3[01])[- \/.](0[1-9]|1[012])[- \/.](19|20)\d\d$/",$date) || Utils::isValidDate($date)){
+    else if(!preg_match("/^(0[1-9]|[12][0-9]|3[01])[- \/.](0[1-9]|1[012])[- \/.](19|20)\d\d$/",$date) || !Utils::isValidDate($date)){
         $_SESSION['error-message'] = "Controlla la data di lancio! La data inserita non risulta valida o non segue il formato dd-mm-yyyy.";
         return false;
     }
