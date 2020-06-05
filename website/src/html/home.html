@@ -2,7 +2,7 @@
   <div class="search-container">
     <fieldset class="custom-fieldset">
       <legend class="custom-legend">Ricerca</legend>
-      <form class="inline-form" method="get">
+      <form class="inline-form" method="get" action="#">
         <div class="search-bar-container">
           <label class="custom-label" for="search-input">Cerca un telefono</label>
           <input class="custom-input" id="search-input" type="text" name="search" />
@@ -10,16 +10,16 @@
 
         <div class="filters-container">
           <div>
-            <label class="custom-label" for="search-select">Marca</label>
-            <select class="custom-select" id="search-select" name="model">
+            <label class="custom-label" for="brand-select">Marca</label>
+            <select class="custom-select" id="brand-select" name="model">
               <option value="all">Tutte le marche</option>
               <option>{modelOptions}</option>
             </select>
           </div>
 
           <div>
-            <label class="custom-label" for="search-select">Ordina per</label>
-            <select class="custom-select" id="search-select" name="ordine">
+            <label class="custom-label" for="price-select">Ordina per</label>
+            <select class="custom-select" id="price-select" name="ordine">
               <option value="all">Nessun filtro</option>
               <option value="price-asc">Per prezzo crescente</option>
               <option value="price-desc">Per prezzo decrescente</option>

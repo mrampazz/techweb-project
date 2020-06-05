@@ -4,7 +4,7 @@ $modelsList = Utils::getModelsOptions(Article::getModelsList());
 
 $output = str_replace("<option>{modelOptions}</option>", $modelsList, $output);
 $model = null;
-$price = null;
+$ordine = null;
 $search = null;
 
 if (isset($_GET['model'])) {
@@ -13,9 +13,9 @@ if (isset($_GET['model'])) {
     }
 }
 
-if (isset($_GET['price'])) {
-    if ($_GET['price'] != 'all') {
-        $model = $_GET['price'];
+if (isset($_GET['ordine'])) {
+    if ($_GET['ordine'] != 'all') {
+        $model = $_GET['ordine'];
     }
 }
 
@@ -28,7 +28,7 @@ if (SessionManager::isUserLogged()) {
     $userId = SessionManager::getUserId();
 }
 
-$list = Utils::getArticles($search, $model, $price, $userId);
+$list = Utils::getArticles($search, $model, $ordine, $userId);
 $articlesList = Utils::generateArticlesList($list);
 if ($articlesList != '') {
     $output = str_replace("{articles}", $articlesList, $output);
