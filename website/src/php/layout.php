@@ -34,7 +34,7 @@ class Link
 
 $links = [
     new Link("Home", SessionManager::BASE_URL . "home", false),
-    new Link("Il tuo profilo", SessionManager::BASE_URL . "profile", false),
+    new Link("Il mio profilo", SessionManager::BASE_URL . "profile", false),
     new Link("Regolamento", SessionManager::BASE_URL . "rules", false),
     new Link("Chi siamo?", SessionManager::BASE_URL . "about", false),
     new Link("Area Amministratore", SessionManager::BASE_URL . "admin", false),
@@ -51,7 +51,7 @@ if (SessionManager::isUserLogged()) {
     $user = User::getUser(SessionManager::getUserId());
     $links[1]->setHidden(false);
     $links[4]->setHidden(true);
-    $userLinks[1]->setName("Log out");
+    $userLinks[1]->setName("Disconnettiti");
     $userLinks[1]->setLink(SessionManager::BASE_URL . "home&amp;logout=true");
     $userLinks[0]->setHidden(true);
     if (SessionManager::userCanPublish()) {
@@ -132,8 +132,8 @@ switch ($_GET['page']) {
         $page = file_get_contents("../html/profile.html");
         $output = str_replace("{breadcrumb}", $breadcrumb, $output);
         $output = str_replace("{content}", $page, $output);
-        $output = str_replace("{currentPage}", "Telefolandia - Il tuo profilo", $output);
-        $linkItems = Utils::getMenuLinks($links, 'Il tuo profilo');
+        $output = str_replace("{currentPage}", "Telefolandia - Il mio profilo", $output);
+        $linkItems = Utils::getMenuLinks($links, 'Il mio profilo');
         $userItems = Utils::getMenuLinks($userLinks, null);
         $output = str_replace("{user-links}", $userItems, $output);
         $output = str_replace("{menu-links}", $linkItems, $output);
