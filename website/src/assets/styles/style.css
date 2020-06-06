@@ -14,6 +14,10 @@ body {
   font-family: "Montserrat", sans-serif;
 }
 
+.body-no-overflow {
+  overflow-y: hidden;
+}
+
 .skip-to-content {
   background: #506180;
   display: flex;
@@ -33,10 +37,10 @@ body {
   transform: translate(-50%, 0%);
 }
 
-#back-to-top {
+.back-to-top {
   position: fixed;
-  display: none;
   padding: 0.5em;
+  display: none;
   background-color: #506180;
   color: white;
   bottom: 5em;
@@ -48,8 +52,16 @@ body {
   background-size: 80%;
   padding: 1em;
 }
-#back-to-top path {
+.back-to-top path {
   fill: white;
+}
+
+.back-to-top-hidden {
+  display: none;
+}
+
+.back-to-top-visible {
+  display: block;
 }
 
 .header-container {
@@ -265,6 +277,7 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
+  flex-direction: column;
 }
 
 .homepage-container {
@@ -431,10 +444,10 @@ body {
 
 .hidden-text {
   position: absolute;
-  left: -300vw;
-  top: -100vh;
-  width: 0.1em;
-  height: 0.1em;
+  left: -10000px;
+  top: -100px;
+  width: 1px;
+  height: 1px;
   overflow: hidden;
 }
 
@@ -986,6 +999,16 @@ input:focus ~ .highlight {
   border: 0.0625em solid #506180;
 }
 
+.accordion-panel-open {
+  opacity: 1;
+  max-height: 20em;
+}
+
+.accordion-panel-closed {
+  opacity: 0;
+  max-height: 0;
+}
+
 .accordion > h2 {
   font-size: 1em;
   font-weight: bold;
@@ -1064,12 +1087,10 @@ input:focus ~ .highlight {
 .panel {
   padding: 0 1em;
   display: block;
-  opacity: 1;
   background-color: white;
   overflow: hidden;
   margin-bottom: 0.5em;
   height: auto;
-  max-height: 20em;
   transition: all 0.3s ease-in-out;
 }
 

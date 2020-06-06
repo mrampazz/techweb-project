@@ -35,9 +35,8 @@ class Link
 $links = [
     new Link("Home", SessionManager::BASE_URL . "home", false),
     new Link("Il tuo profilo", SessionManager::BASE_URL . "profile", false),
-    new Link("Regolamento", SessionManager::BASE_URL . "rules", false),
-    new Link("Chi siamo?", SessionManager::BASE_URL . "about", false),
     new Link("Area Amministratore", SessionManager::BASE_URL . "admin", false),
+    new Link("Regolamento", SessionManager::BASE_URL . "rules", false),
     new Link("FAQ", SessionManager::BASE_URL . "faq", false)
 ];
 
@@ -50,17 +49,17 @@ if (SessionManager::isUserLogged()) {
     $username = SessionManager::getUsername();
     $user = User::getUser(SessionManager::getUserId());
     $links[1]->setHidden(false);
-    $links[4]->setHidden(true);
+    $links[2]->setHidden(true);
     $userLinks[1]->setName("Log out");
     $userLinks[1]->setLink(SessionManager::BASE_URL . "home&amp;logout=true");
     $userLinks[0]->setHidden(true);
     if (SessionManager::userCanPublish()) {
-        $links[4]->setHidden(false);
+        $links[2]->setHidden(false);
     }
 } else {
     $links[1]->setHidden(true);
     $links[0]->setHidden(false);
-    $links[4]->setHidden(true);
+    $links[2]->setHidden(true);
     $userLinks[1]->setName("Registrati");
     $userLinks[1]->setLink(SessionManager::BASE_URL . "registration");
 }
@@ -175,22 +174,6 @@ switch ($_GET['page']) {
         $output = str_replace("{mobile-menu-links}", $linkItems, $output);
         $output = str_replace("{mobile-user-links}", $userItems, $output);
         // include_once("../php/rules.php");
-        break;
-
-    case 'about':
-        $breadcrumb = "<li>&#62;&#62; <a href='" . SessionManager::BASE_URL . 'home' . "'>Home</a></li><li>&#62;&#62; <span>Chi siamo?</span></li>";
-        $page = file_get_contents("../html/about.html");
-        $output = str_replace("{breadcrumb}", $breadcrumb, $output);
-        $output = str_replace("{content}", $page, $output);
-        $output = str_replace("{currentPage}", "Smartphy - Chi siamo?", $output);
-        $linkItems = Utils::getMenuLinks($links, 'Chi siamo?');
-        $userItems = Utils::getMenuLinks($userLinks, null);
-        $output = str_replace("{user-links}", $userItems, $output);
-        $output = str_replace("{menu-links}", $linkItems, $output);
-        $output = str_replace("{mobile-menu-links}", $linkItems, $output);
-        $output = str_replace("{mobile-user-links}", $userItems, $output);
-        
-        // include_once("../php/about.php");
         break;
 
     case 'faq':
