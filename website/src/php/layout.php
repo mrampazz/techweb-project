@@ -87,7 +87,7 @@ switch ($_GET['page']) {
         $page = file_get_contents("../html/login.html");
         $output = str_replace("{breadcrumb}", $breadcrumb, $output);
         $output = str_replace("{content}", $page, $output);
-        $output = str_replace("{currentPage}", "Smartphy - Login", $output);
+        $output = str_replace("{currentPage}", "Telefolandia - Login", $output);
         $linkItems = Utils::getMenuLinks($links, null);
         $userItems = Utils::getMenuLinks($userLinks, 'Login');
         $output = str_replace("{menu-links}", $linkItems, $output);
@@ -102,7 +102,7 @@ switch ($_GET['page']) {
         $page = file_get_contents("../html/registration.html");
         $output = str_replace("{breadcrumb}", $breadcrumb, $output);
         $output = str_replace("{content}", $page, $output);
-        $output = str_replace("{currentPage}", "Smartphy - Registrazione", $output);
+        $output = str_replace("{currentPage}", "Telefolandia - Registrazione", $output);
         $linkItems = Utils::getMenuLinks($links, null);
         $userItems = Utils::getMenuLinks($userLinks, 'Registrati');
         $output = str_replace("{menu-links}", $linkItems, $output);
@@ -117,7 +117,7 @@ switch ($_GET['page']) {
         $page = file_get_contents("../html/home.html");
         $output = str_replace("{breadcrumb}", $breadcrumb, $output);
         $output = str_replace("{content}", $page, $output);
-        $output = str_replace("{currentPage}", "Smartphy - Homepage", $output);
+        $output = str_replace("{currentPage}", "Telefolandia - Homepage", $output);
         $linkItems = Utils::getMenuLinks($links, 'Home');
         $userItems = Utils::getMenuLinks($userLinks, null);
         $output = str_replace("{user-links}", $userItems, $output);
@@ -132,7 +132,7 @@ switch ($_GET['page']) {
         $page = file_get_contents("../html/profile.html");
         $output = str_replace("{breadcrumb}", $breadcrumb, $output);
         $output = str_replace("{content}", $page, $output);
-        $output = str_replace("{currentPage}", "Smartphy - Il tuo profilo", $output);
+        $output = str_replace("{currentPage}", "Telefolandia - Il tuo profilo", $output);
         $linkItems = Utils::getMenuLinks($links, 'Il tuo profilo');
         $userItems = Utils::getMenuLinks($userLinks, null);
         $output = str_replace("{user-links}", $userItems, $output);
@@ -157,7 +157,7 @@ switch ($_GET['page']) {
         $output = str_replace("{user-links}", $userItems, $output);
         $output = str_replace("{menu-links}", $linkItems, $output);
         $output = str_replace("{mobile-menu-links}", $linkItems, $output);
-        $output = str_replace("{currentPage}", "Smartphy - Articolo {$article->model}", $output);
+        $output = str_replace("{currentPage}", "Telefolandia - Articolo {$article->model}", $output);
         $output = str_replace("{mobile-user-links}", $userItems, $output);
         include_once("../php/article_page.php");
         break;
@@ -167,7 +167,7 @@ switch ($_GET['page']) {
         $page = file_get_contents("../html/rules.html");
         $output = str_replace("{breadcrumb}", $breadcrumb, $output);
         $output = str_replace("{content}", $page, $output);
-        $output = str_replace("{currentPage}", "Smartphy - Regolamento", $output);
+        $output = str_replace("{currentPage}", "Telefolandia - Regolamento", $output);
         $linkItems = Utils::getMenuLinks($links, 'Regolamento');
         $userItems = Utils::getMenuLinks($userLinks, null);
         $output = str_replace("{user-links}", $userItems, $output);
@@ -182,7 +182,7 @@ switch ($_GET['page']) {
         $page = file_get_contents("../html/about.html");
         $output = str_replace("{breadcrumb}", $breadcrumb, $output);
         $output = str_replace("{content}", $page, $output);
-        $output = str_replace("{currentPage}", "Smartphy - Chi siamo?", $output);
+        $output = str_replace("{currentPage}", "Telefolandia - Chi siamo?", $output);
         $linkItems = Utils::getMenuLinks($links, 'Chi siamo?');
         $userItems = Utils::getMenuLinks($userLinks, null);
         $output = str_replace("{user-links}", $userItems, $output);
@@ -198,7 +198,7 @@ switch ($_GET['page']) {
         $page = file_get_contents("../html/faq.html");
         $output = str_replace("{breadcrumb}", $breadcrumb, $output);
         $output = str_replace("{content}", $page, $output);
-        $output = str_replace("{currentPage}", "Smartphy - FAQ", $output);
+        $output = str_replace("{currentPage}", "Telefolandia - FAQ", $output);
         $linkItems = Utils::getMenuLinks($links, 'FAQ');
         $userItems = Utils::getMenuLinks($userLinks, null);
         $output = str_replace("{user-links}", $userItems, $output);
@@ -214,7 +214,7 @@ switch ($_GET['page']) {
         $page = file_get_contents("../html/admin.html");
         $output = str_replace("{breadcrumb}", $breadcrumb, $output);
         $output = str_replace("{content}", $page, $output);
-        $output = str_replace("{currentPage}", "Smartphy - Area Amministratore", $output);
+        $output = str_replace("{currentPage}", "Telefolandia - Area Amministratore", $output);
         $linkItems = Utils::getMenuLinks($links, 'Area Amministratore');
         $userItems = Utils::getMenuLinks($userLinks, null);
         $output = str_replace("{user-links}", $userItems, $output);
@@ -229,7 +229,7 @@ switch ($_GET['page']) {
         $page = file_get_contents("../html/admin-form.html");
         $output = str_replace("{breadcrumb}", $breadcrumb, $output);
         $output = str_replace("{content}", $page, $output);
-        $output = str_replace("{currentPage}", "Smartphy - Aggiungi articolo", $output);
+        $output = str_replace("{currentPage}", "Telefolandia - Aggiungi articolo", $output);
         $linkItems = Utils::getMenuLinks($links, null);
         $userItems = Utils::getMenuLinks($userLinks, null);
         $output = str_replace("{user-links}", $userItems, $output);
@@ -244,7 +244,7 @@ switch ($_GET['page']) {
         $page = file_get_contents("../html/admin-form.html");
         $output = str_replace("{breadcrumb}", $breadcrumb, $output);
         $output = str_replace("{content}", $page, $output);
-        $output = str_replace("{currentPage}", "Smartphy - Modifica articolo", $output);
+        $output = str_replace("{currentPage}", "Telefolandia - Modifica articolo", $output);
         $linkItems = Utils::getMenuLinks($links, null);
         $userItems = Utils::getMenuLinks($userLinks, null);
         $output = str_replace("{user-links}", $userItems, $output);
@@ -258,7 +258,7 @@ switch ($_GET['page']) {
         $page = file_get_contents("../html/no-permissions.html");
         $output = str_replace("{breadcrumb}", $breadcrumb, $output);
         $output = str_replace("{content}", $page, $output);
-        $output = str_replace("{currentPage}", "Smartphy - Non hai i permessi", $output);
+        $output = str_replace("{currentPage}", "Telefolandia - Non hai i permessi", $output);
         $linkItems = Utils::getMenuLinks($links, null);
         $userItems = Utils::getMenuLinks($userLinks, null);
         $output = str_replace("{user-links}", $userItems, $output);
@@ -271,7 +271,7 @@ switch ($_GET['page']) {
         $page = file_get_contents("../html/404.html");
         $output = str_replace("{breadcrumb}", $breadcrumb, $output);
         $output = str_replace("{content}", $page, $output);
-        $output = str_replace("{currentPage}", "Smartphy - 404", $output);
+        $output = str_replace("{currentPage}", "Telefolandia - 404", $output);
         $linkItems = Utils::getMenuLinks($links, null);
         $userItems = Utils::getMenuLinks($userLinks, null);
         $output = str_replace("{user-links}", $userItems, $output);
