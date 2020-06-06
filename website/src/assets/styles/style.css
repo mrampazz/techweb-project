@@ -989,17 +989,10 @@ input:focus ~ .highlight {
 .accordion > h2 {
   font-size: 1em;
   font-weight: bold;
-  user-select: none;
-  cursor: pointer;
   flex-grow: 3;
   flex-shrink: 3;
   flex-basis: 0;
   padding: 1em;
-}
-
-.panel:focus,
-.accordion-title:focus {
-  outline: none !important;
 }
 
 .accordion > button {
@@ -1031,7 +1024,7 @@ input:focus ~ .highlight {
 }
 
 .accordion-button:focus {
-  outline: 0.0625em solid #506180;
+  outline: 0.0625em solid black;
 }
 
 /* ADMIN TILE */

@@ -7,12 +7,12 @@ class Utils
         $list = [];
         for ($x = 0; $x < count($array); $x++) {
             if ($name && $array[$x]->name == $name) {
-                $element = "<span class='menu-item-active'>{$array[$x]->name}</span>";
+                $element = "<span aria-hidden='false' class='menu-item-active'>{$array[$x]->name}</span>";
             } else {
                 if ($array[$x]->hidden) {
-                    $element = "<a class='menu-item hidden' href='{$array[$x]->link}'>{$array[$x]->name}</a>";
+                    $element = "<a aria-hidden='true' class='menu-item hidden' href='{$array[$x]->link}'>{$array[$x]->name}</a>";
                 } else {
-                    $element = "<a class='menu-item' href='{$array[$x]->link}'>{$array[$x]->name}</a>";
+                    $element = "<a aria-hidden='false' role='menuitem' class='menu-item' href='{$array[$x]->link}'>{$array[$x]->name}</a>";
                 }
             }
 
@@ -26,9 +26,9 @@ class Utils
         $list = [];
         for ($x = 0; $x < count($array); $x++) {
             if ($name && $array[$x]->name == $name) {
-                $element = "<span class='menu-item-active'>{$array[$x]->name}</span>";
+                $element = "<span aria-hidden='false' class='menu-item-active'>{$array[$x]->name}</span>";
             } else {
-                $element = "<a class='menu-item' href='{$array[$x]->link}'>{$array[$x]->name}</a>";
+                $element = "<a aria-hidden='false' role='menuitem' class='menu-item' href='{$array[$x]->link}'>{$array[$x]->name}</a>";
             }
 
             array_push($list, $element);
