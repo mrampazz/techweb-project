@@ -693,6 +693,13 @@ body {
   margin-bottom: 2.8em;
 }
 
+.custom-legend-title{
+  font-weight: bold;
+  font-size: 2em;
+  padding-top: 1em;
+  text-align: center;
+}
+
 .error-message-box {
   width: 50%;
   border-radius: 0.5em;

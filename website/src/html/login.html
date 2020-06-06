@@ -1,22 +1,24 @@
 <div class="log-reg-container">
-    <h1 class="flex-container flex-content-center margin-top-1">Login</h1>
     {message-box}
-    <form action="validate-login-url" method="post" onsubmit="return validateFormLogin()">
-        <div class="group margin-top-3">     
-            <label for="username" class="form-label">Username</label>
-            <input type="text" class="custom-form-input" name="username" id="username" value="{username}"/> 
-            <span class="highlight"></span>
-            <span class="bar"></span> 
-        </div>
-        <div class="group">      
-            <label for="password" class="form-label">Password</label>
-            <input type="password" class="custom-form-input" name="password" id="password"/>
-            <span class="highlight"></span>
-            <span class="bar"></span>
-        </div>
-        <div class="flex-container flex-content-center margin-bottom-2">
-            <input type="submit" value="Accedi" class="form-button"/>
-        </div>
-    </form>
+        <form action="validate-login-url" method="post" onsubmit="return validateFormLogin()">
+            <fieldset class="custom-fieldset">
+            <legend class="custom-legend-title">Login</legend>
+            <div class="group margin-top-3">     
+                <label for="username" class="form-label">Username</label>
+                <input type="text" class="custom-form-input" name="username" id="username" value="{username}"/> 
+                <span class="highlight"></span>
+                <span class="bar"></span> 
+            </div>
+            <div class="group">      
+                <label for="password" class="form-label">Password</label>
+                <input type="password" class="custom-form-input" name="password" id="password"/>
+                <span class="highlight"></span>
+                <span class="bar"></span>
+            </div>
+            <div class="flex-container flex-content-center margin-bottom-2">
+                <input type="submit" value="Accedi" class="form-button"/>
+            </div>
+            </fieldset>
+        </form>
     <a href="../php/layout.php?page=registration" class="font-size-0-75">Non sei ancora registrato? CLICCA QUI</a>
 </div>
