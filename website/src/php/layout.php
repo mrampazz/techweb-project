@@ -173,7 +173,6 @@ switch ($_GET['page']) {
         $output = str_replace("{menu-links}", $linkItems, $output);
         $output = str_replace("{mobile-menu-links}", $linkItems, $output);
         $output = str_replace("{mobile-user-links}", $userItems, $output);
-        // include_once("../php/rules.php");
         break;
 
     case 'faq':

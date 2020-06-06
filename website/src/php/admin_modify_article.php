@@ -42,7 +42,7 @@ if ($article) {
         $output = str_replace("{price}",$_SESSION['price'], $output);
     }
     else{
-        $output = str_replace("{price}", $article->initialPrice, $output);
+        $output = str_replace("{price}", number_format((float)$article->initialPrice, 2, '.', ''), $output);
     }
     if (isset($_SESSION['date'])){
         $output = str_replace("{date}",$_SESSION['date'], $output);

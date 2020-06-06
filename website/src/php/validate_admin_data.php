@@ -20,7 +20,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $image="";
     setSessionVariables();
 
-    if (checkParameters($brand, $model, $price, $date, $amazonLink, $description, $image)) { // if true parameters are in the correct format -> try to login
+    if (checkParameters($brand, $model, $price, $date, $amazonLink, $description, $image, $isUpdateMode)) { // if true parameters are in the correct format -> try to login
         $article = new Article();
         $article->brand = $brand;
         $article->model = $model;
@@ -57,10 +57,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 }
 
 // check data format -> return true if correct. Otherwise, return false and set errormessage
-function checkParameters($brand, $model, $price, $date, $amazonLink, $description, &$image){
+function checkParameters($brand, $model, $price, $date, $amazonLink, $description, &$image, $isUpdateMode){
 
     //first check image validity
-    $tempImg = validateImage();
+    $tempImg = validateImage($isUpdateMode);
     if (is_null($tempImg))
         return false;
     else
@@ -107,7 +107,7 @@ function checkParameters($brand, $model, $price, $date, $amazonLink, $descriptio
     return true;
 }
 
-function validateImage(){
+function validateImage($isUpdateMode){
     //check image upload
     $target_dir = "../assets/img/articles/";
     if ($_FILES["file-upload"]["name"] != null) {
@@ -118,6 +118,13 @@ function validateImage(){
         }
         else{
             return $upload_result["url"];
+        }
+    }
+    else if ($isUpdateMode){
+        $article = Article::fetch($_GET['id']);
+        $image = $article->image;
+        if(!empty($image)){
+            return $image;
         }
     }
     return "default.png";

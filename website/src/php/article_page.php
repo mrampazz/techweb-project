@@ -16,7 +16,7 @@ $output = str_replace("{article-id}",$articleId,$output);
 $output = str_replace("article-id-link",$articleId,$output);
 $output = str_replace("{article-name}", $articleFullName,$output);
 $output = str_replace("article-image-url", "../assets/img/articles/".$articleImageUrl,$output);
-$output = str_replace("{article-price}", $articlePrice,$output);
+$output = str_replace("{article-price}", number_format((float)$articlePrice, 2, '.', ''),$output);
 $output = str_replace("{article-description}", $articleDescription,$output);
 $output = str_replace("{article-release-date}", $formattedDate, $output);
 $output = str_replace("article-purchase-url", (substr($purchaseLink, 0, 4) != "http") ? "//".$purchaseLink : $purchaseLink, $output);
