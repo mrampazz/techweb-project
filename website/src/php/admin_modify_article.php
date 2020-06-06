@@ -6,6 +6,9 @@ if (isset($_GET['id'])) {
         $id = $_GET['id'];
     }
 }
+
+
+
 $article = Article::fetch($id);
 if ($article) {
     if(isset($_SESSION['error-message'])) {

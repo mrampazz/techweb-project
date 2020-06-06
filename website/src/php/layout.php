@@ -4,6 +4,7 @@ include_once("../../../database/db_manager.php");
 include_once("../../server/models/models.php");
 include_once("../../server/utils.php");
 
+$dbMan = DBManager::getInstance();
 $output = file_get_contents("../html/layout.html");
 
 class Link
@@ -37,9 +38,12 @@ $links = [
     new Link("Regolamento", SessionManager::BASE_URL . "rules", false),
     new Link("Chi siamo?", SessionManager::BASE_URL . "about", false),
     new Link("Area Amministratore", SessionManager::BASE_URL . "admin", false),
-    new Link("Login", SessionManager::BASE_URL . "login", false),
-    new Link("Registrati", SessionManager::BASE_URL . "registration", false),
     new Link("FAQ", SessionManager::BASE_URL . "faq", false)
+];
+
+$userLinks = [
+    new Link("Login", SessionManager::BASE_URL . "login", false),
+    new Link("Registrati", SessionManager::BASE_URL . "registration", false)
 ];
 
 if (SessionManager::isUserLogged()) {
@@ -47,19 +51,18 @@ if (SessionManager::isUserLogged()) {
     $user = User::getUser(SessionManager::getUserId());
     $links[1]->setHidden(false);
     $links[4]->setHidden(true);
-    $links[6]->setName("Log out");
-    $links[6]->setLink(SessionManager::BASE_URL . "home&amp;logout=true");
-
-    $links[5]->setHidden(true);
+    $userLinks[1]->setName("Log out");
+    $userLinks[1]->setLink(SessionManager::BASE_URL . "home&amp;logout=true");
+    $userLinks[0]->setHidden(true);
     if (SessionManager::userCanPublish()) {
         $links[4]->setHidden(false);
     }
 } else {
     $links[1]->setHidden(true);
-    $links[5]->setHidden(false);
+    $links[0]->setHidden(false);
     $links[4]->setHidden(true);
-    $links[6]->setName("Registrati");
-    $links[6]->setLink(SessionManager::BASE_URL . "registration");
+    $userLinks[1]->setName("Registrati");
+    $userLinks[1]->setLink(SessionManager::BASE_URL . "registration");
 }
 
 if (isset($_GET["logout"])) {
@@ -85,8 +88,10 @@ switch ($_GET['page']) {
         $output = str_replace("{breadcrumb}", $breadcrumb, $output);
         $output = str_replace("{content}", $page, $output);
         $output = str_replace("{currentPage}", "Smartphy - Login", $output);
-        $linkItems = Utils::getMenuLinks($links, 'Login');
+        $linkItems = Utils::getMenuLinks($links, null);
+        $userItems = Utils::getMenuLinks($userLinks, 'Login');
         $output = str_replace("{menu-links}", $linkItems, $output);
+        $output = str_replace("{user-links}", $userItems, $output);
         $output = str_replace("{mobile-menu-links}", $linkItems, $output);
         include_once("../php/login.php");
         break;
@@ -97,8 +102,10 @@ switch ($_GET['page']) {
         $output = str_replace("{breadcrumb}", $breadcrumb, $output);
         $output = str_replace("{content}", $page, $output);
         $output = str_replace("{currentPage}", "Smartphy - Registrazione", $output);
-        $linkItems = Utils::getMenuLinks($links, 'Registrati');
+        $linkItems = Utils::getMenuLinks($links, null);
+        $userItems = Utils::getMenuLinks($userLinks, 'Registrati');
         $output = str_replace("{menu-links}", $linkItems, $output);
+        $output = str_replace("{user-links}", $userItems, $output);
         $output = str_replace("{mobile-menu-links}", $linkItems, $output);
         include_once("../php/registration.php");
         break;
@@ -110,6 +117,8 @@ switch ($_GET['page']) {
         $output = str_replace("{content}", $page, $output);
         $output = str_replace("{currentPage}", "Smartphy - Homepage", $output);
         $linkItems = Utils::getMenuLinks($links, 'Home');
+        $userItems = Utils::getMenuLinks($userLinks, null);
+        $output = str_replace("{user-links}", $userItems, $output);
         $output = str_replace("{menu-links}", $linkItems, $output);
         $output = str_replace("{mobile-menu-links}", $linkItems, $output);
         include_once("../php/home.php");
@@ -122,6 +131,8 @@ switch ($_GET['page']) {
         $output = str_replace("{content}", $page, $output);
         $output = str_replace("{currentPage}", "Smartphy - Il tuo profilo", $output);
         $linkItems = Utils::getMenuLinks($links, 'Il tuo profilo');
+        $userItems = Utils::getMenuLinks($userLinks, null);
+        $output = str_replace("{user-links}", $userItems, $output);
         $output = str_replace("{menu-links}", $linkItems, $output);
         $output = str_replace("{mobile-menu-links}", $linkItems, $output);
         include_once("../php/profile.php");
@@ -138,6 +149,8 @@ switch ($_GET['page']) {
         $output = str_replace("{breadcrumb}", $breadcrumb, $output);
         $output = str_replace("{content}", $page, $output);
         $linkItems = Utils::getMenuLinks($links, null);
+        $userItems = Utils::getMenuLinks($userLinks, null);
+        $output = str_replace("{user-links}", $userItems, $output);
         $output = str_replace("{menu-links}", $linkItems, $output);
         $output = str_replace("{mobile-menu-links}", $linkItems, $output);
         $output = str_replace("{currentPage}", "Smartphy - Articolo {$article->model}", $output);
@@ -151,6 +164,8 @@ switch ($_GET['page']) {
         $output = str_replace("{content}", $page, $output);
         $output = str_replace("{currentPage}", "Smartphy - Regolamento", $output);
         $linkItems = Utils::getMenuLinks($links, 'Regolamento');
+        $userItems = Utils::getMenuLinks($userLinks, null);
+        $output = str_replace("{user-links}", $userItems, $output);
         $output = str_replace("{menu-links}", $linkItems, $output);
         $output = str_replace("{mobile-menu-links}", $linkItems, $output);
         // include_once("../php/rules.php");
@@ -163,6 +178,8 @@ switch ($_GET['page']) {
         $output = str_replace("{content}", $page, $output);
         $output = str_replace("{currentPage}", "Smartphy - Chi siamo?", $output);
         $linkItems = Utils::getMenuLinks($links, 'Chi siamo?');
+        $userItems = Utils::getMenuLinks($userLinks, null);
+        $output = str_replace("{user-links}", $userItems, $output);
         $output = str_replace("{menu-links}", $linkItems, $output);
         $output = str_replace("{mobile-menu-links}", $linkItems, $output);
         // include_once("../php/about.php");
@@ -175,6 +192,8 @@ switch ($_GET['page']) {
         $output = str_replace("{content}", $page, $output);
         $output = str_replace("{currentPage}", "Smartphy - FAQ", $output);
         $linkItems = Utils::getMenuLinks($links, 'FAQ');
+        $userItems = Utils::getMenuLinks($userLinks, null);
+        $output = str_replace("{user-links}", $userItems, $output);
         $output = str_replace("{menu-links}", $linkItems, $output);
         $output = str_replace("{mobile-menu-links}", $linkItems, $output);
         include_once("../php/faq_page.php");
@@ -188,6 +207,8 @@ switch ($_GET['page']) {
         $output = str_replace("{content}", $page, $output);
         $output = str_replace("{currentPage}", "Smartphy - Area Amministratore", $output);
         $linkItems = Utils::getMenuLinks($links, 'Area Amministratore');
+        $userItems = Utils::getMenuLinks($userLinks, null);
+        $output = str_replace("{user-links}", $userItems, $output);
         $output = str_replace("{menu-links}", $linkItems, $output);
         $output = str_replace("{mobile-menu-links}", $linkItems, $output);
         include_once("../php/admin.php");
@@ -200,6 +221,8 @@ switch ($_GET['page']) {
         $output = str_replace("{content}", $page, $output);
         $output = str_replace("{currentPage}", "Smartphy - Aggiungi articolo", $output);
         $linkItems = Utils::getMenuLinks($links, null);
+        $userItems = Utils::getMenuLinks($userLinks, null);
+        $output = str_replace("{user-links}", $userItems, $output);
         $output = str_replace("{menu-links}", $linkItems, $output);
         $output = str_replace("{mobile-menu-links}", $linkItems, $output);
         include_once("../php/admin_add_article.php");
@@ -212,6 +235,8 @@ switch ($_GET['page']) {
         $output = str_replace("{content}", $page, $output);
         $output = str_replace("{currentPage}", "Smartphy - Modifica articolo", $output);
         $linkItems = Utils::getMenuLinks($links, null);
+        $userItems = Utils::getMenuLinks($userLinks, null);
+        $output = str_replace("{user-links}", $userItems, $output);
         $output = str_replace("{menu-links}", $linkItems, $output);
         $output = str_replace("{mobile-menu-links}", $linkItems, $output);
         include_once("../php/admin_modify_article.php");
@@ -223,6 +248,8 @@ switch ($_GET['page']) {
         $output = str_replace("{content}", $page, $output);
         $output = str_replace("{currentPage}", "Smartphy - Non hai i permessi", $output);
         $linkItems = Utils::getMenuLinks($links, null);
+        $userItems = Utils::getMenuLinks($userLinks, null);
+        $output = str_replace("{user-links}", $userItems, $output);
         $output = str_replace("{menu-links}", $linkItems, $output);
         $output = str_replace("{mobile-menu-links}", $linkItems, $output);
         break;
@@ -233,6 +260,8 @@ switch ($_GET['page']) {
         $output = str_replace("{content}", $page, $output);
         $output = str_replace("{currentPage}", "Smartphy - 404", $output);
         $linkItems = Utils::getMenuLinks($links, null);
+        $userItems = Utils::getMenuLinks($userLinks, null);
+        $output = str_replace("{user-links}", $userItems, $output);
         $output = str_replace("{menu-links}", $linkItems, $output);
         $output = str_replace("{mobile-menu-links}", $linkItems, $output);
         break;

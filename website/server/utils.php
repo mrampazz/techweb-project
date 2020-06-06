@@ -36,14 +36,32 @@ class Utils
         return implode($list);
     }
 
-    public static function getModelsOptions($array)
+    public static function getModelsOptions($array, $model = null)
     {
         $list = [];
         for ($x = 0; $x < count($array); $x++) {
-            $element = "<option value='{$array[$x]->brand}'>{$array[$x]->brand}</option>";
+            if ($array[$x]->brand == $model) {
+                $element = "<option value='{$array[$x]->brand}' selected>{$array[$x]->brand}</option>";
+            } else {
+                $element = "<option value='{$array[$x]->brand}'>{$array[$x]->brand}</option>";
+            }
             array_push($list, $element);
         }
         return implode($list);
+    }
+
+    public static function getPriceSelectOptions($order = null)
+    {
+        if ($order == 'price-asc') {
+            return '<option value="price-asc" selected>Per prezzo crescente</option>
+            <option value="price-desc">Per prezzo decrescente</option>';
+        } else if ($order == 'price-desc') {
+            return '<option value="price-asc">Per prezzo crescente</option>
+            <option value="price-desc" selected>Per prezzo decrescente</option>';
+        } else {
+            return '<option value="price-asc">Per prezzo crescente</option>
+            <option value="price-desc">Per prezzo decrescente</option>';
+        }
     }
 
     public static function isArticleLiked($id)
@@ -98,13 +116,11 @@ class Utils
 
     public static function replaceContentsAdminArticleItem($html, $item)
     {
+        $html = str_replace("{article-brand}", $item->brand, $html);
+        $html = str_replace("{article-id}", $item->id, $html);
         $html = str_replace("{article-model}", $item->model, $html);
         $html = str_replace("{article-link}", "./layout.php?page=article&amp;id={$item->id}", $html);
-        $html = str_replace("{modify-article}", "./layout.php?page=modify-article&amp;edit=true&amp;id={$item->id}", $html);
-        $html = str_replace("{article-memory}", $item->votesPositive, $html);
-        $html = str_replace("{article-price}", ($item->votesTotal) - ($item->votesPositive), $html);
         $html = str_replace("{article-img}", "../assets/img/articles/" . $item->image, $html);
-        $html = str_replace("{article-modify}", "./layout.php?page=modifyArticle&amp;id={$item->id}", $html);
         return $html;
     }
 
@@ -120,9 +136,9 @@ class Utils
     {
         $orderKey = 'created_at';
         $ordering = 'desc';
-        if(strpos($order, 'price') !== false) {
+        if (strpos($order, 'price') !== false) {
             $orderKey = "initial_price";
-            $ordering = substr($order, strpos($order, "-")+1);
+            $ordering = substr($order, strpos($order, "-") + 1);
         }
         return Article::list($search, $brand, $orderKey, $ordering);
     }
@@ -200,12 +216,13 @@ class Utils
     }
 
     //check if a date formatted as dd-mm-yyyy is valid
-    public static function isValidDate($dateDMY){
-        $splittedDate = explode('-',$dateDMY);
+    public static function isValidDate($dateDMY)
+    {
+        $splittedDate = explode('-', $dateDMY);
         $day = $splittedDate[0];
         $month = $splittedDate[1];
         $year = $splittedDate[2];
-        if (checkdate($month,$day,$year))
+        if (checkdate($month, $day, $year))
             return true;
         else
             return false;

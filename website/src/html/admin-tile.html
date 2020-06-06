@@ -1,14 +1,17 @@
 <div class="first-content">
   <div class="admin-article-img">
-    <img src="{article-img}" alt="{article-model}" class="image-size-admin"/>
+    <img src="{article-img}" alt="{article-model}" class="image-size-admin" />
   </div>
   <div class="font-size-0-625 info-admin-tile">
-    <h2 class="document-font font-size-1-5" tabindex="0">MODELLO: {article-model}</h2>
-    <h2 class="document-font font-size-1-5 margin-top-1" tabindex="0">MEMORIA: {article-memory}</h2>
-    <h2 class="document-font font-size-1-5 margin-top-1" tabindex="0">PREZZO: {article-price}</h2>
+    <h2 class="document-font font-size-1-5" tabindex="0">MARCA: {article-brand}</h2>
+    <h2 class="document-font font-size-1-5 margin-top-1" tabindex="0">MODELLO: {article-model}</h2>
   </div>
   <div class="mobile-margin">
-    <a href='{modify-article}' class="modify-device margin-top-0-5">Modifica</a>
-    <a href='{delete-article}' class="modify-device margin-top-0-5">Elimina</a>
+    <form action="../php/layout.php?page=modify-article&amp;edit=true&amp;id={article-id}" method="POST">
+      <button name="modify-article" value="{article-id}" class="custom-button margin-top-0-5">Modifica</button>
+    </form>
+    <form action="../php/delete_article.php" method="POST">
+      <button name="delete-article" value="{article-id}" class="custom-button margin-top-0-5">Elimina</button>
+    </form>
   </div>
 </div>
