@@ -1,9 +1,9 @@
-<div class="accordion" tabindex="0" aria-expanded="true" aria-controls="accordion-content">
-  <h2 class="accordion-title" tabindex="0">{question}</h2>
+<div class="accordion" tabindex="0" aria-expanded="true" aria-controls="accordion-content-{id}">
+  <h2 id="accordion-title-{id}" class="accordion-title" tabindex="0">{question}</h2>
   <button class="accordion-button" aria-label="Nascondere o mostrare risposta alla domanda">
   </button>
 </div>
-<div id="accordion-content" role="region" aria-labelledby="accordion-title" class="panel" tabindex="0">
+<div id="accordion-content-{id}" class="panel accordion-panel-open" role="region" aria-labelledby="accordion-title-{id}" tabindex="0">
   <p>
     {answer}
   </p>

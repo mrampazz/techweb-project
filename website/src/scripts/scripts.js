@@ -3,14 +3,14 @@
 document.addEventListener("DOMContentLoaded", theDomHasLoaded, false);
 
 function togglePanel(panel, accordion) {
-  if (panel.style.opacity == "0") {
-    panel.style.opacity = "1";
-    panel.style.maxHeight = "20em";
-    accordion.setAttribute('aria-expanded', 'true');
+  if (accordion.getAttribute("aria-expanded") == "false") {
+    panel.classList.add("accordion-panel-open");
+    panel.classList.remove("accordion-panel-closed");
+    accordion.setAttribute("aria-expanded", "true");
   } else {
-    panel.style.opacity = "0";
-    panel.style.maxHeight = "0";
-    accordion.setAttribute('aria-expanded', 'false');
+    panel.classList.add("accordion-panel-closed");
+    panel.classList.remove("accordion-panel-open");
+    accordion.setAttribute("aria-expanded", "false");
   }
 }
 
@@ -37,23 +37,25 @@ function theDomHasLoaded(e) {
   var ham = document.getElementById("ham-menu-links");
   var body = document.getElementsByTagName("body")[0];
   buttonOpen.addEventListener("click", function () {
-    body.style.overflow = "hidden";
+    body.classList.toggle("body-no-overflow");
     ham.classList.toggle("ham-menu-open");
-    ham.setAttribute('aria-expanded', 'true');
+    ham.setAttribute("aria-expanded", "true");
   });
   buttonClose.addEventListener("click", function () {
-    body.style.overflow = "auto";
+    body.classList.toggle("body-no-overflow");
     ham.classList.toggle("ham-menu-open");
-    ham.setAttribute('aria-expanded', 'false');
+    ham.setAttribute("aria-expanded", "false");
   });
 }
 
 window.onscroll = function () {
-  var btn = document.getElementById("back-to-top");
+  var btn = document.getElementsByClassName("back-to-top")[0];
 
   if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
-    btn.style.display = "block";
+    btn.classList.add("back-to-top-visible");
+    btn.classList.remove("back-to-top-hidden");
   } else {
-    btn.style.display = "none";
+    btn.classList.add("back-to-top-hidden");
+    btn.classList.remove("back-to-top-visible");
   }
 };
