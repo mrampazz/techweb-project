@@ -33,14 +33,17 @@
       <div id="ham-menu-links" class="mobile-menu-links">
         <button id="ham-button-close" aria-label="Chiudi menu hamburger"></button>
         {mobile-menu-links}
+        <div class="user-menu-section">
+          {mobile-user-links}
+        </div>
       </div>
 
-      <div class="breadcrumb-container el-container">
+      <nav aria-label="Breadcrumb" class="breadcrumb-container el-container">
         <ul>
           <li>Ti trovi in</li>
           {breadcrumb}
         </ul>
-      </div>
+      </nav>
     </header>
 
     <main class="main-container">
