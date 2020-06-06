@@ -1,8 +1,6 @@
 <?php
 
-$modelsList = Utils::getModelsOptions(Article::getModelsList());
 
-$output = str_replace("<option>{modelOptions}</option>", $modelsList, $output);
 $model = null;
 $ordine = null;
 $search = null;
@@ -12,12 +10,18 @@ if (isset($_GET['model'])) {
         $model = $_GET['model'];
     }
 }
-
 if (isset($_GET['ordine'])) {
     if ($_GET['ordine'] != 'all') {
         $ordine = $_GET['ordine'];
     }
 }
+
+
+$modelsList = Utils::getModelsOptions(Article::getModelsList(), $model);
+$orderList = Utils::getPriceSelectOptions($ordine);
+
+$output = str_replace("<option>{modelOptions}</option>", $modelsList, $output);
+$output = str_replace("<option>{orderOptions}</option>", $orderList, $output);
 
 if (isset($_GET['search'])) {
     $search = $_GET['search'];
