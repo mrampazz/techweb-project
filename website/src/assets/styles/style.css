@@ -357,10 +357,12 @@ body {
   padding: 0.5em;
   color: white;
   transition: box-shadow 0.2s ease-in-out;
+  opacity: 0.93;
 }
 
 .custom-button:hover {
   box-shadow: 0 0 0.2em 0 rgba(0, 0, 0, 0.25);
+  opacity: 1;
 }
 
 .articles-container {
@@ -462,7 +464,7 @@ body {
   width: auto;
   background-color: transparent;
   cursor: pointer;
-  font-size: 1.2em;
+  font-size: 1.5em;
   color: #506180;
 }
 .custom-thumbs-up:hover,
@@ -666,7 +668,7 @@ body {
   background-color: #506180;
   color: white;
   font-weight: 700;
-  opacity: 0.95;
+  opacity: 0.93;
 }
 
 .form-button:hover {
