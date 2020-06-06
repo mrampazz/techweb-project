@@ -28,19 +28,22 @@
       </div>
 
       <div class="mobile-button-container">
-        <button id="ham-button-open" aria-label="Apri menu hamburger"></button>
+        <button id="ham-button-open" aria-label="Apri menù"></button>
       </div>
-      <div id="ham-menu-links" class="mobile-menu-links">
-        <button id="ham-button-close" aria-label="Chiudi menu hamburger"></button>
+      <div id="ham-menu-links" class="mobile-menu-links" aria-expanded="false">
+        <button id="ham-button-close" aria-label="Chiudi menù"></button>
         {mobile-menu-links}
+        <div class="user-menu-section">
+          {mobile-user-links}
+        </div>
       </div>
 
-      <div class="breadcrumb-container el-container">
+      <nav aria-label="Breadcrumb" class="breadcrumb-container el-container">
         <ul>
           <li>Ti trovi in</li>
           {breadcrumb}
         </ul>
-      </div>
+      </nav>
     </header>
 
     <main class="main-container">

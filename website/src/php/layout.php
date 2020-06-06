@@ -93,6 +93,7 @@ switch ($_GET['page']) {
         $output = str_replace("{menu-links}", $linkItems, $output);
         $output = str_replace("{user-links}", $userItems, $output);
         $output = str_replace("{mobile-menu-links}", $linkItems, $output);
+        $output = str_replace("{mobile-user-links}", $userItems, $output);
         include_once("../php/login.php");
         break;
 
@@ -107,6 +108,7 @@ switch ($_GET['page']) {
         $output = str_replace("{menu-links}", $linkItems, $output);
         $output = str_replace("{user-links}", $userItems, $output);
         $output = str_replace("{mobile-menu-links}", $linkItems, $output);
+        $output = str_replace("{mobile-user-links}", $userItems, $output);
         include_once("../php/registration.php");
         break;
 
@@ -121,6 +123,7 @@ switch ($_GET['page']) {
         $output = str_replace("{user-links}", $userItems, $output);
         $output = str_replace("{menu-links}", $linkItems, $output);
         $output = str_replace("{mobile-menu-links}", $linkItems, $output);
+        $output = str_replace("{mobile-user-links}", $userItems, $output);
         include_once("../php/home.php");
         break;
 
@@ -135,6 +138,7 @@ switch ($_GET['page']) {
         $output = str_replace("{user-links}", $userItems, $output);
         $output = str_replace("{menu-links}", $linkItems, $output);
         $output = str_replace("{mobile-menu-links}", $linkItems, $output);
+        $output = str_replace("{mobile-user-links}", $userItems, $output);
         include_once("../php/profile.php");
         break;
 
@@ -154,6 +158,7 @@ switch ($_GET['page']) {
         $output = str_replace("{menu-links}", $linkItems, $output);
         $output = str_replace("{mobile-menu-links}", $linkItems, $output);
         $output = str_replace("{currentPage}", "Smartphy - Articolo {$article->model}", $output);
+        $output = str_replace("{mobile-user-links}", $userItems, $output);
         include_once("../php/article_page.php");
         break;
 
@@ -168,6 +173,7 @@ switch ($_GET['page']) {
         $output = str_replace("{user-links}", $userItems, $output);
         $output = str_replace("{menu-links}", $linkItems, $output);
         $output = str_replace("{mobile-menu-links}", $linkItems, $output);
+        $output = str_replace("{mobile-user-links}", $userItems, $output);
         // include_once("../php/rules.php");
         break;
 
@@ -182,6 +188,8 @@ switch ($_GET['page']) {
         $output = str_replace("{user-links}", $userItems, $output);
         $output = str_replace("{menu-links}", $linkItems, $output);
         $output = str_replace("{mobile-menu-links}", $linkItems, $output);
+        $output = str_replace("{mobile-user-links}", $userItems, $output);
+        
         // include_once("../php/about.php");
         break;
 
@@ -196,6 +204,7 @@ switch ($_GET['page']) {
         $output = str_replace("{user-links}", $userItems, $output);
         $output = str_replace("{menu-links}", $linkItems, $output);
         $output = str_replace("{mobile-menu-links}", $linkItems, $output);
+        $output = str_replace("{mobile-user-links}", $userItems, $output);
         include_once("../php/faq_page.php");
         break;
 
@@ -211,6 +220,7 @@ switch ($_GET['page']) {
         $output = str_replace("{user-links}", $userItems, $output);
         $output = str_replace("{menu-links}", $linkItems, $output);
         $output = str_replace("{mobile-menu-links}", $linkItems, $output);
+        $output = str_replace("{mobile-user-links}", $userItems, $output);
         include_once("../php/admin.php");
         break;
     case 'add-article':
@@ -225,6 +235,7 @@ switch ($_GET['page']) {
         $output = str_replace("{user-links}", $userItems, $output);
         $output = str_replace("{menu-links}", $linkItems, $output);
         $output = str_replace("{mobile-menu-links}", $linkItems, $output);
+        $output = str_replace("{mobile-user-links}", $userItems, $output);
         include_once("../php/admin_add_article.php");
         break;
     case 'modify-article':
@@ -239,6 +250,7 @@ switch ($_GET['page']) {
         $output = str_replace("{user-links}", $userItems, $output);
         $output = str_replace("{menu-links}", $linkItems, $output);
         $output = str_replace("{mobile-menu-links}", $linkItems, $output);
+        $output = str_replace("{mobile-user-links}", $userItems, $output);
         include_once("../php/admin_modify_article.php");
         break;
     case 'no-permissions':
@@ -252,6 +264,7 @@ switch ($_GET['page']) {
         $output = str_replace("{user-links}", $userItems, $output);
         $output = str_replace("{menu-links}", $linkItems, $output);
         $output = str_replace("{mobile-menu-links}", $linkItems, $output);
+        $output = str_replace("{mobile-user-links}", $userItems, $output);
         break;
     default:
         $breadcrumb = "<li>&#62;&#62; <a href='" . SessionManager::BASE_URL . 'home' . "'>Home</a></li><li>&#62;&#62; <span>404</span></li>";
@@ -264,6 +277,7 @@ switch ($_GET['page']) {
         $output = str_replace("{user-links}", $userItems, $output);
         $output = str_replace("{menu-links}", $linkItems, $output);
         $output = str_replace("{mobile-menu-links}", $linkItems, $output);
+        $output = str_replace("{mobile-user-links}", $userItems, $output);
         break;
 }
 

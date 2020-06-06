@@ -7,14 +7,14 @@
   <div class="article-votes">
     <form method="post" action="add_vote.php">
       <div class="vote-container">
-        <span aria-label="Voti positivi">{article-likes}</span>
+        <span><span class="hidden-text">Questo articolo è consigliato da: </span>{article-likes}<span class="hidden-text">persone</span></span>
         <button aria-label="Dai un voto positivo" name="vote" type="submit" value="like" class="custom-thumbs-up far fa-thumbs-up {article-liked}"></button>
         <span>Lo consiglio</span>
       </div>
       <div class="vote-container">
-        <span aria-label="Voti negativi">{article-dislikes}</span>
+        <span><span class="hidden-text">Questo articolo è sconsigliato da: </span>{article-dislikes}<span class="hidden-text">persone</span></span>
         <button aria-label="Dai un voto negativo" name="vote" type="submit" value="dislike" class="custom-thumbs-down far fa-thumbs-down {article-disliked}"></button>
-        <span>Non lo consiglio</span>
+        <span>Lo sconsiglio</span>
       </div>
       <div>
         <input type="hidden" value="{articleID}" name="articleID" />

@@ -1,52 +1,56 @@
+"use strict";
+
 document.addEventListener("DOMContentLoaded", theDomHasLoaded, false);
 
-function togglePanel(panel) {
+function togglePanel(panel, accordion) {
   if (panel.style.opacity == "0") {
     panel.style.opacity = "1";
     panel.style.maxHeight = "20em";
+    accordion.setAttribute('aria-expanded', 'true');
   } else {
     panel.style.opacity = "0";
     panel.style.maxHeight = "0";
+    accordion.setAttribute('aria-expanded', 'false');
   }
 }
 
 function theDomHasLoaded(e) {
-  const acc = document.getElementsByClassName("accordion-button");
-  const titles = document.getElementsByClassName("accordion-title");
-  const panels = document.getElementsByClassName("panel");
+  var acc = document.getElementsByClassName("accordion-button");
+  var panels = document.getElementsByClassName("panel");
+  var accordion = document.getElementsByClassName("accordion");
 
-  for (let i = 0; i < acc.length; i++) {
-    let button = acc[i];
-    let title = titles[i];
+  var _loop = function _loop(i) {
+    var button = acc[i];
     button.addEventListener("click", function () {
       this.classList.toggle("accordion-button-reversed");
       this.classList.toggle("accordion-button");
-      togglePanel(panels[i]);
+      togglePanel(panels[i], accordion[i]);
     });
-    title.addEventListener("click", function () {
-      button.classList.toggle("accordion-button-reversed");
-      button.classList.toggle("accordion-button");
-      togglePanel(panels[i]);
-    });
+  };
+
+  for (var i = 0; i < acc.length; i++) {
+    _loop(i);
   }
 
-  const buttonOpen = document.getElementById("ham-button-open");
-  const buttonClose = document.getElementById("ham-button-close");
-  const ham = document.getElementById("ham-menu-links");
-  const body = document.getElementsByTagName("body")[0];
+  var buttonOpen = document.getElementById("ham-button-open");
+  var buttonClose = document.getElementById("ham-button-close");
+  var ham = document.getElementById("ham-menu-links");
+  var body = document.getElementsByTagName("body")[0];
   buttonOpen.addEventListener("click", function () {
     body.style.overflow = "hidden";
     ham.classList.toggle("ham-menu-open");
+    ham.setAttribute('aria-expanded', 'true');
   });
-
   buttonClose.addEventListener("click", function () {
     body.style.overflow = "auto";
     ham.classList.toggle("ham-menu-open");
+    ham.setAttribute('aria-expanded', 'false');
   });
 }
 
 window.onscroll = function () {
-  let btn = document.getElementById("back-to-top");
+  var btn = document.getElementById("back-to-top");
+
   if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
     btn.style.display = "block";
   } else {
