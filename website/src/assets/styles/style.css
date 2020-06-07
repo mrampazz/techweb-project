@@ -908,6 +908,7 @@ input:focus ~ .highlight {
 
 .comment-content-container {
   margin-left: 0.5em;
+  margin-right: 0.5em;
   min-width: 0em;
   width: 100%;
   word-wrap: break-word;

@@ -9,12 +9,12 @@
   <div class="mobile-margin">
     <form action="../php/layout.php?page=modify-article&amp;edit=true&amp;id={article-id}" method="post">
       <div>
-        <button name="modify-article" value="{article-id}" class="custom-button margin-top-0-5">Modifica</button>
+        <button name="modify-article" value="{article-id}" class="custom-button margin-top-0-5" aria-label="Modifica dati di {article-brand} {article-model}">Modifica</button>
       </div>
     </form>
     <form action="../php/delete_article.php" method="post">
       <div>
-        <button name="delete-article" value="{article-id}" class="custom-button margin-top-0-5">Elimina</button>
+        <button name="delete-article" value="{article-id}" class="custom-button margin-top-0-5" aria-label="Elimina {article-brand} {article-model}">Elimina</button>
       </div>
     </form>
   </div>
