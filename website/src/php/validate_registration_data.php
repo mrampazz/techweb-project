@@ -33,14 +33,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
       $_SESSION['registration'] = true;
       SessionManager::startSessionForUser($reg, $username, false);
       userRegisteredCorrectly();
+      return;
     } 
     else {
-      $_SESSION['error-message'] = "la registrazione non ha avuto successo.";
+      $_SESSION['error-message'] = "la registrazione non ha avuto successo. Probabilmente esiste già un account con lo stesso username o email.";
     }
   }
-  else{
-    header("Location: ".SessionManager::BASE_URL."registration");
-  }
+  
+  header("Location: ".SessionManager::BASE_URL."registration");
+  
 
 }
 
@@ -100,7 +101,7 @@ function checkParameters($username, $password, $confirmationPassword, $name, $su
 }
 
 function userRegisteredCorrectly() {
-  // redirect to home and save session data
+  // redirect to home
   header("Location: ".SessionManager::BASE_URL."home");
 }
 

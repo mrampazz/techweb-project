@@ -5,7 +5,7 @@ session_start(); // move to layout or somewhere else if necessary
 class SessionManager
 {
     private const USER_ID_KEY = "user_id";
-    private const USERNAME_KEY = "username";
+    private const USERNAME_KEY = "user_username";
     private const PUBLISH_KEY = "canPublish";
 
     public const BASE_URL = "../php/layout.php?page="; //to check
@@ -16,7 +16,9 @@ class SessionManager
 
     public static function startSessionForUser($userId, $username, $canPublish)
     {
-        if (is_int($userId) && $userId >= 0 && is_string($username) && !empty($username))
+        if (!is_int($userId))
+            $userId = intval($userId);
+        if ($userId >= 0 && is_string($username) && !empty($username))
         {
             $_SESSION[SessionManager::USER_ID_KEY] = $userId;
             $_SESSION[SessionManager::USERNAME_KEY] = $username;
