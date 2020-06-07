@@ -33,15 +33,15 @@ class Link
 }
 
 $links = [
-    new Link("Home", SessionManager::BASE_URL . "home", false),
+    new Link("Pagina iniziale", SessionManager::BASE_URL . "home", false),
     new Link("Il mio profilo", SessionManager::BASE_URL . "profile", false),
     new Link("Area Amministratore", SessionManager::BASE_URL . "admin", false),
     new Link("Regolamento", SessionManager::BASE_URL . "rules", false),
-    new Link("FAQ", SessionManager::BASE_URL . "faq", false)
+    new Link("Domande frequenti", SessionManager::BASE_URL . "faq", false)
 ];
 
 $userLinks = [
-    new Link("Login", SessionManager::BASE_URL . "login", false),
+    new Link("Accedi", SessionManager::BASE_URL . "login", false),
     new Link("Registrati", SessionManager::BASE_URL . "registration", false)
 ];
 
@@ -82,13 +82,13 @@ function noPermissions()
 
 switch ($_GET['page']) {
     case 'login':
-        $breadcrumb = "<li>&#62;&#62; <a>Login</a></li>";
+        $breadcrumb = "<li>&#62;&#62; <a>Accedi</a></li>";
         $page = file_get_contents("../html/login.html");
         $output = str_replace("{breadcrumb}", $breadcrumb, $output);
         $output = str_replace("{content}", $page, $output);
-        $output = str_replace("{currentPage}", "Telefolandia - Login", $output);
+        $output = str_replace("{currentPage}", "Telefolandia - Accedi", $output);
         $linkItems = Utils::getMenuLinks($links, null);
-        $userItems = Utils::getMenuLinks($userLinks, 'Login');
+        $userItems = Utils::getMenuLinks($userLinks, 'Accedi');
         $output = str_replace("{menu-links}", $linkItems, $output);
         $output = str_replace("{user-links}", $userItems, $output);
         $output = str_replace("{mobile-menu-links}", $linkItems, $output);
@@ -97,11 +97,11 @@ switch ($_GET['page']) {
         break;
 
     case 'registration':
-        $breadcrumb = "<li>&#62;&#62; <a>Registrazione</a></li>";
+        $breadcrumb = "<li>&#62;&#62; <a>Registrati</a></li>";
         $page = file_get_contents("../html/registration.html");
         $output = str_replace("{breadcrumb}", $breadcrumb, $output);
         $output = str_replace("{content}", $page, $output);
-        $output = str_replace("{currentPage}", "Telefolandia - Registrazione", $output);
+        $output = str_replace("{currentPage}", "Telefolandia - Registrati", $output);
         $linkItems = Utils::getMenuLinks($links, null);
         $userItems = Utils::getMenuLinks($userLinks, 'Registrati');
         $output = str_replace("{menu-links}", $linkItems, $output);
@@ -112,12 +112,12 @@ switch ($_GET['page']) {
         break;
 
     case 'home':
-        $breadcrumb = "<li>&#62;&#62; <a>Home</a></li>";
+        $breadcrumb = "<li>&#62;&#62; <a>Pagina iniziale</a></li>";
         $page = file_get_contents("../html/home.html");
         $output = str_replace("{breadcrumb}", $breadcrumb, $output);
         $output = str_replace("{content}", $page, $output);
-        $output = str_replace("{currentPage}", "Telefolandia - Homepage", $output);
-        $linkItems = Utils::getMenuLinks($links, 'Home');
+        $output = str_replace("{currentPage}", "Telefolandia - Pagina iniziale", $output);
+        $linkItems = Utils::getMenuLinks($links, 'Pagina iniziale');
         $userItems = Utils::getMenuLinks($userLinks, null);
         $output = str_replace("{user-links}", $userItems, $output);
         $output = str_replace("{menu-links}", $linkItems, $output);
@@ -127,7 +127,7 @@ switch ($_GET['page']) {
         break;
 
     case 'profile':
-        $breadcrumb = "<li>&#62;&#62; <a href='" . SessionManager::BASE_URL . 'home' . "'>Home</a></li><li>&#62;&#62;<a>Profilo</a></li>";
+        $breadcrumb = "<li>&#62;&#62; <a href='" . SessionManager::BASE_URL . 'home' . "'>Pagina iniziale</a></li><li>&#62;&#62;<a>Il mio profilo</a></li>";
         $page = file_get_contents("../html/profile.html");
         $output = str_replace("{breadcrumb}", $breadcrumb, $output);
         $output = str_replace("{content}", $page, $output);
@@ -147,7 +147,7 @@ switch ($_GET['page']) {
             $id = $_GET['articleId'];
             $article = Utils::getArticleFromId($id);
         }
-        $breadcrumb = "<li>&#62;&#62; <a href='" . SessionManager::BASE_URL . 'home' . "'>Home</a></li><li>&#62;&#62; <span>Articolo - {$article->model} </span></li>";
+        $breadcrumb = "<li>&#62;&#62; <a href='" . SessionManager::BASE_URL . 'home' . "'>Pagina iniziale</a></li><li>&#62;&#62; <span>Articolo - {$article->model} </span></li>";
         $page = file_get_contents("../html/article-page.html");
         $output = str_replace("{breadcrumb}", $breadcrumb, $output);
         $output = str_replace("{content}", $page, $output);
@@ -162,7 +162,7 @@ switch ($_GET['page']) {
         break;
 
     case 'rules':
-        $breadcrumb = "<li>&#62;&#62; <a href='" . SessionManager::BASE_URL . 'home' . "'>Home</a></li><li>&#62;&#62; <span>Regolamento</span></li>";
+        $breadcrumb = "<li>&#62;&#62; <a href='" . SessionManager::BASE_URL . 'home' . "'>Pagina iniziale</a></li><li>&#62;&#62; <span>Regolamento</span></li>";
         $page = file_get_contents("../html/rules.html");
         $output = str_replace("{breadcrumb}", $breadcrumb, $output);
         $output = str_replace("{content}", $page, $output);
@@ -176,12 +176,12 @@ switch ($_GET['page']) {
         break;
 
     case 'faq':
-        $breadcrumb = "<li>&#62;&#62; <a href='" . SessionManager::BASE_URL . 'home' . "'>Home</a></li><li>&#62;&#62; <span>FAQ</span></li>";
+        $breadcrumb = "<li>&#62;&#62; <a href='" . SessionManager::BASE_URL . 'home' . "'>Pagina iniziale</a></li><li>&#62;&#62; <span>Domande frequenti</span></li>";
         $page = file_get_contents("../html/faq.html");
         $output = str_replace("{breadcrumb}", $breadcrumb, $output);
         $output = str_replace("{content}", $page, $output);
-        $output = str_replace("{currentPage}", "Telefolandia - FAQ", $output);
-        $linkItems = Utils::getMenuLinks($links, 'FAQ');
+        $output = str_replace("{currentPage}", "Telefolandia - Domande frequenti", $output);
+        $linkItems = Utils::getMenuLinks($links, 'Domande frequenti');
         $userItems = Utils::getMenuLinks($userLinks, null);
         $output = str_replace("{user-links}", $userItems, $output);
         $output = str_replace("{menu-links}", $linkItems, $output);
@@ -192,7 +192,7 @@ switch ($_GET['page']) {
 
     case 'admin':
         noPermissions();
-        $breadcrumb = "<li>&#62;&#62; <a href='" . SessionManager::BASE_URL . 'home' . "'>Home</a></li><li>&#62;&#62; <span>Area Amministratore</span></li>";
+        $breadcrumb = "<li>&#62;&#62; <a href='" . SessionManager::BASE_URL . 'home' . "'>Pagina iniziale</a></li><li>&#62;&#62; <span>Area Amministratore</span></li>";
         $page = file_get_contents("../html/admin.html");
         $output = str_replace("{breadcrumb}", $breadcrumb, $output);
         $output = str_replace("{content}", $page, $output);
@@ -207,7 +207,7 @@ switch ($_GET['page']) {
         break;
     case 'add-article':
         noPermissions();
-        $breadcrumb = "<li>&#62;&#62; <a href='" . SessionManager::BASE_URL . 'home' . "'>Home</a></li><li>&#62;&#62; <a href='" . SessionManager::BASE_URL . 'admin' . "'>Area Amministratore</a></li><li>&#62;&#62; <span>Aggiungi articolo</span></li>";
+        $breadcrumb = "<li>&#62;&#62; <a href='" . SessionManager::BASE_URL . 'home' . "'>Pagina iniziale</a></li><li>&#62;&#62; <a href='" . SessionManager::BASE_URL . 'admin' . "'>Area Amministratore</a></li><li>&#62;&#62; <span>Aggiungi articolo</span></li>";
         $page = file_get_contents("../html/admin-form.html");
         $output = str_replace("{breadcrumb}", $breadcrumb, $output);
         $output = str_replace("{content}", $page, $output);
@@ -222,7 +222,7 @@ switch ($_GET['page']) {
         break;
     case 'modify-article':
         noPermissions();
-        $breadcrumb = "<li>&#62;&#62; <a href='" . SessionManager::BASE_URL . 'home' . "'>Home</a></li><li>&#62;&#62; <a href='" . SessionManager::BASE_URL . 'admin' . "'>Area Amministratore</a></li><li>&#62;&#62; <span>Modifica articolo</span></li>";
+        $breadcrumb = "<li>&#62;&#62; <a href='" . SessionManager::BASE_URL . 'home' . "'>Pagina iniziale</a></li><li>&#62;&#62; <a href='" . SessionManager::BASE_URL . 'admin' . "'>Area Amministratore</a></li><li>&#62;&#62; <span>Modifica articolo</span></li>";
         $page = file_get_contents("../html/admin-form.html");
         $output = str_replace("{breadcrumb}", $breadcrumb, $output);
         $output = str_replace("{content}", $page, $output);
@@ -236,7 +236,7 @@ switch ($_GET['page']) {
         include_once("../php/admin_modify_article.php");
         break;
     case 'no-permissions':
-        $breadcrumb = "<li>&#62;&#62; <a href='" . SessionManager::BASE_URL . 'home' . "'>Home</a></li><li>&#62;&#62; <span>Zona Amministratore</span></li>";
+        $breadcrumb = "<li>&#62;&#62; <a href='" . SessionManager::BASE_URL . 'home' . "'>Pagina iniziale</a></li><li>&#62;&#62; <span>Zona Amministratore</span></li>";
         $page = file_get_contents("../html/no-permissions.html");
         $output = str_replace("{breadcrumb}", $breadcrumb, $output);
         $output = str_replace("{content}", $page, $output);
@@ -249,7 +249,7 @@ switch ($_GET['page']) {
         $output = str_replace("{mobile-user-links}", $userItems, $output);
         break;
     default:
-        $breadcrumb = "<li>&#62;&#62; <a href='" . SessionManager::BASE_URL . 'home' . "'>Home</a></li><li>&#62;&#62; <span>404</span></li>";
+        $breadcrumb = "<li>&#62;&#62; <a href='" . SessionManager::BASE_URL . 'home' . "'>Pagina iniziale</a></li><li>&#62;&#62; <span>404</span></li>";
         $page = file_get_contents("../html/404.html");
         $output = str_replace("{breadcrumb}", $breadcrumb, $output);
         $output = str_replace("{content}", $page, $output);
