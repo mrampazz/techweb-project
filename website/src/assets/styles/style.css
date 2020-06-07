@@ -345,7 +345,7 @@ body {
 
 .custom-button {
   border: none;
-  width: 4.8em;
+  min-width: 4.8em;
   background-color: #506180;
   font-size: 1.2em;
   margin-top: 0.5em;
@@ -1152,10 +1152,6 @@ input:focus ~ .highlight {
   }
 
   #article-image-container {
-    margin-right: 0em;
-  }
-
-  #article-image {
     margin-right: 0em;
   }
 
