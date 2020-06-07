@@ -1,5 +1,3 @@
-"use strict";
-
 document.addEventListener("DOMContentLoaded", theDomHasLoaded, false);
 
 function togglePanel(panel, accordion) {
