@@ -1,38 +1,38 @@
 <div id="homepage-container">
   <div id="search-container">
-    <fieldset class="custom-fieldset">
+    <form role="search" class="inline-form" method="get" action="#">
+      <fieldset class="custom-fieldset">
       <legend class="custom-legend">Ricerca</legend>
-      <form role="search" class="inline-form" method="get" action="#">
-        <div id="search-bar-container">
-          <label class="custom-label" for="search-input">Cerca un telefono</label>
-          <input class="custom-input" id="search-input" type="text" name="search" />
+      <div id="search-bar-container">
+        <label class="custom-label" for="search-input">Cerca un telefono</label>
+        <input class="custom-input" id="search-input" type="text" name="search" />
+      </div>
+
+      <div class="filters-container">
+        <div>
+          <label class="custom-label" for="brand-select">Marca</label>
+          <select class="custom-select" id="brand-select" name="model">
+            <option value="all">Tutte le marche</option>
+            <option>{modelOptions}</option>
+          </select>
         </div>
 
-        <div class="filters-container">
-          <div>
-            <label class="custom-label" for="brand-select">Marca</label>
-            <select class="custom-select" id="brand-select" name="model">
-              <option value="all">Tutte le marche</option>
-              <option>{modelOptions}</option>
-            </select>
-          </div>
-
-          <div>
-            <label class="custom-label" for="price-select">Ordina per</label>
-            <select class="custom-select" id="price-select" name="ordine">
-              <option value="all">Nessun filtro</option>
-              <option>{orderOptions}</option>
-            </select>
-          </div>
-          <div>
-            <button class="custom-button" type="submit" name="page" value="home">Cerca</button>
-          </div>
+        <div>
+          <label class="custom-label" for="price-select">Ordina per</label>
+          <select class="custom-select" id="price-select" name="ordine">
+            <option value="all">Nessun filtro</option>
+            <option>{orderOptions}</option>
+          </select>
         </div>
-      </form>
-    </fieldset>
+        <div>
+          <button class="custom-button" type="submit" name="page" value="home">Cerca</button>
+        </div>
+      </div>
+      </fieldset>
+    </form>
   </div>
 
-  <div id="articles-container">
+  <div class="articles-container">
     {articles}
   </div>
 </div>
