@@ -167,6 +167,7 @@ body {
 #no-js-message-box{
   background-color: orange;
   text-transform: uppercase;
+  padding-left:1em;
 }
 
 .breadcrumb-container {
