@@ -4,10 +4,10 @@ class DBManager
     private static $instance = null;
     private $conn;
     
-    private $host = "localhost"; //da modificare
-    private $user = 'app';
-    private $pass = 'appdbpasswd';
-    private $database = 'db-techweb';
+    private $host = "localhost";
+    private $user = 'gciulei';
+    private $pass = 'OhboGh8Zoh0saela';
+    private $database = 'gciulei';
     
     // The db connection is established in the private constructor.
     private function __construct()

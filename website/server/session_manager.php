@@ -8,7 +8,7 @@ class SessionManager
     private const USERNAME_KEY = "user_username";
     private const PUBLISH_KEY = "canPublish";
 
-    public const BASE_URL = "../php/layout.php?page="; //to check
+    public const BASE_URL = "../php/layout.php?page=";
 
     private function __construct()
     {

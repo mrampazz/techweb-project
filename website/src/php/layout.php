@@ -1,6 +1,6 @@
 <?php
-include_once("../../../database/session_manager.php");
-include_once("../../../database/db_manager.php");
+include_once("../../server/session_manager.php");
+include_once("../../server/db_manager.php");
 include_once("../../server/models/models.php");
 include_once("../../server/utils.php");
 
