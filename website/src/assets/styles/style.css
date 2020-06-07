@@ -427,6 +427,7 @@ body {
   flex-direction: column;
   align-items: center;
   padding: 0.5em;
+  width:100%;
 }
 
 .hidden-text {
@@ -440,7 +441,7 @@ body {
 
 .vote-container > button {
   display: block;
-  font-size: 2em;
+  font-size: 1.3em;
 }
 
 .vote-container > span {
