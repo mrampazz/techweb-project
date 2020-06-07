@@ -232,6 +232,7 @@ body {
   font-size: 1.2em;
   margin-bottom: 0.2em;
   background-color: white;
+  text-align: center;
 }
 
 .menu-item-active {
@@ -349,6 +350,7 @@ body {
 
 .custom-button {
   border: none;
+  width: 4.8em;
   background-color: #506180;
   font-size: 1.2em;
   margin-top: 0.5em;
@@ -1057,7 +1059,8 @@ input:focus ~ .highlight {
   justify-content: center;
   align-items: center;
   margin-top: 1em;
-  margin-bottom: 1em;
+  border-bottom: 0.01em solid #cccccc;
+  padding-bottom: 1em;
 }
 
 .info-admin-tile {
@@ -1116,7 +1119,6 @@ input:focus ~ .highlight {
 }
 
 .add_device {
-  color: black;
   display: flex;
   justify-content: center;
   align-items: center;

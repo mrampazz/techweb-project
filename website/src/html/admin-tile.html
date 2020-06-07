@@ -7,11 +7,15 @@
     <h2 class="document-font font-size-1-5 margin-top-1" tabindex="0">MODELLO: {article-model}</h2>
   </div>
   <div class="mobile-margin">
-    <form action="../php/layout.php?page=modify-article&amp;edit=true&amp;id={article-id}" method="POST">
-      <button name="modify-article" value="{article-id}" class="custom-button margin-top-0-5">Modifica</button>
+    <form action="../php/layout.php?page=modify-article&amp;edit=true&amp;id={article-id}" method="post">
+      <div>
+        <button name="modify-article" value="{article-id}" class="custom-button margin-top-0-5">Modifica</button>
+      </div>
     </form>
-    <form action="../php/delete_article.php" method="POST">
-      <button name="delete-article" value="{article-id}" class="custom-button margin-top-0-5">Elimina</button>
+    <form action="../php/delete_article.php" method="post">
+      <div>
+        <button name="delete-article" value="{article-id}" class="custom-button margin-top-0-5">Elimina</button>
+      </div>
     </form>
   </div>
 </div>
