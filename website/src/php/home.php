@@ -26,6 +26,7 @@ $output = str_replace("<option>{orderOptions}</option>", $orderList, $output);
 if (isset($_GET['search'])) {
     $search = $_GET['search'];
 }
+$output = str_replace("{search-preset}", $search, $output);
 
 $list = Utils::getArticles($search, $model, $ordine);
 $articlesList = Utils::generateArticlesList($list);
