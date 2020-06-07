@@ -164,6 +164,11 @@ body {
   flex-wrap: wrap;
 }
 
+#no-js-message-box{
+  background-color: orange;
+  text-transform: uppercase;
+}
+
 .breadcrumb-container {
   height: 2.5em;
   display: flex;
