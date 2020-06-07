@@ -8,16 +8,16 @@
     <form method="post" action="add_vote.php">
       <div class="vote-container">
         <span tabindex="0"><span class="hidden-text">{article-brand} {article-model} è consigliato da: </span>{article-likes}<span class="hidden-text">persone</span></span>
-        <button name="vote" type="submit" value="like" class="custom-thumbs-up">
+        <button name="vote" type="submit" value="like" class="custom-thumbs-up" aria-label="Consiglia {article-brand} {article-model}">
           <span class="far fa-thumbs-up {article-liked}"></span>
-          <span class="font-size-0-75 flex-container {article-liked}">Lo consiglio</span>
+          <span class="font-size-0-75 flex-container {article-liked}">Consiglia</span>
         </button>
       </div>
       <div class="vote-container">
         <span tabindex="0"><span class="hidden-text">{article-brand} {article-model} è sconsigliato da: </span>{article-dislikes}<span class="hidden-text">persone</span></span>
-        <button name="vote" type="submit" value="dislike" class="custom-thumbs-down">
+        <button name="vote" type="submit" value="dislike" class="custom-thumbs-down" aria-label="Sconsiglia {article-brand} {article-model}">
           <span class="far fa-thumbs-down {article-disliked}"></span>
-          <span class="font-size-0-75 flex-container {article-disliked}">Lo sconsiglio</span>
+          <span class="font-size-0-75 flex-container {article-disliked}">Sconsiglia</span>
         </button>
       </div>
       <div>

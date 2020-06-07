@@ -25,13 +25,13 @@
     <div class="{comment-form-visible}">
         <form method="post" action="../php/add_vote.php">
             <div class="flex-container flex-content-center margin-top-1 margin-bottom-1"> 
-                <button name="vote" type="submit" value="like" class="custom-thumbs-up">
+                <button name="vote" type="submit" value="like" class="custom-thumbs-up" aria-label="Consiglia {article-name}">
                     <span class="far fa-thumbs-up {like-selected}"></span>
-                    <span class="font-size-0-75 flex-container {like-selected}">Lo consiglio</span>
+                    <span class="font-size-0-75 flex-container {like-selected}">Consiglia</span>
                 </button>
-                <button name="vote" type="submit" value="dislike" class="custom-thumbs-down">
+                <button name="vote" type="submit" value="dislike" class="custom-thumbs-down margin-left-0-5" aria-label="Sconsiglia {article-name}">
                     <span class="far fa-thumbs-down {dislike-selected}"></span>
-                    <span class="font-size-0-75 flex-container {dislike-selected}">Lo sconsiglio</span>
+                    <span class="font-size-0-75 flex-container {dislike-selected}">Sconsiglia</span>
                 </button>
                 <input type="hidden" value="{article-id}" name="articleID"/>
                 <input type="hidden" value="article" name="redirectURL" />
